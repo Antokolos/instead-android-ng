@@ -1,0 +1,23 @@
+For build, download INSTEAD src from SVN first:
+
+    cd project/jni/src
+    ./download-instead.sh
+
+If you see this error:
+/Users/sanghuacai/sdl/SDL-Android/jni/SDL_image/IMG_webp.c:123: undefined reference to `WebPGetFeaturesInternal' 
+/Users/sanghuacai/sdl/SDL-Android/jni/SDL_image/IMG_webp.c:123: undefined reference to `WebPDecodeRGBInto' 
+/Users/sanghuacai/sdl/SDL-Android/jni/SDL_image/IMG_webp.c:123: undefined reference to `WebPDecodeRGBAInto' 
+
+then
+
+There is some build issue with libwebp support in current SDL2_image lib, not sure what it is (I'm on Ubuntu). 
+If you don't need webp support you can disable it in SDL2_image's Android.mk: 
+Code:
+SUPPORT_WEBP := false
+
+Or you can copy entire libwebp directory (which is in external/libwebp-0.3.0) to jni directory.
+
+If
+dynamic_mp3.c:169: error: undefined reference to 'SMPEG_actualSpec'
+then
+copy external/smpeg2-2.0.0 to jni directory

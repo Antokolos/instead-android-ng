@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game_list version="1.0">
+	<game>
+		<name>last_hope</name>
+		<title>Последняя надежда</title>
+		<version>1.1</version>
+		<url>http://instead.syscall.ru/download/games/last_hope.zip</url>
+		<size>3238637</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?id=288</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>doa</name>
+		<title>Живым или мертвым</title>
+		<version>0.2</version>
+		<url>http://instead.syscall.ru/download/games/instead-doa-0.2.zip</url>
+		<size>1558454</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?id=375</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>nothing_unusual</name>
+		<title>Ничего необычного</title>
+		<version>0.1</version>
+		<url>http://instead.syscall.ru/download/games/nothing_unusual.zip</url>
+		<size>1295038</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?pid=6139#p6139</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>journey</name>
+		<title>Детективная история</title>
+		<version>0.1</version>
+		<url>http://instead.syscall.ru/download/games/journey-0.1.zip</url>
+		<size>4277813</size>
+		<descurl>http://instead.syscall.ru/wiki/ru/games/detective-story</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>starfighter</name>
+		<title>Starfighter</title>
+		<version>1.2</version>
+		<url>http://instead-games.googlecode.com/files/instead-starfighter-1.2.zip</url>
+		<size>289531</size>
+		<descurl>http://instead.syscall.ru/2011/05/starfighter-1-0/</descurl>
+		<lang>en</lang>
+	</game>
+
+	<game>
+		<name>dedmoroz2011</name>
+		<title>Дед Мороз</title>
+		<version>0.2</version>
+		<url>http://instead.syscall.ru/download/games/dedmoroz2011.zip</url>
+		<size>538582</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?id=283</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>shmel</name>
+		<title>Полет шмеля</title>
+		<version>1.0.2</version>
+		<url>http://instead.syscall.ru/download/games/shmel.zip</url>
+		<size>6998</size>
+		<descurl>http://instead.syscall.ru/wiki/ru/games/shmel</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>ts</name>
+		<title>Время выживать</title>
+		<url>http://instead.syscall.ru/download/games/instead-ts.zip</url>
+		<size>13454372</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?id=420</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>darzy</name>
+		<title>Рикки - Тикки - Тави</title>
+		<url>http://instead.syscall.ru/download/games/instead-darzy.zip</url>
+		<size>18273235</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?id=427</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>maxwell</name>
+		<title>Приключения Максвелла</title>
+		<url>http://instead.syscall.ru/download/games/instead-maxwell.zip</url>
+		<size>22146269</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?id=431</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>nt</name>
+		<title>СКАЗКА О НАДЕЖДЕ</title>
+		<url>http://instead.syscall.ru/download/games/instead-nt.zip</url>
+		<size>14926894</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?id=422</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>exdream</name>
+		<title>Выход из сна</title>
+		<version>1.0</version>
+		<url>http://instead.syscall.ru/download/games/exdream.zip</url>
+		<size>980928</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?id=348</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>dn_mission_autograph</name>
+		<title>Death Note: Миссия "Автограф"</title>
+		<url>http://speakingstone.com/games/dn_mission_autograph.zip</url>
+		<size>7401</size>
+		<descurl>http://speakingstone.com</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>dn_mary_in_the_note</name>
+		<title>Death Note: Мария в Тетради</title>
+		<url>http://speakingstone.com/games/dn_mary_in_the_note.zip</url>
+		<size>145379</size>
+		<descurl>http://speakingstone.com</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>babkin_sunduk</name>
+		<title>Прабабкин сундук</title>
+		<url>http://speakingstone.com/games/babkin_sunduk.zip</url>
+		<size>178861</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?id=510</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>taiga</name>
+		<title>Дикая тайга</title>
+		<url>http://oreolek.ru/my_games/taiga.zip</url>
+		<size>1766073</size>
+		<descurl>http://oreolek.ru</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>darkwing</name>
+		<title>Чёрный Плащ: Герой в маске</title>
+		<version>1.2</version>
+		<url>http://oreolek.ru/my_games/darkwing.zip</url>
+		<size>40368567</size>
+		<descurl>http://oreolek.ru/?page_id=701</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>darkwing-nomusic</name>
+		<title>Чёрный Плащ: Герой в маске (без музыки)</title>
+		<version>1.2</version>
+		<url>http://oreolek.ru/my_games/darkwing-nomusic.zip</url>
+		<size>104112</size>
+		<descurl>http://oreolek.ru/?page_id=701</descurl>
+		<lang>ru</lang>
+	</game>
+
+	<game>
+		<name>mindtricks</name>
+		<title>Игры с разумом</title>
+		<version>1.0</version>
+		<url>http://oreolek.ru/my_games/mindtricks.zip</url>
+		<size>23494236</size>
+		<descurl>http://oreolek.ru/?page_id=1648</descurl>
+		<lang>ru</lang>
+	</game>
+	<game>
+		<name>toilet_revenge</name>
+		<title>Побег Из Туалета: Месть Критика</title>
+		<url>http://instead.syscall.ru/download/games/toilet_revenge.zip</url>
+		<size>2584853</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?pid=6448#p6448</descurl>
+		<lang>ru</lang>
+	</game>
+	<game>
+		<name>toilet_again</name>
+		<title>Escape The Toilet Again</title>
+		<version>0.1</version>
+		<url>http://instead.syscall.ru/download/games/toilet_again-0.1.zip</url>
+		<size>8136916</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?id=403</descurl>
+		<lang>ru</lang>
+	</game>
+	<game>
+		<name>lyzneg</name>
+		<title>Лыжнег</title>
+		<version>0.4</version>
+		<url>http://instead.syscall.ru/download/games/instead-lyzneg-0.4.zip</url>
+		<size>2859864</size>
+		<descurl>http://instead.syscall.ru/forum/viewtopic.php?id=482</descurl>
+		<lang>ru</lang>
+	</game>
+</game_list>
