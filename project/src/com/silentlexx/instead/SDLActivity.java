@@ -42,9 +42,9 @@ public class SDLActivity extends SDLActivityBase {
 	static {
 		System.loadLibrary("SDL2");
 		System.loadLibrary("SDL2_image");
+		System.loadLibrary("smpeg2");
 		System.loadLibrary("SDL2_mixer");
 		System.loadLibrary("SDL2_ttf");
-		//System.loadLibrary("smpeg2");
 		System.loadLibrary("main");
 	}
 
