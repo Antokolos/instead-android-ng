@@ -29,7 +29,7 @@ LOCAL_SRC_FILES := $(notdir $(filter-out %/showimage.c, $(wildcard $(LOCAL_PATH)
 
 LOCAL_LDLIBS :=
 LOCAL_STATIC_LIBRARIES :=
-LOCAL_SHARED_LIBRARIES := SDL2
+LOCAL_SHARED_LIBRARIES := SDL2 jpeg
 
 ifeq ($(SUPPORT_JPG),true)
     LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(JPG_LIBRARY_PATH)
@@ -77,7 +77,8 @@ ifeq ($(SUPPORT_JPG),true)
         $(JPG_LIBRARY_PATH)/jfdctfst.c \
         $(JPG_LIBRARY_PATH)/jfdctint.c \
         $(JPG_LIBRARY_PATH)/jidctflt.c \
-        $(JPG_LIBRARY_PATH)/jidctfst.S \
+# Removed this file from build, see https://forums.libsdl.org/viewtopic.php?t=10369&sid=cb0e9385390b2f8aca3e253d3694403d
+#        $(JPG_LIBRARY_PATH)/jidctfst.S \
         $(JPG_LIBRARY_PATH)/jidctint.c \
         $(JPG_LIBRARY_PATH)/jquant1.c \
         $(JPG_LIBRARY_PATH)/jquant2.c \

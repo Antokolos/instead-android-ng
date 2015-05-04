@@ -1,6 +1,7 @@
 package com.silentlexx.instead;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.microedition.khronos.egl.*;
 
@@ -39,6 +40,8 @@ public class SDLActivity extends SDLActivityBase {
 	private static Context Ctx;
 
 	// Load the .so
+	/*
+	Now this is done in loadLibs()
 	static {
 		System.loadLibrary("SDL2");
 		System.loadLibrary("SDL2_image");
@@ -46,6 +49,22 @@ public class SDLActivity extends SDLActivityBase {
 		System.loadLibrary("SDL2_mixer");
 		System.loadLibrary("SDL2_ttf");
 		System.loadLibrary("main");
+	}
+	*/
+
+	public void loadLibs() {
+		try {
+			// I'm using /data/data/myPackage/app_libs (using Ctx.getDir("libs",Context.MODE_PRIVATE); returns that path).
+			String libsDirPath = Ctx.getDir("libs",Context.MODE_PRIVATE).getCanonicalPath() + "/";
+			System.load(libsDirPath + "libSDL2.so");
+			System.load(libsDirPath + "libSDL2_image.so");
+			System.load(libsDirPath + "libsmpeg2.so");
+			System.load(libsDirPath + "libSDL2_mixer.so");
+			System.load(libsDirPath + "libSDL2_ttf.so");
+			System.load(libsDirPath + "libmain.so");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public static void showKeyboard(Context c){
@@ -98,6 +117,7 @@ public class SDLActivity extends SDLActivityBase {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		Ctx = this;
+		loadLibs();
 		Intent intent = getIntent(); 
 		if (intent.getAction()!=null){
 			game = intent.getAction();

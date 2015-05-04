@@ -33,6 +33,26 @@
 #include <sys/types.h>
 #endif
 
+#ifndef BYTE_ORDER 
+#warning "Platform doesn't define BYTE_ORDER" 
+
+#define LITTLE_ENDIAN   1234 
+#define BIG_ENDIAN      4321 
+
+#if (defined(__i386__) || defined(__i386)) || \ 
+     defined(__ia64__) || defined(WIN32) || \ 
+    (defined(__alpha__) || defined(__alpha)) || \ 
+     defined(__arm__) || \ 
+    (defined(__mips__) && defined(__MIPSEL__)) || \ 
+     defined(__SYMBIAN32__) || \ 
+     defined(__x86_64__) || \ 
+     defined(__LITTLE_ENDIAN__) 
+#define BYTE_ORDER      LITTLE_ENDIAN 
+#else 
+#define BYTE_ORDER      BIG_ENDIAN 
+#endif 
+#endif 
+
 #if BYTE_ORDER==LITTLE_ENDIAN
 union magic {
   struct {

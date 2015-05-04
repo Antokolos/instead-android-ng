@@ -4,6 +4,8 @@ import java.util.zip.*;
 import java.io.*;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 
 class DataDownloader extends Thread {
@@ -42,21 +44,32 @@ class DataDownloader extends Thread {
 		this.start();
 	}
 
-	@Override
-	public void run() {
-		String path = null;
-		
-		(new File(Globals.getStorage() + Globals.ApplicationName)).mkdir();
-		
-		Globals.delete(new File(Globals.getOutFilePath("stead")));
-		Globals.delete(new File(Globals.getOutFilePath("themes")));
-		Globals.delete(new File(Globals.getOutFilePath("languages")));
-		Globals.delete(new File(Globals.getOutFilePath("lang")));
-		(new File(Globals.getOutFilePath(Globals.DataFlag))).delete();
+	private interface PathResolver {
+		String resolvePath(String fileName) throws IOException;
+	}
 
+	private class SDPathResolver implements PathResolver {
+
+		@Override
+		public String resolvePath(String fileName) throws IOException {
+			return Globals.getOutFilePath(fileName);
+		}
+	}
+
+	private class SystemPathResolver implements PathResolver {
+
+		@Override
+		public String resolvePath(String fileName) throws IOException {
+			// I'm using /data/data/myPackage/app_libs (using Ctx.getDir("libs",Context.MODE_PRIVATE); returns that path).
+			String libsDirPath = Parent.getApplicationContext().getDir("libs", Context.MODE_PRIVATE).getCanonicalPath() + "/";
+			return libsDirPath + fileName;
+		}
+	}
+
+	public void extractArchive(InputStream stream, PathResolver pathResolver) throws IOException {
+		String path = null;
 		ZipInputStream zip = null;
-		zip = new ZipInputStream(Parent.getResources().openRawResource(
-				R.raw.data));
+		zip = new ZipInputStream(stream);
 
 		byte[] buf = new byte[1024];
 
@@ -76,7 +89,7 @@ class DataDownloader extends Thread {
 				break;
 			if (entry.isDirectory()) {
 				try {
-					(new File(Globals.getOutFilePath(entry.getName()))).mkdirs();
+					(new File(pathResolver.resolvePath(entry.getName()))).mkdirs();
 				} catch (SecurityException e) {
 				}
 				;
@@ -84,7 +97,7 @@ class DataDownloader extends Thread {
 			}
 
 			OutputStream out = null;
-			path = Globals.getOutFilePath(entry.getName());
+			path = pathResolver.resolvePath(entry.getName());
 
 			try {
 				out = new FileOutputStream(path);
@@ -122,6 +135,52 @@ class DataDownloader extends Thread {
 				return;
 			}
 
+		}
+	}
+
+	public static boolean isArmv7() {
+		try {
+			return Build.VERSION.SDK_INT >= 4 && Build.class.getField("CPU_ABI").get(null).toString().startsWith("armeabi-v7");
+		} catch (Throwable ignore) {}
+
+		return false;
+	}
+
+	public static boolean isX86() {
+		try {
+			return Build.VERSION.SDK_INT >= 4 && Build.class.getField("CPU_ABI").get(null).toString().startsWith("x86");
+		} catch (Throwable ignore) {}
+
+		return false;
+	}
+
+	private InputStream getAppropriateLibsStream() {
+		if (isArmv7()) {
+			return Parent.getResources().openRawResource(R.raw.libs_armeabi_v7a);
+		} else if (isX86()) {
+			return Parent.getResources().openRawResource(R.raw.libs_x86);
+		} else {
+			return Parent.getResources().openRawResource(R.raw.libs_armeabi);
+		}
+	}
+
+	@Override
+	public void run() {
+		String path = null;
+		
+		(new File(Globals.getStorage() + Globals.ApplicationName)).mkdir();
+		
+		Globals.delete(new File(Globals.getOutFilePath("stead")));
+		Globals.delete(new File(Globals.getOutFilePath("themes")));
+		Globals.delete(new File(Globals.getOutFilePath("languages")));
+		Globals.delete(new File(Globals.getOutFilePath("lang")));
+		(new File(Globals.getOutFilePath(Globals.DataFlag))).delete();
+
+		try {
+			extractArchive(Parent.getResources().openRawResource(R.raw.data), new SDPathResolver());
+			extractArchive(getAppropriateLibsStream(), new SystemPathResolver());
+		} catch (IOException e) {
+			Log.e("Instead ERROR", "IOException");
 		}
 
 		path = Globals.getOutFilePath(Globals.DataFlag);

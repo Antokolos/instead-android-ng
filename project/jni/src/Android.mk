@@ -32,7 +32,7 @@ LOCAL_CFLAGS := \
 				-I$(LOCAL_PATH)/../SDL2_image \
 				-I$(LOCAL_PATH)/../SDL2_ttf \
 				-I$(LOCAL_PATH)/../png \
-				-I$(LOCAL_PATH)/../jpeg \
+				-I$(LOCAL_PATH)/../jpeg-9 \
 				-I$(LOCAL_PATH)/../lua/lua/src \
 				-I$(LOCAL_PATH)/../freetype/include \
 				-I$(LOCAL_PATH)/../libiconv/libiconv/include \
