@@ -34,8 +34,8 @@ class Globals {
 	public static final String ZipName = "data.zip";
 	public static final String GameListFileName = "game_list.xml";
 	public static final String GameListAltFileName = "game_list_alt.xml";
-	public static final String GameListDownloadUrl = "http://instead-launcher.googlecode.com/svn/pool/game_list.xml";
-	public static final String GameListAltDownloadUrl = "http://instead-launcher.googlecode.com/svn/pool/game_list_alt.xml";
+	public static final String GameListDownloadUrl = "http://instead.syscall.ru/pool/game_list.xml";
+	public static final String GameListAltDownloadUrl = "http://instead-games.ru/xml.php";
 	public static final String GameDir = "appdata/games/";
 	public static final String SaveDir = "appdata/saves/";
 	public static final String Options = "appdata/insteadrc";
