@@ -1,4 +1,4 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.standalone;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,8 +12,9 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
+import com.silentlexx.instead.R;
 
-class Globals {
+public class Globals {
 
 	public static final String ApplicationName = "Instead";
 	
@@ -60,7 +61,7 @@ class Globals {
 //	public static String game = null;
 //	public static String title = null;
 	
-	class Lang {
+	public class Lang {
 		public static final String RU = "ru";
 		public static final String EN = "en";
 		public static final String ALL = "";
@@ -209,7 +210,7 @@ class Globals {
 	public static int getIcon(String game){
 		int ico;
     	if(game.endsWith(".idf")) {
-			ico = R.drawable.idf48; 		
+			ico = R.drawable.idf48;
 		} else if(game.equals("rangers")){
 			ico = R.drawable.rangers48;
 		} else if(game.equals("urq")){

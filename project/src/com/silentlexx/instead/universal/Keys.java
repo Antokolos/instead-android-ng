@@ -1,7 +1,8 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.universal;
 
 
 import android.view.KeyEvent;
+import com.silentlexx.instead.SDLActivity;
 
 public class Keys {
 

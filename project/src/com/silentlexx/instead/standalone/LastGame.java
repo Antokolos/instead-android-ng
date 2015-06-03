@@ -1,6 +1,8 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.standalone;
 
 import android.content.Context;
+import com.silentlexx.instead.R;
+import com.silentlexx.instead.universal.GameList;
 
 
 public class LastGame {
@@ -17,8 +19,8 @@ public class LastGame {
     private boolean keyb;
     private boolean keyvol;
     
-	LastGame(Context p){
-		pr = new MyPrefs(p, Globals.ApplicationName); 
+	public LastGame(Context p){
+		pr = new MyPrefs(p, Globals.ApplicationName);
 		title_def =  p.getString(R.string.tutorial);
  		filtr = pr.get("filtr", GameList.ALL);
  		list = pr.get("list", Globals.BASIC);		

@@ -1,4 +1,4 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.universal;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetProvider;
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.Context;
 import android.widget.RemoteViews;
 import android.appwidget.AppWidgetManager;
+import com.silentlexx.instead.R;
+import com.silentlexx.instead.SDLActivity;
 
 public class GameIcon extends AppWidgetProvider {
 	

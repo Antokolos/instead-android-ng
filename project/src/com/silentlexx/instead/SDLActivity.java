@@ -1,21 +1,28 @@
 package com.silentlexx.instead;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.microedition.khronos.egl.*;
-
 import android.annotation.TargetApi;
-import android.app.*;
-import android.content.*;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
+import android.media.AudioManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.PowerManager;
+import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
-import android.os.*;
-import android.util.Log;
-import android.graphics.*;
-import android.media.*;
+import com.silentlexx.instead.standalone.Globals;
+import com.silentlexx.instead.standalone.LastGame;
+import com.silentlexx.instead.universal.InputDialog;
+import com.silentlexx.instead.universal.Keys;
+import com.silentlexx.instead.universal.Options;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * SDL Activity
@@ -34,7 +41,7 @@ public class SDLActivity extends SDLActivityBase {
 	private static int i_s = KOLL;
 	private static boolean keyb = true;
 	private static Handler h;
-	private  LastGame lastGame;
+	private LastGame lastGame;
 	private static InputDialog input;
 	private static AudioManager audioManager;
 	private static Context Ctx;
@@ -99,7 +106,7 @@ public class SDLActivity extends SDLActivityBase {
 		//Log.d("Input ",s);
 		//nativeInput(s);
 		int len = s.length();
-		if(len>Globals.IN_MAX){
+		if(len> Globals.IN_MAX){
 			s = s.substring(0, Globals.IN_MAX);
 			len = s.length();
 		}
@@ -125,7 +132,7 @@ public class SDLActivity extends SDLActivityBase {
 					  (new File(Globals.getOutFilePath(Globals.GameDir
 			    				+ game)).exists())==false)){	
 				  
-					Toast.makeText(this, getString(R.string.game)+" \""+game+"\" "+getString(R.string.ag_new), 
+					Toast.makeText(this, getString(R.string.game)+" \""+game+"\" "+getString(R.string.ag_new),
 							Toast.LENGTH_SHORT).show();		
 					finish();
 			  			}

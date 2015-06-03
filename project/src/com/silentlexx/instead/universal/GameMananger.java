@@ -1,4 +1,4 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.universal;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,6 +34,10 @@ import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.silentlexx.instead.R;
+import com.silentlexx.instead.standalone.Globals;
+import com.silentlexx.instead.standalone.LastGame;
+import com.silentlexx.instead.SDLActivity;
 
 public class GameMananger extends ListActivity implements ViewBinder {
 

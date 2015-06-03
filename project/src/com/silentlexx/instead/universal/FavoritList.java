@@ -1,4 +1,4 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.universal;
 
 
 import java.io.File;
@@ -27,6 +27,9 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SimpleAdapter.ViewBinder;
+import com.silentlexx.instead.R;
+import com.silentlexx.instead.standalone.Globals;
+import com.silentlexx.instead.SDLActivity;
 
 public class FavoritList extends ListActivity  implements ViewBinder  {
 	private static final String LIST_TEXT = "list_text";
@@ -112,7 +115,7 @@ public class FavoritList extends ListActivity  implements ViewBinder  {
 
 			menu.setHeaderTitle(favGame.getTitle(item_index));
 			
-		  if(Globals.isWorking(favGame.getGame(item_index)) 
+		  if(Globals.isWorking(favGame.getGame(item_index))
 				  || (favGame.getGame(item_index).endsWith(".idf") && 
 						  (new File(Globals.getOutFilePath(Globals.GameDir
 				    				+ favGame.getGame(item_index))).exists()))){	

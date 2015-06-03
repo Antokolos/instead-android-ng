@@ -1,4 +1,4 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.universal;
 
 
 import java.io.BufferedReader;
@@ -30,6 +30,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import com.silentlexx.instead.R;
+import com.silentlexx.instead.standalone.Globals;
+import com.silentlexx.instead.standalone.LastGame;
 
 public class Options extends Activity {
 	final static int VSMALL = 0;
@@ -214,7 +217,7 @@ public class Options extends Activity {
 	}
 	
 	private void deleteCfg(){
-		(new File(this.getFilesDir()+"/"+Globals.GameListFileName)).delete();
+		(new File(this.getFilesDir()+"/"+ Globals.GameListFileName)).delete();
 		(new File(this.getFilesDir()+"/"+Globals.GameListAltFileName)).delete();
 		lastGame.clearAll();
 		(new File(Globals.getOutFilePath(Globals.DataFlag))).delete();

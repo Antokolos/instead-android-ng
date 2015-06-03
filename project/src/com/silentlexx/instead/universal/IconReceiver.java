@@ -1,4 +1,4 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.universal;
 
 import java.util.ArrayList;
 

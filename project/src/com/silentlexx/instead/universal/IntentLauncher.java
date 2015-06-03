@@ -1,8 +1,9 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.universal;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import com.silentlexx.instead.standalone.Globals;
 
 public class IntentLauncher extends Activity {
 
@@ -26,8 +27,15 @@ public class IntentLauncher extends Activity {
 				Globals.qm = u;
 			}  
 			if(run){
-				Intent myIntent = new Intent(this, MainMenu.class);
-				startActivity(myIntent);
+				try {
+                    // com.silentlexx.instead.standalone.MainMenu for standalone app without favourites, library etc
+                    // com.silentlexx.instead.universal.UniversalMainMenu for universal app
+					Intent myIntent = new Intent(this, Class.forName("com.silentlexx.instead.universal.UniversalMainMenu"));
+					startActivity(myIntent);
+				} catch (ClassNotFoundException e) {
+					// TODO: report error
+					throw new RuntimeException(e);
+				}
 			}		
 		}
         finish();

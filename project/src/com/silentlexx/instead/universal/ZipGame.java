@@ -1,9 +1,12 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.universal;
 
 import java.util.zip.*;
 import java.io.*;
 
 import android.app.ProgressDialog;
+import com.silentlexx.instead.R;
+import com.silentlexx.instead.standalone.Globals;
+import com.silentlexx.instead.standalone.MainMenu;
 
 class ZipGame extends Thread {
 	class StatusWriter {
@@ -49,7 +52,7 @@ class ZipGame extends Thread {
 		try {
 			in = new FileInputStream(new File(Globals.zip));
 		} catch (FileNotFoundException e1) {
-			if (!Parent.onpause)
+			if (!Parent.isOnpause())
 				Status.setMessage(Parent.getString(R.string.dataerror));
 			Parent.onError(Parent.getString(R.string.dataerror));
 			return;
@@ -65,7 +68,7 @@ class ZipGame extends Thread {
 			try {
 				entry = zip.getNextEntry();
 			} catch (java.io.IOException e) {
-				if (!Parent.onpause)
+				if (!Parent.isOnpause())
 					Status.setMessage(Parent.getString(R.string.dataerror));
 				Parent.onError(Parent.getString(R.string.dataerror));
 				return;
@@ -91,7 +94,7 @@ class ZipGame extends Thread {
 			}
 			;
 			if (out == null) {
-				if (!Parent.onpause)
+				if (!Parent.isOnpause())
 					Status.setMessage(Parent.getString(R.string.writefileerorr)
 							+ " " + path);
 				Parent.onError(Parent.getString(R.string.writefileerorr) + " "
@@ -112,7 +115,7 @@ class ZipGame extends Thread {
 				}
 				out.flush();
 			} catch (java.io.IOException e) {
-				if (!Parent.onpause)
+				if (!Parent.isOnpause())
 					Status.setMessage(Parent.getString(R.string.writefile)
 							+ " " + path);
 				Parent.onError(Parent.getString(R.string.writefile) + " "
@@ -122,12 +125,12 @@ class ZipGame extends Thread {
 
 		}
 
-		if (!Parent.onpause)
+		if (!Parent.isOnpause())
 			Status.setMessage(Parent.getString(R.string.finish));
 		DownloadComplete = true;
 
 		Parent.setDownGood();
-		if (!Parent.onpause)
+		if (!Parent.isOnpause())
 			initParent();
 	};
 

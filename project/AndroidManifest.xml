@@ -4,18 +4,19 @@
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
     <application android:debuggable="false"
         android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="@string/app_name">
+        <!-- android:name=".standalone.MainMenu" for standalone app, android:name=".universal.UniversalMainMenu" for universal app -->
         <activity android:icon="@drawable/icon"
-            android:label="@string/app_name" android:name=".MainMenu" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation">
+            android:label="@string/app_name" android:name=".universal.UniversalMainMenu" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".SDLActivity" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
-        <activity android:name=".GameMananger" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
-        <activity android:name=".Options" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
-        <activity android:name=".AboutGame" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
-        <activity android:name=".IntentLauncher" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation">
+        <activity android:name=".universal.GameMananger" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
+        <activity android:name=".universal.Options" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
+        <activity android:name=".universal.AboutGame" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
+        <activity android:name=".universal.IntentLauncher" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -40,27 +41,27 @@
             </intent-filter>
         </activity>
         <receiver android:icon="@drawable/icon"
-            android:label="@string/add_widget" android:name=".GameIcon">
+            android:label="@string/add_widget" android:name=".universal.GameIcon">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_info"/>
         </receiver>
-        <activity android:name=".GameChooser" android:theme="@android:style/Theme.Translucent" android:configChanges="keyboard|keyboardHidden|orientation">
+        <activity android:name=".universal.GameChooser" android:theme="@android:style/Theme.Translucent" android:configChanges="keyboard|keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
             </intent-filter>
         </activity>
-        <receiver android:enabled="false" android:name=".IconReceiver"/>
+        <receiver android:enabled="false" android:name=".universal.IconReceiver"/>
         <activity android:label="@string/add_cut"  android:icon="@drawable/game48"
-            android:name=".Shortcut" android:theme="@android:style/Theme.Translucent" android:configChanges="keyboard|keyboardHidden|orientation">
+            android:name=".universal.Shortcut" android:theme="@android:style/Theme.Translucent" android:configChanges="keyboard|keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".FavoritList" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
-        <activity android:name=".GameDirs" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
+        <activity android:name=".universal.FavoritList" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
+        <activity android:name=".universal.GameDirs" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
     </application>
     <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="8"/>
     <uses-permission android:name="android.permission.INTERNET"/>

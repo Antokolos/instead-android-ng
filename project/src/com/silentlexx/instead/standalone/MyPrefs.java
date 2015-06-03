@@ -1,4 +1,4 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.standalone;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,9 +9,8 @@ public class MyPrefs {
 	public static final boolean BOOL = false;
 	private SharedPreferences pr;
 	SharedPreferences.Editor ed;
-
 	
-	MyPrefs(Context p, final String PREFS_STRING){
+	public MyPrefs(Context p, final String PREFS_STRING){
 	    pr = p.getSharedPreferences(PREFS_STRING, 0);		
 	    ed = pr.edit();
 	}

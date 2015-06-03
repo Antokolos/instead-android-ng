@@ -103,14 +103,14 @@ public abstract class SDLActivityBase extends Activity {
     protected void onPause() {
         Log.v("SDL", "onPause()");
         super.onPause();
-        SDLActivity.handlePause();
+        handlePause();
     }
 
     @Override
     protected void onResume() {
         Log.v("SDL", "onResume()");
         super.onResume();
-        SDLActivity.handleResume();
+        handleResume();
     }
 
 
@@ -119,9 +119,9 @@ public abstract class SDLActivityBase extends Activity {
         super.onWindowFocusChanged(hasFocus);
         Log.v("SDL", "onWindowFocusChanged(): " + hasFocus);
 
-        SDLActivity.mHasFocus = hasFocus;
+        mHasFocus = hasFocus;
         if (hasFocus) {
-            SDLActivity.handleResume();
+            handleResume();
         }
     }
 
@@ -136,24 +136,24 @@ public abstract class SDLActivityBase extends Activity {
     protected void onDestroy() {
         Log.v("SDL", "onDestroy()");
         // Send a quit message to the application
-        SDLActivity.mExitCalledFromJava = true;
+        mExitCalledFromJava = true;
         SDLActivity.nativeQuit();
 
         // Now wait for the SDL thread to quit
-        if (SDLActivity.mSDLThread != null) {
+        if (mSDLThread != null) {
             try {
-                SDLActivity.mSDLThread.join();
+                mSDLThread.join();
             } catch(Exception e) {
                 Log.v("SDL", "Problem stopping thread: " + e);
             }
-            SDLActivity.mSDLThread = null;
+            mSDLThread = null;
 
             //Log.v("SDL", "Finished waiting for SDL thread");
         }
             
         super.onDestroy();
         // Reset everything in case the user re opens the app
-        SDLActivity.initialize();
+        initialize();
     }
 
     @Override
@@ -176,8 +176,8 @@ public abstract class SDLActivityBase extends Activity {
      *  to 'true' during the call to onPause (in a usual scenario).
      */
     public static void handlePause() {
-        if (!SDLActivity.mIsPaused && SDLActivity.mIsSurfaceReady) {
-            SDLActivity.mIsPaused = true;
+        if (!mIsPaused && mIsSurfaceReady) {
+            mIsPaused = true;
             SDLActivity.nativePause();
             mSurface.enableSensor(Sensor.TYPE_ACCELEROMETER, false);
         }
@@ -188,8 +188,8 @@ public abstract class SDLActivityBase extends Activity {
      * every time we get one of those events, only if it comes after surfaceDestroyed
      */
     public static void handleResume() {
-        if (SDLActivity.mIsPaused && SDLActivity.mIsSurfaceReady && SDLActivity.mHasFocus) {
-            SDLActivity.mIsPaused = false;
+        if (mIsPaused && mIsSurfaceReady && mHasFocus) {
+            mIsPaused = false;
             SDLActivity.nativeResume();
             mSurface.enableSensor(Sensor.TYPE_ACCELEROMETER, true);
         }
@@ -197,7 +197,7 @@ public abstract class SDLActivityBase extends Activity {
         
     /* The native thread has finished */
     public static void handleNativeExit() {
-        SDLActivity.mSDLThread = null;
+        mSDLThread = null;
         mSingleton.finish();
     }
 
@@ -350,7 +350,7 @@ public abstract class SDLActivityBase extends Activity {
     }
             
     public static Surface getNativeSurface() {
-        return SDLActivity.mSurface.getNativeSurface();
+        return mSurface.getNativeSurface();
     }
 
     // Audio
@@ -456,7 +456,7 @@ public abstract class SDLActivityBase extends Activity {
     }
     
     public static void pollInputDevices() {
-        if (SDLActivity.mSDLThread != null) {
+        if (mSDLThread != null) {
             mJoystickHandler.pollInputDevices();
         }
     }

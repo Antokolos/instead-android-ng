@@ -1,4 +1,4 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.universal;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,6 +9,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import com.silentlexx.instead.R;
+import com.silentlexx.instead.standalone.Globals;
+import com.silentlexx.instead.SDLActivity;
 
 public class InputDialog extends Dialog {
 	private EditText text;
@@ -83,7 +86,7 @@ public class InputDialog extends Dialog {
     		public void afterTextChanged(Editable txt) {
     			String s = txt.toString();
         		
-    			if(s.length()>Globals.IN_MAX){
+    			if(s.length()> Globals.IN_MAX){
     				s = s.substring(0, Globals.IN_MAX);
     				text.setText(s);
     				 text.setSelection(s.length());
@@ -156,7 +159,7 @@ public class InputDialog extends Dialog {
     
 	protected void Enter() {
 		String txt = text.getText().toString();
-		SDLActivity.inputText(txt);	
+		SDLActivity.inputText(txt);
 	}
 
 	protected void Close() {

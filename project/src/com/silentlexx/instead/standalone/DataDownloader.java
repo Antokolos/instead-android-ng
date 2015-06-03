@@ -1,4 +1,4 @@
-package com.silentlexx.instead;
+package com.silentlexx.instead.standalone;
 
 import java.util.zip.*;
 import java.io.*;
@@ -7,8 +7,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
+import com.silentlexx.instead.R;
+import com.silentlexx.instead.standalone.Globals;
+import com.silentlexx.instead.standalone.MainMenu;
+import com.silentlexx.instead.universal.UniversalMainMenu;
 
-class DataDownloader extends Thread {
+public class DataDownloader extends Thread {
 	class StatusWriter {
 		private ProgressDialog Status;
 		private MainMenu Parent;
