@@ -3,6 +3,7 @@ package com.silentlexx.instead.standalone;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -12,8 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
-import android.view.Display;
-import android.view.View;
+import android.view.*;
 import android.widget.*;
 import android.widget.SimpleAdapter.ViewBinder;
 import com.silentlexx.instead.R;
@@ -438,5 +438,116 @@ public class MainMenu extends ListActivity implements ViewBinder {
 
     public boolean isOnpause() {
         return onpause;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!dwn) {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
+            checkRC();
+        } else {
+            if (onpause && !dialog.isShowing()) {
+                dialog.show();
+            }
+        }
+        onpause = false;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Log.d(Globals.TAG, "Main: Resume");
+    }
+
+    @Override
+    protected void onDestroy() {
+        // Log.d(Globals.TAG, "Main: Destroy");
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mmenu1, menu);
+        return true;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean("onpause", onpause);
+        savedInstanceState.putBoolean("dwn", dwn);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        dwn = savedInstanceState.getBoolean("dwn");
+        onpause = savedInstanceState.getBoolean("onpause");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mailme:
+                sendEmail();
+                break;
+            case R.id.about:
+                showAboutInstead();
+                break;
+            case R.id.market:
+                openMarket();
+                break;
+/*
+	case R.id.rmidf:
+		  	    idf_act = DELETE_IDF;
+		  	    ff = true;
+				getGamesLS();
+		break;
+	case R.id.runidf:
+  	    idf_act = RUN_IDF;
+  	    ff = true;
+		getGamesLS();
+break;
+*/
+        }
+        return true;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        return true;
+    }
+
+    private void openMarket(){
+        try {
+            String url = "market://details?id=com.silentlexx.instead";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        } catch (ActivityNotFoundException e){
+            openUrl("https://market.android.com/details?id=com.silentlexx.instead");
+        }
+    }
+
+    private void openUrl(String url){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 }

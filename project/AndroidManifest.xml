@@ -6,7 +6,7 @@
         android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="@string/app_name">
         <!-- android:name=".standalone.MainMenu" for standalone app, android:name=".universal.UniversalMainMenu" for universal app -->
         <activity android:icon="@drawable/icon"
-            android:label="@string/app_name" android:name=".universal.UniversalMainMenu" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation">
+            android:label="@string/app_name" android:name=".standalone.MainMenu" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

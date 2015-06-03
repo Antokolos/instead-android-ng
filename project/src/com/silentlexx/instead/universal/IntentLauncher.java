@@ -30,7 +30,7 @@ public class IntentLauncher extends Activity {
 				try {
                     // com.silentlexx.instead.standalone.MainMenu for standalone app without favourites, library etc
                     // com.silentlexx.instead.universal.UniversalMainMenu for universal app
-					Intent myIntent = new Intent(this, Class.forName("com.silentlexx.instead.universal.UniversalMainMenu"));
+					Intent myIntent = new Intent(this, Class.forName("com.silentlexx.instead.standalone.MainMenu"));
 					startActivity(myIntent);
 				} catch (ClassNotFoundException e) {
 					// TODO: report error

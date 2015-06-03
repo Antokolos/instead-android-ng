@@ -27,7 +27,6 @@ import java.util.Map;
 public class UniversalMainMenu extends MainMenu {
 
     private final Handler h = new Handler();
-    private boolean ff = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,22 +142,6 @@ public class UniversalMainMenu extends MainMenu {
 
     }
 
-    private void openMarket(){
-        try {
-            String url = "market://details?id=com.silentlexx.instead";
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-            startActivity(i);
-        } catch (ActivityNotFoundException e){
-            openUrl("https://market.android.com/details?id=com.silentlexx.instead");
-        }
-    }
-
-    private void openUrl(String url){
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browserIntent);
-    }
-
     public void showRun() {
         super.showRun();
         check();
@@ -208,105 +191,6 @@ public class UniversalMainMenu extends MainMenu {
         } else {
             checkRC();
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (!dwn) {
-            if (dialog.isShowing()) {
-                dialog.dismiss();
-            }
-            checkRC();
-        } else {
-            if (onpause && !dialog.isShowing()) {
-                dialog.show();
-            }
-        }
-        onpause = false;
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // Log.d(Globals.TAG, "Main: Resume");
-    }
-
-    @Override
-    protected void onDestroy() {
-        // Log.d(Globals.TAG, "Main: Destroy");
-        super.onDestroy();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.mmenu1, menu);
-        return true;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putBoolean("onpause", onpause);
-        savedInstanceState.putBoolean("dwn", dwn);
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        dwn = savedInstanceState.getBoolean("dwn");
-        onpause = savedInstanceState.getBoolean("onpause");
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.mailme:
-                sendEmail();
-                break;
-            case R.id.about:
-                showAboutInstead();
-                break;
-            case R.id.market:
-                openMarket();
-                break;
-/*
-	case R.id.rmidf:
-		  	    idf_act = DELETE_IDF;
-		  	    ff = true;
-				getGamesLS();
-		break;
-	case R.id.runidf:
-  	    idf_act = RUN_IDF;
-  	    ff = true;
-		getGamesLS();
-break;
-*/
-        }
-        return true;
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        if (ff){
-
-        }
-        ff =false;
-
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-
-        return true;
     }
 
     private void IdfCopy(){
