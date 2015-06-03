@@ -69,7 +69,9 @@ public class MainMenu extends ListActivity implements ViewBinder {
 		*/
         registerForContextMenu(listView);
         showMenu();
-
+        if (!dwn) {
+            checkRC();
+        }
     }
 
     protected void sendEmail() {
@@ -424,6 +426,7 @@ public class MainMenu extends ListActivity implements ViewBinder {
             dialog.dismiss();
         }
         dwn = false;
+        checkRC();
     }
 
     public void showRunB() {

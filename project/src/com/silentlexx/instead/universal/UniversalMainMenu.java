@@ -1,10 +1,8 @@
 package com.silentlexx.instead.universal;
 
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -31,13 +29,10 @@ public class UniversalMainMenu extends MainMenu {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        check();
+        doCommands();
     }
 
-    private void check() {
-        if (!dwn) {
-            checkRC();
-        }
+    private void doCommands() {
         if(Globals.idf!=null) IdfCopy();
         if(Globals.zip!=null) ZipInstall();
         if(Globals.qm!=null) QmInstall();
@@ -144,7 +139,7 @@ public class UniversalMainMenu extends MainMenu {
 
     public void showRun() {
         super.showRun();
-        check();
+        doCommands();
     }
 
     private void startAppIdf() {
