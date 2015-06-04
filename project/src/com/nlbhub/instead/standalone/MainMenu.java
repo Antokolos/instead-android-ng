@@ -18,7 +18,6 @@ import android.widget.*;
 import android.widget.SimpleAdapter.ViewBinder;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.SDLActivity;
-import com.nlbhub.instead.universal.Options;
 
 import java.io.*;
 import java.util.*;

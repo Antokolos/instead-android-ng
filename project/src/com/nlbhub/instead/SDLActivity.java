@@ -15,12 +15,11 @@ import android.os.PowerManager;
 import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
-import com.nlbhub.instead.R;
 import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.standalone.LastGame;
-import com.nlbhub.instead.universal.InputDialog;
-import com.nlbhub.instead.universal.Keys;
-import com.nlbhub.instead.universal.Options;
+import com.nlbhub.instead.standalone.InputDialog;
+import com.nlbhub.instead.standalone.Keys;
+import com.nlbhub.instead.standalone.Options;
 
 import java.io.File;
 import java.io.IOException;

@@ -30,7 +30,7 @@ public class IntentLauncher extends Activity {
 				try {
                     // com.nlbhub.instead.standalone.MainMenu for standalone app without favourites, library etc
                     // com.nlbhub.instead.universal.UniversalMainMenu for universal app
-					Intent myIntent = new Intent(this, Class.forName("com.nlbhub.instead.standalone.MainMenu"));
+					Intent myIntent = new Intent(this, Class.forName("com.nlbhub.instead.universal.UniversalMainMenu"));
 					startActivity(myIntent);
 				} catch (ClassNotFoundException e) {
 					// TODO: report error

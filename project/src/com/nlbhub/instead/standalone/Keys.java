@@ -1,4 +1,4 @@
-package com.nlbhub.instead.universal;
+package com.nlbhub.instead.standalone;
 
 
 import android.view.KeyEvent;

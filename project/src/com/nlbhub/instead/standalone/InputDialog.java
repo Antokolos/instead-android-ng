@@ -1,4 +1,4 @@
-package com.nlbhub.instead.universal;
+package com.nlbhub.instead.standalone;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.SDLActivity;
 
 public class InputDialog extends Dialog {
