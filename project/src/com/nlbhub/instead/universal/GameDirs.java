@@ -248,7 +248,7 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 					menu.add(0, v.getId(), 0, getString(R.string.addtofav));
 				}
 			menu.add(0, v.getId(), 0, getString(R.string.addtodesc));
-			if(!getIndexMenu(dtitles.get(item_index)).equals(Globals.TutorialGame)){
+			if(!getIndexMenu(dtitles.get(item_index)).equals(Globals.BundledGame)){
 				menu.add(0, v.getId(), 0, getString(R.string.menudel));			
 			}
      	}

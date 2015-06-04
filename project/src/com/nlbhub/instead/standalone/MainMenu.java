@@ -322,7 +322,7 @@ public class MainMenu extends ListActivity implements ViewBinder {
 //		Log.d("res", theme+" "+Float.toString(res));
 
 
-        String s = "game = "+Globals.TutorialGame+"\nkbd = 2\nautosave = 1\nowntheme = 0\nhl = 0\nclick = 1\nmusic = 1\nfscale = 12\njustufy = 0\n"
+        String s = "game = "+Globals.BundledGame +"\nkbd = 2\nautosave = 1\nowntheme = 1\nhl = 0\nclick = 1\nmusic = 1\nfscale = 12\njustufy = 0\n"
                 + locale + theme + "\n";
         return s;
     }

@@ -16,11 +16,11 @@ public class Favorites {
     private MyPrefs p;
 	private List<String> game = new ArrayList<String>();
 	private List<String> title = new ArrayList<String>();	
-    private String TitleTutorial;
+    private String TitleBundled;
 
 	Favorites(Context c){
 		p = new MyPrefs(c, Globals.ApplicationName+TAG);
-		TitleTutorial = c.getString(R.string.tutorial);
+		TitleBundled = c.getString(R.string.bundledgame);
 		sync();
 	}
 	
@@ -29,8 +29,8 @@ public class Favorites {
 		title.clear();
 		int n = p.get(SIZE, 0);
 		for(int i=0; i<n;i++){
-			game.add(p.get(GAME+Integer.toString(i), Globals.TutorialGame));
-			title.add(p.get(TITLE+Integer.toString(i), TitleTutorial));
+			game.add(p.get(GAME+Integer.toString(i), Globals.BundledGame));
+			title.add(p.get(TITLE+Integer.toString(i), TitleBundled));
 		}
 	}
 	

@@ -21,11 +21,11 @@ public class LastGame {
     
 	public LastGame(Context p){
 		pr = new MyPrefs(p, Globals.ApplicationName);
-		title_def =  p.getString(R.string.tutorial);
+		title_def =  p.getString(R.string.bundledgame);
  		filtr = pr.get("filtr", GameList.ALL);
  		list = pr.get("list", Globals.BASIC);		
  		lang = pr.get("lang", Globals.Lang.ALL);
- 		name = pr.get("name", Globals.TutorialGame);
+ 		name = pr.get("name", Globals.BundledGame);
  		title = pr.get("title", title_def);
  		scroff = pr.get("scroff", true);
  		keyb = pr.get("keyb", true);
@@ -34,7 +34,7 @@ public class LastGame {
 	}
 	
 	public void clearGame(){
- 		name = Globals.TutorialGame;
+ 		name = Globals.BundledGame;
  		title = title_def;		
  		Commit();
 	}
@@ -47,7 +47,7 @@ public class LastGame {
 		filtr = GameList.ALL;
  		list =  Globals.BASIC;		
  		lang = Globals.Lang.ALL;
- 		name = Globals.TutorialGame;
+ 		name = Globals.BundledGame;
  		title = title_def;		
  		Commit();
 	}

@@ -222,7 +222,7 @@ private void readFolder() {
         if (prefix != null) {
             return prefix;
         } else {
-            return context.getString(R.string.tutorial);
+            return context.getString(R.string.bundledgame);
         }
     }
 
@@ -232,7 +232,7 @@ private void readFolder() {
         if (prefix != null) {
             return prefix;
         } else {
-            return Globals.TutorialGame;
+            return Globals.BundledGame;
         }
     }
     

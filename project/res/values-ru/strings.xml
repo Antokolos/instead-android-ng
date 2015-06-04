@@ -87,7 +87,7 @@
     <string name="delsaves">Удалить сохранения игры?</string>
     <string name="mailme">Отправить мне email</string>
     <string name="ver">Версия</string>
-    <string name="tutorial">Учебник</string>
+    <string name="bundledgame">BundledGame</string>
     <string name="gmwhat">Установка и запуск игр</string>
     <string name="optwhat">Экран, звук и шрифт</string>
     <string name="marketon">Оценить, написать коментарий</string>

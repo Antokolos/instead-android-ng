@@ -42,7 +42,7 @@ public class Globals {
 	public static final String Options = "appdata/insteadrc";
 	public static final String MainLua = "/main.lua";
 	public static final String DataFlag = ".version";
-	public static final String TutorialGame = "tutorial3";
+	public static final String BundledGame = "bundled";
 	public static final String DirURQ = "urq";
 	public static final String StringURQ = "\\[URQ\\]";
 	public static final String PORTRET_KEY = "portrait";
