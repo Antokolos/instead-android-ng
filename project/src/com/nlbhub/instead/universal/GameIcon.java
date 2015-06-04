@@ -1,4 +1,4 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetProvider;
@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.content.Context;
 import android.widget.RemoteViews;
 import android.appwidget.AppWidgetManager;
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.SDLActivity;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.SDLActivity;
 
 public class GameIcon extends AppWidgetProvider {
 	
@@ -43,7 +43,7 @@ public class GameIcon extends AppWidgetProvider {
 		//Log.d("w","onEnabled");
     /*   PackageManager pm = context.getPackageManager();
         pm.setComponentEnabledSetting(
-                new ComponentName("com.silentlexx.instead", ".IconReceiver"),
+                new ComponentName("com.nlbhub.instead", ".IconReceiver"),
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
                 */
@@ -54,7 +54,7 @@ public class GameIcon extends AppWidgetProvider {
 	//Log.d("w","onDisabled");
     /*    PackageManager pm = context.getPackageManager();
         pm.setComponentEnabledSetting(
-        		new ComponentName("com.silentlexx.instead", ".IconReceiver"),
+        		new ComponentName("com.nlbhub.instead", ".IconReceiver"),
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP); */
 	}

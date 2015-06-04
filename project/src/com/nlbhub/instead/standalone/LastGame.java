@@ -1,8 +1,8 @@
-package com.silentlexx.instead.standalone;
+package com.nlbhub.instead.standalone;
 
 import android.content.Context;
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.universal.GameList;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.universal.GameList;
 
 
 public class LastGame {

@@ -15,7 +15,7 @@
 extern "C" void SDL_Android_Init(JNIEnv* env, jclass cls);
 
 /* Start up the SDL app */
-extern "C" void Java_com_silentlexx_instead_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jstring jpath, jstring jres, jstring jgame, jstring jidf)
+extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jstring jpath, jstring jres, jstring jgame, jstring jidf)
 {
     /* This interface could expand with ABI negotiation, calbacks, etc. */
     SDL_Android_Init(env, cls);

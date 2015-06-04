@@ -1,4 +1,4 @@
-package com.silentlexx.instead;
+package com.nlbhub.instead;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
@@ -15,11 +15,12 @@ import android.os.PowerManager;
 import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
-import com.silentlexx.instead.standalone.Globals;
-import com.silentlexx.instead.standalone.LastGame;
-import com.silentlexx.instead.universal.InputDialog;
-import com.silentlexx.instead.universal.Keys;
-import com.silentlexx.instead.universal.Options;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.standalone.LastGame;
+import com.nlbhub.instead.universal.InputDialog;
+import com.nlbhub.instead.universal.Keys;
+import com.nlbhub.instead.universal.Options;
 
 import java.io.File;
 import java.io.IOException;

@@ -38,9 +38,9 @@
     <string name="click">Звук щелчка</string>
     <string name="music">Включить музыку</string>
     <string name="hlpopt">Больше настроек доступно из самой игры (Клавиша Menu - Настройки).</string>
-    <string name="by">Instead Launcher for Android by</string>
+    <string name="by">Instead-NG: SilentLexx/NLB project</string>
     <string name="menu">Меню</string>
-    <string name="email">silentlexx@gmail.com</string>
+    <string name="email">antokolos@gmail.com</string>
     <string name="serverr">Ошибка соединения...</string>
     <string name="nodata">Data-файлов не найдено!</string>
     <string name="listupd">Создание списка игр...</string>

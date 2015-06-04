@@ -1,4 +1,4 @@
-package com.silentlexx.instead.standalone;
+package com.nlbhub.instead.standalone;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,9 +9,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.standalone.Globals;
-import com.silentlexx.instead.SDLActivity;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.SDLActivity;
 
 public class InputDialog extends Dialog {
 	private EditText text;

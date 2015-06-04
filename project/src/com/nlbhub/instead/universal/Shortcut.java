@@ -1,4 +1,4 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -19,9 +19,9 @@ import android.view.Window;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.standalone.Globals;
-import com.silentlexx.instead.SDLActivity;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.SDLActivity;
 
 public class Shortcut extends Activity {
 	private Handler h = new Handler();

@@ -1,4 +1,4 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,10 +29,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SimpleAdapter.ViewBinder;
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.standalone.Globals;
-import com.silentlexx.instead.standalone.LastGame;
-import com.silentlexx.instead.SDLActivity;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.standalone.LastGame;
+import com.nlbhub.instead.SDLActivity;
 
 public class GameDirs extends ListActivity  implements ViewBinder  {
 	private final Handler h = new Handler();

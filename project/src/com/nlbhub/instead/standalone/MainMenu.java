@@ -1,4 +1,4 @@
-package com.silentlexx.instead.standalone;
+package com.nlbhub.instead.standalone;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -16,9 +16,9 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.SimpleAdapter.ViewBinder;
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.SDLActivity;
-import com.silentlexx.instead.universal.Options;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.SDLActivity;
+import com.nlbhub.instead.universal.Options;
 
 import java.io.*;
 import java.util.*;
@@ -76,7 +76,7 @@ public class MainMenu extends ListActivity implements ViewBinder {
 
     protected void sendEmail() {
         String [] addr = new String[1];
-        addr[0] = "silentlexx@gmail.com";
+        addr[0] = "antokolos@gmail.com";
 
         try{
 
@@ -540,12 +540,12 @@ break;
 
     private void openMarket(){
         try {
-            String url = "market://details?id=com.silentlexx.instead";
+            String url = "market://details?id=com.nlbhub.instead";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             startActivity(i);
         } catch (ActivityNotFoundException e){
-            openUrl("https://market.android.com/details?id=com.silentlexx.instead");
+            openUrl("https://market.android.com/details?id=com.nlbhub.instead");
         }
     }
 

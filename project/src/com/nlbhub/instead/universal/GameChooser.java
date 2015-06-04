@@ -1,4 +1,4 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,8 +22,8 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.standalone.Globals;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.Globals;
 
 public class GameChooser extends Activity {
     private static final String PREFS_NAME

@@ -1,7 +1,7 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.standalone.Globals;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.Globals;
 import org.apache.http.client.methods.*;
 import org.apache.http.*;
 import org.apache.http.impl.client.*;

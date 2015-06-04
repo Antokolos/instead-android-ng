@@ -1,8 +1,8 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
 
 import android.view.KeyEvent;
-import com.silentlexx.instead.SDLActivity;
+import com.nlbhub.instead.SDLActivity;
 
 public class Keys {
 

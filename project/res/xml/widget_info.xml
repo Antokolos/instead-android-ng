@@ -6,5 +6,5 @@
   android:updatePeriodMillis="86400000"
   android:initialLayout="@layout/widget_initial_layout"
   android:resizeMode="none" android:previewImage="@drawable/oldbook_widget"
-  android:configure="com.silentlexx.instead.universal.GameChooser" >
+  android:configure="com.nlbhub.instead.universal.GameChooser" >
 </appwidget-provider>

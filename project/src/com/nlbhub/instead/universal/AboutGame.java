@@ -1,4 +1,4 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.standalone.Globals;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.Globals;
 
 public class AboutGame extends Activity {
 	private TextView tstatus;

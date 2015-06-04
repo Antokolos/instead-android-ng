@@ -38,9 +38,9 @@
     <string name="click">Click sound</string>
     <string name="music">Enable music</string>
     <string name="hlpopt">More options available in game (Menu - Settings).</string>
-    <string name="by">Instead Launcher for Android by</string>
+    <string name="by">Instead-NG: SilentLexx/NLB project</string>
     <string name="menu">Menu</string>
-    <string name="email">silentlexx@gmail.com</string>
+    <string name="email">antokolos@gmail.com</string>
     <string name="serverr">Connection error.</string>
     <string name="nodata">Data-files not found!</string>
     <string name="listupd">Creating game list...</string>

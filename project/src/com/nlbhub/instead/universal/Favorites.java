@@ -1,12 +1,12 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.standalone.Globals;
-import com.silentlexx.instead.standalone.MyPrefs;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.standalone.MyPrefs;
 
 public class Favorites {
     private final String TAG = "-favorites";

@@ -1,4 +1,4 @@
-package com.silentlexx.instead.standalone;
+package com.nlbhub.instead.standalone;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,7 +12,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
-import com.silentlexx.instead.R;
+import com.nlbhub.instead.R;
 
 public class Globals {
 

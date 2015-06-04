@@ -6,7 +6,7 @@
     <string name="menudel">Видалити гру</string>
     <string name="ag_name">Директорія</string>
     <string name="cancel">Скасування</string>
-    <string name="by">Instead Launcher for Android by</string>
+    <string name="by">Instead-NG: SilentLexx/NLB project</string>
     <string name="wait">Чекайте ...</string>
     <string name="ready">Готово</string>
     <string name="agame">Про гру</string>
@@ -29,7 +29,7 @@
     <string name="init">Ініціалізація</string>
     <string name="exit">Вийти</string>
     <string name="finish">Завантаження закінчена</string>
-    <string name="email">silentlexx@gmail.com</string>
+    <string name="email">antokolos@gmail.com</string>
     <string name="downfile">Загузка файлу в</string>
     <string name="about_btn">Про Instead</string>
     <string name="ag_new">Не встановлено</string>

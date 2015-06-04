@@ -1,9 +1,9 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import com.silentlexx.instead.standalone.Globals;
+import com.nlbhub.instead.standalone.Globals;
 
 public class IntentLauncher extends Activity {
 
@@ -28,9 +28,9 @@ public class IntentLauncher extends Activity {
 			}  
 			if(run){
 				try {
-                    // com.silentlexx.instead.standalone.MainMenu for standalone app without favourites, library etc
-                    // com.silentlexx.instead.universal.UniversalMainMenu for universal app
-					Intent myIntent = new Intent(this, Class.forName("com.silentlexx.instead.standalone.MainMenu"));
+                    // com.nlbhub.instead.standalone.MainMenu for standalone app without favourites, library etc
+                    // com.nlbhub.instead.universal.UniversalMainMenu for universal app
+					Intent myIntent = new Intent(this, Class.forName("com.nlbhub.instead.standalone.MainMenu"));
 					startActivity(myIntent);
 				} catch (ClassNotFoundException e) {
 					// TODO: report error

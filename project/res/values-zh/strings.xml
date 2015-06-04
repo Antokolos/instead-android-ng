@@ -6,7 +6,7 @@
     <string name="menudel">删除游戏</string>
     <string name="ag_name">目录名称</string>
     <string name="cancel">取消</string>
-    <string name="by">Instead Launcher for Android by</string>
+    <string name="by">Instead-NG: SilentLexx/NLB project</string>
     <string name="wait">请稍候...</string>
     <string name="ready">准备好</string>
     <string name="agame">关于游戏</string>
@@ -29,7 +29,7 @@
     <string name="init">初始化</string>
     <string name="exit">退出</string>
     <string name="finish">下载完成</string>
-    <string name="email">silentlexx@gmail.com</string>
+    <string name="email">antokolos@gmail.com</string>
     <string name="downfile">下载文件</string>
     <string name="about_btn">有关Instead</string>
     <string name="ag_new">未安装</string>

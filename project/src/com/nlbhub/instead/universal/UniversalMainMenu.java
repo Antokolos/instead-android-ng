@@ -1,4 +1,4 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,10 +9,10 @@ import android.util.Log;
 import android.view.*;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.standalone.Globals;
-import com.silentlexx.instead.standalone.MainMenu;
-import com.silentlexx.instead.SDLActivity;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.standalone.MainMenu;
+import com.nlbhub.instead.SDLActivity;
 
 import java.io.*;
 import java.util.ArrayList;

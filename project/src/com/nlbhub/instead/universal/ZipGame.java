@@ -1,12 +1,12 @@
-package com.silentlexx.instead.universal;
+package com.nlbhub.instead.universal;
 
 import java.util.zip.*;
 import java.io.*;
 
 import android.app.ProgressDialog;
-import com.silentlexx.instead.R;
-import com.silentlexx.instead.standalone.Globals;
-import com.silentlexx.instead.standalone.MainMenu;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.standalone.MainMenu;
 
 class ZipGame extends Thread {
 	class StatusWriter {
