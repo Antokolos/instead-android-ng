@@ -6,7 +6,7 @@
     <string name="menudel">Quitar juego</string>
     <string name="ag_name">Nombre de Dir</string>
     <string name="cancel">Cancelar</string>
-    <string name="by">Instead de lanzamiento para Android por</string>
+    <string name="by">Instead-NG: SilentLexx/NLB project</string>
     <string name="wait">Por favor espere ...</string>
     <string name="ready">Listo</string>
     <string name="agame">Acerca del juego</string>
@@ -31,7 +31,7 @@
     <string name="finish">Descarga finalizada</string>
     <string name="email">antokolos@gmail.com</string>
     <string name="downfile">La descarga de archivos a</string>
-    <string name="about_btn">Acerca Instead</string>
+    <string name="about_btn">Acerca Instead-NG</string>
     <string name="ag_new">No se instala</string>
     <string name="menustart">Inicio del juego</string>
     <string name="fnormal">Normal</string>
@@ -49,7 +49,7 @@
     <string name="click">Haga clic en el sonido</string>
     <string name="downdata">Descargar archivo</string>
     <string name="run">Inicio del juego</string>
-    <string name="app_name">Instead</string>
+    <string name="app_name">Instead-NG</string>
     <string name="lang">Lengua</string>
     <string name="zipsize">Tamaño</string>
     <string name="alang">Todos los idiomas</string>
@@ -79,7 +79,7 @@
     <string name="gmlist">Lista de juegos</string>
     <string name="na">No avaible</string>
     <string name="nodata">Archivos de datos no encontrado!</string>
-    <string name="about_instead">Escrito por Peter Kosyh \'2009-2011 \n \ nPorted para Android por Aleksey Mahno \'2010-2011 \n \ nHomepage: \ nhttp: / / instead.googlecode.com</string>
+    <string name="about_instead">Written by Peter Kosyh \'2009-2011\n\nPorted to Android by Aleksey Mahno \'2010-2011\n\nFurther Android port development by Anton P. Kolosov \'2015\n\nHomepage:\nhttp://instead.syscall.ru</string>
     <string name="conerror">Error de conexión</string>
     <string name="dataerror">Archivo de datos error al descargar</string>
     <string name="sizeyesno">¿Desea continuar con la descarga?</string>

@@ -6,7 +6,7 @@
     <string name="menudel">Rimuovere gioco</string>
     <string name="ag_name">Nome Dir</string>
     <string name="cancel">Annullare</string>
-    <string name="by">Instead Launcher per android da</string>
+    <string name="by">Instead-NG: SilentLexx/NLB project</string>
     <string name="wait">Attendere prego ...</string>
     <string name="ready">Pronto</string>
     <string name="agame">A proposito di gioco</string>
@@ -31,7 +31,7 @@
     <string name="finish">Scarica finito</string>
     <string name="email">antokolos@gmail.com</string>
     <string name="downfile">Download del file di</string>
-    <string name="about_btn">Chi Instead</string>
+    <string name="about_btn">Chi Instead-NG</string>
     <string name="ag_new">Non installato</string>
     <string name="menustart">Iniziare il gioco</string>
     <string name="fnormal">Normale</string>
@@ -49,7 +49,7 @@
     <string name="click">Clicca suono</string>
     <string name="downdata">Download file</string>
     <string name="run">Iniziare il gioco</string>
-    <string name="app_name">Instead</string>
+    <string name="app_name">Instead-NG</string>
     <string name="lang">Lingua</string>
     <string name="zipsize">Dimensione</string>
     <string name="alang">Tutte le lingue</string>
@@ -79,7 +79,7 @@
     <string name="gmlist">Gioco lista</string>
     <string name="na">Non disponibile</string>
     <string name="nodata">Dati-file non trovato!</string>
-    <string name="about_instead">Scritto da Peter Kosyh \'2009-2011 \n \ nPorted per android da Aleksey Mahno \'2010-2011 \n \ nHomepage: \ nhttp: / / instead.googlecode.com</string>
+    <string name="about_instead">Written by Peter Kosyh \'2009-2011\n\nPorted to Android by Aleksey Mahno \'2010-2011\n\nFurther Android port development by Anton P. Kolosov \'2015\n\nHomepage:\nhttp://instead.syscall.ru</string>
     <string name="conerror">Errore di connessione</string>
     <string name="dataerror">File-dati scaricando errore</string>
     <string name="sizeyesno">Vuoi continuare a scaricare?</string>

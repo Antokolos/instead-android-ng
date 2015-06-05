@@ -16,7 +16,7 @@ import com.nlbhub.instead.R;
 
 public class Globals {
 
-	public static final String ApplicationName = "Instead";
+	public static final String ApplicationName = "Instead-NG";
 	
 	public static String AppVer(Context c) {
 		PackageInfo pi;

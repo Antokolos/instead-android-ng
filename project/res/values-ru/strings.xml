@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">Instead</string>
+    <string name="app_name">Instead-NG</string>
     <string name="run">Начать игру</string>
     <string name="gmlist">Репозиторий игр</string>
     <string name="exit">Выйти</string>
@@ -70,10 +70,10 @@
     <string name="sizeyesno">Продолжить загрузку?</string>
     <string name="waitdwn">Ждите, идет загрузка</string>
     <string name="na">Недоступно</string>
-    <string name="downfile">Загузка файла в</string>
-    <string name="about_instead">Интерпретатор простых текстовых приключений:\nКосых П.А. \'2009-2011\n\nПортирование на Android:\nМахно А.И. \'2010-2011\n\nСайт проекта:\nhttp://instead.googlecode.com\n\n\nБлагодарности за финансовую поддержку выражаем:\nXlab</string>
+    <string name="downfile">Загрузка файла в</string>
+    <string name="about_instead">Written by Peter Kosyh \'2009-2011\n\nPorted to Android by Aleksey Mahno \'2010-2011\n\nFurther Android port development by Anton P. Kolosov \'2015\n\nHomepage:\nhttp://instead.syscall.ru</string>
     <string name="ok">Ок</string>
-    <string name="about_btn">О Instead</string>
+    <string name="about_btn">О Instead-NG</string>
     <string name="instdata">Установка</string>
     <string name="conferror">Не правельно определено разрешение экрана! Попробуйте пересоздать настройки!</string>
     <string name="ourtheme">Свои темы в играх</string>
@@ -91,7 +91,7 @@
     <string name="gmwhat">Установка и запуск игр</string>
     <string name="optwhat">Экран, звук и шрифт</string>
     <string name="marketon">Оценить, написать коментарий</string>
-    <string name="market">Instead на Маркете</string>
+    <string name="market">Instead-NG на Маркете</string>
     <string name="nourq">URQ модуль не установлен!</string>
     <string name="deleting">Удаление...</string>
     <string name="resetsd">Эта операция сбросит настройки игры, переустановит файлы игры на SD карте, но не затронет ваши игры и сохранения. Продолжить?</string>
@@ -102,7 +102,7 @@
     <string name="portrait">Портретная ориентация экрана</string>
     <string name="dirlist">Все игры</string>
     <string name="gamein">Игры в</string>
-    <string name="cpidf">Копировать файл игры в папку Instead?</string>
+    <string name="cpidf">Копировать файл игры в папку Instead-NG?</string>
     <string name="copy">Копирование...</string>
     <string name="rmidf">Удалить игру в IDF</string>
     <string name="runidf">Запустить игру в IDF</string>
@@ -110,7 +110,7 @@
     <string name="folderop">Игры доступные к запуску</string>
     <string name="instzipwarn">Если вы не уверены что в zip-архиве находится игра для Instead - нажмите "НЕТ"!</string>
     <string name="instzip">Установить игру с zip-архива?</string>
-    <string name="cpidfwarn">Это даст возможность запускать игру непосредственно с Instead.</string>
+    <string name="cpidfwarn">Это даст возможность запускать игру непосредственно с Instead-NG.</string>
     <string name="launch">Запустить</string>
     <string name="sand">Копировать</string>
     <string name="add_widget">Игра Instead (виджет)</string>

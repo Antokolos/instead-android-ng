@@ -7,7 +7,7 @@ SDL_JAVA_PACKAGE_PATH := com_nlbhub_instead
 # Typically /sdcard/alienblaster 
 # Or /data/data/de.schwardtnet.alienblaster/files if you're planning to unpack data in application private folder
 # Your application will just set current directory there
-SDL_CURDIR_PATH := /sdcard/Instead
+SDL_CURDIR_PATH := /sdcard/Instead-NG
 
 # Android Dev Phone G1 has trackball instead of cursor keys, and 
 # sends trackball movement events as rapid KeyDown/KeyUp events,

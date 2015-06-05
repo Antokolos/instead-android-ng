@@ -181,7 +181,7 @@ public class DataDownloader extends Thread {
 			extractArchive(Parent.getResources().openRawResource(R.raw.data), new SDPathResolver());
 			extractArchive(getAppropriateLibsStream(), new SystemPathResolver());
 		} catch (IOException e) {
-			Log.e("Instead ERROR", "IOException");
+			Log.e("Instead-NG ERROR", "IOException");
 		}
 
 		path = Globals.getOutFilePath(Globals.DataFlag);
@@ -195,7 +195,7 @@ public class DataDownloader extends Thread {
 		} catch (FileNotFoundException e) {
 		} catch (SecurityException e) {
 		} catch (java.io.IOException e) {
-			Log.e("Instead ERROR", "Error writing file " + path);
+			Log.e("Instead-NG ERROR", "Error writing file " + path);
 			return;
 		}
 		;

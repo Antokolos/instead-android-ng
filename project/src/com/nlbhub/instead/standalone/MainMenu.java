@@ -261,7 +261,7 @@ public class MainMenu extends ListActivity implements ViewBinder {
             } catch (FileNotFoundException e) {
             } catch (SecurityException e) {
             } catch (java.io.IOException e) {
-                Log.e("Instead ERROR", "Error writing file " + path);
+                Log.e("Instead-NG ERROR", "Error writing file " + path);
                 return;
             };
         }
@@ -417,7 +417,7 @@ public class MainMenu extends ListActivity implements ViewBinder {
     public void onError(String s) {
         dialog.setCancelable(true);
         dwn = false;
-        Log.e("Instead ERROR: ", s);
+        Log.e("Instead-NG ERROR: ", s);
     }
 
     public void showRun() {

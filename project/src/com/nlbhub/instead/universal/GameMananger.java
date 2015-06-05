@@ -516,7 +516,7 @@ public class GameMananger extends ListActivity implements ViewBinder {
 		dialog.setCancelable(true);
 		dwn = false;
 		downloader = null;
-		Log.e("Instead ERORR: ", s);
+		Log.e("Instead-NG ERROR: ", s);
 
 	}
 

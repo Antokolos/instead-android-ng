@@ -16,7 +16,7 @@ LOCAL_H_FILES := $(SUBDIR)/cache.h $(SUBDIR)/config.h $(SUBDIR)/externals.h $(SU
 	$(SUBDIR)/menu.h $(SUBDIR)/SDL_anigif.h $(SUBDIR)/SDL_gfxBlitFunc.h $(SUBDIR)/SDL_rotozoom.h $(SUBDIR)/sound.h $(SUBDIR)/themes.h $(SUBDIR)/unzip.h $(SUBDIR)/util.h $(SUBDIR)/android.h 
 
 
-#DATAPATH=/sdcard/Instead
+#DATAPATH=/sdcard/Instead-NG
 DATAPATH=.
 
 STEADPATH=$(DATAPATH)/stead

@@ -174,7 +174,7 @@ public class GameList {
 	}
 
 	private void flagsScan() {
-		Log.d("Instead","Rescan games flags!");
+		Log.d("Instead-NG","Rescan games flags!");
 		String path;
 
 		for (int i = 0; i < getLength(); i++) {
