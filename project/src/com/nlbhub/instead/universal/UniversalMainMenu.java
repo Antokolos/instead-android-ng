@@ -100,6 +100,11 @@ public class UniversalMainMenu extends MainMenu {
         );
 
         listData.add(
+                addListItem(getHtmlTagForName(getString(R.string.nlbgmlist)) + BR + getHtmlTagForSmall(getString(R.string.nlbgmwhat)),
+                        R.drawable.nlbgames)
+        );
+
+        listData.add(
                 addListItem(getHtmlTagForName(getString(R.string.favorits)) + BR + getHtmlTagForSmall(getString(R.string.favfolder)),
                 R.drawable.folder_star)
         );
@@ -119,9 +124,12 @@ public class UniversalMainMenu extends MainMenu {
                 startGM();
                 break;
             case 3:
-                startFav();
+                startNLBGM();
                 break;
             case 4:
+                startFav();
+                break;
+            case 5:
                 startGD();
                 break;
         }
@@ -171,6 +179,15 @@ public class UniversalMainMenu extends MainMenu {
     }
 
     private void startGM() {
+        if (checkInstall()) {
+            Intent myIntent = new Intent(this, GameMananger.class);
+            startActivity(myIntent);
+        } else {
+            checkRC();
+        }
+    }
+
+    private void startNLBGM() {
         if (checkInstall()) {
             Intent myIntent = new Intent(this, GameMananger.class);
             startActivity(myIntent);

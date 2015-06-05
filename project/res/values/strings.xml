@@ -3,6 +3,7 @@
     <string name="app_name">Instead-NG</string>
     <string name="run">Start game</string>
     <string name="gmlist">Games repository</string>
+    <string name="nlbgmlist">NLB project</string>
     <string name="exit">Exit</string>
     <string name="writefile">Save file</string>
     <string name="writefileerorr">File saving error</string>
@@ -89,6 +90,7 @@
     <string name="ver">Version</string>
     <string name="bundledgame">BundledGame</string>
     <string name="gmwhat">Install and launch games</string>
+    <string name="nlbgmwhat">Install and launch NLB project games</string>
     <string name="optwhat">Screen, sound and font</string>
     <string name="marketon">Rate, write a comment</string>
     <string name="market">Instead-NG on the Market</string>
