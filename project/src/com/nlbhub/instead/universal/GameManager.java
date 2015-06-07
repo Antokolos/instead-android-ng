@@ -39,7 +39,7 @@ import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.standalone.LastGame;
 import com.nlbhub.instead.SDLActivity;
 
-public class GameMananger extends ListActivity implements ViewBinder {
+public class GameManager extends ListActivity implements ViewBinder {
 
 	private final int MENU_LIST=1;
 	private final int MENU_FILTER=2;
@@ -73,6 +73,14 @@ public class GameMananger extends ListActivity implements ViewBinder {
 	private LastGame lastGame;
 	private final Handler h = new Handler();
 
+	protected int getBasicListNo() {
+        return Globals.BASIC;
+    }
+
+    protected int getAlterListNo() {
+        return Globals.ALTER;
+    }
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -97,7 +105,7 @@ public class GameMananger extends ListActivity implements ViewBinder {
 
 			@Override
 			public void onClick(View arg0) {
-				listNo = Globals.BASIC;
+				listNo = getBasicListNo();
 				lastGame.setListNo(listNo);
 				list_fresh = true;
 				setTabs();
@@ -145,7 +153,7 @@ public class GameMananger extends ListActivity implements ViewBinder {
 
 			@Override
 			public void onClick(View arg0) {
-				listNo = Globals.ALTER;
+				listNo = getAlterListNo();
 				lastGame.setListNo(listNo);
 				list_fresh = true;
 				setTabs();
@@ -209,18 +217,18 @@ public class GameMananger extends ListActivity implements ViewBinder {
 	}
 	
 	private void setTabsG() {
-		switch (listNo) {
-		case Globals.BASIC:
-			basic_btn.setTextColor(Color.rgb(0, 0, 0));
-			alter_btn.setTextColor(Color.rgb(200, 200, 200));
+        final int basicListNo = getBasicListNo();
+        final int alterListNo = getAlterListNo();
+        if (listNo == basicListNo) {
+            basic_btn.setTextColor(Color.rgb(0, 0, 0));
+            alter_btn.setTextColor(Color.rgb(200, 200, 200));
 
-			basic_btn.setBackgroundDrawable(getResources().getDrawable(
-					R.drawable.tab_a));
-			alter_btn.setBackgroundDrawable(getResources().getDrawable(
-					R.drawable.tab_g));
+            basic_btn.setBackgroundDrawable(getResources().getDrawable(
+                    R.drawable.tab_a));
+            alter_btn.setBackgroundDrawable(getResources().getDrawable(
+                    R.drawable.tab_g));
 
-			break;
-		case Globals.ALTER:
+        } else if (listNo == alterListNo) {
 			basic_btn.setTextColor(Color.rgb(200, 200, 200));
 			alter_btn.setTextColor(Color.rgb(0, 0, 0));
 
@@ -228,25 +236,23 @@ public class GameMananger extends ListActivity implements ViewBinder {
 					R.drawable.tab_g));
 			alter_btn.setBackgroundDrawable(getResources().getDrawable(
 					R.drawable.tab_a));
-			break;
 		}
 
 	}
 
 	private void setTabs() {
-		
-		switch (listNo) {
-		case Globals.BASIC:
-			basic_btn.setTextColor(Color.rgb(0, 0, 0));
-			alter_btn.setTextColor(Color.rgb(200, 200, 200));
+        final int basicListNo = getBasicListNo();
+        final int alterListNo = getAlterListNo();
+        if (listNo == basicListNo) {
+            basic_btn.setTextColor(Color.rgb(0, 0, 0));
+            alter_btn.setTextColor(Color.rgb(200, 200, 200));
 
-			basic_btn.setBackgroundDrawable(getResources().getDrawable(
-					R.drawable.tab_c));
-			alter_btn.setBackgroundDrawable(getResources().getDrawable(
-					R.drawable.tab));
+            basic_btn.setBackgroundDrawable(getResources().getDrawable(
+                    R.drawable.tab_c));
+            alter_btn.setBackgroundDrawable(getResources().getDrawable(
+                    R.drawable.tab));
 
-			break;
-		case Globals.ALTER:
+        } else if (listNo == alterListNo) {
 			basic_btn.setTextColor(Color.rgb(200, 200, 200));
 			alter_btn.setTextColor(Color.rgb(0, 0, 0));
 
@@ -254,7 +260,6 @@ public class GameMananger extends ListActivity implements ViewBinder {
 					R.drawable.tab));
 			alter_btn.setBackgroundDrawable(getResources().getDrawable(
 					R.drawable.tab_c));
-			break;
 		}
 
 	}
@@ -529,13 +534,22 @@ public class GameMananger extends ListActivity implements ViewBinder {
 		return iD;
 	}
 
+    protected String getGameListFileName() {
+        return Globals.GameListFileName;
+    }
+
+    protected String getGameListAltFileName() {
+        return Globals.GameListAltFileName;
+    }
+
 	private String getGameListName(int n) {
-		switch (n) {
-		case Globals.BASIC:
-			return Globals.GameListFileName;
-		case Globals.ALTER:
-			return Globals.GameListAltFileName;
-		default:
+        final int basicListNo = getBasicListNo();
+        final int alterListNo = getAlterListNo();
+        if (n == basicListNo) {
+            return getGameListFileName();
+        } else if (n == alterListNo) {
+            return getGameListAltFileName();
+        } else {
 			return Globals.GameListFileName;
 		}
 	}
@@ -822,7 +836,7 @@ public class GameMananger extends ListActivity implements ViewBinder {
 		String s = gl.getInf(GameList.SIZE, index.get(item_index));
 	
 		//FIXME workaround for size of URQ module
-		if(listNo==Globals.BASIC){
+		if(listNo == getBasicListNo()){
 			if(item_index==gl.getIndexOfURQ()) s = gl.getInf(GameList.SIZE, item_index);
 		}
 		

@@ -24,11 +24,11 @@ class XmlDownloader extends Thread {
 
 	class StatusWriter {
 		private ProgressDialog Status;
-		private GameMananger Parent;
+		private GameManager Parent;
 
-		public StatusWriter(ProgressDialog _Status, GameMananger GameMananger) {
+		public StatusWriter(ProgressDialog _Status, GameManager GameManager) {
 			Status = _Status;
-			Parent = GameMananger;
+			Parent = GameManager;
 		}
 
 		public void setMessage(final String str) {
@@ -48,7 +48,7 @@ class XmlDownloader extends Thread {
 
 	}
 
-	public XmlDownloader(GameMananger GameMananger, ProgressDialog _Status,
+	public XmlDownloader(GameManager GameManager, ProgressDialog _Status,
 			int src) {
 
 		switch (src) {
@@ -65,10 +65,10 @@ class XmlDownloader extends Thread {
 			gameListFileName = Globals.GameListFileName;
 		}
 
-		Parent = GameMananger;
+		Parent = GameManager;
 		DownloadComplete = false;
 		if (!Parent.onpause)
-			Status = new StatusWriter(_Status, GameMananger);
+			Status = new StatusWriter(_Status, GameManager);
 		// Status.setMessage(
 		// Parent.getString(R.string.connect)+" "+gameListUrl);
 		this.start();
@@ -173,7 +173,7 @@ class XmlDownloader extends Thread {
 
 	private void initParent() {
 		class Callback implements Runnable {
-			public GameMananger Parent;
+			public GameManager Parent;
 
 			public void run() {
 		
@@ -188,5 +188,5 @@ class XmlDownloader extends Thread {
 
 	public boolean DownloadComplete;
 	public StatusWriter Status;
-	private GameMananger Parent;
+	private GameManager Parent;
 }

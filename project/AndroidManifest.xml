@@ -12,7 +12,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SDLActivity" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
-        <activity android:name=".universal.GameMananger" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
+        <activity android:name=".universal.GameManager" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
         <activity android:name=".standalone.Options" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
         <activity android:name=".universal.AboutGame" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
         <activity android:name=".universal.IntentLauncher" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation">

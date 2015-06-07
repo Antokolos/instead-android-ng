@@ -85,10 +85,10 @@ public class GameList {
 	private List<String> size;
 	
 	private Document document;
-	private GameMananger Parent;
+	private GameManager Parent;
 
 	
-	GameList(GameMananger _parent, String f) {
+	GameList(GameManager _parent, String f) {
 		Parent = _parent;
 		na=Parent.getString(R.string.na);
 		flag = new ArrayList<Integer>();

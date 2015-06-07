@@ -13,11 +13,11 @@ import android.app.ProgressDialog;
 class GameDownloader extends Thread {
 	class StatusWriter {
 		private ProgressDialog Status;
-		private GameMananger Parent;
+		private GameManager Parent;
 
-		public StatusWriter(ProgressDialog _Status, GameMananger gameMananger) {
+		public StatusWriter(ProgressDialog _Status, GameManager gameManager) {
 			Status = _Status;
-			Parent = gameMananger;
+			Parent = gameManager;
 		}
 
 		public void setMessage(final String str, final int prg) {
@@ -60,14 +60,14 @@ class GameDownloader extends Thread {
 		
 	}
 
-	public GameDownloader(GameMananger gameMananger, String url, String name,
+	public GameDownloader(GameManager gameManager, String url, String name,
 			ProgressDialog _Status) {
-		Parent = gameMananger;
+		Parent = gameManager;
 		DownloadComplete = false;
 		gameUrl = url;
 		gameName = name;
 		gameDir = Globals.GameDir + gameName;
-		Status = new StatusWriter(_Status, gameMananger);
+		Status = new StatusWriter(_Status, gameManager);
 		// Status.setMessage( Parent.getString(R.string.connect) +" "+ gameUrl
 		// );
 		this.start();
@@ -249,7 +249,7 @@ class GameDownloader extends Thread {
 
 	private void initParent() {
 		class Callback implements Runnable {
-			public GameMananger Parent;
+			public GameManager Parent;
 
 			public void run() {
 
@@ -263,7 +263,7 @@ class GameDownloader extends Thread {
 
 	private void Cancel() {
 		class Callback implements Runnable {
-			public GameMananger Parent;
+			public GameManager Parent;
 
 			public void run() {
 
@@ -277,7 +277,7 @@ class GameDownloader extends Thread {
 
 	public boolean DownloadComplete;
 	public StatusWriter Status;
-	private GameMananger Parent;
+	private GameManager Parent;
 	private String gameUrl;
 	private String gameName;
 	private String gameDir;

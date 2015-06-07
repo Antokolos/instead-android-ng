@@ -212,9 +212,9 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 		for(int i=0; i < dtitles.size(); i++){
 
 
-		listData.add(addListItem(GameMananger.getHtmlTagForName(dtitles.get(i)), 
+		listData.add(addListItem(GameManager.getHtmlTagForName(dtitles.get(i)),
 				Globals.getIcon(getIndexMenu(dtitles.get(i)))));
-				//GameMananger.getHtmlTagForComment(getIndexMenu(dtitles.get(i)))
+				//GameManager.getHtmlTagForComment(getIndexMenu(dtitles.get(i)))
 				
 		
 		}

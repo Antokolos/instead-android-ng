@@ -35,8 +35,12 @@ public class Globals {
 	public static final String ZipName = "data.zip";
 	public static final String GameListFileName = "game_list.xml";
 	public static final String GameListAltFileName = "game_list_alt.xml";
+    public static final String GameListNLBFileName = "game_list_nlb.xml";
+    public static final String GameListNLBPaidFileName = "game_list_nlb_paid.xml";
 	public static final String GameListDownloadUrl = "http://instead.syscall.ru/pool/game_list.xml";
 	public static final String GameListAltDownloadUrl = "http://instead-games.ru/xml.php";
+    public static final String GameListNLBFreeDownloadUrl = "http://nlbproject.com/services/getfreegames";
+    public static final String GameListNLBPaidDownloadUrl = "http://nlbproject.com/services/getpaidgames";
 	public static final String GameDir = "appdata/games/";
 	public static final String SaveDir = "appdata/saves/";
 	public static final String Options = "appdata/insteadrc";
@@ -48,6 +52,8 @@ public class Globals {
 	public static final String PORTRET_KEY = "portrait";
 	public static final int BASIC = 1;
 	public static final int ALTER = 2;
+	public static final int NLBFREE = 3;
+	public static final int NLBPAID = 4;
 	public static final int AUTO = 0;
 	public static final int PORTRAIT = 1;
 	public static final int LANDSCAPE = 2;

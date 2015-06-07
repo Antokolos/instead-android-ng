@@ -91,7 +91,7 @@ public class FavoritList extends ListActivity  implements ViewBinder  {
 		int n = favGame.size();
 		
 		for(int i = 0; i < n ; i++){
-		listData.add(addListItem(GameMananger.getHtmlTagForName(favGame.getTitle(i)),
+		listData.add(addListItem(GameManager.getHtmlTagForName(favGame.getTitle(i)),
 				R.drawable.star));
 		}
 		

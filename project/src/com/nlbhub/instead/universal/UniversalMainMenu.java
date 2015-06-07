@@ -10,6 +10,7 @@ import android.view.*;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.nlb.NLBGameManager;
 import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.standalone.MainMenu;
 import com.nlbhub.instead.SDLActivity;
@@ -180,7 +181,7 @@ public class UniversalMainMenu extends MainMenu {
 
     private void startGM() {
         if (checkInstall()) {
-            Intent myIntent = new Intent(this, GameMananger.class);
+            Intent myIntent = new Intent(this, GameManager.class);
             startActivity(myIntent);
         } else {
             checkRC();
@@ -189,7 +190,7 @@ public class UniversalMainMenu extends MainMenu {
 
     private void startNLBGM() {
         if (checkInstall()) {
-            Intent myIntent = new Intent(this, GameMananger.class);
+            Intent myIntent = new Intent(this, NLBGameManager.class);
             startActivity(myIntent);
         } else {
             checkRC();
