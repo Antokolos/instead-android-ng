@@ -550,7 +550,7 @@ public class GameManager extends ListActivity implements ViewBinder {
         } else if (n == alterListNo) {
             return getGameListAltFileName();
         } else {
-			return Globals.GameListFileName;
+			return getGameListFileName();
 		}
 	}
 
