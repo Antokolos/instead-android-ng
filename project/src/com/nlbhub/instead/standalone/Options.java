@@ -31,8 +31,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.standalone.Globals;
-import com.nlbhub.instead.standalone.LastGame;
 
 public class Options extends Activity {
 	final static int VSMALL = 0;
@@ -219,8 +217,8 @@ public class Options extends Activity {
 	private void deleteCfg(){
 		(new File(this.getFilesDir()+"/"+ Globals.GameListFileName)).delete();
 		(new File(this.getFilesDir()+"/"+Globals.GameListAltFileName)).delete();
-		(new File(this.getFilesDir()+"/"+ Globals.GameListNLBFileName)).delete();
-		(new File(this.getFilesDir()+"/"+Globals.GameListNLBPaidFileName)).delete();
+		(new File(this.getFilesDir()+"/"+ Globals.GameListNLBDemosFileName)).delete();
+		(new File(this.getFilesDir()+"/"+Globals.GameListNLBFullFileName)).delete();
 		lastGame.clearAll();
 		(new File(Globals.getOutFilePath(Globals.DataFlag))).delete();
 		(new File(Globals.getOutFilePath(Globals.Options))).delete();

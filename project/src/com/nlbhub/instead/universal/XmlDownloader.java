@@ -17,7 +17,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.ProgressDialog;
 
-class XmlDownloader extends Thread {
+public class XmlDownloader extends Thread {
 
 	private String gameListUrl;
 	private String gameListFileName;
@@ -48,21 +48,37 @@ class XmlDownloader extends Thread {
 
 	}
 
-	public XmlDownloader(GameManager GameManager, ProgressDialog _Status,
+	protected String getGameListDownloadUrl() {
+        return Globals.GameListDownloadUrl;
+    }
+
+    protected String getGameListAltDownloadUrl() {
+        return Globals.GameListAltDownloadUrl;
+    }
+
+    protected String getGameListFileName() {
+        return Globals.GameListFileName;
+    }
+
+    protected String getGameListAltFileName() {
+        return Globals.GameListAltFileName;
+    }
+
+    public XmlDownloader(GameManager GameManager, ProgressDialog _Status,
 			int src) {
 
 		switch (src) {
 		case Globals.BASIC:
-			gameListUrl = Globals.GameListDownloadUrl;
-			gameListFileName = Globals.GameListFileName;
+			gameListUrl = getGameListDownloadUrl();
+			gameListFileName = getGameListFileName();
 			break;
 		case Globals.ALTER:
-			gameListUrl = Globals.GameListAltDownloadUrl;
-			gameListFileName = Globals.GameListAltFileName;
+			gameListUrl = getGameListAltDownloadUrl();
+			gameListFileName = getGameListAltFileName();
 			break;
 		default:
-			gameListUrl = Globals.GameListDownloadUrl;
-			gameListFileName = Globals.GameListFileName;
+            gameListUrl = getGameListDownloadUrl();
+            gameListFileName = getGameListFileName();
 		}
 
 		Parent = GameManager;

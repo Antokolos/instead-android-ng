@@ -241,16 +241,16 @@ public class MainMenu extends ListActivity implements ViewBinder {
             //	(new File(Globals.getOutFilePath(Globals.Options))).delete();
             (new File(this.getFilesDir()+"/"+Globals.GameListFileName)).delete();
             (new File(this.getFilesDir()+"/"+Globals.GameListAltFileName)).delete();
-            (new File(this.getFilesDir()+"/"+Globals.GameListNLBFileName)).delete();
-            (new File(this.getFilesDir()+"/"+Globals.GameListNLBPaidFileName)).delete();
+            (new File(this.getFilesDir()+"/"+Globals.GameListNLBDemosFileName)).delete();
+            (new File(this.getFilesDir()+"/"+Globals.GameListNLBFullFileName)).delete();
             //	lastGame.clearAll();
             showMenu();
             loadData();
         }
         copyXml(Globals.GameListFileName);
         copyXml(Globals.GameListAltFileName);
-        copyXml(Globals.GameListNLBFileName);
-        copyXml(Globals.GameListNLBPaidFileName);
+        copyXml(Globals.GameListNLBDemosFileName);
+        copyXml(Globals.GameListNLBFullFileName);
     }
 
     private void CreateRC() {

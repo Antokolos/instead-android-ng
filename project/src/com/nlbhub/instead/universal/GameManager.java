@@ -81,7 +81,31 @@ public class GameManager extends ListActivity implements ViewBinder {
         return Globals.ALTER;
     }
 
-	@Override
+    protected String getGameListFileName() {
+        return Globals.GameListFileName;
+    }
+
+    protected String getGameListAltFileName() {
+        return Globals.GameListAltFileName;
+    }
+
+    protected int getLayoutResID() {
+        return R.layout.gmtab;
+    }
+
+    protected void createAndRunXmlDownloader() {
+        new XmlDownloader(this, dialog, listNo);
+    }
+
+    protected ProgressDialog getDialog() {
+        return dialog;
+    }
+
+    protected int getListNo() {
+        return listNo;
+    }
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -91,7 +115,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 		dialog.setMessage(getString(R.string.init));
 		dialog.setIndeterminate(true);
 		dialog.setCancelable(false);
-        setContentView(R.layout.gmtab);
+        setContentView(getLayoutResID());
     	lastGame = new LastGame(this);
     	favGame = new Favorites(this);
         filter = lastGame.getFiltr();
@@ -534,14 +558,6 @@ public class GameManager extends ListActivity implements ViewBinder {
 		return iD;
 	}
 
-    protected String getGameListFileName() {
-        return Globals.GameListFileName;
-    }
-
-    protected String getGameListAltFileName() {
-        return Globals.GameListAltFileName;
-    }
-
 	private String getGameListName(int n) {
         final int basicListNo = getBasicListNo();
         final int alterListNo = getAlterListNo();
@@ -669,7 +685,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 		//fscan = true;
 		Globals.FlagSync = true;
 		lastGame.setFlagSync(Globals.FlagSync);
-		new XmlDownloader(this, dialog, listNo);
+		createAndRunXmlDownloader();
 	}
 
 	private void Download() {
