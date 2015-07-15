@@ -17,6 +17,7 @@ import com.nlbhub.instead.R;
 public class Globals {
 
 	public static final String ApplicationName = "Instead-NG";
+    public static final String ObbFolder = "Android/obb/";
 	
 	public static String AppVer(Context c) {
 		PackageInfo pi;
@@ -41,6 +42,8 @@ public class Globals {
 	public static final String GameListAltDownloadUrl = "http://instead-games.ru/xml.php";
     public static final String GameListNLBDemoDownloadUrl = "http://nlbproject.com/services/getdemogames";
     public static final String GameListNLBFullDownloadUrl = "http://nlbproject.com/services/getfullgames";
+	public static final String MainObb = "main.100000.com.nlbhub.instead.obb";
+    public static final String PatchObb = "patch.100000.com.nlbhub.instead.obb";
 	public static final String GameDir = "appdata/games/";
 	public static final String SaveDir = "appdata/saves/";
 	public static final String Options = "appdata/insteadrc";
@@ -84,7 +87,11 @@ public class Globals {
 	public static String getAutoSavePath(String f){
 		return getOutFilePath(SaveDir+f+"/autosave");
 	}
-	
+
+    public static String getObbFilePath(final String filename, Context context) {
+        return getStorage() + Globals.ObbFolder + context.getPackageName() + "/" + filename;
+    };
+
 	public static String getOutFilePath(final String filename) {
 		return getStorage() + Globals.ApplicationName + "/" + filename;
 	};
