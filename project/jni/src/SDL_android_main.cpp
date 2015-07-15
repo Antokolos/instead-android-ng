@@ -15,7 +15,7 @@
 extern "C" void SDL_Android_Init(JNIEnv* env, jclass cls);
 
 /* Start up the SDL app */
-extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jstring jpath, jstring jres, jstring jgame, jstring jidf)
+extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jstring jpath, jstring jappdata, jstring jgamespath, jstring jres, jstring jgame, jstring jidf)
 {
     /* This interface could expand with ABI negotiation, calbacks, etc. */
     SDL_Android_Init(env, cls);
@@ -24,14 +24,13 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jcla
 
     /* Run the application code! */
     int status;
-    char *argv[6];
+    char *argv[10];
     int n = 1;
     if (jpath != NULL) {
         const char *path = env->GetStringUTFChars(jpath, 0);
         chdir(SDL_strdup(path));
         env->ReleaseStringUTFChars(jpath, path);
     }
-
 
     argv[0] = SDL_strdup("sdl-instead");
 
@@ -41,23 +40,29 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jcla
         argv[1] = SDL_strdup("-mode");
         argv[2] = SDL_strdup(res);
         env->ReleaseStringUTFChars(jres, res);
-
+        if (jappdata != NULL) {
+            const char *appdata = env->GetStringUTFChars(jappdata, 0);
+            argv[n++] = SDL_strdup("-appdata");
+            argv[n++] = SDL_strdup(appdata);
+            env->ReleaseStringUTFChars(jappdata, appdata);
+        }
+        if (jgamespath != NULL) {
+            const char *gamespath = env->GetStringUTFChars(jgamespath, 0);
+            argv[n++] = SDL_strdup("-gamespath");
+            argv[n++] = SDL_strdup(gamespath);
+            env->ReleaseStringUTFChars(jgamespath, gamespath);
+        }
         if (jidf != NULL) {
             const char *idf = env->GetStringUTFChars(jidf, 0);
-            n = 4;
-            argv[3] = SDL_strdup(idf);
-            argv[4] = NULL;
+            argv[n++] = SDL_strdup(idf);
             env->ReleaseStringUTFChars(jidf, idf);
         } else if (jgame != NULL) {
             const char *game = env->GetStringUTFChars(jgame, 0);
-            n = 5;
-            argv[3] = SDL_strdup("-game");
-            argv[4] = SDL_strdup(game);
-            argv[5] = NULL;
+            argv[n++] = SDL_strdup("-game");
+            argv[n++] = SDL_strdup(game);
             env->ReleaseStringUTFChars(jgame, game);
-        } else {
-            argv[3] = NULL;
         }
+        argv[n] = NULL;
     } else {
         argv[1] = NULL;
     }

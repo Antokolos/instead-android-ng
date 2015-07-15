@@ -305,7 +305,7 @@ public class SDLActivity extends SDLActivityBase {
 	*/
 
 	// C functions we call
-	public static native void nativeInit(String jpath, String jres, String jgame, String jidf);
+	public static native void nativeInit(String jpath, String jappdata, String jgamespath, String jres, String jgame, String jidf);
 	public static native void nativeLowMemory();
 	public static native void nativeQuit();
 	public static native void nativePause();
@@ -374,7 +374,14 @@ public class SDLActivity extends SDLActivityBase {
  */
 class SDLMain implements Runnable {
 	public void run() {
-		SDLActivity.nativeInit(Globals.getStorage() + Globals.ApplicationName, SDLActivity.getRes(),SDLActivity.getGame(), SDLActivity.getIdf());
+		SDLActivity.nativeInit(
+				Globals.getStorage() + Globals.ApplicationName,
+                Globals.getStorage() + Globals.ApplicationName + "/appdata",
+                Globals.getStorage() + Globals.ApplicationName + "/appdata/games",
+                SDLActivity.getRes(),
+                SDLActivity.getGame(),
+                SDLActivity.getIdf()
+        );
 	}
 }
 

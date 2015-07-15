@@ -1,7 +1,7 @@
 #!/bin/sh
 
 export ROOT_DIR=$(pwd)
-export NDK_HOME="/usr/local/android/android-ndk-r10c"
+export NDK_HOME="/usr/local/apps/android-ndk-r10d"
 $NDK_HOME/ndk-build clean NDK_PROJECT_PATH=$ROOT_DIR/project NDK_APPLICATION_MK=$ROOT_DIR/Application.mk
 $ROOT_DIR/clean.sh
 $NDK_HOME/ndk-build NDK_PROJECT_PATH=$ROOT_DIR/project NDK_APPLICATION_MK=$ROOT_DIR/Application.mk
