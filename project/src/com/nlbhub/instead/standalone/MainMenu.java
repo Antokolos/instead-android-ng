@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -11,6 +12,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.*;
@@ -30,15 +32,26 @@ public class MainMenu extends ListActivity implements ViewBinder {
     protected static final String BR = "<br>";
     private static final String LIST_TEXT = "list_text";
 
+
 	protected class ListItem {
 		public String text;
 		public int icon;
 	}
 
+    private synchronized void initExpansionManager(Context context) {
+        if (Globals.expansionMounter == null) {
+            if (Globals.storageManager == null) {
+                Globals.storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
+            }
+            Globals.expansionMounter = new ExpansionMounter(Globals.storageManager);
+            Globals.expansionMounter.mountExpansion(Globals.getObbFilePath(Globals.MainObb, context));
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        initExpansionManager(this);
 
         lastGame = new LastGame(this);
         Globals.FlagSync = lastGame.getFlagSync();

@@ -12,14 +12,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
-import com.nlbhub.instead.standalone.Globals;
-import com.nlbhub.instead.standalone.LastGame;
-import com.nlbhub.instead.standalone.InputDialog;
-import com.nlbhub.instead.standalone.Keys;
-import com.nlbhub.instead.standalone.Options;
+import com.nlbhub.instead.standalone.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -117,7 +114,7 @@ public class SDLActivity extends SDLActivityBase {
 		}
 		Keys.Enter();
 	}
-	
+
 	// Setup
 	protected void onCreate(Bundle savedInstanceState) {
 		// The following line is to workaround AndroidRuntimeException: requestFeature() must be called before adding content
@@ -377,7 +374,7 @@ class SDLMain implements Runnable {
 		SDLActivity.nativeInit(
 				Globals.getStorage() + Globals.ApplicationName,
                 Globals.getStorage() + Globals.ApplicationName + "/appdata",
-                Globals.getStorage() + Globals.ApplicationName + "/appdata/games",
+                Globals.expansionMounter.getExpansionFilePath(),
                 SDLActivity.getRes(),
                 SDLActivity.getGame(),
                 SDLActivity.getIdf()
