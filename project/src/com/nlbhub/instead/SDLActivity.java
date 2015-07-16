@@ -382,9 +382,17 @@ public class SDLActivity extends SDLActivityBase {
  * Simple nativeInit() runnable
  */
 class SDLMain implements Runnable {
+    private String getAppDataFolderName(File bundledGameDirParent) {
+        if (bundledGameDirParent == null || !bundledGameDirParent.isDirectory()) {
+            return "appdata";
+        } else {
+            return bundledGameDirParent.list()[0];
+        }
+    }
 	public void run() {
         final String expansionFilePath = Globals.expansionMounter.getExpansionFilePath();
-        final String appdata = Globals.getStorage() + Globals.ApplicationName + "/appdata";
+        final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
+        final String appdata = Globals.getStorage() + Globals.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
         final String gamespath = (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
         SDLActivity.nativeInit(
 				Globals.getStorage() + Globals.ApplicationName,

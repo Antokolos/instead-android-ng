@@ -12,10 +12,11 @@ then
     mkdir ./games/games
     if [ -f ./bundled.zip ]
     then
-        echo Bundled game archive exists, using it as default    
+        echo Bundled game archive exists, using it as default
         unzip -x ./bundled.zip -d ./games/games
         export GAMENAME=`ls -1 ./games/games`
-        mv ./games/games/$GAMENAME ./games/games/bundled
+        # The following folder will be used instead of appdata folder (personal preferences & saves folder)
+        mkdir $RESPATH/data/$GAMENAME
         $TOOLSDIR/jobb -v -pn com.nlbhub.instead -pv 100000 -d ./games -o ./main.100000.com.nlbhub.instead.obb
     else
         echo Bundled game archive does not exist, using tutorial3 game as default
