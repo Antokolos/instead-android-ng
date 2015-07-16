@@ -38,20 +38,9 @@ public class MainMenu extends ListActivity implements ViewBinder {
 		public int icon;
 	}
 
-    private synchronized void initExpansionManager(Context context) {
-        if (Globals.expansionMounter == null) {
-            if (Globals.storageManager == null) {
-                Globals.storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
-            }
-            Globals.expansionMounter = new ExpansionMounter(Globals.storageManager);
-            Globals.expansionMounter.mountExpansion(Globals.getObbFilePath(Globals.MainObb, context));
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initExpansionManager(this);
 
         lastGame = new LastGame(this);
         Globals.FlagSync = lastGame.getFlagSync();

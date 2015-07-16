@@ -71,6 +71,16 @@ public class SDLActivity extends SDLActivityBase {
 		}
 	}
 
+	private synchronized void initExpansionManager(Context context) {
+		if (Globals.expansionMounter == null) {
+			if (Globals.storageManager == null) {
+				Globals.storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
+			}
+			Globals.expansionMounter = new ExpansionMounter(Globals.storageManager, Globals.getObbFilePath(Globals.MainObb, context));
+			Globals.expansionMounter.mountExpansion();
+		}
+	}
+
 	public static void showKeyboard(Context c){
 		if(keyb){
 			input.show();
@@ -122,7 +132,9 @@ public class SDLActivity extends SDLActivityBase {
 		super.onCreate(savedInstanceState);
 		Ctx = this;
 		loadLibs();
-		Intent intent = getIntent(); 
+        initExpansionManager(this);
+
+        Intent intent = getIntent();
 		if (intent.getAction()!=null){
 			game = intent.getAction();
 			  if(Globals.isWorking(game)==false && (game.endsWith(".idf")==false || 

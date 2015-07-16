@@ -12,13 +12,13 @@ import java.io.File;
 public class ExpansionMounter {
     private static final String TAG="Instead-NG";
     private StorageManager storageManager;
-    private String expansionFilePath;
-
-    public ExpansionMounter(StorageManager storageManager) {
+    private String filePath;
+    public ExpansionMounter(StorageManager storageManager, String filePath) {
         this.storageManager = storageManager;
+        this.filePath = filePath;
     }
 
-    public void mountExpansion(String filePath) {
+    public void mountExpansion() {
         final File mainFile = new File(filePath);
         if (mainFile.exists()) {
             Log.d(TAG, "FILE: " + filePath + " Exists");
@@ -36,9 +36,8 @@ public class ExpansionMounter {
                                 super.onObbStateChange(path, state);
                                 Log.d("PATH = ",path);
                                 Log.d("STATE = ", state+"");
-                                //expansionFilePath =   storageManager.getMountedObbPath(path);
                                 if (state == OnObbStateChangeListener.MOUNTED) {
-                                    expansionFilePath = storageManager.getMountedObbPath(path);
+                                    String expansionFilePath = storageManager.getMountedObbPath(path);
                                     Log.d(TAG,expansionFilePath+"-->MOUNTED");
 
                                 }
@@ -64,6 +63,6 @@ public class ExpansionMounter {
     }
 
     public String getExpansionFilePath() {
-        return expansionFilePath;
+        return storageManager.getMountedObbPath(filePath);
     }
 }
