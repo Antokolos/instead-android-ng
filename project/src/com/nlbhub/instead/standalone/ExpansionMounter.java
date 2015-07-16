@@ -21,14 +21,7 @@ public class ExpansionMounter {
     public void mountExpansion() {
         final File mainFile = new File(filePath);
         if (mainFile.exists()) {
-            Log.d(TAG, "FILE: " + filePath + " Exists");
-        } else {
-            Log.d(TAG, "FILE: " + filePath + " DOESNT EXIST");
-        }
-
-
-        if (!storageManager.isObbMounted(mainFile.getAbsolutePath())) {
-            if (mainFile.exists()) {
+            if (!storageManager.isObbMounted(mainFile.getAbsolutePath())) {
                 if(storageManager.mountObb(mainFile.getAbsolutePath(), null,
                         new OnObbStateChangeListener() {
                             @Override
@@ -45,20 +38,15 @@ public class ExpansionMounter {
                                     Log.d(TAG, "Path: " + path + "; state: " + state);
                                 }
                             }
-                        }))
-                {
+                        }
+                )) {
                     Log.d(TAG,"SUCCESSFULLY QUEUED");
-                }
-                else
-                {
+                } else {
                     Log.d(TAG,"FAILED");
                 }
-
-            } else {
-                Log.d(TAG, "Patch file not found");
             }
-        }else {
-
+        } else {
+            Log.d(TAG, "Patch file not found");
         }
     }
 

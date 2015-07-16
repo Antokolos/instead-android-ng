@@ -383,10 +383,13 @@ public class SDLActivity extends SDLActivityBase {
  */
 class SDLMain implements Runnable {
 	public void run() {
-		SDLActivity.nativeInit(
+        final String expansionFilePath = Globals.expansionMounter.getExpansionFilePath();
+        final String appdata = Globals.getStorage() + Globals.ApplicationName + "/appdata";
+        final String gamespath = (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
+        SDLActivity.nativeInit(
 				Globals.getStorage() + Globals.ApplicationName,
-                Globals.getStorage() + Globals.ApplicationName + "/appdata",
-                Globals.expansionMounter.getExpansionFilePath(),
+                appdata,
+                gamespath,
                 SDLActivity.getRes(),
                 SDLActivity.getGame(),
                 SDLActivity.getIdf()

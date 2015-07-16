@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export RESPATH=./../../res/raw
-export TOOLSDIR=/usr/local/apps/android-sdk-macosx/tools
+export TOOLSDIR=/usr/local/android/android-sdk-linux/tools
 
 if [ -f $TOOLSDIR/jobb ]
 then
@@ -16,12 +16,13 @@ then
         unzip -x ./bundled.zip -d ./games/games
         export GAMENAME=`ls -1 ./games/games`
         mv ./games/games/$GAMENAME ./games/games/bundled
+        $TOOLSDIR/jobb -v -pn com.nlbhub.instead -pv 100000 -d ./games -o ./main.100000.com.nlbhub.instead.obb
     else
         echo Bundled game archive does not exist, using tutorial3 game as default
         mkdir ./games/games/bundled
         cp ./instead/games/tutorial3/* ./games/games/bundled/
+        mv ./games/games $RESPATH/data/appdata
     fi
-    $TOOLSDIR/jobb -v -pn com.nlbhub.instead -pv 100000 -d ./games -o ./main.100000.com.nlbhub.instead.obb
     rm -rf ./games
     cp ./instead/lang/* $RESPATH/data/lang
     cp ./instead/stead/* $RESPATH/data/stead
