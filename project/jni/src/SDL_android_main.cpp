@@ -10,9 +10,75 @@
 *******************************************************************************/
 #include <jni.h>
 #include <unistd.h>
+#include <android/log.h>
 
 /* Called before SDL_main() to initialize JNI bindings in SDL library */
 extern "C" void SDL_Android_Init(JNIEnv* env, jclass cls);
+
+extern "C" void Java_com_nlbhub_instead_SDLActivity_nativePipeSTDOUTToLogcat(JNIEnv* env, jclass cls)
+{
+    int pipes[2];
+    pipe(pipes);
+    dup2(pipes[1], STDOUT_FILENO);
+    FILE *inputFile = fdopen(pipes[0], "r");
+    char readBuffer[256];
+    while (1) {
+        fgets(readBuffer, sizeof(readBuffer), inputFile);
+        __android_log_write(ANDROID_LOG_INFO, "stdout", readBuffer);
+    }
+    /*
+    Stuff to add in Java:
+    class STDOUTLog implements Runnable {
+    	public void run() {
+    		SDLActivity.nativePipeSTDOUTToLogcat();
+    	}
+    }
+    public static native void nativePipeSTDOUTToLogcat();
+
+    int lWriteFD = dup(STDOUT_FILENO);
+
+    if ( lWriteFD < 0 ) {
+        // WE failed to get our file descriptor
+        LOGE("Unable to get STDOUT file descriptor.");
+        return;
+    }
+
+    int pipes[2];
+    pipe(pipes);
+    dup2(pipes[1], STDOUT_FILENO);
+    FILE *inputFile = fdopen(pipes[0], "r");
+
+    close(pipes[1]);
+
+    int fd = fileno(inputFile);
+    int flags = fcntl(fd, F_GETFL, 0);
+    flags |= O_NONBLOCK;
+    fcntl(fd, F_SETFL, flags);
+
+    if ( nullptr == inputFile )
+    {
+        LOGE("Unable to get read pipe for STDOUT");
+        return;
+    }
+
+    char readBuffer[256];
+
+    while (true == mKeepRunning)
+    {
+        fgets(readBuffer, sizeof(readBuffer), inputFile);
+
+        if ( strlen(readBuffer) == 0 )
+        {
+           sleep(1);
+           continue;
+        }
+
+        __android_log_write(ANDROID_LOG_ERROR, "stdout", readBuffer);
+    }
+
+    close(pipes[0]);
+    fclose(inputFile);*/
+}
 
 /* Start up the SDL app */
 extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jstring jpath, jstring jappdata, jstring jgamespath, jstring jres, jstring jgame, jstring jidf)
