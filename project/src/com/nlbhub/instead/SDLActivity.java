@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
 import com.nlbhub.instead.standalone.*;
+import com.nlbhub.instead.universal.ExceptionHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,12 +73,12 @@ public class SDLActivity extends SDLActivityBase {
 	}
 
 	private synchronized void initExpansionManager(Context context) {
-		if (Globals.expansionMounter == null) {
+		if (Globals.expansionMounterMain == null) {
 			if (Globals.storageManager == null) {
 				Globals.storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
 			}
-			Globals.expansionMounter = new ExpansionMounter(Globals.storageManager, Globals.getObbFilePath(Globals.MainObb, context));
-			Globals.expansionMounter.mountExpansion();
+			Globals.expansionMounterMain = new ExpansionMounter(Globals.storageManager, Globals.getObbFilePath(Globals.MainObb, context));
+			Globals.expansionMounterMain.mountExpansion();
 		}
 	}
 
@@ -127,6 +128,7 @@ public class SDLActivity extends SDLActivityBase {
 
 	// Setup
 	protected void onCreate(Bundle savedInstanceState) {
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		// The following line is to workaround AndroidRuntimeException: requestFeature() must be called before adding content
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
@@ -390,7 +392,7 @@ class SDLMain implements Runnable {
         }
     }
 	public void run() {
-        final String expansionFilePath = Globals.expansionMounter.getExpansionFilePath();
+        final String expansionFilePath = Globals.expansionMounterMain.getExpansionFilePath();
         final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
         final String appdata = Globals.getStorage() + Globals.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
         final String gamespath = (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";

@@ -68,7 +68,7 @@ public class Globals {
 	public static String idf = null;
 	public static String zip = null;
 	public static String qm = null;
-	public static ExpansionMounter expansionMounter = null;
+	public static ExpansionMounter expansionMounterMain = null;
     public static StorageManager storageManager = null;
 //	public static String game = null;
 //	public static String title = null;
