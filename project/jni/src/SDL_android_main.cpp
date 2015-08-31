@@ -10,79 +10,59 @@
 *******************************************************************************/
 #include <jni.h>
 #include <unistd.h>
+#include <pthread.h>
 #include <android/log.h>
 
 /* Called before SDL_main() to initialize JNI bindings in SDL library */
 extern "C" void SDL_Android_Init(JNIEnv* env, jclass cls);
 
-extern "C" void Java_com_nlbhub_instead_SDLActivity_nativePipeSTDOUTToLogcat(JNIEnv* env, jclass cls)
-{
-    int pipes[2];
-    pipe(pipes);
-    dup2(pipes[1], STDOUT_FILENO);
-    FILE *inputFile = fdopen(pipes[0], "r");
-    char readBuffer[256];
-    while (1) {
-        fgets(readBuffer, sizeof(readBuffer), inputFile);
-        __android_log_write(ANDROID_LOG_INFO, "stdout", readBuffer);
-    }
-    /*
-    Stuff to add in Java:
-    class STDOUTLog implements Runnable {
-    	public void run() {
-    		SDLActivity.nativePipeSTDOUTToLogcat();
-    	}
-    }
-    public static native void nativePipeSTDOUTToLogcat();
+/*
+ * https://codelab.wordpress.com/2014/11/03/how-to-use-standard-output-streams-for-logging-in-android-apps/
+ */
 
-    int lWriteFD = dup(STDOUT_FILENO);
+static int pfd[2];
+static pthread_t thr;
+static const char *tag = "Instead-NG";
+static FILE *logFile;
 
-    if ( lWriteFD < 0 ) {
-        // WE failed to get our file descriptor
-        LOGE("Unable to get STDOUT file descriptor.");
-        return;
-    }
-
-    int pipes[2];
-    pipe(pipes);
-    dup2(pipes[1], STDOUT_FILENO);
-    FILE *inputFile = fdopen(pipes[0], "r");
-
-    close(pipes[1]);
-
-    int fd = fileno(inputFile);
-    int flags = fcntl(fd, F_GETFL, 0);
-    flags |= O_NONBLOCK;
-    fcntl(fd, F_SETFL, flags);
-
-    if ( nullptr == inputFile )
-    {
-        LOGE("Unable to get read pipe for STDOUT");
-        return;
-    }
-
-    char readBuffer[256];
-
-    while (true == mKeepRunning)
-    {
-        fgets(readBuffer, sizeof(readBuffer), inputFile);
-
-        if ( strlen(readBuffer) == 0 )
-        {
-           sleep(1);
-           continue;
+static void *thread_func(void*) {
+    ssize_t rdsz;
+    char buf[128];
+    while((rdsz = read(pfd[0], buf, sizeof buf - 1)) > 0) {
+        if(buf[rdsz - 1] == '\n') --rdsz;
+        buf[rdsz - 1] = 0;  /* add null-terminator */
+        __android_log_write(ANDROID_LOG_DEBUG, tag, buf);
+        if (logFile != NULL) {
+            fprintf(logFile, "%s\n", buf);
         }
-
-        __android_log_write(ANDROID_LOG_ERROR, "stdout", readBuffer);
+        fflush(logFile);
+        usleep(50000);
     }
+    return 0;
+}
 
-    close(pipes[0]);
-    fclose(inputFile);*/
+int start_logger(const char *app_name) {
+    tag = app_name;
+
+    /* make stdout line-buffered and stderr unbuffered */
+    setvbuf(stdout, 0, _IOLBF, 0);
+    setvbuf(stderr, 0, _IONBF, 0);
+
+    /* create the pipe and redirect stdout and stderr */
+    pipe(pfd);
+    dup2(pfd[1], 1);
+    dup2(pfd[1], 2);
+
+    /* spawn the logging thread */
+    if(pthread_create(&thr, 0, thread_func, 0) == -1)
+        return -1;
+    pthread_detach(thr);
+    return 0;
 }
 
 /* Start up the SDL app */
-extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jstring jpath, jstring jappdata, jstring jgamespath, jstring jres, jstring jgame, jstring jidf)
-{
+extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jstring jpath, jstring jappdata, jstring jgamespath, jstring jres, jstring jgame, jstring jidf) {
+
     /* This interface could expand with ABI negotiation, calbacks, etc. */
     SDL_Android_Init(env, cls);
 
@@ -96,6 +76,8 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jcla
         const char *path = env->GetStringUTFChars(jpath, 0);
         chdir(SDL_strdup(path));
         env->ReleaseStringUTFChars(jpath, path);
+        logFile = fopen("native.log", "a");
+        start_logger("INSTEAD-Native");
     }
 
     argv[0] = SDL_strdup("sdl-instead");
@@ -134,14 +116,17 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jcla
     }
 
     status = SDL_main(n, argv);
+    if (logFile != NULL) {
+        fclose(logFile);
+    }
 
-/*
-No freeing in initial SDL_android_main.c
+    /*
+    No freeing in initial SDL_android_main.c
     int i;
     for (i = 0; i < n; ++i) {
         free(argv[i]);
     }
-*/
+    */
 
     /* Do not issue an exit or the whole application will terminate instead of just the SDL thread */
     /* exit(status); */
