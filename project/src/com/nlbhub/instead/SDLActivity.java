@@ -316,7 +316,7 @@ public class SDLActivity extends SDLActivityBase {
 	*/
 
 	// C functions we call
-	public static native void nativeInit(String jpath, String jappdata, String jgamespath, String jres, String jgame, String jidf);
+	public static native void nativeInit(String jnativelog, String jpath, String jappdata, String jgamespath, String jres, String jgame, String jidf);
 	public static native void nativeLowMemory();
 	public static native void nativeQuit();
 	public static native void nativePause();
@@ -384,6 +384,12 @@ public class SDLActivity extends SDLActivityBase {
  * Simple nativeInit() runnable
  */
 class SDLMain implements Runnable {
+	private String dataDir;
+
+	public SDLMain(String dataDir) {
+		this.dataDir = dataDir;
+	}
+
     private String getAppDataFolderName(File bundledGameDirParent) {
         if (bundledGameDirParent == null || !bundledGameDirParent.isDirectory()) {
             return "appdata";
@@ -391,13 +397,15 @@ class SDLMain implements Runnable {
             return bundledGameDirParent.list()[0];
         }
     }
+
 	public void run() {
         final String expansionFilePath = Globals.expansionMounterMain.getExpansionFilePath();
         final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
         final String appdata = Globals.getStorage() + Globals.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
         final String gamespath = (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
         SDLActivity.nativeInit(
-				Globals.getStorage() + Globals.ApplicationName,
+				Globals.getStorage() + Globals.ApplicationName + "/native.log",
+				dataDir,
                 appdata,
                 gamespath,
                 SDLActivity.getRes(),
@@ -408,8 +416,11 @@ class SDLMain implements Runnable {
 }
 
 class SDLSurface extends SDLSurfaceBase {
+	private Context context;
+
 	public SDLSurface(Context context) {
 		super(context);
+		this.context = context;
 	}
 
 	// Key events
@@ -516,12 +527,20 @@ class SDLSurface extends SDLSurfaceBase {
 		return true;
 	}
 
+	private String getDataDir() {
+		try {
+			return context.getDir("data",Context.MODE_PRIVATE).getCanonicalPath() + "/";
+		} catch (IOException e) {
+			Log.e("SDL", "Cannot retrieve data dir", e);
+			throw new RuntimeException(e);
+		}
+	}
 	/**
 	 * Added by Anton P. Kolosov
 	 * @return
 	 */
 	protected Thread initThread() {
-		final Thread thread = new Thread(new SDLMain(), "SDLThread");
+		final Thread thread = new Thread(new SDLMain(getDataDir()), "SDLThread");
 		enableSensor(Sensor.TYPE_ACCELEROMETER, true);
 		thread.start();
 

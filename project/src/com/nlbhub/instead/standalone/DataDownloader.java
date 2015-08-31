@@ -50,20 +50,33 @@ public class DataDownloader extends Thread {
 	}
 
 	private class SDPathResolver implements PathResolver {
+		private String dirName;
+
+		public SDPathResolver(String dirName) {
+			this.dirName = dirName;
+		}
 
 		@Override
 		public String resolvePath(String fileName) throws IOException {
-			return Globals.getOutFilePath(fileName);
+			return Globals.getOutFilePath(dirName, fileName) ;
 		}
 	}
 
 	private class SystemPathResolver implements PathResolver {
+		private String dirName;
+
+		public SystemPathResolver(String dirName) {
+			this.dirName = dirName;
+		}
 
 		@Override
 		public String resolvePath(String fileName) throws IOException {
 			// I'm using /data/data/myPackage/app_libs (using Ctx.getDir("libs",Context.MODE_PRIVATE); returns that path).
-			String libsDirPath = Parent.getApplicationContext().getDir("libs", Context.MODE_PRIVATE).getCanonicalPath() + "/";
-			return libsDirPath + fileName;
+			return getPath() + fileName;
+		}
+
+		public String getPath() throws IOException {
+			return Parent.getApplicationContext().getDir(dirName, Context.MODE_PRIVATE).getCanonicalPath() + "/";
 		}
 	}
 
@@ -168,37 +181,43 @@ public class DataDownloader extends Thread {
 	@Override
 	public void run() {
 		String path = null;
-		
-		(new File(Globals.getStorage() + Globals.ApplicationName)).mkdir();
-		
-		Globals.delete(new File(Globals.getOutFilePath("stead")));
-		Globals.delete(new File(Globals.getOutFilePath("themes")));
-		Globals.delete(new File(Globals.getOutFilePath("languages")));
-		Globals.delete(new File(Globals.getOutFilePath("lang")));
-		(new File(Globals.getOutFilePath(Globals.DataFlag))).delete();
+		SystemPathResolver dataResolver = new SystemPathResolver("data");
+
+		File programDirOnSD = new File(Globals.getStorage() + Globals.ApplicationName);
+		programDirOnSD.mkdir();
+		(new File(programDirOnSD, "appdata")).mkdir();
 
 		try {
-			extractArchive(Parent.getResources().openRawResource(R.raw.data), new SDPathResolver());
-			extractArchive(getAppropriateLibsStream(), new SystemPathResolver());
+			Globals.delete(dataResolver.getPath() + "stead");
+			Globals.delete(dataResolver.getPath() + "themes");
+			Globals.delete(dataResolver.getPath() + "languages");
+			Globals.delete(dataResolver.getPath() + "lang");
+            (new File(Globals.getOutFilePath(Globals.DataFlag))).delete();
+			extractArchive(Parent.getResources().openRawResource(R.raw.games), new SDPathResolver("appdata"));
+			extractArchive(Parent.getResources().openRawResource(R.raw.data), dataResolver);
+			extractArchive(getAppropriateLibsStream(), new SystemPathResolver("libs"));
 		} catch (IOException e) {
 			Log.e("Instead-NG ERROR", "IOException");
 		}
 
-		path = Globals.getOutFilePath(Globals.DataFlag);
-
 		OutputStream out = null;
 		byte buff[] = Globals.AppVer(Parent).getBytes();
 		try {
-			out = new FileOutputStream(path);
-			out.write(buff);
-			out.close();
+			try {
+                path = Globals.getOutFilePath(Globals.DataFlag);
+				out = new FileOutputStream(path);
+				out.write(buff);
+			} finally {
+				if (out != null) {
+					out.close();
+				}
+			}
 		} catch (FileNotFoundException e) {
 		} catch (SecurityException e) {
 		} catch (java.io.IOException e) {
 			Log.e("Instead-NG ERROR", "Error writing file " + path);
 			return;
 		}
-		;
 
 		if (!Parent.onpause)
 			Status.setMessage(Parent.getString(R.string.finish));

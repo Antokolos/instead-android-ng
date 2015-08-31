@@ -36,7 +36,7 @@ static void *thread_func(void*) {
             fprintf(logFile, "%s\n", buf);
         }
         fflush(logFile);
-        usleep(50000);
+        usleep(500000);
     }
     return 0;
 }
@@ -61,8 +61,15 @@ int start_logger(const char *app_name) {
 }
 
 /* Start up the SDL app */
-extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jstring jpath, jstring jappdata, jstring jgamespath, jstring jres, jstring jgame, jstring jidf) {
+extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jstring jnativelog, jstring jpath, jstring jappdata, jstring jgamespath, jstring jres, jstring jgame, jstring jidf) {
 
+    if (jnativelog != NULL) {
+        const char *nativelog = env->GetStringUTFChars(jnativelog, 0);
+        logFile = fopen(nativelog, "w");
+        start_logger("INSTEAD-Native");
+        env->ReleaseStringUTFChars(jnativelog, nativelog);
+    }
+    
     /* This interface could expand with ABI negotiation, calbacks, etc. */
     SDL_Android_Init(env, cls);
 
@@ -76,8 +83,6 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jcla
         const char *path = env->GetStringUTFChars(jpath, 0);
         chdir(SDL_strdup(path));
         env->ReleaseStringUTFChars(jpath, path);
-        logFile = fopen("native.log", "a");
-        start_logger("INSTEAD-Native");
     }
 
     argv[0] = SDL_strdup("sdl-instead");

@@ -43,8 +43,8 @@ public class Globals {
 	public static final String GameListAltDownloadUrl = "http://instead-games.ru/xml.php";
     public static final String GameListNLBDemoDownloadUrl = "http://nlbproject.com/services/getdemogames";
     public static final String GameListNLBFullDownloadUrl = "http://nlbproject.com/services/getfullgames";
-	public static final String MainObb = "main.100000.com.nlbhub.instead.obb";
-    public static final String PatchObb = "patch.100000.com.nlbhub.instead.obb";
+	public static final String MainObb = "main.101000.com.nlbhub.instead.obb";
+    public static final String PatchObb = "patch.101000.com.nlbhub.instead.obb";
 	public static final String GameDir = "appdata/games/";
 	public static final String SaveDir = "appdata/saves/";
 	public static final String Options = "appdata/insteadrc";
@@ -99,10 +99,18 @@ public class Globals {
 		return getStorage() + Globals.ApplicationName + "/" + filename;
 	};
 
+    public static String getOutFilePath(final String subDir, final String filename) {
+        return getStorage() + Globals.ApplicationName + "/" + subDir + "/" + filename;
+    };
+
 	public static String getOutGamePath(final String filename) {
 		return getStorage() + Globals.ApplicationName + "/" + GameDir + filename;
 	};
-	
+
+    public static void delete(String path) {
+        delete(new File(path));
+    }
+
 	public static void delete(File file) {
 
 		if (file.isDirectory()) {

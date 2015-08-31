@@ -1,28 +1,29 @@
 #!/bin/bash
 
 export RESPATH=./../../res/raw
-export TOOLSDIR=/usr/local/android/android-sdk-linux/tools
+export TOOLSDIR=/usr/local/apps/android-sdk-macosx/tools
 
 if [ -f $TOOLSDIR/jobb ]
 then
     rm $RESPATH/data.zip
+    rm $RESPATH/games.zip
     mkdir $RESPATH/data
     unzip -x ./data.zip -d $RESPATH/data
     mkdir ./games
-    mkdir ./games/games
     if [ -f ./bundled.zip ]
     then
         echo Bundled game archive exists, using it as default
+        mkdir ./games/games
         unzip -x ./bundled.zip -d ./games/games
         export GAMENAME=`ls -1 ./games/games`
         # The following folder will be used instead of appdata folder (personal preferences & saves folder)
         mkdir $RESPATH/data/$GAMENAME
-        $TOOLSDIR/jobb -v -pn com.nlbhub.instead -pv 100000 -d ./games -o ./main.100000.com.nlbhub.instead.obb
+        $TOOLSDIR/jobb -v -pn com.nlbhub.instead -pv 101000 -d ./games -o ./main.101000.com.nlbhub.instead.obb
     else
         echo Bundled game archive does not exist, using tutorial3 game as default
-        mkdir ./games/games/bundled
-        cp ./instead/games/tutorial3/* ./games/games/bundled/
-        mv ./games/games $RESPATH/data/appdata
+        mkdir ./games/bundled
+        cp ./instead/games/tutorial3/* ./games/bundled/
+        zip -r $RESPATH/games.zip ./games
     fi
     rm -rf ./games
     cp ./instead/lang/* $RESPATH/data/lang
