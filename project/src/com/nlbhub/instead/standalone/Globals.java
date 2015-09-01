@@ -13,12 +13,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.storage.StorageManager;
 import android.util.Log;
+import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
 
 public class Globals {
 
 	public static final String ApplicationName = "Instead-NG";
-    public static final String ObbFolder = "Android/obb/";
 	
 	public static String AppVer(Context c) {
 		PackageInfo pi;
@@ -80,7 +80,7 @@ public class Globals {
 	}
 
 	public static String getStorage(){
-		return android.os.Environment.getExternalStorageDirectory().toString()+"/";
+		return InsteadApplication.getAppContext().getExternalFilesDir(null) + "/";
 	}
 
 	public static String getGamePath(String f){
@@ -92,7 +92,7 @@ public class Globals {
 	}
 
     public static String getObbFilePath(final String filename, Context context) {
-        return getStorage() + Globals.ObbFolder + context.getPackageName() + "/" + filename;
+        return context.getObbDir() + "/" + filename;
     };
 
 	public static String getOutFilePath(final String filename) {

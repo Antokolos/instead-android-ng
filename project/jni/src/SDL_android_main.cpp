@@ -81,6 +81,7 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jcla
     int n = 1;
     if (jpath != NULL) {
         const char *path = env->GetStringUTFChars(jpath, 0);
+        printf("path = %s\n", path);
         chdir(SDL_strdup(path));
         env->ReleaseStringUTFChars(jpath, path);
     }
@@ -89,28 +90,33 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jcla
 
     if (jres != NULL) {
         const char *res = env->GetStringUTFChars(jres, 0);
+        printf("res = %s\n", res);
         n = 3;
         argv[1] = SDL_strdup("-mode");
         argv[2] = SDL_strdup(res);
         env->ReleaseStringUTFChars(jres, res);
         if (jappdata != NULL) {
             const char *appdata = env->GetStringUTFChars(jappdata, 0);
+            printf("appdata = %s\n", appdata);
             argv[n++] = SDL_strdup("-appdata");
             argv[n++] = SDL_strdup(appdata);
             env->ReleaseStringUTFChars(jappdata, appdata);
         }
         if (jgamespath != NULL) {
             const char *gamespath = env->GetStringUTFChars(jgamespath, 0);
+            printf("gamespath = %s\n", gamespath);
             argv[n++] = SDL_strdup("-gamespath");
             argv[n++] = SDL_strdup(gamespath);
             env->ReleaseStringUTFChars(jgamespath, gamespath);
         }
         if (jidf != NULL) {
             const char *idf = env->GetStringUTFChars(jidf, 0);
+            printf("idf = %s\n", idf);
             argv[n++] = SDL_strdup(idf);
             env->ReleaseStringUTFChars(jidf, idf);
         } else if (jgame != NULL) {
             const char *game = env->GetStringUTFChars(jgame, 0);
+            printf("game = %s\n", game);
             argv[n++] = SDL_strdup("-game");
             argv[n++] = SDL_strdup(game);
             env->ReleaseStringUTFChars(jgame, game);

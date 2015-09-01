@@ -120,13 +120,4 @@ public class AboutGame extends Activity {
 		i.setData(Uri.parse(url));
 		startActivity(i);
 	}
-
-	/*
-	 * private String getFile(String f){ return
-	 * getOutFilePath(Globals.GameDir+f); }
-	 */
-	public String getOutFilePath(final String filename) {
-		return "/sdcard/" + Globals.ApplicationName + "/" + filename;
-	}
-
 }

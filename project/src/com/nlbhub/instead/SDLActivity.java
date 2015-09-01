@@ -77,6 +77,7 @@ public class SDLActivity extends SDLActivityBase {
 			if (Globals.storageManager == null) {
 				Globals.storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
 			}
+			context.getObbDir().mkdir();
 			Globals.expansionMounterMain = new ExpansionMounter(Globals.storageManager, Globals.getObbFilePath(Globals.MainObb, context));
 			Globals.expansionMounterMain.mountExpansion();
 		}
