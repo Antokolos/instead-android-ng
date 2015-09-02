@@ -8,6 +8,9 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.fs.PathResolver;
+import com.nlbhub.instead.standalone.fs.SDPathResolver;
+import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
 public class DataDownloader extends Thread {
 	class StatusWriter {
@@ -43,41 +46,6 @@ public class DataDownloader extends Thread {
 		// Status.setMessage( Parent.getString(R.string.connect) +" "+
 		// Globals.DataDownloadUrl );
 		this.start();
-	}
-
-	private interface PathResolver {
-		String resolvePath(String fileName) throws IOException;
-	}
-
-	private class SDPathResolver implements PathResolver {
-		private String dirName;
-
-		public SDPathResolver(String dirName) {
-			this.dirName = dirName;
-		}
-
-		@Override
-		public String resolvePath(String fileName) throws IOException {
-			return Globals.getOutFilePath(dirName, fileName) ;
-		}
-	}
-
-	private class SystemPathResolver implements PathResolver {
-		private String dirName;
-
-		public SystemPathResolver(String dirName) {
-			this.dirName = dirName;
-		}
-
-		@Override
-		public String resolvePath(String fileName) throws IOException {
-			// I'm using /data/data/myPackage/app_libs (using Ctx.getDir("libs",Context.MODE_PRIVATE); returns that path).
-			return getPath() + fileName;
-		}
-
-		public String getPath() throws IOException {
-			return Parent.getApplicationContext().getDir(dirName, Context.MODE_PRIVATE).getCanonicalPath() + "/";
-		}
 	}
 
 	public void extractArchive(InputStream stream, PathResolver pathResolver) throws IOException {
@@ -181,7 +149,7 @@ public class DataDownloader extends Thread {
 	@Override
 	public void run() {
 		String path = null;
-		SystemPathResolver dataResolver = new SystemPathResolver("data");
+		SystemPathResolver dataResolver = new SystemPathResolver("data", Parent.getApplicationContext());
 
 		File programDirOnSD = new File(Globals.getStorage() + Globals.ApplicationName);
 		programDirOnSD.mkdir();
@@ -195,7 +163,7 @@ public class DataDownloader extends Thread {
             (new File(Globals.getOutFilePath(Globals.DataFlag))).delete();
 			extractArchive(Parent.getResources().openRawResource(R.raw.games), new SDPathResolver("appdata"));
 			extractArchive(Parent.getResources().openRawResource(R.raw.data), dataResolver);
-			extractArchive(getAppropriateLibsStream(), new SystemPathResolver("libs"));
+			extractArchive(getAppropriateLibsStream(), new SystemPathResolver("libs", Parent.getApplicationContext()));
 		} catch (IOException e) {
 			Log.e("Instead-NG ERROR", "IOException");
 		}

@@ -404,8 +404,11 @@ class SDLMain implements Runnable {
         final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
         final String appdata = Globals.getStorage() + Globals.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
         final String gamespath = (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
-        SDLActivity.nativeInit(
-				Globals.getStorage() + Globals.ApplicationName + "/native.log",
+		// TODO: make UI setting for nativeLogEnabled
+		boolean nativeLogEnabled = false;
+        String nativeLogPath = nativeLogEnabled ? Globals.getStorage() + Globals.ApplicationName + "/native.log" : null;
+		SDLActivity.nativeInit(
+				nativeLogPath,
 				dataDir,
                 appdata,
                 gamespath,

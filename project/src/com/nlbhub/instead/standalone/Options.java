@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
 public class Options extends Activity {
 	final static int VSMALL = 0;
@@ -225,29 +226,32 @@ public class Options extends Activity {
 		finish();
 	}
 	
-	private void  readDir(){
+	private void readDir(){
+		List<String> ls = getThemesList();
+        arr = ls.toArray(new String[ls.size()]);
+	}
+
+	private List<String> getThemesList() {
 		List<String> ls = new ArrayList<String>();
-		File f = new File(Globals.getOutFilePath("themes"));
-		if(f.isDirectory()){
-		if(f.list().length>0){
-			String files[] = f.list();
-			for (String temp : files) {
-				File file = new File(f, temp);
-				if(file.isDirectory()){
-					//Log.d("DIR",temp);
-					ls.add(temp);
-				}
-			}
+		try {
+			SystemPathResolver pathResolver = new SystemPathResolver("data", getApplicationContext());
+			File f = new File(pathResolver.resolvePath("themes"));
+			if(f.isDirectory()){
+            if(f.list().length>0){
+                String files[] = f.list();
+                for (String temp : files) {
+                    File file = new File(f, temp);
+                    if(file.isDirectory()){
+                        //Log.d("DIR",temp);
+                        ls.add(temp);
+                    }
+                }
+            }
+            }
+		} catch (IOException e) {
+			Log.e(Globals.ApplicationName, "Exception when retrieving themes list", e);
 		}
-		}
-
-        arr = new String[ls.size()]; 
-        for(int i = 0; i < ls.size(); i++){
-      	  arr[i] = ls.get(i);
-        }
-        ls.clear();
-
-		
+		return ls;
 	}
 
 	public static boolean isPortrait(){
@@ -409,7 +413,9 @@ public class Options extends Activity {
 			        	rc = rc + "fscale = " + Integer.toString(fsize) + "\n";
 					} else if (line.toLowerCase().matches(
 					"theme\\ *=\\ *.*")) {
-			        	rc = rc + "theme = " + arr[theme] + "\n";
+						if (arr.length > 0) {
+							rc = rc + "theme = " + arr[theme] + "\n";
+						}
 					}else {
 						rc = rc + line + "\n";
 					}
