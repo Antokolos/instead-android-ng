@@ -98,8 +98,7 @@ public class Globals {
 			canWrite = false;
 			canRead = false;
 		}
-		String extStoragePath = (new StringBuilder(String.valueOf(Environment.getExternalStorageDirectory().toString()))).append("/").toString();
-		if(extStoragePath.contains("emulated") || !canRead || !canWrite)
+		if(result.contains("emulated") || !canRead || !canWrite)
 		{
 			PackageManager packageManager = context.getPackageManager();
 			String packageName = context.getPackageName();
