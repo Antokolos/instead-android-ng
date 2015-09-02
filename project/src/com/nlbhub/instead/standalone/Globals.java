@@ -10,7 +10,9 @@ import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.util.Log;
 import com.nlbhub.instead.InsteadApplication;
@@ -80,7 +82,39 @@ public class Globals {
 	}
 
 	public static String getStorage(){
-		return InsteadApplication.getAppContext().getExternalFilesDir(null) + "/";
+		final Context context = InsteadApplication.getAppContext();
+		String result = context.getExternalFilesDir(null) + "/";
+
+		String extStorageState = Environment.getExternalStorageState();
+		boolean canRead;
+		boolean canWrite;
+		if ("mounted".equals(extStorageState)) {
+			canWrite = true;
+			canRead = true;
+		} else if ("mounted_ro".equals(extStorageState)) {
+			canRead = true;
+			canWrite = false;
+		} else {
+			canWrite = false;
+			canRead = false;
+		}
+		String extStoragePath = (new StringBuilder(String.valueOf(Environment.getExternalStorageDirectory().toString()))).append("/").toString();
+		if(extStoragePath.contains("emulated") || !canRead || !canWrite)
+		{
+			PackageManager packageManager = context.getPackageManager();
+			String packageName = context.getPackageName();
+			try {
+				PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 0);
+				result = packageInfo.applicationInfo.dataDir + "/files/";
+				File dir = new File(result);
+				if (!dir.exists()) {
+					dir.mkdir();
+				}
+			} catch(NameNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return result;
 	}
 
 	public static String getGamePath(String f){
