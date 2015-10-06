@@ -158,6 +158,17 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_toggleMenu(JNIEnv* env, jcla
     event.key.keysym.mod = 0; // from SDL_Keymod
 
     SDL_PushEvent(&event); // Inject key press of the Escape Key
+
+    event.key.type = SDL_KEYUP;
+    //event.timestamp = lastEvent.timestamp + 1;
+    //event.windowID = lastEvent.windowID;
+    event.key.state = SDL_RELEASED;
+
+    event.key.keysym.scancode = SDL_SCANCODE_ESCAPE; // from SDL_Keysym
+    event.key.keysym.sym = SDLK_ESCAPE;
+    event.key.keysym.mod = 0; // from SDL_Keymod
+
+    SDL_PushEvent(&event); // Inject key release of the Escape Key
 }
 
 /* vi: set ts=4 sw=4 expandtab: */

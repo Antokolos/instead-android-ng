@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game_list version="1.0">
 	<game>
-		<name>wild_island_quest</name>
-		<title>Дикий Остров</title>
-		<version>1.0</version>
-		<url>http://nlbhub.ru/download/instead-wild_island_quest-1.0.zip</url>
-		<size>1</size>
+		<name>return_of_red_hood</name>
+		<title>Возвращение Красной Шапочки</title>
+		<version>1.04</version>
+		<url>http://nlbproject.com/dist/games/instead-return_of_red_hood-1.04.zip</url>
+		<size>101782567</size>
 		<lang>ru</lang>
-		<descurl>http://nlbproject.com/games/wiq</descurl>
+		<descurl>http://nlbproject.com/games/redhood</descurl>
 	</game>
 
 	<game>
-		<name>wild_island_quest</name>
-		<title>Wild Island Quest</title>
-		<version>1.0</version>
-		<url>http://nlbhub.ru/download/instead-wild_island_quest-1.0.zip</url>
-		<size>1</size>
+		<name>return_of_red_hood</name>
+		<title>Return of Red Hood</title>
+		<version>1.04</version>
+		<url>http://nlbproject.com/dist/games/instead-return_of_red_hood-1.04.zip</url>
+		<size>101782567</size>
 		<lang>en</lang>
-		<descurl>http://nlbproject.com/games/wiq</descurl>
+		<descurl>http://nlbproject.com/games/redhood</descurl>
 	</game>
 </game_list>

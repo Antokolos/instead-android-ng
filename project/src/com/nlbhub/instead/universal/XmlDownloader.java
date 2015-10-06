@@ -69,10 +69,12 @@ public class XmlDownloader extends Thread {
 
 		switch (src) {
 		case Globals.BASIC:
+		case Globals.NLBDEMO:
 			gameListUrl = getGameListDownloadUrl();
 			gameListFileName = getGameListFileName();
 			break;
 		case Globals.ALTER:
+		case Globals.NLBFULL:
 			gameListUrl = getGameListAltDownloadUrl();
 			gameListFileName = getGameListAltFileName();
 			break;
