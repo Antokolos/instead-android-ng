@@ -22,7 +22,7 @@ then
     else
         echo Bundled game archive does not exist, using tutorial3 game as default
         mkdir ./games/bundled
-        cp ./instead/games/tutorial3/* ./games/bundled/
+        cp -r ./instead/games/tutorial3/* ./games/bundled/
         zip -r $RESPATH/games.zip ./games
     fi
     rm -rf ./games

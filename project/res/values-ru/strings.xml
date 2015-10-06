@@ -77,6 +77,7 @@
     <string name="instdata">Установка</string>
     <string name="conferror">Не правельно определено разрешение экрана! Попробуйте пересоздать настройки!</string>
     <string name="ourtheme">Свои темы в играх</string>
+    <string name="nativelog">Native Log</string>
     <string name="flage">Большой</string>
     <string name="fnormal">Нормальный</string>
     <string name="fsmall">Маленький</string>

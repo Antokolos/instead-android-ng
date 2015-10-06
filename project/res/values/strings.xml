@@ -80,6 +80,7 @@
     <string name="instdata">Installing</string>
     <string name="conferror">Screen resolution is wrong! Try reconfigure again!</string>
     <string name="ourtheme">Сustom game themes</string>
+    <string name="nativelog">Native Log</string>
     <string name="flage">Lage</string>
     <string name="fnormal">Normal</string>
     <string name="fsmall">Small</string>

@@ -3,6 +3,7 @@
     Converted to cpp by Anton P. Kolosov because of compilation errors otherwise
 */
 /* Include the SDL main definition header */
+#include <SDL.h>
 #include "SDL_main.h"
 
 /*******************************************************************************
@@ -27,10 +28,10 @@ static FILE *logFile;
 
 static void *thread_func(void*) {
     ssize_t rdsz;
-    char buf[128];
+    char buf[512];
     while((rdsz = read(pfd[0], buf, sizeof buf - 1)) > 0) {
         if(buf[rdsz - 1] == '\n') --rdsz;
-        buf[rdsz - 1] = 0;  /* add null-terminator */
+        buf[rdsz] = 0;  /* add null-terminator */
         __android_log_write(ANDROID_LOG_DEBUG, tag, buf);
         if (logFile != NULL) {
             fprintf(logFile, "%s\n", buf);
@@ -141,6 +142,22 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jcla
 
     /* Do not issue an exit or the whole application will terminate instead of just the SDL thread */
     /* exit(status); */
+}
+
+extern "C" void Java_com_nlbhub_instead_SDLActivity_toggleMenu(JNIEnv* env, jclass cls) {
+    printf("Menu toggle command issued\n");
+    SDL_Event event;
+
+    event.key.type = SDL_KEYDOWN;
+    //event.timestamp = lastEvent.timestamp + 1;
+    //event.windowID = lastEvent.windowID;
+    event.key.state = SDL_PRESSED;
+
+    event.key.keysym.scancode = SDL_SCANCODE_ESCAPE; // from SDL_Keysym
+    event.key.keysym.sym = SDLK_ESCAPE;
+    event.key.keysym.mod = 0; // from SDL_Keymod
+
+    SDL_PushEvent(&event); // Inject key press of the Escape Key
 }
 
 /* vi: set ts=4 sw=4 expandtab: */

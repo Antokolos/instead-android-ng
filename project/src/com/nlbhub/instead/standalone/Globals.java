@@ -63,7 +63,8 @@ public class Globals {
 	public static final int AUTO = 0;
 	public static final int PORTRAIT = 1;
 	public static final int LANDSCAPE = 2;
-	public static final int IN_MAX = 16;	
+	public static final int IN_MAX = 16;
+    public static final boolean NATIVE_LOG_DEFAULT = false;
 
 	//VARS
     public static boolean FlagSync = false;	
@@ -72,6 +73,7 @@ public class Globals {
 	public static String qm = null;
 	public static ExpansionMounter expansionMounterMain = null;
     public static StorageManager storageManager = null;
+    public static boolean nativeLog = NATIVE_LOG_DEFAULT;
 //	public static String game = null;
 //	public static String title = null;
 	

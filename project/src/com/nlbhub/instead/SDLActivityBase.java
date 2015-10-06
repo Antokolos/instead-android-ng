@@ -888,6 +888,7 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
     }
     class RangeComparator implements Comparator<InputDevice.MotionRange>
     {
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
         @Override
         public int compare(InputDevice.MotionRange arg0, InputDevice.MotionRange arg1) {
             return arg0.getAxis() - arg1.getAxis();
@@ -901,7 +902,7 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
         mJoysticks = new ArrayList<SDLJoystick>();
     }
 
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
     @Override
     public void pollInputDevices() {
         int[] deviceIds = InputDevice.getDeviceIds();

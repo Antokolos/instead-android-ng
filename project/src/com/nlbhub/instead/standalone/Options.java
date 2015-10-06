@@ -46,6 +46,7 @@ public class Options extends Activity {
 	private CheckBox music;
 	private CheckBox click;
 	private CheckBox ourtheme;
+	private CheckBox nativelog;
 	private CheckBox scroff;
 	private CheckBox keyb;
 	private CheckBox keyvol;
@@ -87,6 +88,7 @@ public class Options extends Activity {
 		music = (CheckBox) findViewById(R.id.music);
 		click = (CheckBox) findViewById(R.id.click);
 		ourtheme = (CheckBox) findViewById(R.id.ourtheme);
+        nativelog = (CheckBox) findViewById(R.id.nativelog);
 		scroff = (CheckBox) findViewById(R.id.scroff);
 		keyb = (CheckBox) findViewById(R.id.virtkey);
 		keyvol = (CheckBox) findViewById(R.id.volkey);
@@ -298,7 +300,7 @@ public class Options extends Activity {
 	*/
 		
 
-		
+		nativelog.setChecked(Globals.nativeLog);
 		scroff.setChecked(lastGame.getScreenOff());
 		keyb.setChecked(lastGame.getKeyboard());
 		keyvol.setChecked(lastGame.getOvVol());
@@ -378,7 +380,8 @@ public class Options extends Activity {
 	}
 
 	private void rewriteRC() {
-	
+
+        Globals.nativeLog = nativelog.isChecked();
 		lastGame.setScreenOff(scroff.isChecked());
 		lastGame.setKeyboard(keyb.isChecked());
 		lastGame.setOvVol(keyvol.isChecked());

@@ -91,7 +91,30 @@ public class SDLActivity extends SDLActivityBase {
 	//		imm.showSoftInput(mSurface, InputMethodManager.SHOW_FORCED);
 		}
 	}
-	
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN
+                    && event.getRepeatCount() == 0) {
+
+                // Tell the framework to start tracking this event.
+                mSurface.getKeyDispatcherState().startTracking(event, this);
+                return true;
+
+            } else if (event.getAction() == KeyEvent.ACTION_UP) {
+                mSurface.getKeyDispatcherState().handleUpEvent(event);
+                if (event.isTracking() && !event.isCanceled()) {
+                    toggleMenu();
+                    return true;
+
+                }
+            }
+            return super.dispatchKeyEvent(event);
+        } else {
+            return super.dispatchKeyEvent(event);
+        }
+    }
 
 	public static void setVol(int dvol){
 
@@ -318,6 +341,7 @@ public class SDLActivity extends SDLActivityBase {
 
 	// C functions we call
 	public static native void nativeInit(String jnativelog, String jpath, String jappdata, String jgamespath, String jres, String jgame, String jidf);
+	public static native void toggleMenu();
 	public static native void nativeLowMemory();
 	public static native void nativeQuit();
 	public static native void nativePause();
@@ -404,8 +428,7 @@ class SDLMain implements Runnable {
         final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
         final String appdata = Globals.getStorage() + Globals.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
         final String gamespath = (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
-		// TODO: make UI setting for nativeLogEnabled
-		boolean nativeLogEnabled = false;
+		boolean nativeLogEnabled = Globals.nativeLog;
         String nativeLogPath = nativeLogEnabled ? Globals.getStorage() + Globals.ApplicationName + "/native.log" : null;
 		SDLActivity.nativeInit(
 				nativeLogPath,
