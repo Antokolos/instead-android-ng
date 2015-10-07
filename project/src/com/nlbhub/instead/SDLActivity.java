@@ -34,6 +34,7 @@ public class SDLActivity extends SDLActivityBase {
 	private static BroadcastReceiver mReceiver;
 
     private static boolean overrVol = false;
+	private static boolean nativeLog = false;
 	private static String game = null;
 	private static String idf = null;
 	private static int i_s = KOLL;
@@ -92,6 +93,11 @@ public class SDLActivity extends SDLActivityBase {
 		}
 	}
 
+	/**
+	 * See http://android-developers.blogspot.ru/2009_12_01_archive.html
+	 * @param event
+	 * @return
+	 */
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
@@ -129,7 +135,11 @@ public class SDLActivity extends SDLActivityBase {
 		}
 		 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curvol, 0);
 	}
-	
+
+	public static boolean isNativeLog() {
+		return nativeLog;
+	}
+
 	public static boolean getOvVol(){
 		return overrVol;
 	}
@@ -181,6 +191,7 @@ public class SDLActivity extends SDLActivityBase {
 		}
 		
 		lastGame = new LastGame(this);
+		nativeLog = lastGame.isNativelog();
 		overrVol = lastGame.getOvVol();
 		keyb = lastGame.getKeyboard();
 		if(keyb){
@@ -428,7 +439,7 @@ class SDLMain implements Runnable {
         final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
         final String appdata = Globals.getStorage() + Globals.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
         final String gamespath = (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
-		boolean nativeLogEnabled = Globals.nativeLog;
+		boolean nativeLogEnabled = SDLActivity.isNativeLog();
         String nativeLogPath = nativeLogEnabled ? Globals.getStorage() + Globals.ApplicationName + "/native.log" : null;
 		SDLActivity.nativeInit(
 				nativeLogPath,

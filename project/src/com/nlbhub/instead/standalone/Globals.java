@@ -73,7 +73,6 @@ public class Globals {
 	public static String qm = null;
 	public static ExpansionMounter expansionMounterMain = null;
     public static StorageManager storageManager = null;
-    public static boolean nativeLog = NATIVE_LOG_DEFAULT;
 //	public static String game = null;
 //	public static String title = null;
 	

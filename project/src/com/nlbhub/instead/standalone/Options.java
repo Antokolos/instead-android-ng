@@ -300,7 +300,7 @@ public class Options extends Activity {
 	*/
 		
 
-		nativelog.setChecked(Globals.nativeLog);
+		nativelog.setChecked(lastGame.isNativelog());
 		scroff.setChecked(lastGame.getScreenOff());
 		keyb.setChecked(lastGame.getKeyboard());
 		keyvol.setChecked(lastGame.getOvVol());
@@ -381,7 +381,7 @@ public class Options extends Activity {
 
 	private void rewriteRC() {
 
-        Globals.nativeLog = nativelog.isChecked();
+        lastGame.setNativelog(nativelog.isChecked());
 		lastGame.setScreenOff(scroff.isChecked());
 		lastGame.setKeyboard(keyb.isChecked());
 		lastGame.setOvVol(keyvol.isChecked());

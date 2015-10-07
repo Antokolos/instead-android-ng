@@ -14,6 +14,7 @@ public class LastGame {
 	private int list;
 	private String lang;	    
     private MyPrefs pr;
+	private boolean nativelog;
     private boolean scroff;
     private boolean flagsync;
     private boolean keyb;
@@ -27,6 +28,7 @@ public class LastGame {
  		lang = pr.get("lang", Globals.Lang.ALL);
  		name = pr.get("name", Globals.BundledGame);
  		title = pr.get("title", title_def);
+        nativelog = pr.get("nativelog", Globals.NATIVE_LOG_DEFAULT);
  		scroff = pr.get("scroff", true);
  		keyb = pr.get("keyb", true);
  		keyvol = pr.get("keyvol", false);
@@ -40,6 +42,7 @@ public class LastGame {
 	}
 
 	public void clearAll(){
+        nativelog = Globals.NATIVE_LOG_DEFAULT;
 		scroff = true;
 		flagsync = true;
 		keyb = true;
@@ -107,9 +110,18 @@ public class LastGame {
 		list = l;
 		Commit();
 	}
-	
-	
-	public boolean getScreenOff(){
+
+
+    public boolean isNativelog() {
+        return nativelog;
+    }
+
+    public void setNativelog(boolean nativelog) {
+        this.nativelog = nativelog;
+        Commit();
+    }
+
+    public boolean getScreenOff(){
 		return scroff;
 	}
 	
@@ -153,7 +165,8 @@ public class LastGame {
  		pr.set("list", list);		
  		pr.set("lang", lang);
  		pr.set("name", name);
- 		pr.set("title", title);		
+ 		pr.set("title", title);
+        pr.set("nativelog", nativelog);
  		pr.set("scroff", scroff);
  		pr.set("keyb", keyb);
  		pr.set("keyvol", keyvol);

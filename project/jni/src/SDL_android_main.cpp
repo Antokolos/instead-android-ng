@@ -148,9 +148,10 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_toggleMenu(JNIEnv* env, jcla
     printf("Menu toggle command issued\n");
     SDL_Event event;
 
+    memset(&event, 0, sizeof(event));
     event.key.type = SDL_KEYDOWN;
-    //event.timestamp = lastEvent.timestamp + 1;
-    //event.windowID = lastEvent.windowID;
+    //event.timestamp = lastEvent.timestamp + 1; -- don't know what to set here, but works fine as is
+    //event.windowID = lastEvent.windowID; -- don't know what to set here, but works fine as is
     event.key.state = SDL_PRESSED;
 
     event.key.keysym.scancode = SDL_SCANCODE_ESCAPE; // from SDL_Keysym
@@ -158,17 +159,6 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_toggleMenu(JNIEnv* env, jcla
     event.key.keysym.mod = 0; // from SDL_Keymod
 
     SDL_PushEvent(&event); // Inject key press of the Escape Key
-
-    event.key.type = SDL_KEYUP;
-    //event.timestamp = lastEvent.timestamp + 1;
-    //event.windowID = lastEvent.windowID;
-    event.key.state = SDL_RELEASED;
-
-    event.key.keysym.scancode = SDL_SCANCODE_ESCAPE; // from SDL_Keysym
-    event.key.keysym.sym = SDLK_ESCAPE;
-    event.key.keysym.mod = 0; // from SDL_Keymod
-
-    SDL_PushEvent(&event); // Inject key release of the Escape Key
 }
 
 /* vi: set ts=4 sw=4 expandtab: */
