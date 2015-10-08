@@ -491,6 +491,12 @@ class SDLSurface extends SDLSurfaceBase {
 		return super.onKey(v, keyCode, event);
 	}
 
+	@Override
+	public void enableSensor(int sensortype, boolean enabled) {
+		// super.enableSensor(sensortype, enabled); -- disabled for performance, INSTEAD does not need sensor support
+		// see http://en.wildservices.net/2013/10/making-libsdl-2-apps-on-android.html
+	}
+
 	public void showKeybord() {
 		SDLActivity.showKeyboard(this.getContext());
 		//	SDLActivity.onNativeKeyUp(67);
