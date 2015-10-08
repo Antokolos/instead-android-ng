@@ -15,6 +15,8 @@ public class LastGame {
 	private String lang;	    
     private MyPrefs pr;
 	private boolean nativelog;
+	private boolean enforceorientation;
+	private boolean enforceresolution;
     private boolean scroff;
     private boolean flagsync;
     private boolean keyb;
@@ -29,6 +31,8 @@ public class LastGame {
  		name = pr.get("name", Globals.BundledGame);
  		title = pr.get("title", title_def);
         nativelog = pr.get("nativelog", Globals.NATIVE_LOG_DEFAULT);
+		enforceorientation = pr.get("enforceorientation", Globals.ENFORCE_ORIENTATION_DEFAULT);
+		enforceresolution = pr.get("enforceresolution", Globals.ENFORCE_RESOLUTION_DEFAULT);
  		scroff = pr.get("scroff", true);
  		keyb = pr.get("keyb", true);
  		keyvol = pr.get("keyvol", false);
@@ -43,6 +47,8 @@ public class LastGame {
 
 	public void clearAll(){
         nativelog = Globals.NATIVE_LOG_DEFAULT;
+		enforceorientation = Globals.ENFORCE_ORIENTATION_DEFAULT;
+		enforceresolution = Globals.ENFORCE_RESOLUTION_DEFAULT;
 		scroff = true;
 		flagsync = true;
 		keyb = true;
@@ -121,7 +127,25 @@ public class LastGame {
         Commit();
     }
 
-    public boolean getScreenOff(){
+	public boolean isEnforceorientation() {
+		return enforceorientation;
+	}
+
+	public void setEnforceorientation(boolean enforceorientation) {
+		this.enforceorientation = enforceorientation;
+		Commit();
+	}
+
+	public boolean isEnforceresolution() {
+		return enforceresolution;
+	}
+
+	public void setEnforceresolution(boolean enforceresolution) {
+		this.enforceresolution = enforceresolution;
+		Commit();
+	}
+
+	public boolean getScreenOff(){
 		return scroff;
 	}
 	
@@ -167,6 +191,8 @@ public class LastGame {
  		pr.set("name", name);
  		pr.set("title", title);
         pr.set("nativelog", nativelog);
+		pr.set("enforceorientation", enforceorientation);
+		pr.set("enforceresolution", enforceresolution);
  		pr.set("scroff", scroff);
  		pr.set("keyb", keyb);
  		pr.set("keyvol", keyvol);

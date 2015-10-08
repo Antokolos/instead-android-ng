@@ -65,6 +65,8 @@ public class Globals {
 	public static final int LANDSCAPE = 2;
 	public static final int IN_MAX = 16;
     public static final boolean NATIVE_LOG_DEFAULT = false;
+	public static final boolean ENFORCE_ORIENTATION_DEFAULT = false;
+	public static final boolean ENFORCE_RESOLUTION_DEFAULT = false;
 
 	//VARS
     public static boolean FlagSync = false;	

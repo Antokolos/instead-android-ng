@@ -35,6 +35,7 @@ public class SDLActivity extends SDLActivityBase {
 
     private static boolean overrVol = false;
 	private static boolean nativeLog = false;
+	private static boolean enforceResolution = false;
 	private static String game = null;
 	private static String idf = null;
 	private static int i_s = KOLL;
@@ -143,6 +144,10 @@ public class SDLActivity extends SDLActivityBase {
 	public static boolean getOvVol(){
 		return overrVol;
 	}
+
+	public static boolean isEnforceResolution() {
+		return enforceResolution;
+	}
 	
 	public static void inputText(String s){
 		//Log.d("Input ",s);
@@ -192,6 +197,7 @@ public class SDLActivity extends SDLActivityBase {
 		
 		lastGame = new LastGame(this);
 		nativeLog = lastGame.isNativelog();
+		enforceResolution = lastGame.isEnforceresolution();
 		overrVol = lastGame.getOvVol();
 		keyb = lastGame.getKeyboard();
 		if(keyb){
@@ -202,15 +208,17 @@ public class SDLActivity extends SDLActivityBase {
 			audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
 		}
 		
-		
-		// if (lastGame.getOreintation()==Globals.PORTRAIT) {
-		if(Options.isPortrait()){
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        } else {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }
-		
-		///requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		if (lastGame.isEnforceorientation()) {
+			// if (lastGame.getOreintation()==Globals.PORTRAIT) {
+			if (Options.isPortrait()) {
+				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+			} else {
+				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+			}
+
+			///requestWindowFeature(Window.FEATURE_NO_TITLE);
+		}
 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -440,13 +448,14 @@ class SDLMain implements Runnable {
         final String appdata = Globals.getStorage() + Globals.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
         final String gamespath = (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
 		boolean nativeLogEnabled = SDLActivity.isNativeLog();
+		boolean enforceResolution = SDLActivity.isEnforceResolution();
         String nativeLogPath = nativeLogEnabled ? Globals.getStorage() + Globals.ApplicationName + "/native.log" : null;
 		SDLActivity.nativeInit(
 				nativeLogPath,
 				dataDir,
                 appdata,
                 gamespath,
-                SDLActivity.getRes(),
+				(enforceResolution) ? SDLActivity.getRes() : null,
                 SDLActivity.getGame(),
                 SDLActivity.getIdf()
         );

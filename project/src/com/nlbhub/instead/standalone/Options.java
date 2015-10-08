@@ -47,6 +47,8 @@ public class Options extends Activity {
 	private CheckBox click;
 	private CheckBox ourtheme;
 	private CheckBox nativelog;
+	private CheckBox enforceorientation;
+	private CheckBox enforceresolution;
 	private CheckBox scroff;
 	private CheckBox keyb;
 	private CheckBox keyvol;
@@ -89,6 +91,8 @@ public class Options extends Activity {
 		click = (CheckBox) findViewById(R.id.click);
 		ourtheme = (CheckBox) findViewById(R.id.ourtheme);
         nativelog = (CheckBox) findViewById(R.id.nativelog);
+		enforceorientation = (CheckBox) findViewById(R.id.enforceorientation);
+		enforceresolution = (CheckBox) findViewById(R.id.enforceresolution);
 		scroff = (CheckBox) findViewById(R.id.scroff);
 		keyb = (CheckBox) findViewById(R.id.virtkey);
 		keyvol = (CheckBox) findViewById(R.id.volkey);
@@ -301,6 +305,8 @@ public class Options extends Activity {
 		
 
 		nativelog.setChecked(lastGame.isNativelog());
+		enforceorientation.setChecked(lastGame.isEnforceorientation());
+		enforceresolution.setChecked(lastGame.isEnforceresolution());
 		scroff.setChecked(lastGame.getScreenOff());
 		keyb.setChecked(lastGame.getKeyboard());
 		keyvol.setChecked(lastGame.getOvVol());
@@ -382,6 +388,8 @@ public class Options extends Activity {
 	private void rewriteRC() {
 
         lastGame.setNativelog(nativelog.isChecked());
+		lastGame.setEnforceorientation(enforceorientation.isChecked());
+		lastGame.setEnforceresolution(enforceresolution.isChecked());
 		lastGame.setScreenOff(scroff.isChecked());
 		lastGame.setKeyboard(keyb.isChecked());
 		lastGame.setOvVol(keyvol.isChecked());
