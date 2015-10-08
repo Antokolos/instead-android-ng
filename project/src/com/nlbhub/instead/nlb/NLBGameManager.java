@@ -3,7 +3,6 @@ package com.nlbhub.instead.nlb;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.universal.GameManager;
-import com.nlbhub.instead.universal.XmlDownloader;
 
 /**
  * @author Anton P. Kolosov
