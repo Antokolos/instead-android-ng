@@ -23,6 +23,7 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.standalone.Globals;
 
 public class GameChooser extends Activity {
@@ -158,7 +159,7 @@ private void readFolder() {
 
 
 				
-				File f = new File(Globals.getOutFilePath(Globals.GameDir));
+				File f = new File(Globals.getOutFilePath(StorageResolver.GameDir));
 				if(f.isDirectory()){
 				if(f.list().length>0){
 					String files[] = f.list();
@@ -166,7 +167,7 @@ private void readFolder() {
 						File file = new File(f, temp);
 
 							if(file.isDirectory()){
-							    if(Globals.isWorking(temp)){	
+							    if(StorageResolver.isWorking(temp)){
 							    	String title = Globals.getTitle(temp);
 							    	if (title==null) title = temp;
 							    	dnames.add(title+temp);
@@ -232,7 +233,7 @@ private void readFolder() {
         if (prefix != null) {
             return prefix;
         } else {
-            return Globals.BundledGame;
+            return StorageResolver.BundledGame;
         }
     }
     

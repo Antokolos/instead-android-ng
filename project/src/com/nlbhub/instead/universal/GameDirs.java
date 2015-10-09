@@ -29,7 +29,9 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SimpleAdapter.ViewBinder;
+import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.standalone.LastGame;
 import com.nlbhub.instead.SDLActivity;
@@ -117,7 +119,7 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 		dnames.clear();
 		dtitles.clear();
 
-			File f = new File(Globals.getOutFilePath(Globals.GameDir));
+			File f = new File(Globals.getOutFilePath(StorageResolver.GameDir));
 			if(f.isDirectory()){
 			if(f.list().length>0){
 				String files[] = f.list();
@@ -126,7 +128,7 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 
 					if(idf_act == LS_IDF) {
 						if(file.isDirectory()){
-						    if(Globals.isWorking(temp)){	
+						    if(StorageResolver.isWorking(temp)){
 				
 						    	String title = Globals.getTitle(temp);
 						    	if (title==null) title = temp;
@@ -248,7 +250,7 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 					menu.add(0, v.getId(), 0, getString(R.string.addtofav));
 				}
 			menu.add(0, v.getId(), 0, getString(R.string.addtodesc));
-			if(!getIndexMenu(dtitles.get(item_index)).equals(Globals.BundledGame)){
+			if(!getIndexMenu(dtitles.get(item_index)).equals(StorageResolver.BundledGame)){
 				menu.add(0, v.getId(), 0, getString(R.string.menudel));			
 			}
      	}
@@ -336,7 +338,7 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 	
     private Runnable deleteDir = new Runnable() {  
     	public void run(){
-    		File d = new File(Globals.getOutFilePath(Globals.GameDir
+    		File d = new File(Globals.getOutFilePath(StorageResolver.GameDir
     				+ getIndexMenu(dtitles.get(item_index))));
     		if(d.isDirectory()){    		
     			Globals.delete(d);
@@ -446,7 +448,7 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 	    shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);  
 
         Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
-        shortcutIntent.putExtra(Globals.ApplicationName, game);
+        shortcutIntent.putExtra(InsteadApplication.ApplicationName, game);
         
 	    ComponentName comp = new ComponentName(this.getPackageName(), ".Shortcut");  
 	    shortcutIntent.setComponent(comp);

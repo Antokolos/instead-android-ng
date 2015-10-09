@@ -16,7 +16,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.standalone.MyPrefs;
 import org.w3c.dom.Document;
@@ -27,7 +29,7 @@ import org.xml.sax.SAXException;
 import android.util.Log;
 
 public class GameList {
-	private final String LIST_PREFS = Globals.ApplicationName+"-games";
+	private final String LIST_PREFS = InsteadApplication.ApplicationName+"-games";
 	private final String LENGTH = "lenght";
 	public static final int INSTALLED = 0;
 	public static final int ALL = 1;
@@ -178,7 +180,7 @@ public class GameList {
 		String path;
 
 		for (int i = 0; i < getLength(); i++) {
-			path = Globals.getOutFilePath(Globals.GameDir + name.get(i)
+			path = Globals.getOutFilePath(StorageResolver.GameDir + name.get(i)
 					+ "/main.lua");
 
 			if (checkFile(path)) {

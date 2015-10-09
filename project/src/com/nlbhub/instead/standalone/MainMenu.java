@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -12,14 +11,15 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.storage.StorageManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.SimpleAdapter.ViewBinder;
+import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.SDLActivity;
+import com.nlbhub.instead.StorageResolver;
 
 import java.io.*;
 import java.util.*;
@@ -84,7 +84,7 @@ public class MainMenu extends ListActivity implements ViewBinder {
             Intent sendIntent = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
             sendIntent.setClassName("com.google.android.gm","com.google.android.gm.ComposeActivityGmail");
             sendIntent.putExtra(Intent.EXTRA_EMAIL, addr);
-            sendIntent.putExtra(Intent.EXTRA_SUBJECT, Globals.ApplicationName+" v."+Globals.AppVer(this));
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, InsteadApplication.ApplicationName+" v."+Globals.AppVer(this));
             startActivity(sendIntent);
 
         } catch (Exception e){
@@ -189,7 +189,7 @@ public class MainMenu extends ListActivity implements ViewBinder {
     }
 
     public boolean checkInstall() {
-        String path = Globals.getOutFilePath(Globals.DataFlag);
+        String path = Globals.getOutFilePath(StorageResolver.DataFlag);
 
         BufferedReader input = null;
         try {
@@ -236,7 +236,7 @@ public class MainMenu extends ListActivity implements ViewBinder {
 
     protected void checkRC() {
         if (checkInstall()) {
-            if (!(new File(Globals.getOutFilePath(Globals.Options))).exists()) {
+            if (!(new File(Globals.getOutFilePath(StorageResolver.Options))).exists()) {
                 CreateRC();
             }
         } else {
@@ -256,7 +256,7 @@ public class MainMenu extends ListActivity implements ViewBinder {
     }
 
     private void CreateRC() {
-        String path = Globals.getOutFilePath(Globals.Options);
+        String path = Globals.getOutFilePath(StorageResolver.Options);
         if (!(new File(path)).exists()) {
             OutputStream out = null;
             byte buf[] = getConf().getBytes();
@@ -328,7 +328,7 @@ public class MainMenu extends ListActivity implements ViewBinder {
 //		Log.d("res", theme+" "+Float.toString(res));
 
 
-        String s = "game = "+Globals.BundledGame +"\nkbd = 2\nautosave = 1\nowntheme = 1\nhl = 0\nclick = 1\nmusic = 1\nfscale = 12\njustify = 0\n"
+        String s = "game = "+StorageResolver.BundledGame +"\nkbd = 2\nautosave = 1\nowntheme = 1\nhl = 0\nclick = 1\nmusic = 1\nfscale = 12\njustify = 0\n"
                 + locale + theme + "\n";
         return s;
     }

@@ -19,7 +19,9 @@ import android.view.Window;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.SDLActivity;
 
@@ -61,7 +63,7 @@ public class Shortcut extends Activity {
         }
 
 
-        String game = intent.getStringExtra(Globals.ApplicationName);
+        String game = intent.getStringExtra(InsteadApplication.ApplicationName);
         
         startApp(game);
 		
@@ -70,8 +72,8 @@ public class Shortcut extends Activity {
 	
 	
 	private void startApp(String game) {
-		  if(Globals.isWorking(game) || (game.endsWith(".idf") && 
-				  (new File(Globals.getOutFilePath(Globals.GameDir
+		  if(StorageResolver.isWorking(game) || (game.endsWith(".idf") &&
+				  (new File(Globals.getOutFilePath(StorageResolver.GameDir
 		    				+ game)).exists()))){	
 			Intent myIntent = new Intent(this, SDLActivity.class);
 			Bundle b = new Bundle();
@@ -141,7 +143,7 @@ private void readFolder() {
 
 
 				
-				File f = new File(Globals.getOutFilePath(Globals.GameDir));
+				File f = new File(Globals.getOutFilePath(StorageResolver.GameDir));
 				if(f.isDirectory()){
 				if(f.list().length>0){
 					String files[] = f.list();
@@ -149,7 +151,7 @@ private void readFolder() {
 						File file = new File(f, temp);
 
 							if(file.isDirectory()){
-							    if(Globals.isWorking(temp)){	
+							    if(StorageResolver.isWorking(temp)){
 							    	String title = Globals.getTitle(temp);
 							    	if (title==null) title = temp;
 							    	dnames.add(title+temp);
@@ -204,7 +206,7 @@ Runnable r = new Runnable(){
     	
         Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
         shortcutIntent.setClassName(this, this.getClass().getName());
-        shortcutIntent.putExtra(Globals.ApplicationName, game);
+        shortcutIntent.putExtra(InsteadApplication.ApplicationName, game);
 
         Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);

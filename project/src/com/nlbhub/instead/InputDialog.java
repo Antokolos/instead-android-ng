@@ -1,4 +1,4 @@
-package com.nlbhub.instead.standalone;
+package com.nlbhub.instead;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,10 +9,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import com.nlbhub.instead.R;
-import com.nlbhub.instead.SDLActivity;
 
 public class InputDialog extends Dialog {
+	public static final int IN_MAX = 16;
 	private EditText text;
 	private Button ok;
 	private Button cancel;
@@ -85,8 +84,8 @@ public class InputDialog extends Dialog {
     		public void afterTextChanged(Editable txt) {
     			String s = txt.toString();
         		
-    			if(s.length()> Globals.IN_MAX){
-    				s = s.substring(0, Globals.IN_MAX);
+    			if(s.length()> IN_MAX){
+    				s = s.substring(0, IN_MAX);
     				text.setText(s);
     				 text.setSelection(s.length());
     			}
@@ -132,10 +131,26 @@ public class InputDialog extends Dialog {
 		});
 
 	}
-    
+
+	public static void inputText(String s){
+		//Log.d("Input ",s);
+		//nativeInput(s);
+		int len = s.length();
+		if(len> IN_MAX){
+			s = s.substring(0, IN_MAX);
+			len = s.length();
+		}
+
+		for(int i=0; i < len; i++){
+			char c = s.charAt(i);
+			Keys.key(c);
+		}
+		Keys.Enter();
+	}
+
 	protected void DelAll(){
 	 text.setText("");
-		for(int i=0; i< Globals.IN_MAX; i++){
+		for(int i=0; i< IN_MAX; i++){
 			Keys.Del();	
 		}
 	}

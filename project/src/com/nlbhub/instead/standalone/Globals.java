@@ -1,5 +1,13 @@
 package com.nlbhub.instead.standalone;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.util.Log;
+import com.nlbhub.instead.InsteadApplication;
+import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,20 +16,10 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Environment;
-import android.os.storage.StorageManager;
-import android.util.Log;
-import com.nlbhub.instead.InsteadApplication;
-import com.nlbhub.instead.R;
+import static com.nlbhub.instead.StorageResolver.*;
 
 public class Globals {
 
-	public static final String ApplicationName = "Instead-NG";
-	
 	public static String AppVer(Context c) {
 		PackageInfo pi;
 		try {
@@ -45,14 +43,6 @@ public class Globals {
 	public static final String GameListAltDownloadUrl = "http://instead-games.ru/xml.php";
     public static final String GameListNLBDemoDownloadUrl = "http://nlbproject.com/services/getdemogames";
     public static final String GameListNLBFullDownloadUrl = "http://nlbproject.com/services/getfullgames";
-	public static final String MainObb = "main.101000.com.nlbhub.instead.obb";
-    public static final String PatchObb = "patch.101000.com.nlbhub.instead.obb";
-	public static final String GameDir = "appdata/games/";
-	public static final String SaveDir = "appdata/saves/";
-	public static final String Options = "appdata/insteadrc";
-	public static final String MainLua = "/main.lua";
-	public static final String DataFlag = ".version";
-	public static final String BundledGame = "bundled";
 	public static final String DirURQ = "urq";
 	public static final String StringURQ = "\\[URQ\\]";
 	public static final String PORTRET_KEY = "portrait";
@@ -63,18 +53,13 @@ public class Globals {
 	public static final int AUTO = 0;
 	public static final int PORTRAIT = 1;
 	public static final int LANDSCAPE = 2;
-	public static final int IN_MAX = 16;
-    public static final boolean NATIVE_LOG_DEFAULT = false;
-	public static final boolean ENFORCE_ORIENTATION_DEFAULT = false;
-	public static final boolean ENFORCE_RESOLUTION_DEFAULT = false;
 
 	//VARS
     public static boolean FlagSync = false;	
 	public static String idf = null;
 	public static String zip = null;
 	public static String qm = null;
-	public static ExpansionMounter expansionMounterMain = null;
-    public static StorageManager storageManager = null;
+
 //	public static String game = null;
 //	public static String title = null;
 	
@@ -85,38 +70,7 @@ public class Globals {
 	}
 
 	public static String getStorage(){
-		final Context context = InsteadApplication.getAppContext();
-		String result = context.getExternalFilesDir(null) + "/";
-
-		String extStorageState = Environment.getExternalStorageState();
-		boolean canRead;
-		boolean canWrite;
-		if ("mounted".equals(extStorageState)) {
-			canWrite = true;
-			canRead = true;
-		} else if ("mounted_ro".equals(extStorageState)) {
-			canRead = true;
-			canWrite = false;
-		} else {
-			canWrite = false;
-			canRead = false;
-		}
-		if(result.contains("emulated") || !canRead || !canWrite)
-		{
-			PackageManager packageManager = context.getPackageManager();
-			String packageName = context.getPackageName();
-			try {
-				PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 0);
-				result = packageInfo.applicationInfo.dataDir + "/files/";
-				File dir = new File(result);
-				if (!dir.exists()) {
-					dir.mkdir();
-				}
-			} catch(NameNotFoundException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		return result;
+		return StorageResolver.getStorage();
 	}
 
 	public static String getGamePath(String f){
@@ -127,20 +81,17 @@ public class Globals {
 		return getOutFilePath(SaveDir+f+"/autosave");
 	}
 
-    public static String getObbFilePath(final String filename, Context context) {
-        return context.getObbDir() + "/" + filename;
-    };
-
+	// TODO: move all similar methods to StorageResolver
 	public static String getOutFilePath(final String filename) {
-		return getStorage() + Globals.ApplicationName + "/" + filename;
+		return StorageResolver.getOutFilePath(filename);
 	};
 
     public static String getOutFilePath(final String subDir, final String filename) {
-        return getStorage() + Globals.ApplicationName + "/" + subDir + "/" + filename;
+        return getStorage() + InsteadApplication.ApplicationName + "/" + subDir + "/" + filename;
     };
 
 	public static String getOutGamePath(final String filename) {
-		return getStorage() + Globals.ApplicationName + "/" + GameDir + filename;
+		return getStorage() + InsteadApplication.ApplicationName + "/" + GameDir + filename;
 	};
 
     public static void delete(String path) {
@@ -182,11 +133,7 @@ public class Globals {
 			}
 		}
 	}
-	
-	public static boolean isWorking(String f){
-		String path = Globals.getOutFilePath(Globals.GameDir) + "/" + f + Globals.MainLua;		
-		return (new File(path)).isFile();
-	}
+
 	
 
 	public static String getTitle(String t){
@@ -200,7 +147,7 @@ public class Globals {
 				|| Locale.getDefault().toString().equals("be")) {
 			 lang = Lang.RU;
 		}
-		String path = Globals.getOutFilePath(Globals.GameDir) + "/" + t + Globals.MainLua;
+		String path = Globals.getOutFilePath(GameDir) + "/" + t + MainLua;
 		String line = null;
 		String ru = null;
 		String en = null;

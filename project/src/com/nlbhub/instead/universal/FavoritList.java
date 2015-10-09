@@ -27,7 +27,9 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SimpleAdapter.ViewBinder;
+import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.SDLActivity;
 
@@ -115,9 +117,9 @@ public class FavoritList extends ListActivity  implements ViewBinder  {
 
 			menu.setHeaderTitle(favGame.getTitle(item_index));
 			
-		  if(Globals.isWorking(favGame.getGame(item_index))
+		  if(StorageResolver.isWorking(favGame.getGame(item_index))
 				  || (favGame.getGame(item_index).endsWith(".idf") && 
-						  (new File(Globals.getOutFilePath(Globals.GameDir
+						  (new File(Globals.getOutFilePath(StorageResolver.GameDir
 				    				+ favGame.getGame(item_index))).exists()))){	
 			menu.add(0, v.getId(), 0, getString(R.string.menustart));
 			if ((new File(Globals.getAutoSavePath(favGame.getGame(item_index)))).exists()) {
@@ -218,8 +220,8 @@ public class FavoritList extends ListActivity  implements ViewBinder  {
 			String game = favGame.getGame(item_index);
 			String title = favGame.getTitle(item_index);
 			
-		  if(Globals.isWorking(game) || (game.endsWith(".idf") && 
-				  (new File(Globals.getOutFilePath(Globals.GameDir
+		  if(StorageResolver.isWorking(game) || (game.endsWith(".idf") &&
+				  (new File(Globals.getOutFilePath(StorageResolver.GameDir
 		    				+ game)).exists()))){	
 			Intent myIntent = new Intent(this, SDLActivity.class);
 			Bundle b = new Bundle();
@@ -242,7 +244,7 @@ public class FavoritList extends ListActivity  implements ViewBinder  {
 	    shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);  
 
         Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
-        shortcutIntent.putExtra(Globals.ApplicationName, game);
+        shortcutIntent.putExtra(InsteadApplication.ApplicationName, game);
         
 	    ComponentName comp = new ComponentName(this.getPackageName(), ".Shortcut");  
 	    shortcutIntent.setComponent(comp);

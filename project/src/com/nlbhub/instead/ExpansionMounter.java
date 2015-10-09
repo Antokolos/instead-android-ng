@@ -1,4 +1,4 @@
-package com.nlbhub.instead.standalone;
+package com.nlbhub.instead;
 
 import android.os.storage.OnObbStateChangeListener;
 import android.os.storage.StorageManager;

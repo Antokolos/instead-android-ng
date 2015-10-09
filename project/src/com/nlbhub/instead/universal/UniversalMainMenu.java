@@ -10,6 +10,7 @@ import android.view.*;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.nlb.NLBGameManager;
 import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.standalone.MainMenu;
@@ -41,13 +42,13 @@ public class UniversalMainMenu extends MainMenu {
 
     private void QmInstall() {
         String g = Globals.matchUrl(Globals.qm, ".*\\/(.*\\.qm)");
-        String rangpath = Globals.getOutFilePath(Globals.GameDir + "rangers/");
+        String rangpath = Globals.getOutFilePath(StorageResolver.GameDir + "rangers/");
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(rangpath);
         stringBuilder.append("games/");
         stringBuilder.append(g);
         String out = 	stringBuilder.toString();
-        if(!(new File(rangpath+Globals.MainLua)).exists()){
+        if(!(new File(rangpath+StorageResolver.MainLua)).exists()){
             Toast.makeText(this, getString(R.string.need_rangers), Toast.LENGTH_LONG).show();
             return;
         }
@@ -259,7 +260,7 @@ public class UniversalMainMenu extends MainMenu {
             @Override
             public void run(){
                 String g = Globals.matchUrl(Globals.idf, ".*\\/(.*\\.idf)");
-                String	out  = Globals.getOutFilePath(Globals.GameDir + g);
+                String	out  = Globals.getOutFilePath(StorageResolver.GameDir + g);
                 try {
                     copyFile(Globals.idf, out);
                 } catch (Exception e) {

@@ -16,8 +16,6 @@ import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
-import com.nlbhub.instead.standalone.*;
-import com.nlbhub.instead.universal.ExceptionHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +39,7 @@ public class SDLActivity extends SDLActivityBase {
 	private static int i_s = KOLL;
 	private static boolean keyb = true;
 	private static Handler h;
-	private LastGame lastGame;
+	private Settings settings;
 	private static InputDialog input;
 	private static AudioManager audioManager;
 	private static Context Ctx;
@@ -75,13 +73,13 @@ public class SDLActivity extends SDLActivityBase {
 	}
 
 	private synchronized void initExpansionManager(Context context) {
-		if (Globals.expansionMounterMain == null) {
-			if (Globals.storageManager == null) {
-				Globals.storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
+		if (StorageResolver.expansionMounterMain == null) {
+			if (StorageResolver.storageManager == null) {
+				StorageResolver.storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
 			}
 			context.getObbDir().mkdir();
-			Globals.expansionMounterMain = new ExpansionMounter(Globals.storageManager, Globals.getObbFilePath(Globals.MainObb, context));
-			Globals.expansionMounterMain.mountExpansion();
+			StorageResolver.expansionMounterMain = new ExpansionMounter(StorageResolver.storageManager, StorageResolver.getObbFilePath(StorageResolver.MainObb, context));
+			StorageResolver.expansionMounterMain.mountExpansion();
 		}
 	}
 
@@ -150,19 +148,7 @@ public class SDLActivity extends SDLActivityBase {
 	}
 	
 	public static void inputText(String s){
-		//Log.d("Input ",s);
-		//nativeInput(s);
-		int len = s.length();
-		if(len> Globals.IN_MAX){
-			s = s.substring(0, Globals.IN_MAX);
-			len = s.length();
-		}
-		
-		for(int i=0; i < len; i++){
-			char c = s.charAt(i);
-			Keys.key(c);
-		}
-		Keys.Enter();
+		InputDialog.inputText(s);
 	}
 
 	// Setup
@@ -176,17 +162,15 @@ public class SDLActivity extends SDLActivityBase {
         initExpansionManager(this);
 
         Intent intent = getIntent();
-		if (intent.getAction()!=null){
+		if (intent.getAction()!=null) {
 			game = intent.getAction();
-			  if(Globals.isWorking(game)==false && (game.endsWith(".idf")==false || 
-					  (new File(Globals.getOutFilePath(Globals.GameDir
-			    				+ game)).exists())==false)){	
-				  
-					Toast.makeText(this, getString(R.string.game)+" \""+game+"\" "+getString(R.string.ag_new),
-							Toast.LENGTH_SHORT).show();		
-					finish();
-			  			}
-			  
+			final boolean notWorking = !StorageResolver.isWorking(game);
+			final boolean notIdf = !game.endsWith(".idf");
+			final boolean notExist = !(new File(StorageResolver.getOutFilePath(StorageResolver.GameDir + game)).exists());
+			if (notWorking && (notIdf || notExist)) {
+				Toast.makeText(this, getString(R.string.game)+" \""+game+"\" "+getString(R.string.ag_new), Toast.LENGTH_SHORT).show();
+				finish();
+			}
 		} else {		
 		Bundle b = intent.getExtras();
 		if(b!=null){
@@ -195,11 +179,11 @@ public class SDLActivity extends SDLActivityBase {
 		}
 		}
 		
-		lastGame = new LastGame(this);
-		nativeLog = lastGame.isNativelog();
-		enforceResolution = lastGame.isEnforceresolution();
-		overrVol = lastGame.getOvVol();
-		keyb = lastGame.getKeyboard();
+		settings = SettingsFactory.create(this);
+		nativeLog = settings.isNativelog();
+		enforceResolution = settings.isEnforceresolution();
+		overrVol = settings.getOvVol();
+		keyb = settings.getKeyboard();
 		if(keyb){
 			input = new InputDialog(this, getString(R.string.in_text));
 		}
@@ -209,9 +193,9 @@ public class SDLActivity extends SDLActivityBase {
 		}
 		
 
-		if (lastGame.isEnforceorientation()) {
-			// if (lastGame.getOreintation()==Globals.PORTRAIT) {
-			if (Options.isPortrait()) {
+		if (settings.isEnforceorientation()) {
+			// if (settings.getOreintation()==Globals.PORTRAIT) {
+			if (ThemeHelper.isPortrait()) {
 				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 			} else {
 				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -224,11 +208,8 @@ public class SDLActivity extends SDLActivityBase {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-		wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK,
-				Globals.ApplicationName);
+		wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, InsteadApplication.ApplicationName);
 
-
-		
 		h = new Handler();
 		
 		IntentFilter filter = new IntentFilter(Intent.ACTION_USER_PRESENT);
@@ -307,7 +288,7 @@ public class SDLActivity extends SDLActivityBase {
 	@Override
 	protected void onPause() {
 		nativeSave();
-		if(lastGame.getScreenOff())wakeLock.release();
+		if(settings.getScreenOff())wakeLock.release();
 		 Log.v("SDL", "onPause()");
 		//if(!first_run) mSurface.suspend();
 	    //mSurface = null;
@@ -317,7 +298,7 @@ public class SDLActivity extends SDLActivityBase {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(lastGame.getScreenOff())wakeLock.acquire();
+		if(settings.getScreenOff())wakeLock.acquire();
 		 Log.v("SDL", "onResume()");
 		// if(!first_run) mSurface.resume();
 	}
@@ -443,13 +424,13 @@ class SDLMain implements Runnable {
     }
 
 	public void run() {
-        final String expansionFilePath = Globals.expansionMounterMain.getExpansionFilePath();
+        final String expansionFilePath = StorageResolver.expansionMounterMain.getExpansionFilePath();
         final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
-        final String appdata = Globals.getStorage() + Globals.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
+        final String appdata = StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
         final String gamespath = (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
 		boolean nativeLogEnabled = SDLActivity.isNativeLog();
 		boolean enforceResolution = SDLActivity.isEnforceResolution();
-        String nativeLogPath = nativeLogEnabled ? Globals.getStorage() + Globals.ApplicationName + "/native.log" : null;
+        String nativeLogPath = nativeLogEnabled ? StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/native.log" : null;
 		SDLActivity.nativeInit(
 				nativeLogPath,
 				dataDir,

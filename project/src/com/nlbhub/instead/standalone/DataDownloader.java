@@ -1,16 +1,18 @@
 package com.nlbhub.instead.standalone;
 
-import java.util.zip.*;
-import java.io.*;
-
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Build;
 import android.util.Log;
+import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.standalone.fs.PathResolver;
 import com.nlbhub.instead.standalone.fs.SDPathResolver;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;
+
+import java.io.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class DataDownloader extends Thread {
 	class StatusWriter {
@@ -151,7 +153,7 @@ public class DataDownloader extends Thread {
 		String path = null;
 		SystemPathResolver dataResolver = new SystemPathResolver("data", Parent.getApplicationContext());
 
-		File programDirOnSD = new File(Globals.getStorage() + Globals.ApplicationName);
+		File programDirOnSD = new File(Globals.getStorage() + InsteadApplication.ApplicationName);
 		programDirOnSD.mkdir();
 		(new File(programDirOnSD, "appdata")).mkdir();
 
@@ -160,7 +162,7 @@ public class DataDownloader extends Thread {
 			Globals.delete(dataResolver.getPath() + "themes");
 			Globals.delete(dataResolver.getPath() + "languages");
 			Globals.delete(dataResolver.getPath() + "lang");
-            (new File(Globals.getOutFilePath(Globals.DataFlag))).delete();
+            (new File(Globals.getOutFilePath(StorageResolver.DataFlag))).delete();
 			extractArchive(Parent.getResources().openRawResource(R.raw.games), new SDPathResolver("appdata"));
 			extractArchive(Parent.getResources().openRawResource(R.raw.data), dataResolver);
 			extractArchive(getAppropriateLibsStream(), new SystemPathResolver("libs", Parent.getApplicationContext()));
@@ -172,7 +174,7 @@ public class DataDownloader extends Thread {
 		byte buff[] = Globals.AppVer(Parent).getBytes();
 		try {
 			try {
-                path = Globals.getOutFilePath(Globals.DataFlag);
+                path = Globals.getOutFilePath(StorageResolver.DataFlag);
 				out = new FileOutputStream(path);
 				out.write(buff);
 			} finally {

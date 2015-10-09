@@ -34,7 +34,9 @@ import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.standalone.LastGame;
 import com.nlbhub.instead.SDLActivity;
@@ -791,7 +793,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 
     private Runnable deleteDir = new Runnable() {  
     	public void run(){
-    		Globals.delete(new File(Globals.getOutFilePath(Globals.GameDir
+    		Globals.delete(new File(Globals.getOutFilePath(StorageResolver.GameDir
     				+ gl.getInf(GameList.NAME, index.get(item_index)))));    		    		
     		if(gl.getInf(GameList.NAME, index.get(item_index)).equals(lastGame.getName())){
     			lastGame.clearGame();
@@ -1004,7 +1006,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 	}
 
 	public boolean checkInstall() {
-		return isFile(Globals.DataFlag);
+		return isFile(StorageResolver.DataFlag);
 	}
 
 	private class ListItem {
@@ -1077,7 +1079,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 	    shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);  
 
         Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
-        shortcutIntent.putExtra(Globals.ApplicationName, game);
+        shortcutIntent.putExtra(InsteadApplication.ApplicationName, game);
         
 	    ComponentName comp = new ComponentName(this.getPackageName(), ".Shortcut");  
 	    shortcutIntent.setComponent(comp);

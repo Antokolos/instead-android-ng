@@ -1,8 +1,7 @@
-package com.nlbhub.instead.standalone;
+package com.nlbhub.instead;
 
 
 import android.view.KeyEvent;
-import com.nlbhub.instead.SDLActivity;
 
 public class Keys {
 

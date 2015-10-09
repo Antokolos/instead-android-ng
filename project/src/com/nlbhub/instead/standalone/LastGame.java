@@ -1,12 +1,14 @@
 package com.nlbhub.instead.standalone;
 
 import android.content.Context;
+import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.Settings;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.universal.GameList;
 
 
-public class LastGame {
-
+public class LastGame extends Settings {
 	private String title;
 	private String name;
 	private String title_def;
@@ -14,55 +16,55 @@ public class LastGame {
 	private int list;
 	private String lang;	    
     private MyPrefs pr;
-	private boolean nativelog;
-	private boolean enforceorientation;
-	private boolean enforceresolution;
-    private boolean scroff;
     private boolean flagsync;
-    private boolean keyb;
-    private boolean keyvol;
-    
-	public LastGame(Context p){
-		pr = new MyPrefs(p, Globals.ApplicationName);
+
+	public LastGame() {
+		super();
+	}
+
+	// TODO: maybe remove this contructor and make all initialization of this class via SettingsFactory
+	public LastGame(Context p) {
+		this();
+		init(p);
+	}
+
+	@Override
+	public void init(Context p) {
+		super.init(p);
+		pr = new MyPrefs(p, InsteadApplication.ApplicationName);
 		title_def =  p.getString(R.string.bundledgame);
  		filtr = pr.get("filtr", GameList.ALL);
  		list = pr.get("list", Globals.BASIC);		
  		lang = pr.get("lang", Globals.Lang.ALL);
- 		name = pr.get("name", Globals.BundledGame);
+ 		name = pr.get("name", StorageResolver.BundledGame);
  		title = pr.get("title", title_def);
-        nativelog = pr.get("nativelog", Globals.NATIVE_LOG_DEFAULT);
-		enforceorientation = pr.get("enforceorientation", Globals.ENFORCE_ORIENTATION_DEFAULT);
-		enforceresolution = pr.get("enforceresolution", Globals.ENFORCE_RESOLUTION_DEFAULT);
- 		scroff = pr.get("scroff", true);
- 		keyb = pr.get("keyb", true);
- 		keyvol = pr.get("keyvol", false);
+        super.setNativelog(pr.get("nativelog", Settings.NATIVE_LOG_DEFAULT));
+		super.setEnforceorientation(pr.get("enforceorientation", Settings.ENFORCE_ORIENTATION_DEFAULT));
+		super.setEnforceresolution(pr.get("enforceresolution", Settings.ENFORCE_RESOLUTION_DEFAULT));
+ 		super.setScreenOff(pr.get("scroff", Settings.SCREEN_OFF_DEFAULT));
+ 		super.setKeyboard(pr.get("keyb", Settings.KEYBOARD_DEFAULT));
+ 		super.setOvVol(pr.get("keyvol", Settings.OV_VOL_DEFAULT));
  		flagsync = pr.get("flagsync", true);
 	}
 	
 	public void clearGame(){
- 		name = Globals.BundledGame;
+ 		name = StorageResolver.BundledGame;
  		title = title_def;		
  		Commit();
 	}
 
+	@Override
 	public void clearAll(){
-        nativelog = Globals.NATIVE_LOG_DEFAULT;
-		enforceorientation = Globals.ENFORCE_ORIENTATION_DEFAULT;
-		enforceresolution = Globals.ENFORCE_RESOLUTION_DEFAULT;
-		scroff = true;
+        super.clearAll();
 		flagsync = true;
-		keyb = true;
-		keyvol = false;
 		filtr = GameList.ALL;
  		list =  Globals.BASIC;		
  		lang = Globals.Lang.ALL;
- 		name = Globals.BundledGame;
+ 		name = StorageResolver.BundledGame;
  		title = title_def;		
  		Commit();
 	}
 
-	
-	
 	public String getTitle(){
 		return title;
 	}
@@ -117,49 +119,28 @@ public class LastGame {
 		Commit();
 	}
 
-
-    public boolean isNativelog() {
-        return nativelog;
-    }
-
     public void setNativelog(boolean nativelog) {
-        this.nativelog = nativelog;
+        super.setNativelog(nativelog);
         Commit();
     }
 
-	public boolean isEnforceorientation() {
-		return enforceorientation;
-	}
-
 	public void setEnforceorientation(boolean enforceorientation) {
-		this.enforceorientation = enforceorientation;
+		super.setEnforceorientation(enforceorientation);
 		Commit();
-	}
-
-	public boolean isEnforceresolution() {
-		return enforceresolution;
 	}
 
 	public void setEnforceresolution(boolean enforceresolution) {
-		this.enforceresolution = enforceresolution;
+		super.setEnforceresolution(enforceresolution);
 		Commit();
-	}
-
-	public boolean getScreenOff(){
-		return scroff;
 	}
 	
 	public void setScreenOff(boolean b){
-		scroff = b;
+		super.setScreenOff(b);
 		Commit();
-	}
-
-	public boolean getKeyboard(){
-		return keyb;
 	}
 	
 	public void setKeyboard(boolean b){
-		keyb = b;
+		super.setKeyboard(b);
 		Commit();
 	}
 	
@@ -171,18 +152,12 @@ public class LastGame {
 		flagsync = b;
 		Commit();
 	}
-
-	public boolean getOvVol(){
-		return keyvol;
-	}
 	
 	public void setOvVol(boolean b){
-		keyvol = b;
+		super.setOvVol(b);
 		Commit();
 	}
 
-	
-	
 	private void Commit() {
 		pr.set("flagsync", flagsync);
  		pr.set("filtr", filtr);
@@ -190,12 +165,12 @@ public class LastGame {
  		pr.set("lang", lang);
  		pr.set("name", name);
  		pr.set("title", title);
-        pr.set("nativelog", nativelog);
-		pr.set("enforceorientation", enforceorientation);
-		pr.set("enforceresolution", enforceresolution);
- 		pr.set("scroff", scroff);
- 		pr.set("keyb", keyb);
- 		pr.set("keyvol", keyvol);
+        pr.set("nativelog", isNativelog());
+		pr.set("enforceorientation", isEnforceorientation());
+		pr.set("enforceresolution", isEnforceresolution());
+ 		pr.set("scroff", getScreenOff());
+ 		pr.set("keyb", getKeyboard());
+ 		pr.set("keyvol", getOvVol());
  		pr.commit();
 	}
 	

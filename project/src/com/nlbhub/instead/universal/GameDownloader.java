@@ -1,6 +1,7 @@
 package com.nlbhub.instead.universal;
 
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.standalone.Globals;
 import org.apache.http.client.methods.*;
 import org.apache.http.*;
@@ -66,7 +67,7 @@ class GameDownloader extends Thread {
 		DownloadComplete = false;
 		gameUrl = url;
 		gameName = name;
-		gameDir = Globals.GameDir + gameName;
+		gameDir = StorageResolver.GameDir + gameName;
 		Status = new StatusWriter(_Status, gameManager);
 		// Status.setMessage( Parent.getString(R.string.connect) +" "+ gameUrl
 		// );
@@ -182,7 +183,7 @@ class GameDownloader extends Thread {
 				break;
 			if (entry.isDirectory()) {
 				try {
-					(new File(Globals.getOutFilePath(Globals.GameDir
+					(new File(Globals.getOutFilePath(StorageResolver.GameDir
 							+ entry.getName()))).mkdirs();
 				} catch (SecurityException e) {
 				}
@@ -191,7 +192,7 @@ class GameDownloader extends Thread {
 			}
 
 			OutputStream out = null;
-			path = Globals.getOutFilePath(Globals.GameDir + entry.getName());
+			path = Globals.getOutFilePath(StorageResolver.GameDir + entry.getName());
 
 			
 			try {

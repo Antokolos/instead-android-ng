@@ -30,7 +30,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
 public class Options extends Activity {
@@ -227,8 +229,8 @@ public class Options extends Activity {
 		(new File(this.getFilesDir()+"/"+ Globals.GameListNLBDemosFileName)).delete();
 		(new File(this.getFilesDir()+"/"+Globals.GameListNLBFullFileName)).delete();
 		lastGame.clearAll();
-		(new File(Globals.getOutFilePath(Globals.DataFlag))).delete();
-		(new File(Globals.getOutFilePath(Globals.Options))).delete();
+		(new File(Globals.getOutFilePath(StorageResolver.DataFlag))).delete();
+		(new File(Globals.getOutFilePath(StorageResolver.Options))).delete();
 		finish();
 	}
 	
@@ -255,45 +257,11 @@ public class Options extends Activity {
             }
             }
 		} catch (IOException e) {
-			Log.e(Globals.ApplicationName, "Exception when retrieving themes list", e);
+			Log.e(InsteadApplication.ApplicationName, "Exception when retrieving themes list", e);
 		}
 		return ls;
 	}
 
-	public static boolean isPortrait(){
-		boolean b = false;
-		boolean c = true;
-		String path = Globals.getOutFilePath(Globals.Options);
-		BufferedReader input = null;
-		try {
-			input = new BufferedReader(new InputStreamReader(
-					new FileInputStream(new File(path)), "UTF-8"));
-
-
-			String line = null;
-			while ((line = input.readLine()) != null) {
-
-				if (line.toLowerCase().matches("owntheme\\ *=\\ *1.*")){
-						c = false;
-				}
-				
-				if (line.toLowerCase().matches("theme.*"+Globals.PORTRET_KEY.toLowerCase()+".*")) {
-						b = true;
-				} 
-				}
-	
-		} catch (Exception e) {
-		}
-				
-		if(c && b){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	
-	
 	private void readRC() {
 	/*	
 		if(lastGame.getOreintation()==Globals.PORTRAIT){
@@ -311,7 +279,7 @@ public class Options extends Activity {
 		keyb.setChecked(lastGame.getKeyboard());
 		keyvol.setChecked(lastGame.getOvVol());
 		
-		String path = Globals.getOutFilePath(Globals.Options);
+		String path = Globals.getOutFilePath(StorageResolver.Options);
 		BufferedReader input = null;
 		try {
 			input = new BufferedReader(new InputStreamReader(
@@ -370,12 +338,7 @@ public class Options extends Activity {
 			}
 			
 		}
-		
-		
 	}
-	
-	
-	
 
 	private String getOpt(boolean b) {
 		if (b) {
@@ -394,7 +357,7 @@ public class Options extends Activity {
 		lastGame.setKeyboard(keyb.isChecked());
 		lastGame.setOvVol(keyvol.isChecked());
 		
-		String path = Globals.getOutFilePath(Globals.Options);
+		String path = Globals.getOutFilePath(StorageResolver.Options);
 		String rc = "";
 		BufferedReader input = null;
 		try {

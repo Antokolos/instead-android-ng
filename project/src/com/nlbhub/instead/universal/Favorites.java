@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
+import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.standalone.MyPrefs;
 
@@ -19,7 +21,7 @@ public class Favorites {
     private String TitleBundled;
 
 	Favorites(Context c){
-		p = new MyPrefs(c, Globals.ApplicationName+TAG);
+		p = new MyPrefs(c, InsteadApplication.ApplicationName+TAG);
 		TitleBundled = c.getString(R.string.bundledgame);
 		sync();
 	}
@@ -29,7 +31,7 @@ public class Favorites {
 		title.clear();
 		int n = p.get(SIZE, 0);
 		for(int i=0; i<n;i++){
-			game.add(p.get(GAME+Integer.toString(i), Globals.BundledGame));
+			game.add(p.get(GAME+Integer.toString(i), StorageResolver.BundledGame));
 			title.add(p.get(TITLE+Integer.toString(i), TitleBundled));
 		}
 	}

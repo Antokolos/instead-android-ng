@@ -9,6 +9,7 @@ import android.content.Context;
  * Instead of using this class, Globals class should be fully rewritten (and probably obliterated for greater good)
  */
 public class InsteadApplication extends Application {
+    public static final String ApplicationName = "Instead-NG";
     private static Context context;
 
     public void onCreate(){
