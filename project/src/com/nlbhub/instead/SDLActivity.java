@@ -40,7 +40,7 @@ public class SDLActivity extends SDLActivityBase {
 	private static boolean keyb = true;
 	private static Handler h;
 	private Settings settings;
-	private static InputDialog input;
+	private static InputLayout inputLayout;
 	private static AudioManager audioManager;
 	private static Context Ctx;
 
@@ -85,7 +85,7 @@ public class SDLActivity extends SDLActivityBase {
 
 	public static void showKeyboard(Context c){
 		if(keyb){
-			input.show();
+			inputLayout.open();
 	//		input.focus();
 	//		InputMethodManager imm = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
 	//		imm.showSoftInput(mSurface, InputMethodManager.SHOW_FORCED);
@@ -148,7 +148,7 @@ public class SDLActivity extends SDLActivityBase {
 	}
 	
 	public static void inputText(String s){
-		InputDialog.inputText(s);
+		InputLayout.inputText(s);
 	}
 
 	// Setup
@@ -157,6 +157,15 @@ public class SDLActivity extends SDLActivityBase {
 		// The following line is to workaround AndroidRuntimeException: requestFeature() must be called before adding content
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
+		settings = SettingsFactory.create(this);
+		nativeLog = settings.isNativelog();
+		enforceResolution = settings.isEnforceresolution();
+		overrVol = settings.getOvVol();
+		keyb = settings.getKeyboard();
+		if(keyb){
+			inputLayout = new InputLayout(this);
+			addContentView(inputLayout, InputLayout.getParams());
+		}
 		Ctx = this;
 		loadLibs();
         initExpansionManager(this);
@@ -177,15 +186,6 @@ public class SDLActivity extends SDLActivityBase {
 			game = b.getString("game");
 			idf = b.getString("idf");
 		}
-		}
-		
-		settings = SettingsFactory.create(this);
-		nativeLog = settings.isNativelog();
-		enforceResolution = settings.isEnforceresolution();
-		overrVol = settings.getOvVol();
-		keyb = settings.getKeyboard();
-		if(keyb){
-			input = new InputDialog(this, getString(R.string.in_text));
 		}
 
 		if(!overrVol){
