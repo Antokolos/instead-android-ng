@@ -11,7 +11,7 @@ public class SettingsFactory {
     public static Settings create(Context context) {
         Settings result = null;
         try {
-            result = (Settings) Class.forName("com.nlbhub.standalone.LastGame").newInstance();
+            result = (Settings) Class.forName("com.nlbhub.instead.standalone.LastGame").newInstance();
         } catch (ClassNotFoundException e) {
             Log.i(InsteadApplication.ApplicationName, SETTINGS_FACTORY_ERROR, e);
         } catch (InstantiationException e) {
