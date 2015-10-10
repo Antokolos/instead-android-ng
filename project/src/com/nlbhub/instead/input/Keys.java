@@ -1,7 +1,8 @@
-package com.nlbhub.instead;
+package com.nlbhub.instead.input;
 
 
 import android.view.KeyEvent;
+import com.nlbhub.instead.SDLActivity;
 
 public class Keys {
 
@@ -38,7 +39,23 @@ public class Keys {
 							}
 		
 	}
-	
+
+
+	public static void inputText(String s, int maxlen){
+		//Log.d("Input ",s);
+		//nativeInput(s);
+		int len = s.length();
+		if(len > maxlen){
+			s = s.substring(0, maxlen);
+			len = s.length();
+		}
+
+		for(int i=0; i < len; i++){
+			char c = s.charAt(i);
+			Keys.key(c);
+		}
+		Keys.Enter();
+	}
 
 	public static void Enter(){
 		Down(KeyEvent.KEYCODE_ENTER);

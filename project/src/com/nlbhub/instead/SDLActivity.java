@@ -37,10 +37,10 @@ public class SDLActivity extends SDLActivityBase {
 	private static String game = null;
 	private static String idf = null;
 	private static int i_s = KOLL;
-	private static boolean keyb = true;
+	private static boolean keyb = false;
 	private static Handler h;
 	private Settings settings;
-	private static InputLayout inputLayout;
+	private static KeyboardAdapter keyboardAdapter;
 	private static AudioManager audioManager;
 	private static Context Ctx;
 
@@ -83,13 +83,8 @@ public class SDLActivity extends SDLActivityBase {
 		}
 	}
 
-	public static void showKeyboard(Context c){
-		if(keyb){
-			inputLayout.open();
-	//		input.focus();
-	//		InputMethodManager imm = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
-	//		imm.showSoftInput(mSurface, InputMethodManager.SHOW_FORCED);
-		}
+	public static KeyboardAdapter getKeyboardAdapter(){
+		return keyboardAdapter;
 	}
 
 	/**
@@ -146,10 +141,6 @@ public class SDLActivity extends SDLActivityBase {
 	public static boolean isEnforceResolution() {
 		return enforceResolution;
 	}
-	
-	public static void inputText(String s){
-		InputLayout.inputText(s);
-	}
 
 	// Setup
 	protected void onCreate(Bundle savedInstanceState) {
@@ -162,10 +153,7 @@ public class SDLActivity extends SDLActivityBase {
 		enforceResolution = settings.isEnforceresolution();
 		overrVol = settings.getOvVol();
 		keyb = settings.getKeyboard();
-		if(keyb){
-			inputLayout = new InputLayout(this);
-			addContentView(inputLayout, InputLayout.getParams());
-		}
+		keyboardAdapter = KeyboardFactory.create(this, keyb);
 		Ctx = this;
 		loadLibs();
         initExpansionManager(this);
@@ -177,7 +165,9 @@ public class SDLActivity extends SDLActivityBase {
 			final boolean notIdf = !game.endsWith(".idf");
 			final boolean notExist = !(new File(StorageResolver.getOutFilePath(StorageResolver.GameDir + game)).exists());
 			if (notWorking && (notIdf || notExist)) {
-				Toast.makeText(this, getString(R.string.game)+" \""+game+"\" "+getString(R.string.ag_new), Toast.LENGTH_SHORT).show();
+				// Toast.makeText(this, getString(R.string.game)+" \""+game+"\" "+getString(R.string.ag_new), Toast.LENGTH_SHORT).show();
+				// Removed i18n in order to not use the R class
+				Toast.makeText(this, "Game \""+game+"\" not installed!", Toast.LENGTH_SHORT).show();
 				finish();
 			}
 		} else {		
@@ -487,11 +477,6 @@ class SDLSurface extends SDLSurfaceBase {
 		// see http://en.wildservices.net/2013/10/making-libsdl-2-apps-on-android.html
 	}
 
-	public void showKeybord() {
-		SDLActivity.showKeyboard(this.getContext());
-		//	SDLActivity.onNativeKeyUp(67);
-	}
-
 	private float pX = 0;
 	private float pY = 0;
 	private long pA = 0;
@@ -517,7 +502,7 @@ class SDLSurface extends SDLSurfaceBase {
 			pX = Math.abs(x - pX);
 			pY = Math.abs(y - pY);
 			if (pA > WAIT_TOUCH && pX < SQUAR_TOUCH && pY < SQUAR_TOUCH) {
-				showKeybord();
+				SDLActivity.getKeyboardAdapter().showKeyboard();
 			}
 		}
 

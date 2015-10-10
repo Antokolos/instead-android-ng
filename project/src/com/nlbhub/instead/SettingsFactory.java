@@ -7,7 +7,7 @@ import android.util.Log;
  * Created by Antokolos on 09.10.15.
  */
 public class SettingsFactory {
-    private static final String SETTINGS_FACTORY_ERROR = "SettingsFactory error";
+    private static final String SETTINGS_FACTORY_ERROR = "SettingsFactory problem";
     public static Settings create(Context context) {
         Settings result = null;
         try {

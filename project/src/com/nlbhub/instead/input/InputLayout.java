@@ -1,4 +1,4 @@
-package com.nlbhub.instead;
+package com.nlbhub.instead.input;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import com.nlbhub.instead.R;
 
 /**
  * Created by Antokolos on 10.10.15.
@@ -30,10 +31,6 @@ public class InputLayout extends RelativeLayout {
                 open();
             }
         });
-    }
-
-    public static void inputText(String s){
-        InputDialog.inputText(s);
     }
 
     public static ViewGroup.LayoutParams getParams() {

@@ -1,4 +1,4 @@
-package com.nlbhub.instead;
+package com.nlbhub.instead.input;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import com.nlbhub.instead.R;
 
 public class InputDialog extends Dialog {
 	public static final int IN_MAX = 16;
@@ -132,21 +133,7 @@ public class InputDialog extends Dialog {
 
 	}
 
-	public static void inputText(String s){
-		//Log.d("Input ",s);
-		//nativeInput(s);
-		int len = s.length();
-		if(len> IN_MAX){
-			s = s.substring(0, IN_MAX);
-			len = s.length();
-		}
 
-		for(int i=0; i < len; i++){
-			char c = s.charAt(i);
-			Keys.key(c);
-		}
-		Keys.Enter();
-	}
 
 	protected void DelAll(){
 	 text.setText("");
@@ -173,7 +160,7 @@ public class InputDialog extends Dialog {
     
 	protected void Enter() {
 		String txt = text.getText().toString();
-		SDLActivity.inputText(txt);
+		Keys.inputText(txt, IN_MAX);
 	}
 
 	protected void Close() {

@@ -2,7 +2,6 @@ package com.nlbhub.instead;
 
 import android.content.Context;
 import android.os.Build;
-import com.nlbhub.instead.standalone.Globals;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -48,7 +47,7 @@ public class ExceptionHandler implements
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(
                 new Date());
 
-        File dir = new File(Globals.getStorage() + InsteadApplication.ApplicationName);
+        File dir = new File(StorageResolver.getStorage() + InsteadApplication.ApplicationName);
         if (!dir.exists()) {
             dir.mkdirs();
         }
