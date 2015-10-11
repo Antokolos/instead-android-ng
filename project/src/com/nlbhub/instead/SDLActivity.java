@@ -521,7 +521,8 @@ class SDLSurface extends SDLSurfaceBase {
 					x = event.getX(i) / mWidth;
 					y = event.getY(i) / mHeight;
 					p = event.getPressure(i);
-					SDLActivity.onNativeTouch(touchDevId, pointerFingerId, action, x, y, p);
+					// NB: Pass actionMasked, not action!
+					SDLActivity.onNativeTouch(touchDevId, pointerFingerId, actionMasked, x, y, p);
 				}
 				break;
 			case MotionEvent.ACTION_UP:
@@ -538,7 +539,8 @@ class SDLSurface extends SDLSurfaceBase {
 				x = event.getX(i) / mWidth;
 				y = event.getY(i) / mHeight;
 				p = event.getPressure(i);
-				SDLActivity.onNativeTouch(touchDevId, pointerFingerId, action, x, y, p);
+				// NB: Pass actionMasked, not action!
+				SDLActivity.onNativeTouch(touchDevId, pointerFingerId, actionMasked, x, y, p);
 				break;
 			default:
 				break;
