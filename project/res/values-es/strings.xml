@@ -12,7 +12,6 @@
     <string name="agame">Acerca del juego</string>
     <string name="redwn">Restablecer y \n reinstalar los archivos de la SD</string>
     <string name="writefile">Guarde el archivo</string>
-    <string name="flage">Lage</string>
     <string name="basic">Oficial</string>
     <string name="repo">Lista de juegos</string>
     <string name="conferror">Resolución de pantalla es un error! Intente volver a configurar otra vez!</string>
@@ -34,7 +33,6 @@
     <string name="about_btn">Acerca Instead-NG</string>
     <string name="ag_new">No se instala</string>
     <string name="menustart">Inicio del juego</string>
-    <string name="fnormal">Normal</string>
     <string name="ag_lang">Lengua</string>
     <string name="menuupd">Actualización del juego</string>
     <string name="filtr">Filtro</string>
@@ -46,7 +44,6 @@
     <string name="installed">Instalado</string>
     <string name="waitdwn">Por favor espere, descargar</string>
     <string name="serverr">Error de conexión.</string>
-    <string name="click">Haga clic en el sonido</string>
     <string name="downdata">Descargar archivo</string>
     <string name="run">Inicio del juego</string>
     <string name="app_name">Instead-NG</string>
@@ -62,7 +59,6 @@
     <string name="ag_status">Estado</string>
     <string name="ag_ver">Versión</string>
     <string name="ag_installed">Instalado</string>
-    <string name="fsmall">Pequeño</string>
     <string name="all">Todos</string>
     <string name="options">Configuración</string>
     <string name="music">Activar la música</string>
@@ -71,8 +67,6 @@
     <string name="blang">Su idioma</string>
     <string name="menudown">Descarga del juego</string>
     <string name="menunewstart">Iniciar nuevo juego</string>
-    <string name="vsmall">Muy pequeño</string>
-    <string name="fvlage">Muy lage</string>
     <string name="alter">No es oficial</string>
     <string name="delrc">Eliminado la configuración!</string>
     <string name="yes">¡Sí!</string>
@@ -83,7 +77,6 @@
     <string name="conerror">Error de conexión</string>
     <string name="dataerror">Archivo de datos error al descargar</string>
     <string name="sizeyesno">¿Desea continuar con la descarga?</string>
-    <string name="fontsize">Tamaño de la fuente</string>
     <string name="delsaves">Eliminar guardar juego?</string>
     <string name="mailme">Enviar e-mail me</string>
     <string name="ver">Versión</string>

@@ -38,7 +38,6 @@
     <string name="options">Settings</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="click">Click sound</string>
     <string name="music">Enable music</string>
     <string name="hlpopt">More options available in game (Menu - Settings).</string>
     <string name="by">Instead-NG: SilentLexx/NLB project</string>
@@ -81,15 +80,8 @@
     <string name="conferror">Screen resolution is wrong! Try reconfigure again!</string>
     <string name="ourtheme">Сustom game themes</string>
     <string name="nativelog">Native Log</string>
-    <string name="enforceorientation">Enforce Orientation</string>
     <string name="enforceresolution">Enforce Resolution</string>
-    <string name="flage">Lage</string>
-    <string name="fnormal">Normal</string>
-    <string name="fsmall">Small</string>
-    <string name="fvlage">Very lage</string>
-    <string name="fontsize">Font size</string>
     <string name="menunewstart">Start new game</string>
-    <string name="vsmall">Very small</string>
     <string name="delsaves">Delete save game?</string>
     <string name="mailme">Send me email</string>
     <string name="ver">Version</string>
@@ -103,7 +95,7 @@
     <string name="deleting">Removing ...</string>
     <string name="resetsd">This operation will reset the game, reinstall the game files on the SD card, but will not affect your game and save. Continue anyway?</string>
     <string name="atention">Attention!</string>
-    <string name="scroff">Keep the screen turned</string>
+    <string name="scroff">Keep the screen turned on</string>
     <string name="start">Start game</string>
     <string name="theme">Theme: </string>
     <string name="portrait">Portrait screen orientation</string>

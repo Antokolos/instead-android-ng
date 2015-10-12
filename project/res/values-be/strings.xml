@@ -12,7 +12,6 @@
     <string name="agame">Аб гульні</string>
     <string name="redwn">Скінуць налады і \n пераўсталяваць файлы на SD</string>
     <string name="writefile">Запіс файла</string>
-    <string name="flage">Вялікі</string>
     <string name="basic">Афіцыйны</string>
     <string name="repo">Выбар спісу гульняў</string>
     <string name="conferror">Ня правельно вызначана дазвол экрана! Паспрабуйце перастварыць налады!</string>
@@ -34,7 +33,6 @@
     <string name="about_btn">Аб Instead-NG</string>
     <string name="ag_new">Не ўстаноўлена</string>
     <string name="menustart">Пачаць гульню</string>
-    <string name="fnormal">Нармальны</string>
     <string name="ag_lang">Мова</string>
     <string name="menuupd">Абнавіць гульню</string>
     <string name="filtr">Фільтр</string>
@@ -46,7 +44,6 @@
     <string name="installed">Устаноўленыя</string>
     <string name="waitdwn">Чакайце, ідзе загрузка</string>
     <string name="serverr">Памылка злучэння ...</string>
-    <string name="click">Гук пстрычкі</string>
     <string name="downdata">Загрузка файла</string>
     <string name="run">Пачаць гульню</string>
     <string name="app_name">Instead-NG</string>
@@ -62,7 +59,6 @@
     <string name="ag_status">Стан</string>
     <string name="ag_ver">Версія</string>
     <string name="ag_installed">Устаноўленая</string>
-    <string name="fsmall">Маленькі</string>
     <string name="all">Усе</string>
     <string name="options">Налады</string>
     <string name="music">Уключыць музыку</string>
@@ -71,8 +67,6 @@
     <string name="blang">На вашым мове</string>
     <string name="menudown">Загрузіць гульню</string>
     <string name="menunewstart">Пачаць новую гульню</string>
-    <string name="vsmall">Вельмі маленькі</string>
-    <string name="fvlage">Вельмі вялікі</string>
     <string name="alter">Не афіцыйны</string>
     <string name="delrc">Налады выдаленыя</string>
     <string name="yes">Ды</string>
@@ -83,7 +77,6 @@
     <string name="conerror">Памылка злучэння</string>
     <string name="dataerror">Памылка загрузкі файла дадзеных</string>
     <string name="sizeyesno">Працягнуць загрузку?</string>
-    <string name="fontsize">Памер шрыфта</string>
     <string name="delsaves">Выдаліць захавання гульні?</string>
     <string name="mailme">Адправіць мне па электроннай пошце</string>
     <string name="ver">Версія</string>

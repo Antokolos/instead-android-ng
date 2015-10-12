@@ -38,12 +38,14 @@ public class LastGame extends Settings {
  		lang = pr.get("lang", Globals.Lang.ALL);
  		name = pr.get("name", StorageResolver.BundledGame);
  		title = pr.get("title", title_def);
+		super.setMusic(pr.get("music", Settings.MUSIC_DEFAULT));
         super.setNativelog(pr.get("nativelog", Settings.NATIVE_LOG_DEFAULT));
-		super.setEnforceorientation(pr.get("enforceorientation", Settings.ENFORCE_ORIENTATION_DEFAULT));
 		super.setEnforceresolution(pr.get("enforceresolution", Settings.ENFORCE_RESOLUTION_DEFAULT));
  		super.setScreenOff(pr.get("scroff", Settings.SCREEN_OFF_DEFAULT));
  		super.setKeyboard(pr.get("keyb", Settings.KEYBOARD_DEFAULT));
  		super.setOvVol(pr.get("keyvol", Settings.OV_VOL_DEFAULT));
+		super.setOwntheme(pr.get("owntheme", Settings.OWNTHEME_DEFAULT));
+		super.setTheme(pr.get("theme", Settings.THEME_DEFAULT));
  		flagsync = pr.get("flagsync", true);
 	}
 	
@@ -119,15 +121,16 @@ public class LastGame extends Settings {
 		Commit();
 	}
 
-    public void setNativelog(boolean nativelog) {
+	@Override
+	public void setMusic(boolean music) {
+		super.setMusic(music);
+		Commit();
+	}
+
+	public void setNativelog(boolean nativelog) {
         super.setNativelog(nativelog);
         Commit();
     }
-
-	public void setEnforceorientation(boolean enforceorientation) {
-		super.setEnforceorientation(enforceorientation);
-		Commit();
-	}
 
 	public void setEnforceresolution(boolean enforceresolution) {
 		super.setEnforceresolution(enforceresolution);
@@ -158,6 +161,18 @@ public class LastGame extends Settings {
 		Commit();
 	}
 
+	@Override
+	public void setOwntheme(boolean owntheme) {
+		super.setOwntheme(owntheme);
+		Commit();
+	}
+
+	@Override
+	public void setTheme(String theme) {
+		super.setTheme(theme);
+		Commit();
+	}
+
 	private void Commit() {
 		pr.set("flagsync", flagsync);
  		pr.set("filtr", filtr);
@@ -165,13 +180,15 @@ public class LastGame extends Settings {
  		pr.set("lang", lang);
  		pr.set("name", name);
  		pr.set("title", title);
+		pr.set("music", isMusic());
         pr.set("nativelog", isNativelog());
-		pr.set("enforceorientation", isEnforceorientation());
 		pr.set("enforceresolution", isEnforceresolution());
  		pr.set("scroff", getScreenOff());
  		pr.set("keyb", getKeyboard());
  		pr.set("keyvol", getOvVol());
- 		pr.commit();
+		pr.set("owntheme", isOwntheme());
+		pr.set("theme", getTheme());
+		pr.commit();
 	}
 	
 }

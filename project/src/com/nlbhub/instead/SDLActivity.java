@@ -31,15 +31,12 @@ public class SDLActivity extends SDLActivityBase {
 	private static Display display;
 	private static BroadcastReceiver mReceiver;
 
-    private static boolean overrVol = false;
-	private static boolean nativeLog = false;
-	private static boolean enforceResolution = false;
+	private static boolean portrait = false;
 	private static String game = null;
 	private static String idf = null;
 	private static int i_s = KOLL;
-	private static boolean keyb = false;
 	private static Handler h;
-	private Settings settings;
+	private static Settings settings;
 	private static KeyboardAdapter keyboardAdapter;
 	private static AudioManager audioManager;
 	private static Context Ctx;
@@ -130,16 +127,8 @@ public class SDLActivity extends SDLActivityBase {
 		 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curvol, 0);
 	}
 
-	public static boolean isNativeLog() {
-		return nativeLog;
-	}
-
-	public static boolean getOvVol(){
-		return overrVol;
-	}
-
-	public static boolean isEnforceResolution() {
-		return enforceResolution;
+	public static Settings getSettings() {
+		return settings;
 	}
 
 	// Setup
@@ -149,11 +138,7 @@ public class SDLActivity extends SDLActivityBase {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		settings = SettingsFactory.create(this);
-		nativeLog = settings.isNativelog();
-		enforceResolution = settings.isEnforceresolution();
-		overrVol = settings.getOvVol();
-		keyb = settings.getKeyboard();
-		keyboardAdapter = KeyboardFactory.create(this, keyb);
+		keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard());
 		Ctx = this;
 		loadLibs();
         initExpansionManager(this);
@@ -178,20 +163,17 @@ public class SDLActivity extends SDLActivityBase {
 		}
 		}
 
-		if(!overrVol){
+		if(!settings.getOvVol()) {
 			audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
 		}
-		
 
-		if (settings.isEnforceorientation()) {
-			// if (settings.getOreintation()==Globals.PORTRAIT) {
-			if (ThemeHelper.isPortrait()) {
+		portrait = ThemeHelper.isPortrait(this, settings, game, idf);
+		if (settings.isEnforceresolution()) {
+			if (portrait) {
 				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 			} else {
 				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 			}
-
-			///requestWindowFeature(Window.FEATURE_NO_TITLE);
 		}
 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -330,7 +312,18 @@ public class SDLActivity extends SDLActivityBase {
 	*/
 
 	// C functions we call
-	public static native void nativeInit(String jnativelog, String jpath, String jappdata, String jgamespath, String jres, String jgame, String jidf);
+	public static native void nativeInit(
+			String jnativelog,
+			String jpath,
+			String jappdata,
+			String jgamespath,
+			String jres,
+			String jgame,
+			String jidf,
+			String music,
+			String owntheme,
+			String theme
+	);
 	public static native void toggleMenu();
 	public static native void nativeLowMemory();
 	public static native void nativeQuit();
@@ -383,7 +376,11 @@ public class SDLActivity extends SDLActivityBase {
 	public static String getRes() {
 		int x = display.getWidth();
 		int y = display.getHeight();
-		return x + "x" + y;
+		if (portrait) {
+			return y + "x" + x;
+		} else {
+			return x + "x" + y;
+		}
 	}
 
 	public static String getGame() {
@@ -405,21 +402,12 @@ class SDLMain implements Runnable {
 		this.dataDir = dataDir;
 	}
 
-    private String getAppDataFolderName(File bundledGameDirParent) {
-        if (bundledGameDirParent == null || !bundledGameDirParent.isDirectory()) {
-            return "appdata";
-        } else {
-            return bundledGameDirParent.list()[0];
-        }
-    }
-
 	public void run() {
-        final String expansionFilePath = StorageResolver.expansionMounterMain.getExpansionFilePath();
-        final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
-        final String appdata = StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
-        final String gamespath = (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
-		boolean nativeLogEnabled = SDLActivity.isNativeLog();
-		boolean enforceResolution = SDLActivity.isEnforceResolution();
+        final String appdata = StorageResolver.getAppDataPath();
+        final String gamespath = StorageResolver.getGamesPath();
+		Settings settings = SDLActivity.getSettings();
+		boolean nativeLogEnabled = settings.isNativelog();
+		boolean enforceResolution = settings.isEnforceresolution();
         String nativeLogPath = nativeLogEnabled ? StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/native.log" : null;
 		SDLActivity.nativeInit(
 				nativeLogPath,
@@ -428,7 +416,10 @@ class SDLMain implements Runnable {
                 gamespath,
 				(enforceResolution) ? SDLActivity.getRes() : null,
                 SDLActivity.getGame(),
-                SDLActivity.getIdf()
+                SDLActivity.getIdf(),
+				settings.isMusic() ? "Y" : null,  // The exact value is unimportant, if null, then -nosound will be added
+				settings.isOwntheme() ? "Y" : null,  // The exact value is unimportant, if NOT null, then -owntheme will be added
+				settings.isOwntheme() ? null : settings.getTheme()
         );
 	}
 }
@@ -446,7 +437,7 @@ class SDLSurface extends SDLSurfaceBase {
 		SDLActivity.refreshOff();
 		int key = keyCode;
 
-		if (SDLActivity.getOvVol()) {
+		if (SDLActivity.getSettings().getOvVol()) {
 			switch (keyCode) {
 				case KeyEvent.KEYCODE_VOLUME_UP:
 					key = KeyEvent.KEYCODE_DPAD_UP;

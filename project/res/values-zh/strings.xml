@@ -12,7 +12,6 @@
     <string name="agame">关于游戏</string>
     <string name="redwn">复位和\ n重新安装在SD中的文件</string>
     <string name="writefile">保存文件</string>
-    <string name="flage">拉赫</string>
     <string name="basic">官方</string>
     <string name="repo">游戏名单</string>
     <string name="conferror">屏幕分辨率是错的！再次尝试重新配置！</string>
@@ -34,7 +33,6 @@
     <string name="about_btn">有关Instead</string>
     <string name="ag_new">未安装</string>
     <string name="menustart">开始游戏</string>
-    <string name="fnormal">正常</string>
     <string name="ag_lang">语言</string>
     <string name="menuupd">更新游戏</string>
     <string name="filtr">过滤器</string>
@@ -46,7 +44,6 @@
     <string name="installed">安装</string>
     <string name="waitdwn">请稍候，下载</string>
     <string name="serverr">连接错误。</string>
-    <string name="click">点击声音</string>
     <string name="downdata">下载文件</string>
     <string name="run">开始游戏</string>
     <string name="app_name">Instead-NG</string>
@@ -62,7 +59,6 @@
     <string name="ag_status">状态</string>
     <string name="ag_ver">版本</string>
     <string name="ag_installed">安装</string>
-    <string name="fsmall">小</string>
     <string name="all">所有</string>
     <string name="options">设置</string>
     <string name="music">启用音乐</string>
@@ -71,8 +67,6 @@
     <string name="blang">你的语言</string>
     <string name="menudown">下载游戏</string>
     <string name="menunewstart">开始新游戏</string>
-    <string name="vsmall">非常小的</string>
-    <string name="fvlage">非常拉赫</string>
     <string name="alter">不是官方</string>
     <string name="delrc">设置删除！</string>
     <string name="yes">没错！</string>
@@ -83,7 +77,6 @@
     <string name="conerror">连接错误</string>
     <string name="dataerror">数据文件下载错误</string>
     <string name="sizeyesno">你想继续下载？</string>
-    <string name="fontsize">字体大小</string>
     <string name="delsaves">删除保存游戏？</string>
     <string name="mailme">向我发送电子邮件</string>
     <string name="ver">版本</string>

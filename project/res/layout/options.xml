@@ -32,26 +32,16 @@
 				android:layout_width="fill_parent" android:orientation="horizontal" android:layout_height="fill_parent">
 
 				<TableRow>
-				
 					<CheckBox android:text="@string/music" android:id="@+id/music"
 						android:textSize="20sp" android:layout_height="65dip" android:layout_width="fill_parent" android:layout_marginTop="10dip" android:layout_weight="1"></CheckBox>
 				</TableRow>
-				<TableRow>
-					<CheckBox android:text="@string/click" android:id="@+id/click"
-						android:textSize="20sp" android:layout_height="65dip" android:layout_width="wrap_content" android:layout_weight="1"></CheckBox>
 
-
-				</TableRow>
 				<TableRow>
 					<CheckBox android:text="@string/ourtheme" android:id="@+id/ourtheme"
 						android:textSize="20sp" android:layout_height="65dip" android:layout_width="wrap_content" android:layout_weight="1"></CheckBox>
 				</TableRow>
 				<TableRow>
 					<CheckBox android:text="@string/nativelog" android:id="@+id/nativelog"
-						android:textSize="20sp" android:layout_height="65dip" android:layout_width="wrap_content" android:layout_weight="1"></CheckBox>
-				</TableRow>
-				<TableRow>
-					<CheckBox android:text="@string/enforceorientation" android:id="@+id/enforceorientation"
 						android:textSize="20sp" android:layout_height="65dip" android:layout_width="wrap_content" android:layout_weight="1"></CheckBox>
 				</TableRow>
 				<TableRow>
@@ -79,12 +69,6 @@
 					    android:textSize="20sp" android:layout_weight="1"/>
 
 				</TableRow>
-<!-- 
-				<TableRow android:gravity="center">
-					<CheckBox android:text="@string/portrait" android:id="@+id/portrait"
-						android:textSize="20sp" android:layout_height="65dip" android:layout_width="wrap_content"></CheckBox>
-				</TableRow>
- -->
 
 				<TextView
 				    android:id="@+id/textView2"
@@ -118,15 +102,6 @@
 					</LinearLayout>
 				    
 				</TableRow>				    
-				    				    
-
-				<TableRow android:layout_marginTop="10dip">
-					<Button android:text="@string/fontsize"
-						android:layout_width="fill_parent" android:id="@+id/sfont" android:textSize="20sp" android:layout_height="wrap_content" android:layout_weight="1"></Button>
-				</TableRow>
-
-				    
-				    
 
 				<TableRow android:layout_margin="5dip"
 					android:layout_height="wrap_content">

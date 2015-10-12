@@ -19,6 +19,7 @@ public class StorageResolver {
     public static final String GameDir = "appdata/games/";
     public static final String SaveDir = "appdata/saves/";
     public static final String Options = "appdata/insteadrc";
+    public static final String Themes = "themes";
     public static final String MainLua = "/main.lua";
     public static final String DataFlag = ".version";
     public static final String BundledGame = "bundled";
@@ -69,5 +70,25 @@ public class StorageResolver {
     public static boolean isWorking(String f){
         String path = getOutFilePath(GameDir) + "/" + f + MainLua;
         return (new File(path)).isFile();
+    }
+
+    public static String getGamesPath() {
+        final String expansionFilePath = expansionMounterMain.getExpansionFilePath();
+        final String appdata = getAppDataPath();
+        return (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
+    }
+
+    public static String getAppDataPath() {
+        final String expansionFilePath = expansionMounterMain.getExpansionFilePath();
+        final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
+        return StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
+    }
+
+    private static String getAppDataFolderName(File bundledGameDirParent) {
+        if (bundledGameDirParent == null || !bundledGameDirParent.isDirectory()) {
+            return "appdata";
+        } else {
+            return bundledGameDirParent.list()[0];
+        }
     }
 }

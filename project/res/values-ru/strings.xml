@@ -35,7 +35,6 @@
     <string name="options">Настройки</string>
     <string name="save">Сохранить</string>
     <string name="cancel">Отмена</string>
-    <string name="click">Звук щелчка</string>
     <string name="music">Включить музыку</string>
     <string name="hlpopt">Больше настроек доступно из самой игры (Клавиша Menu - Настройки).</string>
     <string name="by">Instead-NG: SilentLexx/NLB project</string>
@@ -77,13 +76,7 @@
     <string name="instdata">Установка</string>
     <string name="conferror">Не правельно определено разрешение экрана! Попробуйте пересоздать настройки!</string>
     <string name="ourtheme">Свои темы в играх</string>
-    <string name="flage">Большой</string>
-    <string name="fnormal">Нормальный</string>
-    <string name="fsmall">Маленький</string>
-    <string name="fvlage">Очень большой</string>
-    <string name="fontsize">Размер шрифта</string>
     <string name="menunewstart">Начать новую игру</string>
-    <string name="vsmall">Очень маленький</string>
     <string name="delsaves">Удалить сохранения игры?</string>
     <string name="mailme">Отправить мне email</string>
     <string name="ver">Версия</string>

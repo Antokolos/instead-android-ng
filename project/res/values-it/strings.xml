@@ -12,7 +12,6 @@
     <string name="agame">A proposito di gioco</string>
     <string name="redwn">Reset e \n reinstallare i file sulla scheda SD</string>
     <string name="writefile">Salvare il file</string>
-    <string name="flage">Lage</string>
     <string name="basic">Ufficiale</string>
     <string name="repo">Lista dei giochi</string>
     <string name="conferror">Risoluzione dello schermo è sbagliata! Provare a riconfigurare di nuovo!</string>
@@ -34,7 +33,6 @@
     <string name="about_btn">Chi Instead-NG</string>
     <string name="ag_new">Non installato</string>
     <string name="menustart">Iniziare il gioco</string>
-    <string name="fnormal">Normale</string>
     <string name="ag_lang">Lingua</string>
     <string name="menuupd">Aggiornamento del gioco</string>
     <string name="filtr">Filtro</string>
@@ -46,7 +44,6 @@
     <string name="installed">Installato</string>
     <string name="waitdwn">Si prega di attendere, il download</string>
     <string name="serverr">Errore di connessione.</string>
-    <string name="click">Clicca suono</string>
     <string name="downdata">Download file</string>
     <string name="run">Iniziare il gioco</string>
     <string name="app_name">Instead-NG</string>
@@ -62,7 +59,6 @@
     <string name="ag_status">Stato</string>
     <string name="ag_ver">Versione</string>
     <string name="ag_installed">Installato</string>
-    <string name="fsmall">Piccolo</string>
     <string name="all">Tutti</string>
     <string name="options">Impostazioni</string>
     <string name="music">Abilita musica</string>
@@ -71,8 +67,6 @@
     <string name="blang">La tua lingua</string>
     <string name="menudown">Scarica gioco</string>
     <string name="menunewstart">Inizia nuovo gioco</string>
-    <string name="vsmall">Molto piccolo</string>
-    <string name="fvlage">Molto lage</string>
     <string name="alter">Non ufficiale</string>
     <string name="delrc">Impostazioni cancellato!</string>
     <string name="yes">Sì!</string>
@@ -83,7 +77,6 @@
     <string name="conerror">Errore di connessione</string>
     <string name="dataerror">File-dati scaricando errore</string>
     <string name="sizeyesno">Vuoi continuare a scaricare?</string>
-    <string name="fontsize">Dimensione carattere</string>
     <string name="delsaves">Eliminare salvare gioco?</string>
     <string name="mailme">Inviami e-mail</string>
     <string name="ver">Versione</string>

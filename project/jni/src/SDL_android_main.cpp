@@ -62,7 +62,20 @@ int start_logger(const char *app_name) {
 }
 
 /* Start up the SDL app */
-extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jstring jnativelog, jstring jpath, jstring jappdata, jstring jgamespath, jstring jres, jstring jgame, jstring jidf) {
+extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(
+    JNIEnv* env,
+    jclass cls,
+    jstring jnativelog,
+    jstring jpath,
+    jstring jappdata,
+    jstring jgamespath,
+    jstring jres,
+    jstring jgame,
+    jstring jidf,
+    jstring jmusic,
+    jstring jowntheme,
+    jstring jtheme
+) {
 
     if (jnativelog != NULL) {
         const char *nativelog = env->GetStringUTFChars(jnativelog, 0);
@@ -78,7 +91,7 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jcla
 
     /* Run the application code! */
     int status;
-    char *argv[10];
+    char *argv[14];
     int n = 1;
     if (jpath != NULL) {
         const char *path = env->GetStringUTFChars(jpath, 0);
@@ -121,6 +134,21 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(JNIEnv* env, jcla
         argv[n++] = SDL_strdup("-game");
         argv[n++] = SDL_strdup(game);
         env->ReleaseStringUTFChars(jgame, game);
+    }
+    if (jmusic == NULL) {
+        printf("Without music = YES\n");
+        argv[n++] = SDL_strdup("-nosound");
+    }
+    if (jowntheme != NULL) {
+        printf("Force own theme = YES\n");
+        argv[n++] = SDL_strdup("-owntheme");
+    }
+    if (jtheme != NULL) {
+        const char *theme = env->GetStringUTFChars(jtheme, 0);
+        printf("theme = %s\n", theme);
+        argv[n++] = SDL_strdup("-theme");
+        argv[n++] = SDL_strdup(theme);
+        env->ReleaseStringUTFChars(jtheme, theme);
     }
     argv[n] = NULL;
 

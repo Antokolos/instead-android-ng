@@ -12,7 +12,6 @@
     <string name="agame">Про гру</string>
     <string name="redwn">Скинути налаштування і \n перевстановити файли на SD</string>
     <string name="writefile">Запис файлу</string>
-    <string name="flage">Великий</string>
     <string name="basic">Офіційний</string>
     <string name="repo">Вибір списку ігор</string>
     <string name="conferror">Чи не правельно визначено дозвіл екрану! Спробуйте перестворити настроювання!</string>
@@ -34,7 +33,6 @@
     <string name="about_btn">Про Instead-NG</string>
     <string name="ag_new">Не встановлено</string>
     <string name="menustart">Почати гру</string>
-    <string name="fnormal">Нормальний</string>
     <string name="ag_lang">Мова</string>
     <string name="menuupd">Оновити гру</string>
     <string name="filtr">Фільтр</string>
@@ -46,7 +44,6 @@
     <string name="installed">Встановлені</string>
     <string name="waitdwn">Чекайте, йде завантаження</string>
     <string name="serverr">Помилка з\'єднання ...</string>
-    <string name="click">Звук клацання</string>
     <string name="downdata">Завантаження файлу</string>
     <string name="run">Почати гру</string>
     <string name="app_name">Instead-NG</string>
@@ -62,7 +59,6 @@
     <string name="ag_status">Стан</string>
     <string name="ag_ver">Версія</string>
     <string name="ag_installed">Встановлена</string>
-    <string name="fsmall">Маленький</string>
     <string name="all">Всі</string>
     <string name="options">Установки</string>
     <string name="music">Включити музику</string>
@@ -71,8 +67,6 @@
     <string name="blang">На Вашій мові</string>
     <string name="menudown">Завантажити гру</string>
     <string name="menunewstart">Почати нову гру</string>
-    <string name="vsmall">Дуже маленький</string>
-    <string name="fvlage">Дуже великий</string>
     <string name="alter">Не офіційний</string>
     <string name="delrc">Установки видалені</string>
     <string name="yes">Так</string>
@@ -83,7 +77,6 @@
     <string name="conerror">Помилка з\'єднання</string>
     <string name="dataerror">Помилка завантаження файлу даних</string>
     <string name="sizeyesno">Продовжити завантаження?</string>
-    <string name="fontsize">Розмір шрифту</string>
     <string name="delsaves">Видалити збереження гри?</string>
     <string name="mailme">Надіслати мені по електронній пошті</string>
     <string name="ver">Версія</string>
