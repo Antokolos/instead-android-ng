@@ -1,13 +1,8 @@
-package com.nlbhub.instead.standalone;
+package com.nlbhub.instead.simple;
 
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +21,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
-import com.nlbhub.instead.InsteadApplication;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.StorageResolver;
+import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
 public class Options extends Activity {

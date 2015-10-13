@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import com.nlbhub.instead.InsteadApplication;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.StorageResolver;
-import com.nlbhub.instead.standalone.Globals;
-import com.nlbhub.instead.standalone.MyPrefs;
+import com.nlbhub.instead.standalone.StorageResolver;
+import com.nlbhub.instead.simple.MyPrefs;
 
 public class Favorites {
     private final String TAG = "-favorites";

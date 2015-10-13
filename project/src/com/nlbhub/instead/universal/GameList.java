@@ -16,11 +16,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import com.nlbhub.instead.InsteadApplication;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.StorageResolver;
-import com.nlbhub.instead.standalone.Globals;
-import com.nlbhub.instead.standalone.MyPrefs;
+import com.nlbhub.instead.standalone.StorageResolver;
+import com.nlbhub.instead.simple.Globals;
+import com.nlbhub.instead.simple.MyPrefs;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

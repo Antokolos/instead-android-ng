@@ -5,8 +5,8 @@ import java.io.*;
 
 import android.app.ProgressDialog;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.standalone.Globals;
-import com.nlbhub.instead.standalone.MainMenu;
+import com.nlbhub.instead.simple.Globals;
+import com.nlbhub.instead.simple.MainMenu;
 
 class ZipGame extends Thread {
 	class StatusWriter {

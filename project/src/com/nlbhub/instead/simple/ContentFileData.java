@@ -1,11 +1,11 @@
-package com.nlbhub.instead.standalone;
+package com.nlbhub.instead.simple;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
 import android.util.Log;
-import com.nlbhub.instead.InsteadApplication;
+import com.nlbhub.instead.standalone.InsteadApplication;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

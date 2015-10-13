@@ -1,7 +1,7 @@
 package com.nlbhub.instead.nlb;
 
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.simple.Globals;
 import com.nlbhub.instead.universal.GameManager;
 
 /**

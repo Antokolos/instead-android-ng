@@ -34,11 +34,11 @@ import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.nlbhub.instead.InsteadApplication;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.StorageResolver;
-import com.nlbhub.instead.standalone.Globals;
-import com.nlbhub.instead.standalone.LastGame;
+import com.nlbhub.instead.standalone.StorageResolver;
+import com.nlbhub.instead.simple.Globals;
+import com.nlbhub.instead.simple.LastGame;
 import com.nlbhub.instead.SDLActivity;
 
 public class GameManager extends ListActivity implements ViewBinder {

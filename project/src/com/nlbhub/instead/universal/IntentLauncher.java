@@ -1,14 +1,10 @@
 package com.nlbhub.instead.universal;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
-import com.nlbhub.instead.standalone.ContentFileData;
-import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.simple.ContentFileData;
+import com.nlbhub.instead.simple.Globals;
 
 public class IntentLauncher extends Activity {
 
@@ -35,7 +31,7 @@ public class IntentLauncher extends Activity {
 				Globals.qm = contentFileData.open();
 			}  
 			if (run) {
-				// com.nlbhub.instead.standalone.MainMenu for standalone app without favourites, library etc
+				// com.nlbhub.instead.simple.MainMenu for standalone app without favourites, library etc
 				// com.nlbhub.instead.universal.UniversalMainMenu for universal app
 				Intent myIntent = new Intent(this, UniversalMainMenu.class);
 				startActivity(myIntent);

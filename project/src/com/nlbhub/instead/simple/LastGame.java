@@ -1,10 +1,10 @@
-package com.nlbhub.instead.standalone;
+package com.nlbhub.instead.simple;
 
 import android.content.Context;
-import com.nlbhub.instead.InsteadApplication;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.Settings;
-import com.nlbhub.instead.StorageResolver;
+import com.nlbhub.instead.standalone.Settings;
+import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.universal.GameList;
 
 

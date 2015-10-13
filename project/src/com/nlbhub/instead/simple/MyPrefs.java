@@ -1,4 +1,4 @@
-package com.nlbhub.instead.standalone;
+package com.nlbhub.instead.simple;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.standalone.Globals;
 
 public class AboutGame extends Activity {
 	private TextView tstatus;

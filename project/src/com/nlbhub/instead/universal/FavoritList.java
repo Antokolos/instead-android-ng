@@ -27,10 +27,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SimpleAdapter.ViewBinder;
-import com.nlbhub.instead.InsteadApplication;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.StorageResolver;
-import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.standalone.StorageResolver;
+import com.nlbhub.instead.simple.Globals;
 import com.nlbhub.instead.SDLActivity;
 
 public class FavoritList extends ListActivity  implements ViewBinder  {

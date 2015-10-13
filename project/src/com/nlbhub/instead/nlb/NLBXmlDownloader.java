@@ -1,7 +1,7 @@
 package com.nlbhub.instead.nlb;
 
 import android.app.ProgressDialog;
-import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.simple.Globals;
 import com.nlbhub.instead.universal.GameManager;
 import com.nlbhub.instead.universal.XmlDownloader;
 

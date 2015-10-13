@@ -1,7 +1,7 @@
 package com.nlbhub.instead.input;
 
 import android.app.Activity;
-import com.nlbhub.instead.KeyboardAdapter;
+import com.nlbhub.instead.standalone.KeyboardAdapter;
 
 /**
  * Created by Antokolos on 10.10.15.

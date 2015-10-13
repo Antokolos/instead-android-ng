@@ -16,6 +16,7 @@ import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
+import com.nlbhub.instead.standalone.*;
 
 import java.io.File;
 import java.io.IOException;

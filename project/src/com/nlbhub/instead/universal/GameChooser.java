@@ -23,8 +23,8 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.StorageResolver;
-import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.standalone.StorageResolver;
+import com.nlbhub.instead.simple.Globals;
 
 public class GameChooser extends Activity {
     private static final String PREFS_NAME

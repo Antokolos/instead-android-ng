@@ -10,11 +10,11 @@ import android.view.*;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.StorageResolver;
+import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.nlb.NLBGameManager;
-import com.nlbhub.instead.standalone.ContentFileData;
-import com.nlbhub.instead.standalone.Globals;
-import com.nlbhub.instead.standalone.MainMenu;
+import com.nlbhub.instead.simple.ContentFileData;
+import com.nlbhub.instead.simple.Globals;
+import com.nlbhub.instead.simple.MainMenu;
 import com.nlbhub.instead.SDLActivity;
 
 import java.io.*;

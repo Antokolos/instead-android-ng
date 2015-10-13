@@ -1,4 +1,4 @@
-package com.nlbhub.instead;
+package com.nlbhub.instead.standalone;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,7 +11,7 @@ public class SettingsFactory {
     public static Settings create(Context context) {
         Settings result = null;
         try {
-            result = (Settings) Class.forName("com.nlbhub.instead.standalone.LastGame").newInstance();
+            result = (Settings) Class.forName("com.nlbhub.instead.simple.LastGame").newInstance();
         } catch (ClassNotFoundException e) {
             Log.i(InsteadApplication.ApplicationName, SETTINGS_FACTORY_ERROR, e);
         } catch (InstantiationException e) {

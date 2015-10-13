@@ -1,11 +1,11 @@
-package com.nlbhub.instead.standalone;
+package com.nlbhub.instead.simple;
 
 import android.app.ProgressDialog;
 import android.os.Build;
 import android.util.Log;
-import com.nlbhub.instead.InsteadApplication;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.StorageResolver;
+import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.standalone.fs.PathResolver;
 import com.nlbhub.instead.standalone.fs.SDPathResolver;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;

@@ -1,8 +1,8 @@
 package com.nlbhub.instead.universal;
 
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.StorageResolver;
-import com.nlbhub.instead.standalone.Globals;
+import com.nlbhub.instead.standalone.StorageResolver;
+import com.nlbhub.instead.simple.Globals;
 import org.apache.http.client.methods.*;
 import org.apache.http.*;
 import org.apache.http.impl.client.*;

@@ -1,4 +1,4 @@
-package com.nlbhub.instead;
+package com.nlbhub.instead.standalone;
 
 import android.content.Context;
 import android.os.Build;

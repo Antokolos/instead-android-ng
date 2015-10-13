@@ -1,19 +1,19 @@
-package com.nlbhub.instead.standalone;
+package com.nlbhub.instead.simple;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
-import com.nlbhub.instead.InsteadApplication;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.StorageResolver;
+import com.nlbhub.instead.standalone.StorageResolver;
 
 import java.io.*;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.nlbhub.instead.StorageResolver.*;
+import static com.nlbhub.instead.standalone.StorageResolver.*;
 
 public class Globals {
 
@@ -105,7 +105,7 @@ public class Globals {
 	};
 
     public static String getOutFilePath(final String subDir, final String filename) {
-        return getStorage() + InsteadApplication.ApplicationName + "/" + subDir + "/" + filename;
+        return StorageResolver.getOutFilePath(subDir, filename);
     };
 
 	public static String getOutGamePath(final String filename) {

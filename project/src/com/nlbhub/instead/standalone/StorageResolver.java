@@ -1,4 +1,4 @@
-package com.nlbhub.instead;
+package com.nlbhub.instead.standalone;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -65,6 +65,10 @@ public class StorageResolver {
 
     public static String getOutFilePath(final String filename) {
         return getStorage() + InsteadApplication.ApplicationName + "/" + filename;
+    };
+
+    public static String getOutFilePath(final String subDir, final String filename) {
+        return getStorage() + InsteadApplication.ApplicationName + "/" + subDir + "/" + filename;
     };
 
     public static boolean isWorking(String f){

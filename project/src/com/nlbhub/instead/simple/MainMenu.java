@@ -1,4 +1,4 @@
-package com.nlbhub.instead.standalone;
+package com.nlbhub.instead.simple;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -16,10 +16,10 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.SimpleAdapter.ViewBinder;
-import com.nlbhub.instead.InsteadApplication;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.SDLActivity;
-import com.nlbhub.instead.StorageResolver;
+import com.nlbhub.instead.standalone.StorageResolver;
 
 import java.io.*;
 import java.util.*;
