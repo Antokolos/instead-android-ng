@@ -1,4 +1,4 @@
-package com.nlbhub.instead.nlb;
+package com.nlbhub.instead.universal.nlb;
 
 import android.app.ProgressDialog;
 import com.nlbhub.instead.simple.Globals;

@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.standalone.StorageResolver;
-import com.nlbhub.instead.nlb.NLBGameManager;
+import com.nlbhub.instead.universal.nlb.NLBGameManager;
 import com.nlbhub.instead.simple.ContentFileData;
 import com.nlbhub.instead.simple.Globals;
 import com.nlbhub.instead.simple.MainMenu;

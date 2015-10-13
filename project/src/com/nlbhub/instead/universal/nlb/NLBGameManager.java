@@ -1,4 +1,4 @@
-package com.nlbhub.instead.nlb;
+package com.nlbhub.instead.universal.nlb;
 
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.simple.Globals;
