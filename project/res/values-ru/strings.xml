@@ -103,13 +103,12 @@
     <string name="folderop">Игры доступные к запуску</string>
     <string name="instzipwarn">Если вы не уверены что в zip-архиве находится игра для Instead - нажмите "НЕТ"!</string>
     <string name="instzip">Установить игру с zip-архива?</string>
-    <string name="cpidfwarn">Это даст возможность запускать игру непосредственно с Instead-NG.</string>
-    <string name="launch">Запустить</string>
+    <string name="cpidfwarn">Вы должны скопировать эту игру в папку Instead-NG.</string>
     <string name="sand">Копировать</string>
     <string name="add_widget">Игра Instead (виджет)</string>
     <string name="chgame">Выберите игру</string>
     <string name="need_rangers">Для установки данной игры требуется установить "Космические рейнджеры"!</string>
-    <string name="rangers_inst">Игра установлена. Для запустите "Космические рейнджеры" и начните новую игру.</string>
+    <string name="rangers_inst">Игра установлена. Для запуска запустите "Космические рейнджеры" и начните новую игру.</string>
     <string name="addtodesc">Создать ярлык на рабочем столе</string>
     <string name="favorits">Любимые игры</string>
     <string name="delfromfav">Удалить из списка любимых</string>

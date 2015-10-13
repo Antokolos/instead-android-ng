@@ -8,10 +8,7 @@ import com.nlbhub.instead.InsteadApplication;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.StorageResolver;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,9 +53,9 @@ public class Globals {
 
 	//VARS
     public static boolean FlagSync = false;	
-	public static String idf = null;
-	public static String zip = null;
-	public static String qm = null;
+	public static ContentFileData idf = null;
+	public static ContentFileData zip = null;
+	public static ContentFileData qm = null;
 
 //	public static String game = null;
 //	public static String title = null;
@@ -67,6 +64,27 @@ public class Globals {
 		public static final String RU = "ru";
 		public static final String EN = "en";
 		public static final String ALL = "";
+	}
+
+	public static void closeIdf() {
+		if (idf != null) {
+			idf.close();
+			idf = null;
+		}
+	}
+
+	public static void closeZip() {
+		if (zip != null) {
+			zip.close();
+			zip = null;
+		}
+	}
+
+	public static void closeQm() {
+		if (qm != null) {
+			qm.close();
+			qm = null;
+		}
 	}
 
 	public static String getStorage(){

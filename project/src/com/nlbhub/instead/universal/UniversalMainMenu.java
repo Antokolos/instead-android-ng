@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.StorageResolver;
 import com.nlbhub.instead.nlb.NLBGameManager;
+import com.nlbhub.instead.standalone.ContentFileData;
 import com.nlbhub.instead.standalone.Globals;
 import com.nlbhub.instead.standalone.MainMenu;
 import com.nlbhub.instead.SDLActivity;
@@ -41,13 +42,13 @@ public class UniversalMainMenu extends MainMenu {
     }
 
     private void QmInstall() {
-        String g = Globals.matchUrl(Globals.qm, ".*\\/(.*\\.qm)");
+        String g = Globals.qm.getFilename();
         String rangpath = Globals.getOutFilePath(StorageResolver.GameDir + "rangers/");
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(rangpath);
         stringBuilder.append("games/");
         stringBuilder.append(g);
-        String out = 	stringBuilder.toString();
+        String out = stringBuilder.toString();
         if(!(new File(rangpath+StorageResolver.MainLua)).exists()){
             Toast.makeText(this, getString(R.string.need_rangers), Toast.LENGTH_LONG).show();
             return;
@@ -58,7 +59,7 @@ public class UniversalMainMenu extends MainMenu {
             Toast.makeText(this, "Copy error!", Toast.LENGTH_LONG).show();
             return;
         }
-        Globals.qm=null;
+        Globals.closeQm();
         Toast.makeText(this, getString(R.string.rangers_inst), Toast.LENGTH_LONG).show();
     }
 
@@ -72,7 +73,7 @@ public class UniversalMainMenu extends MainMenu {
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
-                        Globals.zip=null;
+                        Globals.closeZip();
                         break;
 
                 }
@@ -152,22 +153,6 @@ public class UniversalMainMenu extends MainMenu {
         doCommands();
     }
 
-    private void startAppIdf() {
-        if(Globals.idf!=null){
-            if (checkInstall()) {
-                Intent myIntent = new Intent(this, SDLActivity.class);
-                Bundle b = new Bundle();
-                b.putString("idf", Globals.idf);
-                Globals.idf = null;
-                myIntent.putExtras(b);
-                startActivity(myIntent);
-
-            } else {
-                checkRC();
-            }
-        }
-    }
-
     private void startApp(String g) {
         if (checkInstall()) {
             Intent myIntent = new Intent(this, SDLActivity.class);
@@ -208,50 +193,27 @@ public class UniversalMainMenu extends MainMenu {
     }
 
     private void IdfCopy(){
-
-
-  /*
-	  if((new File(out)).isFile()){
-		   startAppIdf();
-		  return;
-	  }
-	*/
-
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_NEGATIVE:
-                        Globals.idf=null;
+                        Globals.closeIdf();
                         break;
                     case DialogInterface.BUTTON_POSITIVE:
                         doCopy();
                         break;
-                    case DialogInterface.BUTTON_NEUTRAL:
-                        startAppIdf();
-                        break;
-
                 }
             }
         };
 
-        DialogInterface.OnCancelListener dialogCancelListener = new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                startAppIdf();
-            }
-        };
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setIcon(R.drawable.warning);
         builder.setTitle(getString(R.string.cpidf));
         builder.setMessage(getString(R.string.cpidfwarn))
                 .setPositiveButton(R.string.sand, dialogClickListener)
-                .setNeutralButton(R.string.launch, dialogClickListener)
                 .setNegativeButton(R.string.cancel, dialogClickListener)
-                .setOnCancelListener(dialogCancelListener)
                 .show();
-
-
     }
 
     private void doCopy() {
@@ -259,7 +221,7 @@ public class UniversalMainMenu extends MainMenu {
         final Runnable d = new Runnable() {
             @Override
             public void run(){
-                String g = Globals.matchUrl(Globals.idf, ".*\\/(.*\\.idf)");
+                String g = Globals.idf.getFilename();
                 String	out  = Globals.getOutFilePath(StorageResolver.GameDir + g);
                 try {
                     copyFile(Globals.idf, out);
@@ -280,12 +242,11 @@ public class UniversalMainMenu extends MainMenu {
         t.start();
     }
 
-    private void copyFile(String fa, String fb) throws Exception{
+    private void copyFile(ContentFileData fa, String fb) throws Exception{
 
-        File f1 = new File(fa);
         File f2 = new File(fb);
 
-        InputStream in = new FileInputStream(f1);
+        InputStream in = fa.getInputStream();
         OutputStream out = new FileOutputStream(f2);
 
         byte[] buf = new byte[1024];
@@ -293,7 +254,7 @@ public class UniversalMainMenu extends MainMenu {
         while ((len = in.read(buf)) > 0){
             out.write(buf, 0, len);
         }
-        in.close();
+        // in.close(); -- will be closed later
         out.close();
         if (dialog.isShowing()) {
             dialog.dismiss();

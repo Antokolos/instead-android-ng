@@ -439,7 +439,7 @@ public class MainMenu extends ListActivity implements ViewBinder {
             dialog.dismiss();
         }
         dwn = false;
-        Globals.zip = null;
+        Globals.closeZip();
         Globals.FlagSync = true;
         lastGame.setFlagSync(true);
     }

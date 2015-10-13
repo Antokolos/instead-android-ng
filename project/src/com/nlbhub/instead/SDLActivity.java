@@ -194,7 +194,6 @@ public class SDLActivity extends SDLActivityBase {
 		//if(first_run){
 		first_run=false;
 
-
 		//Log.d("Game", intent.getStringExtra("game"));
 		//if(idf!=null) Log.d("idf", idf);
 		//if(game!=null){Log.v("SDL", "Start game: "+game); }else{Log.v("SDL", "Start default game");};

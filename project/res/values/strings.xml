@@ -109,13 +109,12 @@
     <string name="folderop">Games available for launch</string>
     <string name="instzipwarn">If you are not sure that the zip file contains the Instead game - click "NO"!</string>
     <string name="instzip">Install game from zip?</string>
-    <string name="cpidfwarn">This will provide an opportunity to run the game directly with Instead-NG.</string>
-    <string name="launch">Launch</string>
+    <string name="cpidfwarn">You should copy this game to Instead-NG folder.</string>
     <string name="sand">Copy</string>
     <string name="add_widget">Instead game (widget)</string>
     <string name="chgame">Choose the game</string>
     <string name="need_rangers">To install the game you want to install "Space Rangers"!</string>
-    <string name="rangers_inst">Game is installed. To run the "Space Rangers" and start a new game.</string>
+    <string name="rangers_inst">Game is installed. In order to run it, run the "Space Rangers" and start a new game.</string>
     <string name="addtodesc">Create shortcut on desktop</string>
     <string name="favorits">Favorite games</string>
     <string name="delfromfav">Remove from favorites</string>

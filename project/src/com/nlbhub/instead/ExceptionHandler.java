@@ -12,8 +12,7 @@ import java.util.Date;
  * In my case it is SDLActivity
  * Created by Antokolos on 30.08.15.
  */
-public class ExceptionHandler implements
-        java.lang.Thread.UncaughtExceptionHandler {
+public class ExceptionHandler implements java.lang.Thread.UncaughtExceptionHandler {
     private final Context myContext;
     private final String LINE_SEPARATOR = "\n";
     Thread.UncaughtExceptionHandler defaultUEH;
@@ -43,7 +42,6 @@ public class ExceptionHandler implements
         errorReport.append(Build.MODEL);
         errorReport.append(LINE_SEPARATOR);
 
-        File root = android.os.Environment.getExternalStorageDirectory();
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(
                 new Date());
 

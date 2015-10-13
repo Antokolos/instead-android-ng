@@ -47,11 +47,9 @@ class ZipGame extends Thread {
 	@Override
 	public void run() {
 		String path = null;
-		InputStream in = null;
+		InputStream in = Globals.zip.getInputStream();
 		
-		try {
-			in = new FileInputStream(new File(Globals.zip));
-		} catch (FileNotFoundException e1) {
+		if (in == null) {
 			if (!Parent.isOnpause())
 				Status.setMessage(Parent.getString(R.string.dataerror));
 			Parent.onError(Parent.getString(R.string.dataerror));
@@ -64,7 +62,6 @@ class ZipGame extends Thread {
 		ZipEntry entry = null;
 
 		while (true) {
-			entry = null;
 			try {
 				entry = zip.getNextEntry();
 			} catch (java.io.IOException e) {
@@ -79,8 +76,7 @@ class ZipGame extends Thread {
 				try {
 					(new File(Globals.getOutGamePath(entry.getName()))).mkdirs();
 				} catch (SecurityException e) {
-				}
-				;
+				};
 				continue;
 			}
 
@@ -91,8 +87,7 @@ class ZipGame extends Thread {
 				out = new FileOutputStream(path);
 			} catch (FileNotFoundException e) {
 			} catch (SecurityException e) {
-			}
-			;
+			};
 			if (out == null) {
 				if (!Parent.isOnpause())
 					Status.setMessage(Parent.getString(R.string.writefileerorr)
@@ -106,6 +101,7 @@ class ZipGame extends Thread {
 				Status.setMessage(Parent.getString(R.string.instdata) + " "
 						+ path);
 			} catch (NullPointerException e) {
+				// TODO: I don't understand the point of this code :) Should rewrite later...
 			}
 
 			try {

@@ -1,8 +1,13 @@
 package com.nlbhub.instead.universal;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
+import com.nlbhub.instead.standalone.ContentFileData;
 import com.nlbhub.instead.standalone.Globals;
 
 public class IntentLauncher extends Activity {
@@ -10,23 +15,23 @@ public class IntentLauncher extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(getIntent().getAction().equals(Intent.ACTION_VIEW)){
-			String u = getIntent().getData().getEncodedPath();
+		if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+			ContentFileData contentFileData = new ContentFileData(getContentResolver(), getIntent().getData());
 			boolean run = false;
-			Globals.idf = null;
-			Globals.zip = null;
-			Globals.qm = null;
-			if(u.endsWith(".idf")){
+			Globals.closeIdf();
+			Globals.closeZip();
+			Globals.closeQm();
+			if(contentFileData.isIdf()){
 				run = true;
-				Globals.idf = u;
-			} else if(u.endsWith(".zip")){
+				Globals.idf = contentFileData.open();
+			} else if(contentFileData.isZip()){
 				run = true;
-				Globals.zip = u;
-			}  else if(u.endsWith(".qm")){
+				Globals.zip = contentFileData.open();
+			}  else if(contentFileData.isQm()){
 				run = true;
-				Globals.qm = u;
+				Globals.qm = contentFileData.open();
 			}  
-			if(run){
+			if (run) {
 				// com.nlbhub.instead.standalone.MainMenu for standalone app without favourites, library etc
 				// com.nlbhub.instead.universal.UniversalMainMenu for universal app
 				Intent myIntent = new Intent(this, UniversalMainMenu.class);
@@ -34,7 +39,5 @@ public class IntentLauncher extends Activity {
 			}		
 		}
         finish();
-		
-		
 	}
 }
