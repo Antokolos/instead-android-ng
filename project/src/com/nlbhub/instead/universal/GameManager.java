@@ -34,6 +34,7 @@ import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.nlbhub.instead.simple.FilterConstants;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.standalone.StorageResolver;
@@ -48,7 +49,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 	private int menu_mode = MENU_LIST;
 	private int item_index = -1;
 	private String g;
-	private int filter = GameList.ALL;
+	private int filter = FilterConstants.ALL;
 	private GameList gl;
 	private List<Integer> index;
 	private ProgressDialog dialog;
@@ -228,8 +229,8 @@ public class GameManager extends ListActivity implements ViewBinder {
 	
 	
 	private void openGame(){
-		if (gl.getFlag(index.get(item_index)) == GameList.INSTALLED ||
-				gl.getFlag(index.get(item_index)) == GameList.UPDATE	) {
+		if (gl.getFlag(index.get(item_index)) == FilterConstants.INSTALLED ||
+				gl.getFlag(index.get(item_index)) == FilterConstants.UPDATE	) {
 			startApp();
 			} else {
 			gameDownload();
@@ -338,7 +339,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 			if(menu_mode==MENU_LIST){
 			menu.setHeaderTitle(g);
 
-			if (gl.getFlag(index.get(item_index)) == GameList.INSTALLED) {
+			if (gl.getFlag(index.get(item_index)) == FilterConstants.INSTALLED) {
 				menu.add(0, v.getId(), 0, getString(R.string.menustart));
 				if ((new File(Globals.getAutoSavePath(gl.getInf(GameList.NAME,
 					index.get(item_index))))).exists()) {
@@ -356,11 +357,11 @@ public class GameManager extends ListActivity implements ViewBinder {
 				
 			}
 
-			if (gl.getFlag(index.get(item_index)) == GameList.NEW) {
+			if (gl.getFlag(index.get(item_index)) == FilterConstants.NEW) {
 				menu.add(0, v.getId(), 0, getString(R.string.menudown));
 			}
 
-			if (gl.getFlag(index.get(item_index)) == GameList.UPDATE) {
+			if (gl.getFlag(index.get(item_index)) == FilterConstants.UPDATE) {
 				menu.add(0, v.getId(), 0, getString(R.string.menustart));
 				if ((new File(Globals.getAutoSavePath(gl.getInf(GameList.NAME,
 						index.get(item_index))))).exists()) {
@@ -417,25 +418,25 @@ public class GameManager extends ListActivity implements ViewBinder {
 		{
 			//FILTER Menu
 			 if (item.getTitle() == getString(R.string.installed)) {
-				filter = GameList.INSTALLED;
+				filter = FilterConstants.INSTALLED;
 				lastGame.setFiltr(filter);
 				list_fresh = true;
 				setFiltrImg();
 				listUpdate();
 			} else if (item.getTitle() == getString(R.string.isnew)) {
-				filter = GameList.NEW;
+				filter = FilterConstants.NEW;
 				lastGame.setFiltr(filter);
 				list_fresh = true;
 				setFiltrImg();
 				listUpdate();
 			} else if (item.getTitle() == getString(R.string.isupd)) {
-				filter = GameList.UPDATE;
+				filter = FilterConstants.UPDATE;
 				lastGame.setFiltr(filter);
 				list_fresh = true;
 				setFiltrImg();
 				listUpdate();
 			} else if (item.getTitle() == getString(R.string.all)) {
-				filter = GameList.ALL;
+				filter = FilterConstants.ALL;
 				lastGame.setFiltr(filter);
 				list_fresh = true;
 				setFiltrImg();
@@ -447,10 +448,10 @@ public class GameManager extends ListActivity implements ViewBinder {
 	
 	private void setFiltrImg(){
 		switch (filter){
-		case GameList.INSTALLED: img_filtr.setImageResource(R.drawable.installed); break;
-		case GameList.ALL: img_filtr.setImageResource(R.drawable.all); break;
-		case GameList.NEW: img_filtr.setImageResource(R.drawable.newinstall); break;
-		case GameList.UPDATE: img_filtr.setImageResource(R.drawable.update); break;
+		case FilterConstants.INSTALLED: img_filtr.setImageResource(R.drawable.installed); break;
+		case FilterConstants.ALL: img_filtr.setImageResource(R.drawable.all); break;
+		case FilterConstants.NEW: img_filtr.setImageResource(R.drawable.newinstall); break;
+		case FilterConstants.UPDATE: img_filtr.setImageResource(R.drawable.update); break;
 		default: img_filtr.setImageResource(R.drawable.all);
 		}
 		
@@ -503,16 +504,16 @@ public class GameManager extends ListActivity implements ViewBinder {
 
 
 		switch (gl.getFlag(i)) {
-		case GameList.NEW:
+		case FilterConstants.NEW:
 			return R.drawable.newinstall;
 
-		case GameList.INSTALLED:
+		case FilterConstants.INSTALLED:
 			if (gl.getInf(GameList.NAME, i).equals(lastGame.getName())) {
 				return R.drawable.lastgame;
 			}
 			return R.drawable.installed;
 
-		case GameList.UPDATE:
+		case FilterConstants.UPDATE:
 			return R.drawable.update;
 
 		default:
@@ -523,13 +524,13 @@ public class GameManager extends ListActivity implements ViewBinder {
 	private String getFlagStringId(int i) {
 		String s = "";
 		switch (gl.getFlag(i)) {
-		case GameList.NEW:
+		case FilterConstants.NEW:
 			s = getString(R.string.ag_new);
 			break;
-		case GameList.INSTALLED:
+		case FilterConstants.INSTALLED:
 			s = getString(R.string.ag_installed);
 			break;
-		case GameList.UPDATE:
+		case FilterConstants.UPDATE:
 			s = getString(R.string.ag_update);
 			break;
 		default:
@@ -590,7 +591,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 
 			if (lang_filter.equals(gl.getInf(GameList.LANG, i))
 					|| lang_filter.equals("")) {
-				if (filter == GameList.ALL) {
+				if (filter == FilterConstants.ALL) {
 
 					listData.add(addListItem(
 							getHtmlTagForName(gl.getInf(GameList.TITLE, i))
@@ -599,8 +600,8 @@ public class GameManager extends ListActivity implements ViewBinder {
 					index.add(j, i);
 					j++;
 				}
-				if (filter == GameList.INSTALLED) {
-					if (gl.getFlag(i) == GameList.INSTALLED) {
+				if (filter == FilterConstants.INSTALLED) {
+					if (gl.getFlag(i) == FilterConstants.INSTALLED) {
 						listData.add(addListItem(
 								getHtmlTagForName(gl.getInf(GameList.TITLE, i))
 										+ getFlagStringId(i), getFlagId(i)));
@@ -610,8 +611,8 @@ public class GameManager extends ListActivity implements ViewBinder {
 					}
 				}
 
-				if (filter == GameList.UPDATE) {
-					if (gl.getFlag(i) == GameList.UPDATE) {
+				if (filter == FilterConstants.UPDATE) {
+					if (gl.getFlag(i) == FilterConstants.UPDATE) {
 						listData.add(addListItem(
 								getHtmlTagForName(gl.getInf(GameList.TITLE, i))
 										+ getFlagStringId(i), getFlagId(i)));
@@ -621,8 +622,8 @@ public class GameManager extends ListActivity implements ViewBinder {
 					}
 				}
 
-				if (filter == GameList.NEW) {
-					if (gl.getFlag(i) == GameList.NEW) {
+				if (filter == FilterConstants.NEW) {
+					if (gl.getFlag(i) == FilterConstants.NEW) {
 						listData.add(addListItem(
 								getHtmlTagForName(gl.getInf(GameList.TITLE, i))
 										+ getFlagStringId(i), getFlagId(i)));
@@ -890,9 +891,9 @@ public class GameManager extends ListActivity implements ViewBinder {
 		b.putString("url", gl.getInf(GameList.DESCURL, index.get(item_index)));
 		b.putString("size", gl.getInf(GameList.SIZE, index.get(item_index)));
 		b.putInt("flag", gl.getFlag(index.get(item_index)));
-		b.putInt("INSTALLED", GameList.INSTALLED);
-		b.putInt("UPDATE", GameList.UPDATE);
-		b.putInt("NEW", GameList.NEW);
+		b.putInt("INSTALLED", FilterConstants.INSTALLED);
+		b.putInt("UPDATE", FilterConstants.UPDATE);
+		b.putInt("NEW", FilterConstants.NEW);
 		myIntent.putExtras(b);
 		startActivity(myIntent);
 

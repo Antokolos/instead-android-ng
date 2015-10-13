@@ -5,8 +5,6 @@ import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.standalone.Settings;
 import com.nlbhub.instead.standalone.StorageResolver;
-import com.nlbhub.instead.universal.GameList;
-
 
 public class LastGame extends Settings {
 	private String title;
@@ -33,7 +31,7 @@ public class LastGame extends Settings {
 		super.init(p);
 		pr = new MyPrefs(p, InsteadApplication.ApplicationName);
 		title_def =  p.getString(R.string.bundledgame);
- 		filtr = pr.get("filtr", GameList.ALL);
+ 		filtr = pr.get("filtr", FilterConstants.ALL);
  		list = pr.get("list", Globals.BASIC);		
  		lang = pr.get("lang", Globals.Lang.ALL);
  		name = pr.get("name", StorageResolver.BundledGame);
@@ -59,7 +57,7 @@ public class LastGame extends Settings {
 	public void clearAll(){
         super.clearAll();
 		flagsync = true;
-		filtr = GameList.ALL;
+		filtr = FilterConstants.ALL;
  		list =  Globals.BASIC;		
  		lang = Globals.Lang.ALL;
  		name = StorageResolver.BundledGame;

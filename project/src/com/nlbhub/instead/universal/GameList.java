@@ -28,13 +28,11 @@ import org.xml.sax.SAXException;
 
 import android.util.Log;
 
+import static com.nlbhub.instead.simple.FilterConstants.*;
+
 public class GameList {
 	private final String LIST_PREFS = InsteadApplication.ApplicationName+"-games";
 	private final String LENGTH = "lenght";
-	public static final int INSTALLED = 0;
-	public static final int ALL = 1;
-	public static final int UPDATE = 2;
-	public static final int NEW = 3;
 
 	public static final int FLAG = 0;
 	public static final int NAME = 1;
