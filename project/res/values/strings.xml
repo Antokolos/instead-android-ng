@@ -13,7 +13,7 @@
     <string name="conerror">Connection error</string>
     <string name="connect">Connecting</string>
     <string name="ready">Ready</string>
-    <string name="init">Initialising</string>
+    <string name="init">Initializing</string>
     <string name="update">Update game list</string>
     <string name="menudel">Remove game</string>
     <string name="menudown">Download game</string>

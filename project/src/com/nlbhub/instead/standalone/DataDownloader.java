@@ -1,11 +1,11 @@
-package com.nlbhub.instead.simple;
+package com.nlbhub.instead.standalone;
 
 import android.app.ProgressDialog;
 import android.os.Build;
 import android.util.Log;
-import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.standalone.StorageResolver;
+import com.nlbhub.instead.simple.Globals;
+import com.nlbhub.instead.simple.MainMenu;
 import com.nlbhub.instead.standalone.fs.PathResolver;
 import com.nlbhub.instead.standalone.fs.SDPathResolver;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;
@@ -64,7 +64,7 @@ public class DataDownloader extends Thread {
 			try {
 				entry = zip.getNextEntry();
 			} catch (java.io.IOException e) {
-				if (!Parent.onpause)
+				if (!Parent.isOnpause())
 					Status.setMessage(Parent.getString(R.string.dataerror));
 				Parent.onError(Parent.getString(R.string.dataerror));
 				return;
@@ -90,7 +90,7 @@ public class DataDownloader extends Thread {
 			}
 			;
 			if (out == null) {
-				if (!Parent.onpause)
+				if (!Parent.isOnpause())
 					Status.setMessage(Parent.getString(R.string.writefileerorr)
 							+ " " + path);
 				Parent.onError(Parent.getString(R.string.writefileerorr) + " "
@@ -111,7 +111,7 @@ public class DataDownloader extends Thread {
 				}
 				out.flush();
 			} catch (java.io.IOException e) {
-				if (!Parent.onpause)
+				if (!Parent.isOnpause())
 					Status.setMessage(Parent.getString(R.string.writefile)
 							+ " " + path);
 				Parent.onError(Parent.getString(R.string.writefile) + " "
@@ -189,12 +189,12 @@ public class DataDownloader extends Thread {
 			return;
 		}
 
-		if (!Parent.onpause)
+		if (!Parent.isOnpause())
 			Status.setMessage(Parent.getString(R.string.finish));
 		DownloadComplete = true;
 
 		Parent.setDownGood();
-		if (!Parent.onpause)
+		if (!Parent.isOnpause())
 			initParent();
 	};
 

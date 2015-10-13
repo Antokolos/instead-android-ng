@@ -6,17 +6,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.media.AudioManager;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.PowerManager;
+import android.os.*;
 import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
+import com.google.android.vending.expansion.downloader.*;
 import com.nlbhub.instead.standalone.*;
+import com.nlbhub.instead.standalone.expansion.APKHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +24,7 @@ import java.io.IOException;
 /**
  * SDL Activity
  */
-public class SDLActivity extends SDLActivityBase {
+public class SDLActivity extends SDLActivityBase implements IDownloaderClient {
 	final static int WAIT = 100;
 	final static int KOLL = 10;
 	private boolean first_run = true;
@@ -41,6 +41,9 @@ public class SDLActivity extends SDLActivityBase {
 	private static KeyboardAdapter keyboardAdapter;
 	private static AudioManager audioManager;
 	private static Context Ctx;
+
+	private IStub mDownloaderClientStub;
+	private IDownloaderService mRemoteService;
 
 	// Load the .so
 	/*
@@ -70,7 +73,16 @@ public class SDLActivity extends SDLActivityBase {
 		}
 	}
 
+	private void initDownloaderClientStub(Context context) {
+		try {
+			mDownloaderClientStub = new APKHelper(context).createDownloaderStubIfNeeded(this);
+		} catch (PackageManager.NameNotFoundException e) {
+			Log.e(InsteadApplication.ApplicationName, "Error creating downloader stub", e);
+		}
+	}
+
 	private synchronized void initExpansionManager(Context context) {
+		// initDownloaderClientStub(context);
 		if (StorageResolver.expansionMounterMain == null) {
 			if (StorageResolver.storageManager == null) {
 				StorageResolver.storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
@@ -223,7 +235,24 @@ public class SDLActivity extends SDLActivityBase {
 		super.onRestoreInstanceState(savedInstanceState);
 		first_run = savedInstanceState.getBoolean("first_run");
 	}
-	
+
+	@Override
+	public void onServiceConnected(Messenger m) {
+		mRemoteService = DownloaderServiceMarshaller.CreateProxy(m);
+		mRemoteService.onClientUpdated(mDownloaderClientStub.getMessenger());
+		mRemoteService.setDownloadFlags(IDownloaderService.FLAGS_DOWNLOAD_OVER_CELLULAR);
+	}
+
+	@Override
+	public void onDownloadStateChanged(int newState) {
+
+	}
+
+	@Override
+	public void onDownloadProgress(DownloadProgressInfo progress) {
+
+	}
+
 	public class ScreenReceiver extends	BroadcastReceiver {
 		
 	@Override
@@ -269,12 +298,23 @@ public class SDLActivity extends SDLActivityBase {
 
 	@Override
 	protected void onResume() {
+		if (null != mDownloaderClientStub) {
+			mDownloaderClientStub.connect(this);
+		}
 		super.onResume();
 		if(settings.getScreenOff())wakeLock.acquire();
 		 Log.v("SDL", "onResume()");
 		// if(!first_run) mSurface.resume();
 	}
-	
+
+	@Override
+	protected void onStop() {
+		if (null != mDownloaderClientStub) {
+			mDownloaderClientStub.disconnect(this);
+		}
+		super.onStop();
+	}
+
 	public static void refreshOff(){
 		i_s=0;
 	}

@@ -11,6 +11,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <service android:name=".standalone.expansion.InsteadDownloaderService" />
+        <receiver android:name=".standalone.expansion.InsteadAlarmReceiver" />
         <activity android:name=".SDLActivity" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
         <activity android:name=".universal.GameManager" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
         <activity android:name=".universal.nlb.NLBGameManager" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
@@ -82,7 +84,21 @@
         <activity android:name=".universal.GameDirs" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
     </application>
     <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="15"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- Required to access Google Play Licensing (used for APK expansion files AKA obb) -->
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+
+    <!-- Required to poll the state of the network connection and respond to changes (required for obb) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Required to check whether Wi-Fi is enabled (required for obb) -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <!-- Required to download files from Google Play and INSTEAD repositories -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Required to keep CPU alive while downloading files (AND to keep screen awake in-game) -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Required to read and write the files on shared storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>

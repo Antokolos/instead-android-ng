@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.SimpleAdapter.ViewBinder;
+import com.nlbhub.instead.standalone.DataDownloader;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.SDLActivity;

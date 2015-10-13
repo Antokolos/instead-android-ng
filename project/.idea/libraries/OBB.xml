@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="OBB">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../../lns/android-sdk-macosx/extras/google/play_apk_expansion/downloader_library/src" />
+      <root url="file://$PROJECT_DIR$/../../../../lns/android-sdk-macosx/extras/google/play_licensing/library/src" />
+    </SOURCES>
+  </library>
+</component>
