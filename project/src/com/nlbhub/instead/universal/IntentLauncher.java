@@ -15,7 +15,10 @@ public class IntentLauncher extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+		Intent intent = getIntent();
+		String action = intent.getAction();
+		String type = intent.getType();
+		if (type != null && (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_SEND.equals(action))) {
 			ContentFileData contentFileData = new ContentFileData(getContentResolver(), getIntent().getData());
 			boolean run = false;
 			Globals.closeIdf();

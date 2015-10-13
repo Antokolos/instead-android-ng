@@ -20,7 +20,6 @@ import java.io.InputStream;
 public class ContentFileData {
     private InputStream inputStream = null;
     private String filename = "";
-    private Long filesize = 0L;
     private ContentResolver contentResolver;
     private Uri uri;
 
@@ -40,7 +39,9 @@ public class ContentFileData {
             );
             if (cursor != null && cursor.moveToFirst()) {
                 filename = cursor.getString(0);
-                filesize = cursor.getLong(1);
+                //filesize = cursor.getLong(1);
+            } else {
+                filename = uri.getLastPathSegment();
             }
         } finally {
             if (cursor != null)
