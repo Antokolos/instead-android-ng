@@ -11,10 +11,10 @@
 **/.idea/sqlDataSources.xml
 **/.idea/dynamic.xml
 
-## File-based project format
-*.ipr
-*.iws
-*.iml
+## File-based project format -- let's not exclude these, modules are useful
+#*.ipr
+#*.iws
+#*.iml
 
 ## Additional for IntelliJ
 **/out/
@@ -31,6 +31,6 @@
 # and now, project-specific items
 **/bin/
 **/gen/
-**/libs/
+#**/libs/ -- zero-size anyway, let's leave it
 **/obj/
 modules/instead_standalone/jni/src/instead/
