@@ -4,10 +4,6 @@
     <string name="run">Начать игру</string>
     <string name="gmlist">Репозиторий игр</string>
     <string name="exit">Выйти</string>
-    <string name="writefile">Запись файла</string>
-    <string name="writefileerorr">Ошибка записи файла </string>
-    <string name="finish">Загрузка окончена</string>
-    <string name="dataerror">Ошибка загрузки файла данных </string>
     <string name="downdata">Загрузка файла</string>
     <string name="conerror">Ошибка соединения</string>
     <string name="connect">Соединяемся</string>
@@ -73,7 +69,6 @@
     <string name="about_instead">Written by Peter Kosyh \'2009-2011\n\nPorted to Android by Aleksey Mahno \'2010-2011\n\nFurther Android port development by Anton P. Kolosov \'2015\n\nHomepage:\nhttp://instead.syscall.ru</string>
     <string name="ok">Ок</string>
     <string name="about_btn">О Instead-NG</string>
-    <string name="instdata">Установка</string>
     <string name="conferror">Не правельно определено разрешение экрана! Попробуйте пересоздать настройки!</string>
     <string name="ourtheme">Свои темы в играх</string>
     <string name="menunewstart">Начать новую игру</string>
@@ -122,10 +117,6 @@
     <string name="clearfav">Очистить список любимых</string>
     <string name="virtkey">Виртуальная клавиатура</string>
     <string name="virtkey_t">Для показа клавиатуры в играх нажать в любом месте экрана, подержать больше 1 секунды и отпустить</string>
-    <string name="in_text">Введите текст:</string>
-    <string name="clear">Стереть</string>
-    <string name="enter">Ввод</string>
-    <string name="close">Скрыть</string>
     <string name="volume">Громкость:</string>
     <string name="override_vol">VolUp/VolDown как Up/Down</string>
     <string name="add_cut">Игра Instead (ярлык)</string>

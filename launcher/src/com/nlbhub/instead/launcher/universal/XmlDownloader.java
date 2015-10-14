@@ -177,9 +177,9 @@ public class XmlDownloader extends Thread {
 		} catch (FileNotFoundException e) {
 		} catch (SecurityException e) {
 		} catch (java.io.IOException e) {
-			Status.setMessage(Parent.getString(R.string.writefileerorr) + " "
+			Status.setMessage(Parent.getString(com.nlbhub.instead.R.string.writefileerror) + " "
 					+ path);
-			Parent.onError(Parent.getString(R.string.writefileerorr) + " "
+			Parent.onError(Parent.getString(com.nlbhub.instead.R.string.writefileerror) + " "
 					+ path);
 			(new File(Globals.getOutFilePath(Globals.GameListFileName)))
 					.delete();

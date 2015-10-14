@@ -89,9 +89,9 @@ public class DataDownloader extends Thread {
 			;
 			if (out == null) {
 				if (!Parent.isOnpause())
-					Status.setMessage(Parent.getString(R.string.writefileerorr)
+					Status.setMessage(Parent.getString(R.string.writefileerror)
 							+ " " + path);
-				Parent.onError(Parent.getString(R.string.writefileerorr) + " "
+				Parent.onError(Parent.getString(R.string.writefileerror) + " "
 						+ path);
 				return;
 			}

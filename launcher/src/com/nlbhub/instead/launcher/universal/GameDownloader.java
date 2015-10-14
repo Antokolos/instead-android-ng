@@ -203,9 +203,9 @@ class GameDownloader extends Thread {
 
 			if (out == null) {
 				if (!Parent.onpause)
-					Status.setMessage(Parent.getString(R.string.writefileerorr)
+					Status.setMessage(Parent.getString(com.nlbhub.instead.R.string.writefileerror)
 							+ " " + path,op);
-				Parent.onError(Parent.getString(R.string.writefileerorr) + " "
+				Parent.onError(Parent.getString(com.nlbhub.instead.R.string.writefileerror) + " "
 						+ path);
 				return;
 			}
