@@ -9,4 +9,7 @@
     <string name="clear">Clear</string>
     <string name="enter">Enter</string>
     <string name="close">Hide</string>
+    <string name="downloading_assets">Downloading assets…</string>
+    <string name="preparing_assets">Preparing assets…</string>
+    <string name="download_failed">Download failed.</string>
 </resources>

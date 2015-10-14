@@ -14,8 +14,6 @@ import java.io.File;
 public class StorageResolver {
     public static ExpansionMounter expansionMounterMain = null;
     public static StorageManager storageManager = null;
-    public static final String MainObb = "main.101000.com.nlbhub.instead.obb";
-    public static final String PatchObb = "patch.101000.com.nlbhub.instead.obb";
     public static final String GameDir = "appdata/games/";
     public static final String SaveDir = "appdata/saves/";
     public static final String Options = "appdata/insteadrc";

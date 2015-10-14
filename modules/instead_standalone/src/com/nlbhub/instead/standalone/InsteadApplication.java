@@ -12,11 +12,21 @@ import android.content.pm.PackageManager;
  */
 public class InsteadApplication extends Application {
     public static final String ApplicationName = "Instead-NG";
+    private static final String MainObb = "main.110000.com.nlbhub.instead.obb";
+    private static final String PatchObb = "patch.110000.com.nlbhub.instead.obb";
     private static Context context;
 
     public void onCreate(){
         super.onCreate();
         InsteadApplication.context = getApplicationContext();
+    }
+
+    public String getMainObb() {
+        return MainObb;
+    }
+
+    public String getPatchObb() {
+        return PatchObb;
     }
 
     public static Context getAppContext() {
