@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/in_text"
+        android:layout_width="280dip"
+        android:layout_height="wrap_content" android:layout_marginBottom="10dip" android:layout_marginRight="10dip" android:layout_marginLeft="10dip" android:focusable="true" android:layout_gravity="center" android:maxLines="1" android:lines="1">
+
+        <requestFocus />
+    </EditText>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="10dip" android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/in_ok"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enter" android:layout_weight="1" android:layout_marginLeft="2dip"/>
+
+        <Button
+            android:id="@+id/in_cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clear" android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/in_sw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EN-RU" android:textSize="12sp"/>      
+        
+        <Button
+            android:id="@+id/in_close"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/close" android:layout_weight="1" android:layout_marginRight="2dip"/>        
+        
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout android:layout_width="fill_parent"
+	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+	<TableRow android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:layout_gravity="center_horizontal">
+
+		<LinearLayout android:id="@+id/Linear10"
+			android:layout_height="wrap_content" android:orientation="vertical"
+			android:layout_width="wrap_content">
+
+			<RelativeLayout
+			    android:id="@+id/Linear11"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:background="@drawable/header" >
+
+			    <ImageView
+			        android:id="@+id/logo"
+			        android:layout_width="wrap_content"
+			        android:layout_height="40dip"
+			        android:layout_alignParentLeft="true"
+			        android:layout_alignParentTop="true"
+			        android:layout_marginBottom="1dip"
+			        android:layout_marginTop="1dip"
+			        android:adjustViewBounds="true"
+			        android:scaleType="fitCenter"
+			        android:src="@drawable/nlbgames" android:layout_marginLeft="10dip">
+			    </ImageView>
+
+			    <TextView
+			        android:id="@+id/tv"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_centerVertical="true"
+			        android:layout_toLeftOf="@+id/linearLayout1"
+			        android:layout_toRightOf="@+id/logo"
+			        android:gravity="center"
+			        android:shadowColor="#000000"
+			        android:shadowDx="1"
+			        android:shadowDy="1"
+			        android:shadowRadius="2"
+			        android:text="@string/nlbgmlist"
+			        android:textColor="#FFFFFF"
+			        android:textSize="18sp" android:layout_marginLeft="5dip">
+			    </TextView>
+
+			    <LinearLayout
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_alignParentRight="true"
+			        android:layout_centerVertical="true" >
+
+			        <Button
+			            android:id="@+id/btn_filtr"
+			            android:layout_width="32dip"
+			            android:layout_height="32dip"
+			            android:background="@drawable/filter_small" >
+			        </Button>
+
+			        <ImageView
+			            android:id="@+id/img_filtr"
+			            android:layout_width="32dip"
+			            android:layout_height="32dip"
+			            android:src="@drawable/all" />
+
+			        <Button
+			            android:id="@+id/btn_sync"
+			            android:layout_width="48dip"
+			            android:layout_height="32dip"
+			            android:background="@drawable/refresh_small" android:layout_marginRight="10dip">
+			        </Button>
+			    </LinearLayout>
+			</RelativeLayout>
+
+			<LinearLayout android:id="@+id/Linear12"
+				android:layout_height="wrap_content" android:orientation="horizontal"
+				android:gravity="center" android:layout_width="fill_parent">
+
+				<Button android:text="@string/nlbdemo" android:id="@+id/basic_btn"
+					android:layout_height="50dip" android:background="@drawable/tab_c"
+					android:layout_weight="1" 
+					android:layout_width="0dip" android:textSize="17sp"
+					android:shadowDx="1" android:shadowDy="1" android:shadowRadius="1"
+					android:shadowColor="#444444"></Button>
+				<Button android:text="@string/nlbfull" android:id="@+id/alter_btn"
+					android:layout_height="50dip" android:background="@drawable/tab"
+					android:layout_weight="1"
+					android:layout_width="0dip" android:shadowColor="#444444"
+					android:shadowDx="1" android:shadowDy="1" android:shadowRadius="1"
+					android:textSize="17sp"></Button>
+
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</TableRow>
+	<TableRow android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:layout_gravity="center_horizontal"
+		android:layout_weight="1">
+		<LinearLayout android:layout_height="fill_parent"
+			android:orientation="vertical" android:layout_width="wrap_content">
+			<ListView android:id="@android:id/list" android:scrollbars="vertical"
+				android:scrollbarAlwaysDrawVerticalTrack="true"
+				android:layout_width="fill_parent" android:layout_height="fill_parent"
+				android:smoothScrollbar="true" android:background="@drawable/wallpaper"/>
+		</LinearLayout>
+	</TableRow>
+</TableLayout>

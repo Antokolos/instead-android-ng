@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest android:versionCode="110000"
+    android:versionName="1.1.0" package="com.nlbhub.instead" xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    
+    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="15"/>
+    <!-- Required to access Google Play Licensing (used for APK expansion files AKA obb) -->
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+
+    <!-- Required to poll the state of the network connection and respond to changes (required for obb) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Required to check whether Wi-Fi is enabled (required for obb) -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <!-- Required to download files from Google Play and INSTEAD repositories -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Required to keep CPU alive while downloading files (AND to keep screen awake in-game) -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Required to read and write the files on shared storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+</manifest>
