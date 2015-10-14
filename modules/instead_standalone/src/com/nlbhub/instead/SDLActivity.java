@@ -78,7 +78,7 @@ public class SDLActivity extends SDLActivityBase implements IDownloaderClient {
 
 	private void initDownloaderClientStub(Context context) {
 		try {
-			mDownloaderClientStub = new APKHelper(context).createDownloaderStubIfNeeded(this);
+			mDownloaderClientStub = new APKHelper(context).createDownloaderStubIfNeeded((InsteadApplication) getApplication(), this);
 			if (mDownloaderClientStub != null) {
 				// Shows download progress
 				mProgressDialog = new ProgressDialog(this);
@@ -93,7 +93,7 @@ public class SDLActivity extends SDLActivityBase implements IDownloaderClient {
 	}
 
 	private synchronized void initExpansionManager(Context context) {
-		// initDownloaderClientStub(context);
+		initDownloaderClientStub(context);
 		if (StorageResolver.expansionMounterMain == null) {
 			if (StorageResolver.storageManager == null) {
 				StorageResolver.storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
