@@ -21,7 +21,7 @@ public class ThemeHelper {
             return false;
         }
         if (settings.isOwntheme()) {
-            return isPortraitOwnTheme(context, settings, gameName);
+            return isPortraitOwnTheme(context, settings, (gameName != null) ? gameName : StorageResolver.BundledGame);
         } else {
             return isPortraitStandardTheme(context, settings);
         }
