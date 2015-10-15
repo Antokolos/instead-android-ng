@@ -8,7 +8,6 @@
     <string name="conerror">Ошибка соединения</string>
     <string name="connect">Соединяемся</string>
     <string name="ready">Готово</string>
-    <string name="init">Инициализация</string>
     <string name="update">Обновить список игр</string>
     <string name="menudel">Удалить игру</string>
     <string name="menudown">Загрузить игру</string>
@@ -24,7 +23,6 @@
     <string name="delrc">Настройки удалены</string>
     <string name="gdwncompl">Игра загружена</string>
     <string name="delgame">Игра удалена</string>
-    <string name="wait">Ждите...</string>
     <string name="basic">Официальный</string>
     <string name="repo">Выбор списка игр</string>
     <string name="alter">Не официальный</string>
@@ -33,9 +31,7 @@
     <string name="cancel">Отмена</string>
     <string name="music">Включить музыку</string>
     <string name="hlpopt">Больше настроек доступно из самой игры (Клавиша Menu - Настройки).</string>
-    <string name="by">Instead-NG: SilentLexx/NLB project</string>
     <string name="menu">Меню</string>
-    <string name="email">antokolos@gmail.com</string>
     <string name="serverr">Ошибка соединения...</string>
     <string name="nodata">Data-файлов не найдено!</string>
     <string name="listupd">Создание списка игр...</string>
@@ -85,7 +81,6 @@
     <string name="resetsd">Эта операция сбросит настройки игры, переустановит файлы игры на SD карте, но не затронет ваши игры и сохранения. Продолжить?</string>
     <string name="atention">Внимание!</string>
     <string name="scroff">Держать экран включенным</string>
-    <string name="start">Начать игру</string>
     <string name="theme">Тема: </string>
     <string name="portrait">Портретная ориентация экрана</string>
     <string name="dirlist">Все игры</string>

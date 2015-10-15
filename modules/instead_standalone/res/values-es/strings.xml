@@ -5,4 +5,7 @@
     <string name="dataerror">Archivo de datos error al descargar</string>
     <string name="instdata">La instalación de</string>
     <string name="writefile">Guarde el archivo</string>
+    <string name="wait">Por favor espere…</string>
+    <string name="init">Inicialización</string>
+    <string name="start">Inicio</string>
 </resources>

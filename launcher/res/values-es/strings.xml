@@ -6,8 +6,6 @@
     <string name="menudel">Quitar juego</string>
     <string name="ag_name">Nombre de Dir</string>
     <string name="cancel">Cancelar</string>
-    <string name="by">Instead-NG: SilentLexx/NLB project</string>
-    <string name="wait">Por favor espere ...</string>
     <string name="ready">Listo</string>
     <string name="agame">Acerca del juego</string>
     <string name="redwn">Restablecer y \n reinstalar los archivos de la SD</string>
@@ -22,9 +20,7 @@
     <string name="menu">Menú</string>
     <string name="hlpopt">Más opciones disponibles en el juego (Menú - Configuración).</string>
     <string name="ag_url">Sitio</string>
-    <string name="init">Inicialización</string>
     <string name="exit">Salida</string>
-    <string name="email">antokolos@gmail.com</string>
     <string name="downfile">La descarga de archivos a</string>
     <string name="about_btn">Acerca Instead-NG</string>
     <string name="ag_new">No se instala</string>
@@ -85,7 +81,6 @@
     <string name="resetsd">Esta operación va a reiniciar el juego, vuelva a instalar los archivos del juego en la tarjeta SD, pero no afectará a su juego y guardarlo. ¿Desea continuar?</string>
     <string name="atention">¡Atención!</string>
     <string name="scroff">Mantenga la pantalla se volvió</string>
-    <string name="start">Inicio</string>
     <string name="theme">Tema:</string>
     <string name="portrait">Retrato orientación de la pantalla</string>
 </resources>

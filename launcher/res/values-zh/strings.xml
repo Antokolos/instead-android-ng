@@ -6,8 +6,6 @@
     <string name="menudel">删除游戏</string>
     <string name="ag_name">目录名称</string>
     <string name="cancel">取消</string>
-    <string name="by">Instead-NG: SilentLexx/NLB project</string>
-    <string name="wait">请稍候...</string>
     <string name="ready">准备好</string>
     <string name="agame">关于游戏</string>
     <string name="redwn">复位和\ n重新安装在SD中的文件</string>
@@ -22,9 +20,7 @@
     <string name="menu">菜单</string>
     <string name="hlpopt">在游戏选项（菜单 - 设置）。</string>
     <string name="ag_url">网站</string>
-    <string name="init">初始化</string>
     <string name="exit">退出</string>
-    <string name="email">antokolos@gmail.com</string>
     <string name="downfile">下载文件</string>
     <string name="about_btn">有关Instead</string>
     <string name="ag_new">未安装</string>
@@ -85,7 +81,6 @@
     <string name="resetsd">此操作将复位的游戏，重新安装在SD卡上的游戏文件，但不会影响你的游戏并保存。继续吗？</string>
     <string name="atention">注意！</string>
     <string name="scroff">保持屏幕开启</string>
-    <string name="start">Start</string>
     <string name="theme">Theme:</string>
     <string name="portrait">Portrait screen orientation</string>
 </resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.nlbhub.instead.redhood"
+    android:versionCode="105000"
+    android:versionName="1.0.5">
+
+    <uses-sdk android:minSdkVersion="15" />
+    <application
+        android:name=".RedHoodApplication"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:label="@string/app_name"
+        android:icon="@drawable/ic_launcher">
+        <activity
+            android:name="StartActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service android:name="com.nlbhub.instead.standalone.expansion.InsteadDownloaderService" />
+        <receiver android:name="com.nlbhub.instead.standalone.expansion.InsteadAlarmReceiver" />
+        <activity android:name="com.nlbhub.instead.SDLActivity" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
+    </application>
+    <!-- Required to access Google Play Licensing (used for APK expansion files AKA obb) -->
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+
+    <!-- Required to poll the state of the network connection and respond to changes (required for obb) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Required to check whether Wi-Fi is enabled (required for obb) -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <!-- Required to download files from Google Play and INSTEAD repositories -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Required to keep CPU alive while downloading files (AND to keep screen awake in-game) -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Required to read and write the files on shared storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+</manifest>

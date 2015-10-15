@@ -18,7 +18,7 @@ then
         export GAMENAME=`ls -1 ./games/games`
         # The following folder will be used instead of appdata folder (personal preferences & saves folder)
         mkdir $RESPATH/data/$GAMENAME
-        $TOOLSDIR/jobb -v -pn com.nlbhub.instead -pv 101000 -d ./games -o ./main.101000.com.nlbhub.instead.obb
+        $TOOLSDIR/jobb -v -pn com.nlbhub.instead.redhood -pv 105000 -d ./games -o ./main.105000.com.nlbhub.instead.redhood.obb
     else
         echo Bundled game archive does not exist, using tutorial3 game as default
         mkdir ./games/bundled

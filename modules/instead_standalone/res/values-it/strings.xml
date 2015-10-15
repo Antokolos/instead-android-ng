@@ -5,4 +5,7 @@
     <string name="dataerror">File-dati scaricando errore</string>
     <string name="instdata">Installazione</string>
     <string name="writefile">Salvare il file</string>
+    <string name="wait">Attendere prego…</string>
+    <string name="init">Inizializzazione</string>
+    <string name="start">Iniziare</string>
 </resources>

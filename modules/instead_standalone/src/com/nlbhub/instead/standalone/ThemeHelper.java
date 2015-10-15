@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
  * Created by Antokolos on 09.10.15.
  */
 public class ThemeHelper {
+    public static final String PORTRAIT_KEY = "portrait";
     private static final Pattern SCRW_PATTERN = Pattern.compile("scr\\.w\\s*=\\s*(\\d+)");
     private static final Pattern SCRH_PATTERN = Pattern.compile("scr\\.h\\s*=\\s*(\\d+)");
 

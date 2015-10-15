@@ -5,4 +5,7 @@
     <string name="dataerror">数据文件下载错误</string>
     <string name="instdata">安装</string>
     <string name="writefile">保存文件</string>
+    <string name="wait">请稍候…</string>
+    <string name="init">初始化</string>
+    <string name="start">Start</string>
 </resources>

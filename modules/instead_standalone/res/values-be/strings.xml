@@ -5,4 +5,7 @@
     <string name="dataerror">Памылка загрузкі файла дадзеных</string>
     <string name="instdata">Усталёўка</string>
     <string name="writefile">Запіс файла</string>
+    <string name="wait">Чакайце…</string>
+    <string name="init">Ініцыялізацыя</string>
+    <string name="start">Пачаць</string>
 </resources>

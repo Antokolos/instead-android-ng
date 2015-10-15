@@ -9,4 +9,7 @@
     <string name="clear">Стереть</string>
     <string name="enter">Ввод</string>
     <string name="close">Скрыть</string>
+    <string name="wait">Ждите…</string>
+    <string name="init">Инициализация</string>
+    <string name="start">Начать игру</string>
 </resources>

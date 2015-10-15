@@ -6,8 +6,6 @@
     <string name="menudel">Rimuovere gioco</string>
     <string name="ag_name">Nome Dir</string>
     <string name="cancel">Annullare</string>
-    <string name="by">Instead-NG: SilentLexx/NLB project</string>
-    <string name="wait">Attendere prego ...</string>
     <string name="ready">Pronto</string>
     <string name="agame">A proposito di gioco</string>
     <string name="redwn">Reset e \n reinstallare i file sulla scheda SD</string>
@@ -22,9 +20,7 @@
     <string name="menu">Menu</string>
     <string name="hlpopt">Altre opzioni disponibili in gioco (Menu - Settings).</string>
     <string name="ag_url">Posto</string>
-    <string name="init">Inizializzazione</string>
     <string name="exit">Uscita</string>
-    <string name="email">antokolos@gmail.com</string>
     <string name="downfile">Download del file di</string>
     <string name="about_btn">Chi Instead-NG</string>
     <string name="ag_new">Non installato</string>
@@ -85,7 +81,6 @@
     <string name="resetsd">Questa operazione si resetta il gioco, reinstallare i file del gioco sulla scheda SD, ma non influenzare il tuo gioco e salvare. Continua comunque?</string>
     <string name="atention">Attenzione!</string>
     <string name="scroff">Mantenere lo schermo acceso</string>
-    <string name="start">Iniziare</string>
     <string name="theme">Tema:</string>
     <string name="portrait">Ritratto orientamento dello schermo</string>
 </resources>

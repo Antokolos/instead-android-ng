@@ -9,7 +9,6 @@
     <string name="conerror">Connection error</string>
     <string name="connect">Connecting</string>
     <string name="ready">Ready</string>
-    <string name="init">Initializing</string>
     <string name="update">Update game list</string>
     <string name="menudel">Remove game</string>
     <string name="menudown">Download game</string>
@@ -25,7 +24,6 @@
     <string name="delrc">Settings deleted!</string>
     <string name="gdwncompl">Game downloaded</string>
     <string name="delgame">Game removed</string>
-    <string name="wait">Please wait...</string>
     <string name="basic">Official</string>
     <string name="nlbdemo">Demo</string>
     <string name="repo">List of games</string>
@@ -36,12 +34,10 @@
     <string name="cancel">Cancel</string>
     <string name="music">Enable music</string>
     <string name="hlpopt">More options available in game (Menu - Settings).</string>
-    <string name="by">Instead-NG: SilentLexx/NLB project</string>
     <string name="menu">Menu</string>
-    <string name="email">antokolos@gmail.com</string>
     <string name="serverr">Connection error.</string>
     <string name="nodata">Data-files not found!</string>
-    <string name="listupd">Creating game list...</string>
+    <string name="listupd">Creating game list…</string>
     <string name="yesno">Remove game?</string>
     <string name="yes">Yes!</string>
     <string name="no">No</string>
@@ -91,7 +87,6 @@
     <string name="resetsd">This operation will reset the game, reinstall the game files on the SD card, but will not affect your game and save. Continue anyway?</string>
     <string name="atention">Attention!</string>
     <string name="scroff">Keep the screen turned on</string>
-    <string name="start">Start game</string>
     <string name="theme">Theme: </string>
     <string name="portrait">Portrait screen orientation</string>
     <string name="dirlist">All games</string>

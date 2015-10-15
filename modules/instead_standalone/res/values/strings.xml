@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="app_name">Instead Standalone</string>
     <string name="writefileerror">File saving error</string>
     <string name="finish">Download finished</string>
     <string name="dataerror">Data-file downloading error</string>
@@ -12,4 +13,9 @@
     <string name="downloading_assets">Downloading assets…</string>
     <string name="preparing_assets">Preparing assets…</string>
     <string name="download_failed">Download failed.</string>
+    <string name="wait">Please wait…</string>
+    <string name="init">Initializing</string>
+    <string name="by">Instead-NG: SilentLexx/NLB project</string>
+    <string name="email">antokolos@gmail.com</string>
+    <string name="start">Start game</string>
 </resources>
