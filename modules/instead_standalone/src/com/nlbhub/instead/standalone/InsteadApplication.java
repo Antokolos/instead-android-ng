@@ -117,7 +117,7 @@ public class InsteadApplication extends Application {
         public final int mFileVersion;
         public final long mFileSize;
 
-        XAPKFile(boolean isMain, int fileVersion, long fileSize) {
+        public XAPKFile(boolean isMain, int fileVersion, long fileSize) {
             mIsMain = isMain;
             mFileVersion = fileVersion;
             mFileSize = fileSize;
