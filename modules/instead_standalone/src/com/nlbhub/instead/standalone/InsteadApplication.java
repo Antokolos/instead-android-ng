@@ -6,9 +6,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import com.google.android.vending.expansion.downloader.Helpers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * This should be TEMPORARY workaround! I mean it! :)
  * This class provides method to statically obtain application context.

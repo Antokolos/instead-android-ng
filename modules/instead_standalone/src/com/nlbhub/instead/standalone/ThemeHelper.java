@@ -16,20 +16,20 @@ public class ThemeHelper {
     private static final Pattern SCRW_PATTERN = Pattern.compile("scr\\.w\\s*=\\s*(\\d+)");
     private static final Pattern SCRH_PATTERN = Pattern.compile("scr\\.h\\s*=\\s*(\\d+)");
 
-    public static boolean isPortrait(Context context, Settings settings, String gameName, String idf) {
+    public static boolean isPortrait(Context context, ExpansionMounter expansionMounter, Settings settings, String gameName, String idf) {
         if (idf != null) {
             // TODO: workaround for now, support idf in future
             return false;
         }
         if (settings.isOwntheme()) {
-            return isPortraitOwnTheme(context, settings, (gameName != null) ? gameName : StorageResolver.BundledGame);
+            return isPortraitOwnTheme(context, expansionMounter, settings, (gameName != null) ? gameName : StorageResolver.BundledGame);
         } else {
             return isPortraitStandardTheme(context, settings);
         }
     }
 
-    private static boolean isPortraitOwnTheme(final Context context, Settings settings, final String gameName) {
-        File gameDir = new File(StorageResolver.getGamesPath(), gameName);
+    private static boolean isPortraitOwnTheme(final Context context, ExpansionMounter expansionMounter, Settings settings, final String gameName) {
+        File gameDir = new File(StorageResolver.getGamesPath(expansionMounter), gameName);
         try {
             return isPortraitByThemeIni(gameDir);
         } catch (IOException e) {

@@ -12,8 +12,6 @@ import java.io.File;
  * Created by Antokolos on 09.10.15.
  */
 public class StorageResolver {
-    public static ExpansionMounter expansionMounterMain = null;
-    public static StorageManager storageManager = null;
     public static final String GameDir = "appdata/games/";
     public static final String SaveDir = "appdata/saves/";
     public static final String Options = "appdata/insteadrc";
@@ -74,14 +72,14 @@ public class StorageResolver {
         return (new File(path)).isFile();
     }
 
-    public static String getGamesPath() {
-        final String expansionFilePath = expansionMounterMain.getExpansionFilePath();
-        final String appdata = getAppDataPath();
+    public static String getGamesPath(ExpansionMounter expansionMounter) {
+        final String expansionFilePath = expansionMounter.getExpansionFilePath();
+        final String appdata = getAppDataPath(expansionMounter);
         return (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
     }
 
-    public static String getAppDataPath() {
-        final String expansionFilePath = expansionMounterMain.getExpansionFilePath();
+    public static String getAppDataPath(ExpansionMounter expansionMounter) {
+        final String expansionFilePath = expansionMounter.getExpansionFilePath();
         final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
         String resultPath = StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
         File resultDir = new File(resultPath);

@@ -30,11 +30,12 @@ public class SDLActivity extends SDLActivityBase {
 	final static int WAIT = 100;
 	final static int KOLL = 10;
 	private boolean first_run = true;
+	private static ExpansionMounter expansionMounterMain = null;
+	private static StorageManager storageManager = null;
 	
 	private static Display display;
 	private static BroadcastReceiver mReceiver;
 
-	private static boolean portrait = false;
 	private static String game = null;
 	private static String idf = null;
 	private static int i_s = KOLL;
@@ -42,7 +43,7 @@ public class SDLActivity extends SDLActivityBase {
 	private static Settings settings;
 	private static KeyboardAdapter keyboardAdapter;
 	private static AudioManager audioManager;
-	private static Context Ctx;
+	private static SDLActivity Ctx;
 
 	// Load the .so
 	/*
@@ -72,10 +73,30 @@ public class SDLActivity extends SDLActivityBase {
 		}
 	}
 
-
-
 	public static KeyboardAdapter getKeyboardAdapter(){
 		return keyboardAdapter;
+	}
+
+	public static ExpansionMounter getExpansionMounterMain() {
+		return expansionMounterMain;
+	}
+
+	public static SDLActivity getCtx() {
+		return Ctx;
+	}
+
+	public void lockOrientationIfNeeded() {
+		if (settings.isEnforceresolution()) {
+			if (isPortrait()) {
+				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+			} else {
+				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+			}
+		}
+	}
+
+	private boolean isPortrait() {
+		return ThemeHelper.isPortrait(this, expansionMounterMain, settings, game, idf);
 	}
 
 	/**
@@ -126,6 +147,23 @@ public class SDLActivity extends SDLActivityBase {
 	}
 
 	// Setup
+	private synchronized void initExpansionManager(Context context) {
+		InsteadApplication app = (InsteadApplication) getApplication();
+		if (expansionMounterMain == null) {
+			if (storageManager == null) {
+				storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
+			}
+			context.getObbDir().mkdir();
+			expansionMounterMain = (
+					new ExpansionMounter(
+							storageManager,
+							StorageResolver.getObbFilePath(((InsteadApplication) getApplication()).getMainObb(), context)
+					)
+			);
+			expansionMounterMain.mountExpansion();
+		}
+	}
+
 	protected void onCreate(Bundle savedInstanceState) {
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		// The following line is to workaround AndroidRuntimeException: requestFeature() must be called before adding content
@@ -135,6 +173,7 @@ public class SDLActivity extends SDLActivityBase {
 		keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard());
 		Ctx = this;
 		loadLibs();
+		initExpansionManager(this);
 
         Intent intent = getIntent();
 		if (intent.getAction()!=null) {
@@ -160,14 +199,7 @@ public class SDLActivity extends SDLActivityBase {
 			audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
 		}
 
-		portrait = ThemeHelper.isPortrait(this, settings, game, idf);
-		if (settings.isEnforceresolution()) {
-			if (portrait) {
-				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-			} else {
-				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-			}
-		}
+
 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -362,18 +394,23 @@ public class SDLActivity extends SDLActivityBase {
 
 	private PowerManager.WakeLock wakeLock = null;
 
-	public static int getResY() {
-		int y = display.getHeight();
-		return y;
+	private static int getMin(int x, int y) {
+		return (x < y) ? x : y;
 	}
-	
-	public static String getRes() {
+
+	private static int getMax(int x, int y) {
+		return (x >= y) ? x : y;
+	}
+
+	public String getRes() {
 		int x = display.getWidth();
 		int y = display.getHeight();
-		if (portrait) {
-			return y + "x" + x;
+		int longside = getMax(x, y);
+		int shortside = getMin(x, y);
+		if (isPortrait()) {
+			return shortside + "x" + longside;
 		} else {
-			return x + "x" + y;
+			return longside + "x" + shortside;
 		}
 	}
 
@@ -397,10 +434,12 @@ class SDLMain implements Runnable {
 	}
 
 	public void run() {
-        final String appdata = StorageResolver.getAppDataPath();
-        final String gamespath = StorageResolver.getGamesPath();
+		final SDLActivity ctx = SDLActivity.getCtx();
+		ctx.lockOrientationIfNeeded();
+        final String appdata = StorageResolver.getAppDataPath(SDLActivity.getExpansionMounterMain());
+        final String gamespath = StorageResolver.getGamesPath(SDLActivity.getExpansionMounterMain());
 		Settings settings = SDLActivity.getSettings();
-		boolean nativeLogEnabled = true;//settings.isNativelog();
+		boolean nativeLogEnabled = settings.isNativelog();
 		boolean enforceResolution = settings.isEnforceresolution();
         String nativeLogPath = nativeLogEnabled ? StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/native.log" : null;
 		SDLActivity.nativeInit(
@@ -408,7 +447,7 @@ class SDLMain implements Runnable {
 				dataDir,
                 appdata,
                 gamespath,
-				(enforceResolution) ? SDLActivity.getRes() : "-1x-1",
+				(enforceResolution) ? ctx.getRes() : "-1x-1",
                 SDLActivity.getGame(),
                 SDLActivity.getIdf(),
 				settings.isMusic() ? "Y" : null,  // The exact value is unimportant, if null, then -nosound will be added

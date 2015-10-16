@@ -30,12 +30,13 @@ import java.util.Map;
 
 public class MainMenu extends MainMenuAbstract {
 
-    protected LastGame lastGame;
+    protected LastGame lastGame = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        lastGame = new LastGame(this);
+        // TODO: find more elegant solution to avoid null lastGame in above call then getLastGame() method
+        lastGame = getLastGame();
         Globals.FlagSync = lastGame.getFlagSync();
         TextView email = (TextView) findViewById(R.id.email);
         email.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +45,13 @@ public class MainMenu extends MainMenuAbstract {
                 sendEmail();
             }
         });
+    }
+
+    protected LastGame getLastGame() {
+        if (lastGame == null) {
+            lastGame = new LastGame(this);
+        }
+        return lastGame;
     }
 
     @Override
@@ -205,7 +213,7 @@ public class MainMenu extends MainMenuAbstract {
                 Log.e("Error", e.toString());
             }
             Globals.FlagSync = true;
-            lastGame.setFlagSync(Globals.FlagSync);
+            getLastGame().setFlagSync(Globals.FlagSync);
         }
 
     }
@@ -227,6 +235,6 @@ public class MainMenu extends MainMenuAbstract {
         dwn = false;
         Globals.closeZip();
         Globals.FlagSync = true;
-        lastGame.setFlagSync(true);
+        getLastGame().setFlagSync(true);
     }
 }

@@ -6,8 +6,8 @@ import com.nlbhub.instead.standalone.InsteadApplication;
  * Created by Antokolos on 15.10.15.
  */
 public class RedHoodApplication extends InsteadApplication {
-    private static final String MainObb = "main.105000.com.nlbhub.instead.redhood.obb";
-    private static final String PatchObb = "patch.105000.com.nlbhub.instead.redhood.obb";
+    private static final String MainObb = "main.105001.com.nlbhub.instead.redhood.obb";
+    private static final String PatchObb = "patch.105001.com.nlbhub.instead.redhood.obb";
     // You must use the public key belonging to your publisher account
     public static final String BASE64_PUBLIC_KEY_MY = "YourLVLKey";
     // You should also modify this salt
@@ -16,11 +16,11 @@ public class RedHoodApplication extends InsteadApplication {
     };
 
     public String getPublicKey() {
-        return BASE64_PUBLIC_KEY;
+        return BASE64_PUBLIC_KEY_MY;
     }
 
     public byte[] getSALT() {
-        return SALT;
+        return SALT_MY;
     }
 
     public String getMainObb() {
@@ -39,7 +39,7 @@ public class RedHoodApplication extends InsteadApplication {
         XAPKFile[] result = {
             new XAPKFile(
                     true, // true signifies a main file
-                    105000, // the version of the APK that the file was uploaded
+                    105001, // the version of the APK that the file was uploaded
                     // against
                     104720442L // the length of the file in bytes
             )/*,

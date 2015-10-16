@@ -48,23 +48,6 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
         public int icon;
     }
 
-    private synchronized void initExpansionManager(Context context) {
-        initDownloaderClientStub(context);
-        if (StorageResolver.expansionMounterMain == null) {
-            if (StorageResolver.storageManager == null) {
-                StorageResolver.storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
-            }
-            context.getObbDir().mkdir();
-            StorageResolver.expansionMounterMain = (
-                    new ExpansionMounter(
-                            StorageResolver.storageManager,
-                            StorageResolver.getObbFilePath(((InsteadApplication) getApplication()).getMainObb(), context)
-                    )
-            );
-            StorageResolver.expansionMounterMain.mountExpansion();
-        }
-    }
-
     private void initDownloaderClientStub(Context context) {
         try {
             mDownloaderClientStub = new APKHelper(context).createDownloaderStubIfNeeded((InsteadApplication) getApplication(), this);
@@ -129,7 +112,6 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
         // The following line is to workaround AndroidRuntimeException: requestFeature() must be called before adding content
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        initExpansionManager(this);
 
         dialog = new ProgressDialog(this);
         dialog.setTitle(getString(R.string.wait));
@@ -144,6 +126,7 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
         if (!dwn) {
             checkRC();
         }
+        initDownloaderClientStub(this);
     }
 
     @Override
