@@ -26,7 +26,7 @@ import java.io.IOException;
 /**
  * SDL Activity
  */
-public class SDLActivity extends SDLActivityBase implements IDownloaderClient {
+public class SDLActivity extends SDLActivityBase {
 	final static int WAIT = 100;
 	final static int KOLL = 10;
 	private boolean first_run = true;
@@ -43,10 +43,6 @@ public class SDLActivity extends SDLActivityBase implements IDownloaderClient {
 	private static KeyboardAdapter keyboardAdapter;
 	private static AudioManager audioManager;
 	private static Context Ctx;
-
-	private IStub mDownloaderClientStub;
-	private IDownloaderService mRemoteService;
-	private ProgressDialog mProgressDialog;
 
 	// Load the .so
 	/*
@@ -76,38 +72,7 @@ public class SDLActivity extends SDLActivityBase implements IDownloaderClient {
 		}
 	}
 
-	private void initDownloaderClientStub(Context context) {
-		try {
-			mDownloaderClientStub = new APKHelper(context).createDownloaderStubIfNeeded((InsteadApplication) getApplication(), this);
-			if (mDownloaderClientStub != null) {
-				// Shows download progress
-				mProgressDialog = new ProgressDialog(this);
-				mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-				mProgressDialog.setMessage(getResources().getString(R.string.downloading_assets));
-				mProgressDialog.setCancelable(false);
-				mProgressDialog.show();
-			}
-		} catch (PackageManager.NameNotFoundException e) {
-			Log.e(InsteadApplication.ApplicationName, "Error creating downloader stub", e);
-		}
-	}
 
-	private synchronized void initExpansionManager(Context context) {
-		initDownloaderClientStub(context);
-		if (StorageResolver.expansionMounterMain == null) {
-			if (StorageResolver.storageManager == null) {
-				StorageResolver.storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
-			}
-			context.getObbDir().mkdir();
-			StorageResolver.expansionMounterMain = (
-					new ExpansionMounter(
-							StorageResolver.storageManager,
-							StorageResolver.getObbFilePath(((InsteadApplication) getApplication()).getMainObb(), context)
-					)
-			);
-			StorageResolver.expansionMounterMain.mountExpansion();
-		}
-	}
 
 	public static KeyboardAdapter getKeyboardAdapter(){
 		return keyboardAdapter;
@@ -170,7 +135,6 @@ public class SDLActivity extends SDLActivityBase implements IDownloaderClient {
 		keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard());
 		Ctx = this;
 		loadLibs();
-        initExpansionManager(this);
 
         Intent intent = getIntent();
 		if (intent.getAction()!=null) {
@@ -252,48 +216,6 @@ public class SDLActivity extends SDLActivityBase implements IDownloaderClient {
 		first_run = savedInstanceState.getBoolean("first_run");
 	}
 
-	@Override
-	public void onServiceConnected(Messenger m) {
-		mRemoteService = DownloaderServiceMarshaller.CreateProxy(m);
-		mRemoteService.onClientUpdated(mDownloaderClientStub.getMessenger());
-		mRemoteService.setDownloadFlags(IDownloaderService.FLAGS_DOWNLOAD_OVER_CELLULAR);
-	}
-
-	@Override
-	public void onDownloadProgress(DownloadProgressInfo progress) {
-		long percents = progress.mOverallProgress * 100 / progress.mOverallTotal;
-		Log.v(InsteadApplication.ApplicationName, "DownloadProgress:"+Long.toString(percents) + "%");
-		mProgressDialog.setProgress((int) percents);
-	}
-
-	@Override
-	public void onDownloadStateChanged(int newState) {
-		Log.v(InsteadApplication.ApplicationName, "DownloadStateChanged : " + getString(Helpers.getDownloaderStringResourceIDFromState(newState)));
-
-		switch (newState) {
-			case STATE_DOWNLOADING:
-				Log.v(InsteadApplication.ApplicationName, "Downloading...");
-				break;
-			case STATE_COMPLETED: // The download was finished
-				// validateXAPKZipFiles();
-				mProgressDialog.setMessage(getResources().getString(R.string.preparing_assets));
-				// dismiss progress dialog
-				mProgressDialog.dismiss();
-
-				break;
-			case STATE_FAILED_UNLICENSED:
-			case STATE_FAILED_FETCHING_URL:
-			case STATE_FAILED_SDCARD_FULL:
-			case STATE_FAILED_CANCELED:
-			case STATE_FAILED:
-				AlertDialog.Builder alert = new AlertDialog.Builder(this);
-				alert.setTitle(getResources().getString(R.string.dataerror));
-				alert.setMessage(getResources().getString(R.string.download_failed));
-				alert.setNeutralButton(getResources().getString(R.string.close), null);
-				alert.show();
-				break;
-		}
-	}
 
 
 	public class ScreenReceiver extends	BroadcastReceiver {
@@ -341,21 +263,10 @@ public class SDLActivity extends SDLActivityBase implements IDownloaderClient {
 
 	@Override
 	protected void onResume() {
-		if (null != mDownloaderClientStub) {
-			mDownloaderClientStub.connect(this);
-		}
 		super.onResume();
 		if(settings.getScreenOff())wakeLock.acquire();
 		 Log.v("SDL", "onResume()");
 		// if(!first_run) mSurface.resume();
-	}
-
-	@Override
-	protected void onStop() {
-		if (null != mDownloaderClientStub) {
-			mDownloaderClientStub.disconnect(this);
-		}
-		super.onStop();
 	}
 
 	public static void refreshOff(){
@@ -489,7 +400,7 @@ class SDLMain implements Runnable {
         final String appdata = StorageResolver.getAppDataPath();
         final String gamespath = StorageResolver.getGamesPath();
 		Settings settings = SDLActivity.getSettings();
-		boolean nativeLogEnabled = settings.isNativelog();
+		boolean nativeLogEnabled = true;//settings.isNativelog();
 		boolean enforceResolution = settings.isEnforceresolution();
         String nativeLogPath = nativeLogEnabled ? StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/native.log" : null;
 		SDLActivity.nativeInit(

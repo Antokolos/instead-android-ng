@@ -13,6 +13,9 @@ public class ExpansionMounter {
     private static final String TAG="Instead-NG";
     private StorageManager storageManager;
     private String filePath;
+    private boolean ready = false;
+    private static final Object LOCK = new Object();
+
     public ExpansionMounter(StorageManager storageManager, String filePath) {
         this.storageManager = storageManager;
         this.filePath = filePath;
@@ -32,7 +35,7 @@ public class ExpansionMounter {
                                 if (state == OnObbStateChangeListener.MOUNTED) {
                                     String expansionFilePath = storageManager.getMountedObbPath(path);
                                     Log.d(TAG,expansionFilePath+"-->MOUNTED");
-
+                                    setReady();
                                 }
                                 else {
                                     Log.d(TAG, "Path: " + path + "; state: " + state);
@@ -43,14 +46,37 @@ public class ExpansionMounter {
                     Log.d(TAG,"SUCCESSFULLY QUEUED");
                 } else {
                     Log.d(TAG,"FAILED");
+                    setReady();
                 }
             }
         } else {
             Log.d(TAG, "Patch file not found");
+            setReady();
         }
     }
 
+    private void setReady() {
+        synchronized(LOCK){
+            //set ready flag to true (so isReady returns true)
+            ready = true;
+            LOCK.notifyAll();
+        }
+    }
+
+    /**
+     * NB: DO NOT USE THIS METHOD IN THE SAME THREAD/ACTIVITY THAT CALLED mountExpansion()!
+     * @return
+     */
     public String getExpansionFilePath() {
-        return storageManager.getMountedObbPath(filePath);
+        try {
+            synchronized(LOCK){
+                while (!ready){
+                    LOCK.wait();
+                }
+            }
+            return storageManager.getMountedObbPath(filePath);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

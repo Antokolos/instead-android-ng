@@ -83,7 +83,13 @@ public class StorageResolver {
     public static String getAppDataPath() {
         final String expansionFilePath = expansionMounterMain.getExpansionFilePath();
         final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
-        return StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
+        String resultPath = StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
+        File resultDir = new File(resultPath);
+        if (!resultDir.exists()) {
+            // TODO: directories creation should be moved somewhere, this metod should only get things
+            resultDir.mkdir();
+        }
+        return resultPath;
     }
 
     private static String getAppDataFolderName(File bundledGameDirParent) {
