@@ -452,7 +452,7 @@ class SDLMain implements Runnable {
                 SDLActivity.getIdf(),
 				settings.isMusic() ? "Y" : null,  // The exact value is unimportant, if null, then -nosound will be added
 				settings.isOwntheme() ? "Y" : null,  // The exact value is unimportant, if NOT null, then -owntheme will be added
-				settings.isOwntheme() ? null : settings.getTheme()
+				settings.getTheme()
         );
 	}
 }

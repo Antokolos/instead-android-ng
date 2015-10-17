@@ -15,6 +15,7 @@ public class ThemeHelper {
     public static final String PORTRAIT_KEY = "portrait";
     private static final Pattern SCRW_PATTERN = Pattern.compile("scr\\.w\\s*=\\s*(\\d+)");
     private static final Pattern SCRH_PATTERN = Pattern.compile("scr\\.h\\s*=\\s*(\\d+)");
+    private static final Pattern INCLUDE_PATTERN = Pattern.compile("include\\s*=\\s*([\\w,\\.-]+)");
 
     public static boolean isPortrait(Context context, ExpansionMounter expansionMounter, Settings settings, String gameName, String idf) {
         if (idf != null) {
@@ -24,34 +25,50 @@ public class ThemeHelper {
         if (settings.isOwntheme()) {
             return isPortraitOwnTheme(context, expansionMounter, settings, (gameName != null) ? gameName : StorageResolver.BundledGame);
         } else {
-            return isPortraitStandardTheme(context, settings);
+            return isPortraitStandardTheme(context, settings.getTheme());
         }
     }
 
     private static boolean isPortraitOwnTheme(final Context context, ExpansionMounter expansionMounter, Settings settings, final String gameName) {
-        File gameDir = new File(StorageResolver.getGamesPath(expansionMounter), gameName);
         try {
-            return isPortraitByThemeIni(gameDir);
+            ResData resData = isPortraitByThemeIni(new File(StorageResolver.getGamesPath(expansionMounter)), gameName);
+            if (resData.isOK()) {
+                return resData.isPortrait();
+            } else {
+                return isPortraitStandardTheme(context, resData.getInclude());
+            }
         } catch (IOException e) {
             Log.i(InsteadApplication.ApplicationName, "Error during retrieving portrait flag for the game " + gameName + "; falling back to standard theme");
-            return isPortraitStandardTheme(context, settings);
+            return isPortraitStandardTheme(context, settings.getTheme());
         }
     }
 
-    private static boolean isPortraitStandardTheme(final Context context, Settings settings) {
+    private static boolean isPortraitStandardTheme(final Context context, String theme) {
+        if (theme == null) {
+            Log.e(InsteadApplication.ApplicationName, "Error during retrieving portrait flag because theme name is undefined; falling back to landscape");
+            return false;
+        }
         SystemPathResolver pathResolver = new SystemPathResolver("data", context);
+        ResData resData = new ResData();
+        resData.setInclude(theme);
         try {
             File themesDir = new File(pathResolver.resolvePath("themes"));
-            return isPortraitByThemeIni(new File(themesDir, settings.getTheme()));
+            do {
+                resData = isPortraitByThemeIni(themesDir, resData.getInclude());
+            } while (!resData.isOK());
+            return resData.isPortrait();
         } catch (IOException e) {
-            Log.i(InsteadApplication.ApplicationName, "Error during retrieving portrait flag for standard theme " + settings.getTheme() + "; falling back to landscape");
+            Log.i(InsteadApplication.ApplicationName, "Error during retrieving portrait flag for standard theme " + theme + "; falling back to landscape");
             return false;
         }
     }
 
-    private static boolean isPortraitByThemeIni(final File themeDir) throws IOException {
-        int scrw = -1;
-        int scrh = -1;
+    private static ResData isPortraitByThemeIni(final File themesDir, String theme) throws IOException {
+        if (theme == null) {
+            throw new IOException("Cannot find theme, because it is undefined");
+        }
+        File themeDir = new File(themesDir, theme);
+        ResData result = new ResData();
         BufferedReader input = null;
         FileInputStream fileInputStream = null;
         InputStreamReader inputStreamReader = null;
@@ -70,12 +87,17 @@ public class ThemeHelper {
                     final String inputLine = line.toLowerCase();
                     Matcher matcherW = SCRW_PATTERN.matcher(inputLine);
                     if (matcherW.find()) {
-                        scrw = Integer.parseInt(matcherW.group(1));
+                        result.scrw = Integer.parseInt(matcherW.group(1));
                     }
 
                     Matcher matcherH = SCRH_PATTERN.matcher(inputLine);
                     if (matcherH.find()) {
-                        scrh = Integer.parseInt(matcherH.group(1));
+                        result.scrh = Integer.parseInt(matcherH.group(1));
+                    }
+
+                    Matcher matcherI = INCLUDE_PATTERN.matcher(inputLine);
+                    if (matcherI.find()) {
+                        result.include = matcherI.group(1);
                     }
                 }
             } finally {
@@ -94,6 +116,28 @@ public class ThemeHelper {
             // TODO: at least log something...
         }
 
-        return scrw != -1 && scrh != -1 && scrw <= scrh;
+        return result;
+    }
+
+    private static class ResData {
+        private int scrw = -1;
+        private int scrh = -1;
+        private String include = null;
+
+        public boolean isOK() {
+            return scrw != -1 && scrh != -1;
+        }
+
+        public boolean isPortrait() {
+            return scrw <= scrh;
+        }
+
+        public String getInclude() {
+            return include;
+        }
+
+        public void setInclude(String include) {
+            this.include = include;
+        }
     }
 }
