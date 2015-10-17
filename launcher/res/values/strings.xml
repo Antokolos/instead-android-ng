@@ -71,7 +71,7 @@
     <string name="conferror">Screen resolution is wrong! Try reconfigure again!</string>
     <string name="ourtheme">Сustom game themes</string>
     <string name="nativelog">Native Log</string>
-    <string name="enforceresolution">Enforce Resolution</string>
+    <string name="enforceresolution">Enforce Maximum Resolution</string>
     <string name="menunewstart">Start new game</string>
     <string name="delsaves">Delete save game?</string>
     <string name="mailme">Send me email</string>

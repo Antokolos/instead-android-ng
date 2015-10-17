@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game_list version="1.0">
  <game>
+  <name>hoppers</name>
+  <title>Лягушки-непоседы</title>
+  <version>1.0</version>
+  <url>http://instead-games.ru/download/instead-hoppers-1.0.zip</url>
+  <size>49471</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=208</descurl>
+ </game>
+ <game>
+  <name>fallout-another-side</name>
+  <title>Fallout II: По Ту Сторону Баррикад</title>
+  <version>1.07</version>
+  <url>http://instead-games.ru/download/instead-fallout-another-side-1.07.zip</url>
+  <size>47781146</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=95</descurl>
+ </game>
+ <game>
+  <name>mainland</name>
+  <title>Материк</title>
+  <version>2.3</version>
+  <url>http://instead-games.ru/download/instead-mainland-2.3.zip</url>
+  <size>13982204</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=90</descurl>
+ </game>
+ <game>
   <name>clara</name>
   <title>Клара - расхитительница варенья</title>
   <version>1.4</version>
@@ -8,15 +35,6 @@
   <size>7281786</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=203</descurl>
- </game>
- <game>
-  <name>mainland</name>
-  <title>Материк</title>
-  <version>1.2</version>
-  <url>http://instead-games.ru/download/instead-mainland-1.2.zip</url>
-  <size>14530325</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=90</descurl>
  </game>
  <game>
   <name>mountains_madness</name>
@@ -125,15 +143,6 @@
   <size>31278276</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=188</descurl>
- </game>
- <game>
-  <name>fallout-another-side</name>
-  <title>Fallout II: По Ту Сторону Баррикад</title>
-  <version>1.07</version>
-  <url>http://instead-games.ru/download/instead-fallout-another-side-1.07.zip</url>
-  <size>47781152</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=95</descurl>
  </game>
  <game>
   <name>satori</name>

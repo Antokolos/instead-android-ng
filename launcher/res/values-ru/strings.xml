@@ -67,6 +67,8 @@
     <string name="about_btn">О Instead-NG</string>
     <string name="conferror">Не правельно определено разрешение экрана! Попробуйте пересоздать настройки!</string>
     <string name="ourtheme">Свои темы в играх</string>
+    <string name="nativelog">Логировать консольный вывод</string>
+    <string name="enforceresolution">Всегда максимальное разрешение</string>
     <string name="menunewstart">Начать новую игру</string>
     <string name="delsaves">Удалить сохранения игры?</string>
     <string name="mailme">Отправить мне email</string>

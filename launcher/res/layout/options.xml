@@ -59,7 +59,7 @@
 						android:textSize="20sp" android:layout_height="65dip" android:layout_width="wrap_content" android:layout_weight="1"></CheckBox>
 				</TableRow>
 				
-				<TableRow>
+				<TableRow android:visibility="invisible">
 
 					<CheckBox
 					    android:id="@+id/virtkey"
@@ -71,6 +71,7 @@
 				</TableRow>
 
 				<TextView
+					android:visibility="invisible"
 				    android:id="@+id/textView2"
 				    android:layout_width="wrap_content"
 				    android:layout_height="wrap_content"
