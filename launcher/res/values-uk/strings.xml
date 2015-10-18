@@ -35,14 +35,14 @@
     <string name="connect">Єднаймося</string>
     <string name="installed">Встановлені</string>
     <string name="waitdwn">Чекайте, йде завантаження</string>
-    <string name="serverr">Помилка з\'єднання ...</string>
+    <string name="serverr">Помилка з\'єднання…</string>
     <string name="downdata">Завантаження файлу</string>
     <string name="run">Почати гру</string>
     <string name="app_name">Instead-NG</string>
     <string name="lang">Мова</string>
     <string name="zipsize">Розмір</string>
     <string name="alang">Всі мови</string>
-    <string name="listupd">Створення списку ігор ...</string>
+    <string name="listupd">Створення списку ігор…</string>
     <string name="langen">Англійська</string>
     <string name="mb">МБ</string>
     <string name="gdwncompl">Гра завантажена</string>

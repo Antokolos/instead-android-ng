@@ -42,7 +42,7 @@
     <string name="lang">语言</string>
     <string name="zipsize">尺寸</string>
     <string name="alang">所有的语言</string>
-    <string name="listupd">创建游戏列表...</string>
+    <string name="listupd">创建游戏列表…</string>
     <string name="langen">英语</string>
     <string name="mb">MB</string>
     <string name="gdwncompl">游戏下载</string>
@@ -77,7 +77,7 @@
     <string name="marketon">率，写评论</string>
     <string name="market">相反在市场</string>
     <string name="nourq">URQ模块没有安装！</string>
-    <string name="deleting">删除...</string>
+    <string name="deleting">删除…</string>
     <string name="resetsd">此操作将复位的游戏，重新安装在SD卡上的游戏文件，但不会影响你的游戏并保存。继续吗？</string>
     <string name="atention">注意！</string>
     <string name="scroff">保持屏幕开启</string>

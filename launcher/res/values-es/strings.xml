@@ -42,7 +42,7 @@
     <string name="lang">Lengua</string>
     <string name="zipsize">Tamaño</string>
     <string name="alang">Todos los idiomas</string>
-    <string name="listupd">Creación de lista de juegos ...</string>
+    <string name="listupd">Creación de lista de juegos…</string>
     <string name="langen">Inglés</string>
     <string name="mb">MB</string>
     <string name="gdwncompl">Juego descargado</string>
@@ -77,7 +77,7 @@
     <string name="marketon">Caso, escribir un comentario</string>
     <string name="market">En cambio en el mercado</string>
     <string name="nourq">URQ módulo no está instalado!</string>
-    <string name="deleting">La eliminación de ...</string>
+    <string name="deleting">La eliminación de…</string>
     <string name="resetsd">Esta operación va a reiniciar el juego, vuelva a instalar los archivos del juego en la tarjeta SD, pero no afectará a su juego y guardarlo. ¿Desea continuar?</string>
     <string name="atention">¡Atención!</string>
     <string name="scroff">Mantenga la pantalla se volvió</string>

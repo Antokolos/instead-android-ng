@@ -35,14 +35,14 @@
     <string name="connect">Злучаемся</string>
     <string name="installed">Устаноўленыя</string>
     <string name="waitdwn">Чакайце, ідзе загрузка</string>
-    <string name="serverr">Памылка злучэння ...</string>
+    <string name="serverr">Памылка злучэння…</string>
     <string name="downdata">Загрузка файла</string>
     <string name="run">Пачаць гульню</string>
     <string name="app_name">Instead-NG</string>
     <string name="lang">Мова</string>
     <string name="zipsize">Памер</string>
     <string name="alang">Усе мовы</string>
-    <string name="listupd">Стварэнне спісу гульняў ...</string>
+    <string name="listupd">Стварэнне спісу гульняў…</string>
     <string name="langen">Англійская</string>
     <string name="mb">МБ</string>
     <string name="gdwncompl">Гульня загружана</string>
@@ -77,7 +77,7 @@
     <string name="marketon">Ацаніць, напісаць каментар</string>
     <string name="market">Instead-NG на Маркете</string>
     <string name="nourq">URQ модуль не ўстаноўлены!</string>
-    <string name="deleting">Выдаленне ...</string>
+    <string name="deleting">Выдаленне…</string>
     <string name="resetsd">Гэтая аперацыя скіне налады гульні, пераўсталяваць файлы гульні на SD карце, але не закране вашыя гульні і захавання. Працягнуць?</string>
     <string name="atention">Увага!</string>
     <string name="scroff">Трымаць экран уключаным</string>
