@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 import com.google.android.vending.expansion.downloader.Helpers;
 
 /**
@@ -13,8 +14,6 @@ import com.google.android.vending.expansion.downloader.Helpers;
  */
 public class InsteadApplication extends Application {
     public static final String ApplicationName = "Instead-NG";
-    private static final String MainObb = "main.110000.com.nlbhub.instead.obb";
-    private static final String PatchObb = "patch.110000.com.nlbhub.instead.obb";
     private static Context context;
     // You must use the public key belonging to your publisher account
     public static final String BASE64_PUBLIC_KEY = "YourLVLKey";
@@ -32,15 +31,24 @@ public class InsteadApplication extends Application {
         return context;
     }
 
-    public static String AppVer(Context c) {
-        PackageInfo pi;
+    private static PackageInfo getPackageInfo(Context c) {
+        PackageInfo pi = null;
         try {
             pi = c.getPackageManager().getPackageInfo(c.getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return "Not Found";
+            Log.e(InsteadApplication.ApplicationName, "Name not found", e);
         }
-        return pi.versionName;
+        return pi;
+    }
+
+    public static String AppVer(Context c) {
+        PackageInfo pi = getPackageInfo(c);
+        return (pi != null) ? pi.versionName : "Not Found";
+    }
+
+    public static String AppVerCode(Context c) {
+        PackageInfo pi = getPackageInfo(c);
+        return (pi != null) ? String.valueOf(pi.versionCode) : "000000";
     }
 
     /**
@@ -73,12 +81,16 @@ public class InsteadApplication extends Application {
         return SALT;
     }
 
-    public String getMainObb() {
-        return MainObb;
+    public String getMainObb(Context context) {
+        return "main" + getObbNameTail(context);
     }
 
-    public String getPatchObb() {
-        return PatchObb;
+    private String getObbNameTail(Context context) {
+        return "." + AppVerCode(context) + "." + context.getPackageName() + ".obb";
+    }
+
+    public String getPatchObb(Context context) {
+        return "patch" + getObbNameTail(context);
     }
 
     /**

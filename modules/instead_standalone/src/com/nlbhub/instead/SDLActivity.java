@@ -85,9 +85,9 @@ public class SDLActivity extends SDLActivityBase {
 		return Ctx;
 	}
 
-	public void lockOrientationIfNeeded() {
+	public void lockOrientationIfNeeded(final String bundledGameName) {
 		if (settings.isEnforceresolution()) {
-			if (isPortrait()) {
+			if (isPortrait(bundledGameName)) {
 				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 			} else {
 				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -95,8 +95,10 @@ public class SDLActivity extends SDLActivityBase {
 		}
 	}
 
-	private boolean isPortrait() {
-		return ThemeHelper.isPortrait(this, expansionMounterMain, settings, game, idf);
+	private boolean isPortrait(final String bundledGameName) {
+		// bundled game game can be not so simple if using standalone game in obb file
+		final String realBundledGameName = (game == null || StorageResolver.BundledGame.equals(game)) ? bundledGameName : game;
+		return ThemeHelper.isPortrait(this, expansionMounterMain, settings, realBundledGameName, idf);
 	}
 
 	/**
@@ -157,7 +159,7 @@ public class SDLActivity extends SDLActivityBase {
 			expansionMounterMain = (
 					new ExpansionMounter(
 							storageManager,
-							StorageResolver.getObbFilePath(((InsteadApplication) getApplication()).getMainObb(), context)
+							StorageResolver.getObbFilePath(((InsteadApplication) getApplication()).getMainObb(context), context)
 					)
 			);
 			expansionMounterMain.mountExpansion();
@@ -402,12 +404,12 @@ public class SDLActivity extends SDLActivityBase {
 		return (x >= y) ? x : y;
 	}
 
-	public String getRes() {
+	public String getRes(final String bundledGameName) {
 		int x = display.getWidth();
 		int y = display.getHeight();
 		int longside = getMax(x, y);
 		int shortside = getMin(x, y);
-		if (isPortrait()) {
+		if (isPortrait(bundledGameName)) {
 			return shortside + "x" + longside;
 		} else {
 			return longside + "x" + shortside;
@@ -435,9 +437,11 @@ class SDLMain implements Runnable {
 
 	public void run() {
 		final SDLActivity ctx = SDLActivity.getCtx();
-		ctx.lockOrientationIfNeeded();
-        final String appdata = StorageResolver.getAppDataPath(SDLActivity.getExpansionMounterMain());
-        final String gamespath = StorageResolver.getGamesPath(SDLActivity.getExpansionMounterMain());
+		final ExpansionMounter expansionMounter = SDLActivity.getExpansionMounterMain();
+		final String bundledGameName = StorageResolver.getBundledGameName(expansionMounter);
+		ctx.lockOrientationIfNeeded(bundledGameName);
+        final String appdata = StorageResolver.getAppDataPath(expansionMounter);
+        final String gamespath = StorageResolver.getGamesPath(expansionMounter);
 		Settings settings = SDLActivity.getSettings();
 		boolean nativeLogEnabled = settings.isNativelog();
 		boolean enforceResolution = settings.isEnforceresolution();
@@ -447,7 +451,7 @@ class SDLMain implements Runnable {
 				dataDir,
                 appdata,
                 gamespath,
-				(enforceResolution) ? ctx.getRes() : "-1x-1",
+				(enforceResolution) ? ctx.getRes(bundledGameName) : "-1x-1",
                 SDLActivity.getGame(),
                 SDLActivity.getIdf(),
 				settings.isMusic() ? "Y" : null,  // The exact value is unimportant, if null, then -nosound will be added

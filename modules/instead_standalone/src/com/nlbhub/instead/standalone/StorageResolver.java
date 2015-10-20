@@ -90,6 +90,16 @@ public class StorageResolver {
         return resultPath;
     }
 
+    public static String getBundledGameName(ExpansionMounter expansionMounter) {
+        final String expansionFilePath = expansionMounter.getExpansionFilePath();
+        final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
+        if (bundledGameDirParent == null || !bundledGameDirParent.isDirectory()) {
+            return BundledGame;
+        } else {
+            return bundledGameDirParent.list()[0];
+        }
+    }
+
     private static String getAppDataFolderName(File bundledGameDirParent) {
         if (bundledGameDirParent == null || !bundledGameDirParent.isDirectory()) {
             return "appdata";

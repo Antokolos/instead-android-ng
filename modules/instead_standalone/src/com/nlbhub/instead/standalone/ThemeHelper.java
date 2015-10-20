@@ -23,6 +23,8 @@ public class ThemeHelper {
             return false;
         }
         if (settings.isOwntheme()) {
+            // TODO: nice doublecheck with (gameName != null), but at this point it should not be null and bundled game game is not always 'bundled' :)
+            // see StorageResolver#getBundledGameName()
             return isPortraitOwnTheme(context, expansionMounter, settings, (gameName != null) ? gameName : StorageResolver.BundledGame);
         } else {
             return isPortraitStandardTheme(context, settings.getTheme());
