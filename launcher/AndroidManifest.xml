@@ -35,12 +35,12 @@
                 <data android:scheme="file"/>
                 <data android:scheme="content"/>
                 <data android:host="*"/>
-                <data android:pathPattern="^.*\\.ZIP$"/>
-                <data android:pathPattern="^.*\\.zip$"/>
-                <data android:pathPattern="^.*\\.QM$"/>
-                <data android:pathPattern="^.*\\.qm$"/>
-                <data android:pathPattern="^.*\\.IDF$"/>
-                <data android:pathPattern="^.*\\.idf$"/>
+                <data android:pathPattern=".*\\.ZIP"/>
+                <data android:pathPattern=".*\\.zip"/>
+                <data android:pathPattern=".*\\.QM"/>
+                <data android:pathPattern=".*\\.qm"/>
+                <data android:pathPattern=".*\\.IDF"/>
+                <data android:pathPattern=".*\\.idf"/>
                 <data android:mimeType="*/*"/>
             </intent-filter>
             <intent-filter>
@@ -51,12 +51,12 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-                <data android:pathPattern="^.*\\.ZIP$"/>
-                <data android:pathPattern="^.*\\.zip$"/>
-                <data android:pathPattern="^.*\\.QM$"/>
-                <data android:pathPattern="^.*\\.qm$"/>
-                <data android:pathPattern="^.*\\.IDF$"/>
-                <data android:pathPattern="^.*\\.idf$"/>
+                <data android:pathPattern=".*\\.ZIP"/>
+                <data android:pathPattern=".*\\.zip"/>
+                <data android:pathPattern=".*\\.QM"/>
+                <data android:pathPattern=".*\\.qm"/>
+                <data android:pathPattern=".*\\.IDF"/>
+                <data android:pathPattern=".*\\.idf"/>
                 <data android:mimeType="*/*"/>
             </intent-filter>
         </activity>
