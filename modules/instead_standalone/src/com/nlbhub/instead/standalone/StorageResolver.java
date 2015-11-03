@@ -5,8 +5,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.os.storage.StorageManager;
+import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Antokolos on 09.10.15.
@@ -22,35 +24,33 @@ public class StorageResolver {
 
     public static String getStorage(){
         final Context context = InsteadApplication.getAppContext();
-        String result = context.getExternalFilesDir(null) + "/";
+
+        String result = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
 
         String extStorageState = Environment.getExternalStorageState();
         boolean canRead;
         boolean canWrite;
-        if ("mounted".equals(extStorageState)) {
+        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
             canWrite = true;
             canRead = true;
-        } else if ("mounted_ro".equals(extStorageState)) {
+        } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
             canRead = true;
             canWrite = false;
         } else {
             canWrite = false;
             canRead = false;
         }
-        if(result.contains("emulated") || !canRead || !canWrite)
-        {
-            PackageManager packageManager = context.getPackageManager();
-            String packageName = context.getPackageName();
+        if (!canRead || !canWrite) {
             try {
-                PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 0);
-                result = packageInfo.applicationInfo.dataDir + "/files/";
-                File dir = new File(result);
-                if (!dir.exists()) {
-                    dir.mkdir();
-                }
-            } catch(PackageManager.NameNotFoundException e) {
+                SystemPathResolver downloadResolver = new SystemPathResolver("dwn", context);
+                result = downloadResolver.getPath();
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+        File dir = new File(result);
+        if (!dir.exists()) {
+            dir.mkdirs();
         }
         return result;
     }

@@ -1,6 +1,429 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game_list version="1.0">
  <game>
+  <name>catesc</name>
+  <title>ESCAPE OF THE CAT</title>
+  <version>0.6</version>
+  <url>http://instead-games.ru/download/instead-catesc-0.6.zip</url>
+  <size>3181642</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=149</descurl>
+ </game>
+ <game>
+  <name>last_hope</name>
+  <title>Последняя надежда</title>
+  <version>1.1.1</version>
+  <url>http://instead-games.ru/download/instead-last_hope-1.1.1.zip</url>
+  <size>3241675</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=11</descurl>
+ </game>
+ <game>
+  <name>dead_or_alive</name>
+  <title>Живым или мертвым</title>
+  <version>0.2.1</version>
+  <url>http://instead-games.ru/download/instead-dead_or_alive-0.2.1.zip</url>
+  <size>1558902</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=10</descurl>
+ </game>
+ <game>
+  <name>toilet_again</name>
+  <title>Escape The Toilet Again</title>
+  <version>0.1</version>
+  <url>http://instead-games.ru/download/instead-toilet_again-0.1.zip</url>
+  <size>8136916</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=19</descurl>
+ </game>
+ <game>
+  <name>constellation_3</name>
+  <title>Созвездие: Полёт в бездну</title>
+  <version>1.04</version>
+  <url>http://instead-games.ru/download/instead-constellation_3-1.04.zip</url>
+  <size>35757183</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=56</descurl>
+ </game>
+ <game>
+  <name>great_grandmas_chest</name>
+  <title>Прабабкин сундук</title>
+  <version>0.2.0</version>
+  <url>http://instead-games.ru/download/instead-great_grandmas_chest-0.2.0.zip</url>
+  <size>67707</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=22</descurl>
+ </game>
+ <game>
+  <name>journey</name>
+  <title>Детективная история</title>
+  <version>0.1</version>
+  <url>http://instead-games.ru/download/instead-journey-0.1.zip</url>
+  <size>4277813</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=25</descurl>
+ </game>
+ <game>
+  <name>fallout_quest</name>
+  <title>Fallout quest</title>
+  <version>0.0.1</version>
+  <url>http://instead-games.ru/download/instead-fallout_quest-0.0.1.zip</url>
+  <size>1149304</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=35</descurl>
+ </game>
+ <game>
+  <name>last_raider</name>
+  <title>Last Raider</title>
+  <version>0.0.2</version>
+  <url>http://instead-games.ru/download/instead-last_raider-0.0.2.zip</url>
+  <size>142845</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=38</descurl>
+ </game>
+ <game>
+  <name>hotdog</name>
+  <title>Операция «Хотдог»</title>
+  <version>0.1.3</version>
+  <url>http://instead-games.ru/download/instead-hotdog-0.1.3.zip</url>
+  <size>1569465</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=42</descurl>
+ </game>
+ <game>
+  <name>ilines</name>
+  <title>Шарики INSTEAD</title>
+  <version>1.1</version>
+  <url>http://instead-games.ru/download/instead-ilines-1.1.zip</url>
+  <size>858118</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=140</descurl>
+ </game>
+ <game>
+  <name>crossworlds</name>
+  <title>Перекресток миров</title>
+  <version> 0.7</version>
+  <url>http://instead-games.ru/download/instead-crossworlds-0.7.zip</url>
+  <size>192329</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=41</descurl>
+ </game>
+ <game>
+  <name>mindtricks</name>
+  <title>Игры с разумом</title>
+  <version>1.0</version>
+  <url>http://instead-games.ru/download/instead-mindtricks-1.0.zip</url>
+  <size>23493663</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=44</descurl>
+ </game>
+ <game>
+  <name>mirror</name>
+  <title>Зеркало [ru|en]</title>
+  <version>0.9</version>
+  <url>http://instead-games.ru/download/instead-mirror-0.9.zip</url>
+  <size>10492459</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=46</descurl>
+ </game>
+ <game>
+  <name>starfighter</name>
+  <title>Starfighter</title>
+  <version>1.2</version>
+  <url>http://instead-games.ru/download/instead-starfighter-1.2.zip</url>
+  <size>289531</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=47</descurl>
+ </game>
+ <game>
+  <name>constellation</name>
+  <title>Constellation</title>
+  <version>0.3.3</version>
+  <url>http://instead-games.ru/download/instead-constellation-0.3.3.zip</url>
+  <size>1990203</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=49</descurl>
+ </game>
+ <game>
+  <name>kingdom_of_grain</name>
+  <title>Королевство Зерна [ru|en]</title>
+  <version>0.9.3</version>
+  <url>http://instead-games.ru/download/instead-kingdom_of_grain-0.9.3.zip</url>
+  <size>150776</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=69</descurl>
+ </game>
+ <game>
+  <name>ungodly_earth</name>
+  <title>Ungodly Earth: Пустыня Снов</title>
+  <version>0.2.2</version>
+  <url>http://instead-games.ru/download/instead-ungodly_earth-0.2.2.zip</url>
+  <size>1385059</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=71</descurl>
+ </game>
+ <game>
+  <name>kayleth</name>
+  <title>Kayleth [ru|en]</title>
+  <version>0.4.1</version>
+  <url>http://instead-games.ru/download/instead-kayleth-0.4.1.zip</url>
+  <size>7442146</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=73</descurl>
+ </game>
+ <game>
+  <name>roboto</name>
+  <title>ROBOTO</title>
+  <version> 0.2</version>
+  <url>http://instead-games.ru/download/instead-roboto-0.2.zip</url>
+  <size>589268</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=77</descurl>
+ </game>
+ <game>
+  <name>apple_day</name>
+  <title>День Яблока</title>
+  <version>1.3.1</version>
+  <url>http://instead-games.ru/download/instead-apple_day-1.3.1.zip</url>
+  <size>2220227</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=83</descurl>
+ </game>
+ <game>
+  <name>bear</name>
+  <title>Путь медведя</title>
+  <version>0.9</version>
+  <url>http://instead-games.ru/download/instead-bear-0.9.zip</url>
+  <size>9843252</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=85</descurl>
+ </game>
+ <game>
+  <name>code_10</name>
+  <title>Code-10</title>
+  <version>1.1</version>
+  <url>http://instead-games.ru/download/instead-code_10-1.1.zip</url>
+  <size>32210419</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=91</descurl>
+ </game>
+ <game>
+  <name>satori</name>
+  <title>Satori</title>
+  <version>1.2</version>
+  <url>http://instead-games.ru/download/instead-satori-1.2.zip</url>
+  <size>3840121</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=94</descurl>
+ </game>
+ <game>
+  <name>lydia</name>
+  <title>Лидия</title>
+  <version>1.3</version>
+  <url>http://instead-games.ru/download/instead-lydia-1.3.zip</url>
+  <size>9365238</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=109</descurl>
+ </game>
+ <game>
+  <name>infected</name>
+  <title>Заражённые</title>
+  <version>1.3</version>
+  <url>http://instead-games.ru/download/instead-infected-1.3.zip</url>
+  <size>6741833</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=103</descurl>
+ </game>
+ <game>
+  <name>transition</name>
+  <title>Переход</title>
+  <version>1.4</version>
+  <url>http://instead-games.ru/download/instead-transition-1.4.zip</url>
+  <size>171896906</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=104</descurl>
+ </game>
+ <game>
+  <name>cat</name>
+  <title>Возвращение квантового кота</title>
+  <version>1.6</version>
+  <url>http://instead-games.ru/download/instead-cat-1.6.zip</url>
+  <size>4550110</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=107</descurl>
+ </game>
+ <game>
+  <name>cuba</name>
+  <title>Куба</title>
+  <version>1.1</version>
+  <url>http://instead-games.ru/download/instead-cuba-1.1.zip</url>
+  <size>12093429</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=108</descurl>
+ </game>
+ <game>
+  <name>steelrat</name>
+  <title>Стань стальной крысой</title>
+  <version>0.6</version>
+  <url>http://instead-games.ru/download/instead-steelrat-0.6.zip</url>
+  <size>1798013</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=114</descurl>
+ </game>
+ <game>
+  <name>ferryman</name>
+  <title>Паромщик</title>
+  <version>1.1</version>
+  <url>http://instead-games.ru/download/instead-ferryman-1.1.zip</url>
+  <size>10512987</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=112</descurl>
+ </game>
+ <game>
+  <name>project_b</name>
+  <title>Project B</title>
+  <version>0.4</version>
+  <url>http://instead-games.ru/download/instead-project_b-0.4.zip</url>
+  <size>155898</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=117</descurl>
+ </game>
+ <game>
+  <name>woodcutter</name>
+  <title>Дровосек</title>
+  <version>1.3</version>
+  <url>http://instead-games.ru/download/instead-woodcutter-1.3.zip</url>
+  <size>7347424</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=118</descurl>
+ </game>
+ <game>
+  <name>lifter</name>
+  <title>Лифтер</title>
+  <version>0.4</version>
+  <url>http://instead-games.ru/download/instead-lifter-0.4.zip</url>
+  <size>6200493</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=119</descurl>
+ </game>
+ <game>
+  <name>lifter2</name>
+  <title>Лифтер 2</title>
+  <version>0.3</version>
+  <url>http://instead-games.ru/download/instead-lifter2-0.3.zip</url>
+  <size>16740350</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=121</descurl>
+ </game>
+ <game>
+  <name>star_heritage_1</name>
+  <title>Звёздное Наследие. Часть 1. «Чёрная кобра»</title>
+  <version>0.5</version>
+  <url>http://instead-games.ru/download/instead-star_heritage_1-0.5.zip</url>
+  <size>90448781</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=122</descurl>
+ </game>
+ <game>
+  <name>ivan</name>
+  <title>Иван Царевич</title>
+  <version>0.2</version>
+  <url>http://instead-games.ru/download/instead-ivan-0.2.zip</url>
+  <size>595069</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=123</descurl>
+ </game>
+ <game>
+  <name>quarantine</name>
+  <title>Карантин</title>
+  <version>0.3.7</version>
+  <url>http://instead-games.ru/download/instead-quarantine-0.3.7.zip</url>
+  <size>6063904</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=124</descurl>
+ </game>
+ <game>
+  <name>instedoz1</name>
+  <title>ИНСТЕДОЗ#1</title>
+  <version>0.6</version>
+  <url>http://instead-games.ru/download/instead-instedoz1-0.6.zip</url>
+  <size>8869204</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=125</descurl>
+ </game>
+ <game>
+  <name>solitaire</name>
+  <title>Пасьянс Instead</title>
+  <version>0.9.4</version>
+  <url>http://instead-games.ru/download/instead-solitaire-0.9.4.zip</url>
+  <size>3834436</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=135</descurl>
+ </game>
+ <game>
+  <name>oldstory</name>
+  <title>Одна старая история</title>
+  <version>0.4.4</version>
+  <url>http://instead-games.ru/download/instead-oldstory-0.4.4.zip</url>
+  <size>2534494</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=137</descurl>
+ </game>
+ <game>
+  <name>insteadose3</name>
+  <title>ИНСТЕДОЗ 3: Последний рейс</title>
+  <version>0.4</version>
+  <url>http://instead-games.ru/download/instead-insteadose3-0.4.zip</url>
+  <size>18359863</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=147</descurl>
+ </game>
+ <game>
+  <name>mtungu_airplane</name>
+  <title>Mtungu Airplane</title>
+  <version>0.0.1</version>
+  <url>http://instead-games.ru/download/instead-mtungu_airplane-0.0.1.zip</url>
+  <size>3198454</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=154</descurl>
+ </game>
+ <game>
+  <name>ludd</name>
+  <title>Славный город Лудд</title>
+  <version>0.91</version>
+  <url>http://instead-games.ru/download/instead-ludd-0.91.zip</url>
+  <size>3170485</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=200</descurl>
+ </game>
+ <game>
+  <name>mission_tourist</name>
+  <title>Миссия &amp;lt;Турист&amp;gt;</title>
+  <version>1.0</version>
+  <url>http://instead-games.ru/download/instead-mission_tourist-1.0.zip</url>
+  <size>89258</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=210</descurl>
+ </game>
+ <game>
+  <name>city_of_mists</name>
+  <title>City Of Mists</title>
+  <version>0.0.2</version>
+  <url>http://instead-games.ru/download/instead-city_of_mists-0.0.2.zip</url>
+  <size>15021968</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=194</descurl>
+ </game>
+ <game>
+  <name>lode_runner</name>
+  <title>Lode Runner</title>
+  <version>2.2.2</version>
+  <url>http://instead-games.ru/download/instead-lode_runner-2.2.2.zip</url>
+  <size>936861</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=84</descurl>
+ </game>
+ <game>
   <name>hoppers</name>
   <title>Лягушки-непоседы</title>
   <version>1.0</version>
@@ -53,15 +476,6 @@
   <size>8115602</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=201</descurl>
- </game>
- <game>
-  <name>ludd</name>
-  <title>Славный город Лудд</title>
-  <version>0.91</version>
-  <url>http://instead-games.ru/download/instead-ludd-0.91.zip</url>
-  <size>3170485</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=200</descurl>
  </game>
  <game>
   <name>minerbold</name>
@@ -145,24 +559,6 @@
   <descurl>http://instead-games.ru/game.php?ID=188</descurl>
  </game>
  <game>
-  <name>satori</name>
-  <title>Satori</title>
-  <version>1.2</version>
-  <url>http://instead-games.ru/download/instead-satori-1.2.zip</url>
-  <size>3840121</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=94</descurl>
- </game>
- <game>
-  <name>last_raider</name>
-  <title>Last Raider</title>
-  <version>0.0.2</version>
-  <url>http://instead-games.ru/download/instead-last_raider-0.0.2.zip</url>
-  <size>142845</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=38</descurl>
- </game>
- <game>
   <name>rangers</name>
   <title>Космические рейнджеры</title>
   <version>1.8</version>
@@ -170,15 +566,6 @@
   <size>9702881</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=126</descurl>
- </game>
- <game>
-  <name>constellation_3</name>
-  <title>Созвездие: Полёт в бездну</title>
-  <version>1.04</version>
-  <url>http://instead-games.ru/download/instead-constellation_3-1.04.zip</url>
-  <size>35757183</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=56</descurl>
  </game>
  <game>
   <name>urq-hamster_1</name>
@@ -424,42 +811,6 @@
   <descurl>http://instead-games.ru/game.php?ID=178</descurl>
  </game>
  <game>
-  <name>code_10</name>
-  <title>Code-10</title>
-  <version>1.1</version>
-  <url>http://instead-games.ru/download/instead-code_10-1.1.zip</url>
-  <size>32210419</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=91</descurl>
- </game>
- <game>
-  <name>lydia</name>
-  <title>Лидия</title>
-  <version>1.3</version>
-  <url>http://instead-games.ru/download/instead-lydia-1.3.zip</url>
-  <size>9365238</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=109</descurl>
- </game>
- <game>
-  <name>mtungu_airplane</name>
-  <title>Mtungu Airplane</title>
-  <version>0.0.1</version>
-  <url>http://instead-games.ru/download/instead-mtungu_airplane-0.0.1.zip</url>
-  <size>3198454</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=154</descurl>
- </game>
- <game>
-  <name>catesc</name>
-  <title>ESCAPE OF THE CAT</title>
-  <version>0.4</version>
-  <url>http://instead-games.ru/download/instead-catesc-0.4.zip</url>
-  <size>3181114</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=149</descurl>
- </game>
- <game>
   <name>urq</name>
   <title>[URQ] Модуль URQ</title>
   <version>1.9.9</version>
@@ -469,15 +820,6 @@
   <descurl>http://instead-games.ru/game.php?ID=151</descurl>
  </game>
  <game>
-  <name>woodcutter</name>
-  <title>Дровосек</title>
-  <version>1.3</version>
-  <url>http://instead-games.ru/download/instead-woodcutter-1.3.zip</url>
-  <size>7347424</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=118</descurl>
- </game>
- <game>
   <name>one_day</name>
   <title>День из жизни</title>
   <version>0.1</version>
@@ -485,15 +827,6 @@
   <size>9890654</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=148</descurl>
- </game>
- <game>
-  <name>insteadose3</name>
-  <title>ИНСТЕДОЗ 3: Последний рейс</title>
-  <version>0.4</version>
-  <url>http://instead-games.ru/download/instead-insteadose3-0.4.zip</url>
-  <size>18359863</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=147</descurl>
  </game>
  <game>
   <name>goblin</name>
@@ -532,15 +865,6 @@
   <descurl>http://instead-games.ru/game.php?ID=18</descurl>
  </game>
  <game>
-  <name>ilines</name>
-  <title>Шарики INSTEAD</title>
-  <version>1.1</version>
-  <url>http://instead-games.ru/download/instead-ilines-1.1.zip</url>
-  <size>858118</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=140</descurl>
- </game>
- <game>
   <name>wolf_goat_cabbage</name>
   <title>Волк, Коза и Капуста</title>
   <version>2.0.1</version>
@@ -559,33 +883,6 @@
   <descurl>http://instead-games.ru/game.php?ID=21</descurl>
  </game>
  <game>
-  <name>constellation</name>
-  <title>Constellation</title>
-  <version>0.3.3</version>
-  <url>http://instead-games.ru/download/instead-constellation-0.3.3.zip</url>
-  <size>1990203</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=49</descurl>
- </game>
- <game>
-  <name>apple_day</name>
-  <title>День Яблока</title>
-  <version>1.3.1</version>
-  <url>http://instead-games.ru/download/instead-apple_day-1.3.1.zip</url>
-  <size>2220227</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=83</descurl>
- </game>
- <game>
-  <name>solitaire</name>
-  <title>Пасьянс Instead</title>
-  <version>0.9.4</version>
-  <url>http://instead-games.ru/download/instead-solitaire-0.9.4.zip</url>
-  <size>3834436</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=135</descurl>
- </game>
- <game>
   <name>tale_about_ivan</name>
   <title>Сказка о том, как Иван-дурак невесту искал</title>
   <version>0.1</version>
@@ -595,15 +892,6 @@
   <descurl>http://instead-games.ru/game.php?ID=134</descurl>
  </game>
  <game>
-  <name>oldstory</name>
-  <title>Одна старая история</title>
-  <version>0.4.4</version>
-  <url>http://instead-games.ru/download/instead-oldstory-0.4.4.zip</url>
-  <size>2534494</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=137</descurl>
- </game>
- <game>
   <name>ruins</name>
   <title>Среди руин</title>
   <version>0.3</version>
@@ -611,60 +899,6 @@
   <size>44349</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=139</descurl>
- </game>
- <game>
-  <name>lifter</name>
-  <title>Лифтер</title>
-  <version>0.4</version>
-  <url>http://instead-games.ru/download/instead-lifter-0.4.zip</url>
-  <size>6200493</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=119</descurl>
- </game>
- <game>
-  <name>lifter2</name>
-  <title>Лифтер 2</title>
-  <version>0.3</version>
-  <url>http://instead-games.ru/download/instead-lifter2-0.3.zip</url>
-  <size>16740350</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=121</descurl>
- </game>
- <game>
-  <name>star_heritage_1</name>
-  <title>Звёздное Наследие. Часть 1. «Чёрная кобра»</title>
-  <version>0.5</version>
-  <url>http://instead-games.ru/download/instead-star_heritage_1-0.5.zip</url>
-  <size>90448781</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=122</descurl>
- </game>
- <game>
-  <name>ivan</name>
-  <title>Иван Царевич</title>
-  <version>0.2</version>
-  <url>http://instead-games.ru/download/instead-ivan-0.2.zip</url>
-  <size>595069</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=123</descurl>
- </game>
- <game>
-  <name>quarantine</name>
-  <title>Карантин</title>
-  <version>0.3.7</version>
-  <url>http://instead-games.ru/download/instead-quarantine-0.3.7.zip</url>
-  <size>6063904</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=124</descurl>
- </game>
- <game>
-  <name>instedoz1</name>
-  <title>ИНСТЕДОЗ#1</title>
-  <version>0.6</version>
-  <url>http://instead-games.ru/download/instead-instedoz1-0.6.zip</url>
-  <size>8869204</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=125</descurl>
  </game>
  <game>
   <name>wolf_goat_yakuza</name>
@@ -685,15 +919,6 @@
   <descurl>http://instead-games.ru/game.php?ID=31</descurl>
  </game>
  <game>
-  <name>steelrat</name>
-  <title>Стань стальной крысой</title>
-  <version>0.6</version>
-  <url>http://instead-games.ru/download/instead-steelrat-0.6.zip</url>
-  <size>1798013</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=114</descurl>
- </game>
- <game>
   <name>bumblebee_flight</name>
   <title>Полёт шмеля</title>
   <version>1.0.3</version>
@@ -701,33 +926,6 @@
   <size>7174</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=116</descurl>
- </game>
- <game>
-  <name>project_b</name>
-  <title>Project B</title>
-  <version>0.4</version>
-  <url>http://instead-games.ru/download/instead-project_b-0.4.zip</url>
-  <size>155898</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=117</descurl>
- </game>
- <game>
-  <name>ferryman</name>
-  <title>Паромщик</title>
-  <version>1.1</version>
-  <url>http://instead-games.ru/download/instead-ferryman-1.1.zip</url>
-  <size>10512987</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=112</descurl>
- </game>
- <game>
-  <name>dead_or_alive</name>
-  <title>Живым или мертвым</title>
-  <version>0.2.1</version>
-  <url>http://instead-games.ru/download/instead-dead_or_alive-0.2.1.zip</url>
-  <size>1558902</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=10</descurl>
  </game>
  <game>
   <name>time_to_survive</name>
@@ -784,15 +982,6 @@
   <descurl>http://instead-games.ru/game.php?ID=30</descurl>
  </game>
  <game>
-  <name>infected</name>
-  <title>Заражённые</title>
-  <version>1.3</version>
-  <url>http://instead-games.ru/download/instead-infected-1.3.zip</url>
-  <size>6741833</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=103</descurl>
- </game>
- <game>
   <name>forest_heart</name>
   <title>Сердце леса</title>
   <version>1.3.3</version>
@@ -820,15 +1009,6 @@
   <descurl>http://instead-games.ru/game.php?ID=29</descurl>
  </game>
  <game>
-  <name>lode_runner</name>
-  <title>Lode Runner</title>
-  <version>2.2.1</version>
-  <url>http://instead-games.ru/download/instead-lode_runner-2.2.1.zip</url>
-  <size>934221</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=84</descurl>
- </game>
- <game>
   <name>gremlins</name>
   <title>Гремлины</title>
   <version>0.5.1</version>
@@ -836,24 +1016,6 @@
   <size>14307228</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=100</descurl>
- </game>
- <game>
-  <name>cat</name>
-  <title>Возвращение квантового кота</title>
-  <version>1.6</version>
-  <url>http://instead-games.ru/download/instead-cat-1.6.zip</url>
-  <size>4550110</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=107</descurl>
- </game>
- <game>
-  <name>cuba</name>
-  <title>Куба</title>
-  <version>1.1</version>
-  <url>http://instead-games.ru/download/instead-cuba-1.1.zip</url>
-  <size>12093429</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=108</descurl>
  </game>
  <game>
   <name>flash</name>
@@ -865,15 +1027,6 @@
   <descurl>http://instead-games.ru/game.php?ID=87</descurl>
  </game>
  <game>
-  <name>transition</name>
-  <title>Переход</title>
-  <version>1.4</version>
-  <url>http://instead-games.ru/download/instead-transition-1.4.zip</url>
-  <size>171896906</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=104</descurl>
- </game>
- <game>
   <name>tasty_dinner</name>
   <title>Вкусный ужин</title>
   <version>0.1.2</version>
@@ -881,15 +1034,6 @@
   <size>1646276</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=34</descurl>
- </game>
- <game>
-  <name>ungodly_earth</name>
-  <title>Ungodly Earth: Пустыня Снов</title>
-  <version>0.2.2</version>
-  <url>http://instead-games.ru/download/instead-ungodly_earth-0.2.2.zip</url>
-  <size>1385059</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=71</descurl>
  </game>
  <game>
   <name>dn_mission_autograph</name>
@@ -908,24 +1052,6 @@
   <size>144966</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=86</descurl>
- </game>
- <game>
-  <name>last_hope</name>
-  <title>Последняя надежда</title>
-  <version>1.1.1</version>
-  <url>http://instead-games.ru/download/instead-last_hope-1.1.1.zip</url>
-  <size>3241675</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=11</descurl>
- </game>
- <game>
-  <name>bear</name>
-  <title>Путь медведя</title>
-  <version>0.9</version>
-  <url>http://instead-games.ru/download/instead-bear-0.9.zip</url>
-  <size>9843252</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=85</descurl>
  </game>
  <game>
   <name>basement</name>
@@ -964,15 +1090,6 @@
   <descurl>http://instead-games.ru/game.php?ID=39</descurl>
  </game>
  <game>
-  <name>roboto</name>
-  <title>ROBOTO</title>
-  <version> 0.2</version>
-  <url>http://instead-games.ru/download/instead-roboto-0.2.zip</url>
-  <size>589268</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=77</descurl>
- </game>
- <game>
   <name>ded_moroz_2012</name>
   <title>Дед Мороз 2012</title>
   <version>0.2.1</version>
@@ -991,24 +1108,6 @@
   <descurl>http://instead-games.ru/game.php?ID=14</descurl>
  </game>
  <game>
-  <name>great_grandmas_chest</name>
-  <title>Прабабкин сундук</title>
-  <version>0.2.0</version>
-  <url>http://instead-games.ru/download/instead-great_grandmas_chest-0.2.0.zip</url>
-  <size>67707</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=22</descurl>
- </game>
- <game>
-  <name>kingdom_of_grain</name>
-  <title>Королевство Зерна [ru|en]</title>
-  <version>0.9.3</version>
-  <url>http://instead-games.ru/download/instead-kingdom_of_grain-0.9.3.zip</url>
-  <size>150776</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=69</descurl>
- </game>
- <game>
   <name>bunker</name>
   <title>Бункер</title>
   <version>0.3.1</version>
@@ -1016,69 +1115,6 @@
   <size>9536</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=68</descurl>
- </game>
- <game>
-  <name>kayleth</name>
-  <title>Kayleth [ru|en]</title>
-  <version>0.4.1</version>
-  <url>http://instead-games.ru/download/instead-kayleth-0.4.1.zip</url>
-  <size>7442146</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=73</descurl>
- </game>
- <game>
-  <name>fallout_quest</name>
-  <title>Fallout quest</title>
-  <version>0.0.1</version>
-  <url>http://instead-games.ru/download/instead-fallout_quest-0.0.1.zip</url>
-  <size>1149304</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=35</descurl>
- </game>
- <game>
-  <name>hotdog</name>
-  <title>Операция «Хотдог»</title>
-  <version>0.1.3</version>
-  <url>http://instead-games.ru/download/instead-hotdog-0.1.3.zip</url>
-  <size>1569465</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=42</descurl>
- </game>
- <game>
-  <name>starfighter</name>
-  <title>Starfighter</title>
-  <version>1.2</version>
-  <url>http://instead-games.ru/download/instead-starfighter-1.2.zip</url>
-  <size>289531</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=47</descurl>
- </game>
- <game>
-  <name>mindtricks</name>
-  <title>Игры с разумом</title>
-  <version>1.0</version>
-  <url>http://instead-games.ru/download/instead-mindtricks-1.0.zip</url>
-  <size>23493663</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=44</descurl>
- </game>
- <game>
-  <name>mirror</name>
-  <title>Зеркало [ru|en]</title>
-  <version>0.9</version>
-  <url>http://instead-games.ru/download/instead-mirror-0.9.zip</url>
-  <size>10492459</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=46</descurl>
- </game>
- <game>
-  <name>crossworlds</name>
-  <title>Перекресток миров</title>
-  <version> 0.7</version>
-  <url>http://instead-games.ru/download/instead-crossworlds-0.7.zip</url>
-  <size>192329</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=41</descurl>
  </game>
  <game>
   <name>nothing_unusual</name>
@@ -1099,15 +1135,6 @@
   <descurl>http://instead-games.ru/game.php?ID=17</descurl>
  </game>
  <game>
-  <name>toilet_again</name>
-  <title>Escape The Toilet Again</title>
-  <version>0.1</version>
-  <url>http://instead-games.ru/download/instead-toilet_again-0.1.zip</url>
-  <size>8136916</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=19</descurl>
- </game>
- <game>
   <name>taiga</name>
   <title>Дикая тайга</title>
   <version>0.1</version>
@@ -1124,14 +1151,5 @@
   <size>2584853</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=24</descurl>
- </game>
- <game>
-  <name>journey</name>
-  <title>Детективная история</title>
-  <version>0.1</version>
-  <url>http://instead-games.ru/download/instead-journey-0.1.zip</url>
-  <size>4277813</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=25</descurl>
  </game>
 </game_list>

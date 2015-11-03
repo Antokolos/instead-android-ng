@@ -91,7 +91,7 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(
 
     /* Run the application code! */
     int status;
-    char *argv[14];
+    char *argv[15];
     int n = 1;
     if (jpath != NULL) {
         const char *path = env->GetStringUTFChars(jpath, 0);
@@ -102,6 +102,8 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(
 
     argv[0] = SDL_strdup("sdl-instead");
 
+    argv[n++] = SDL_strdup("-nostdgames");
+    
     if (jres != NULL) {
         const char *res = env->GetStringUTFChars(jres, 0);
         printf("res = %s\n", res);
