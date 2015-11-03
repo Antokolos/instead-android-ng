@@ -22,6 +22,48 @@ public class StorageResolver {
     public static final String DataFlag = ".version";
     public static final String BundledGame = "bundled";
 
+    /**
+     * This method represents getStorage() code that was used in version 1.1.1
+     * It should be removed after 1.1.3 and should not be used in future!
+     * TODO: Remove this method after 1.1.3
+     * @deprecated
+     * @return
+     */
+    public static String getStorage111(){
+        final Context context = InsteadApplication.getAppContext();
+        String result = context.getExternalFilesDir(null) + "/";
+
+        String extStorageState = Environment.getExternalStorageState();
+        boolean canRead;
+        boolean canWrite;
+        if ("mounted".equals(extStorageState)) {
+            canWrite = true;
+            canRead = true;
+        } else if ("mounted_ro".equals(extStorageState)) {
+            canRead = true;
+            canWrite = false;
+        } else {
+            canWrite = false;
+            canRead = false;
+        }
+        if(result.contains("emulated") || !canRead || !canWrite)
+        {
+            PackageManager packageManager = context.getPackageManager();
+            String packageName = context.getPackageName();
+            try {
+                PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 0);
+                result = packageInfo.applicationInfo.dataDir + "/files/";
+                File dir = new File(result);
+                if (!dir.exists()) {
+                    dir.mkdir();
+                }
+            } catch(PackageManager.NameNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return result;
+    }
+
     public static String getStorage(){
         final Context context = InsteadApplication.getAppContext();
 
