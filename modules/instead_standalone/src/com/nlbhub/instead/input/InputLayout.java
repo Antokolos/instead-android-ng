@@ -3,6 +3,7 @@ package com.nlbhub.instead.input;
 import android.app.Activity;
 import android.content.Context;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -15,6 +16,7 @@ import com.nlbhub.instead.R;
  */
 public class InputLayout extends RelativeLayout {
 
+    public static final int IN_MAX = 16;
     private static InputDialog input;
     private ImageButton kbdButton;
     private View view;
@@ -50,5 +52,22 @@ public class InputLayout extends RelativeLayout {
     public void close() {
         InputMethodManager im = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         im.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        int action = event.getAction();
+        if (action == KeyEvent.ACTION_DOWN || action == KeyEvent.ACTION_MULTIPLE) {
+            int keyCode = event.getKeyCode();
+            if (keyCode != KeyEvent.KEYCODE_UNKNOWN) {
+                Keys.keyPress(keyCode);
+            } else {
+                String characters = event.getCharacters();
+                if (characters != null && characters.length() > 0) {
+                    Keys.inputText(characters, IN_MAX);
+                }
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 }

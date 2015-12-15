@@ -13,7 +13,11 @@ public class Keys {
 	private static void Down(int k){	
 		SDLActivity.onNativeKeyDown(k);
 	}
-	
+
+	public static void keyPress(int keyCode) {
+		Down(keyCode);
+		//Up(keyCode);
+	}
 	public static void key(char c){
 		String str = Character.toString(c);
 		if(str.matches("[0-9]")){
@@ -54,7 +58,7 @@ public class Keys {
 			char c = s.charAt(i);
 			Keys.key(c);
 		}
-		Keys.Enter();
+		//Keys.Enter();
 	}
 
 	public static void Enter(){
@@ -129,10 +133,7 @@ switch (s) {
 
 
 if(k>0){
-	if(shift) ShiftDown();
-	Down(k);
-	if(shift) ShiftUp();
-	Up(k);	
+	keyPress(k);
 }
 }
 
@@ -185,13 +186,7 @@ case 'ё': 	k = KeyEvent.KEYCODE_T; break;
 
 
 if(k>0){
-
-AltShift();
-if(shift) ShiftDown();
-Down(k);
-if(shift) ShiftUp();
-Up(k);
-AltShift();
+	keyPress(k);
 
 }
 
@@ -214,8 +209,7 @@ AltShift();
 		case '9': 	k = KeyEvent.KEYCODE_9; break;
 		}
 		if(k>0){
-			Down(k);
-			Up(k);	
+			keyPress(k);
 		}
 	}
 
@@ -245,10 +239,7 @@ AltShift();
 		
 		}
 		if(k>0){
-			if(shift) ShiftDown();
-			Down(k);
-			Up(k);
-			if(shift) ShiftUp();
+			keyPress(k);
 		}
 	}
 }
