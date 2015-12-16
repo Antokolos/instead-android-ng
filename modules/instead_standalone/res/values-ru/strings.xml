@@ -5,7 +5,6 @@
     <string name="dataerror">Ошибка загрузки файла данных</string>
     <string name="instdata">Установка</string>
     <string name="writefile">Запись файла</string>
-    <string name="in_text">Введите текст:</string>
     <string name="clear">Стереть</string>
     <string name="enter">Ввод</string>
     <string name="close">Скрыть</string>

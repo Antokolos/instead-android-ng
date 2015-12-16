@@ -512,9 +512,6 @@ class SDLSurface extends SDLSurfaceBase {
 	// Touch events
 	@TargetApi(Build.VERSION_CODES.FROYO)
 	public boolean onTouch(View v, MotionEvent event) {
-		final int WAIT_TOUCH = 1000;
-		final int SQUAR_TOUCH = 10;
-		//	final int Y = SDLActivity.getResY() - (SDLActivity.getResY()/3);
 		SDLActivity.refreshOff();
 		int action = event.getAction();
 		float x = event.getX();
@@ -529,12 +526,16 @@ class SDLSurface extends SDLSurfaceBase {
 			pA = s - pA;
 			pX = Math.abs(x - pX);
 			pY = Math.abs(y - pY);
-			if (pA > WAIT_TOUCH && pX < SQUAR_TOUCH && pY < SQUAR_TOUCH) {
-				SDLActivity.getKeyboardAdapter().showKeyboard();
-			}
+
+			/* Uncomment to enable show keyboard by long tap
+			 * final int WAIT_TOUCH = 1000;
+			 * final int SQUAR_TOUCH = 10;
+			 * if (pA > WAIT_TOUCH && pX < SQUAR_TOUCH && pY < SQUAR_TOUCH) {
+			 * 	 SDLActivity.getKeyboardAdapter().showKeyboard();
+			 * }
+			 */
 		}
 
-		//Log.d("touch", Integer.toString(Y)+"  "+Float.toString(y));
 		// TODO: Anything else we need to pass?
 		final int touchDevId = event.getDeviceId();
 		final int pointerCount = event.getPointerCount();

@@ -113,7 +113,7 @@
     <string name="game">Игра </string>
     <string name="clearfav">Очистить список любимых</string>
     <string name="virtkey">Виртуальная клавиатура</string>
-    <string name="virtkey_t">Для показа клавиатуры в играх нажать в любом месте экрана, подержать больше 1 секунды и отпустить</string>
+    <string name="virtkey_t">Для показа клавиатуры в играх нажмите на иконку клавиатуры внизу экрана</string>
     <string name="volume">Громкость:</string>
     <string name="override_vol">VolUp/VolDown как Up/Down</string>
     <string name="add_cut">Игра Instead (ярлык)</string>

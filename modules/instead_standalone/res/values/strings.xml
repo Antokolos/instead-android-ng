@@ -6,7 +6,6 @@
     <string name="dataerror">Data-file downloading error</string>
     <string name="instdata">Installing</string>
     <string name="writefile">Save file</string>
-    <string name="in_text">Enter text:</string>
     <string name="clear">Clear</string>
     <string name="enter">Enter</string>
     <string name="close">Hide</string>

@@ -17,7 +17,6 @@ import com.nlbhub.instead.R;
 public class InputLayout extends RelativeLayout {
 
     public static final int IN_MAX = 16;
-    private static InputDialog input;
     private ImageButton kbdButton;
     private View view;
 
@@ -29,7 +28,6 @@ public class InputLayout extends RelativeLayout {
         setLayoutParams(getParams());
         setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
         addView(view);
-        input = new InputDialog(context, ((Activity) context).getString(R.string.in_text));
         kbdButton = (ImageButton) findViewById(R.id.kbdButton);
         kbdButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -60,7 +58,7 @@ public class InputLayout extends RelativeLayout {
         if (action == KeyEvent.ACTION_DOWN || action == KeyEvent.ACTION_MULTIPLE) {
             int keyCode = event.getKeyCode();
             if (keyCode != KeyEvent.KEYCODE_UNKNOWN) {
-                Keys.keyPress(keyCode);
+                Keys.keyPress(keyCode, false);
             } else {
                 String characters = event.getCharacters();
                 if (characters != null && characters.length() > 0) {
