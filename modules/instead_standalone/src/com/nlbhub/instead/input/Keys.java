@@ -6,7 +6,33 @@ import com.nlbhub.instead.SDLActivity;
 public class Keys {
 
 	public static void keyPress(int keyCode, boolean shift) {
+        if (shift) {
+            SDLActivity.onNativeKeyDown(KeyEvent.KEYCODE_SHIFT_LEFT);
+        }
+        waitFun();
         SDLActivity.onNativeKeyDown(keyCode);
+    }
+
+    public static void keyRelease(int keyCode, boolean shift) {
+        SDLActivity.onNativeKeyUp(keyCode);
+        waitFun();
+        if (shift) {
+            SDLActivity.onNativeKeyUp(KeyEvent.KEYCODE_SHIFT_LEFT);
+        }
+    }
+
+    public static void down(int keyCode, boolean shift) {
+        keyPress(keyCode, shift);
+        waitFun();
+        keyRelease(keyCode, shift);
+    }
+
+    private static void waitFun() {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            // no op
+        }
     }
 
 	public static void key(char c) {
@@ -74,7 +100,7 @@ public class Keys {
         }
 
         if (k>0) {
-            keyPress(k, shift);
+            down(k, shift);
         }
     }
 
@@ -121,7 +147,7 @@ public class Keys {
         }
 
         if(k>0) {
-            keyPress(k, shift);
+            down(k, shift);
         }
     }
 	
@@ -141,7 +167,7 @@ public class Keys {
 		}
 
 		if(k>0) {
-			keyPress(k, false);
+			down(k, false);
 		}
 	}
 	
@@ -169,7 +195,7 @@ public class Keys {
 		}
 
 		if(k>0) {
-			keyPress(k, shift);
+			down(k, shift);
 		}
 	}
 }

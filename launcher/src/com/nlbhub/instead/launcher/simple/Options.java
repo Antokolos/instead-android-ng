@@ -140,12 +140,17 @@ public class Options extends Activity {
 	}
 	
 	private void deleteCfg(){
+		SystemPathResolver dataResolver = new SystemPathResolver("data", this);
 		(new File(this.getFilesDir()+"/"+ Globals.GameListFileName)).delete();
 		(new File(this.getFilesDir()+"/"+Globals.GameListAltFileName)).delete();
 		(new File(this.getFilesDir()+"/"+ Globals.GameListNLBDemosFileName)).delete();
 		(new File(this.getFilesDir()+"/"+Globals.GameListNLBFullFileName)).delete();
 		lastGame.clearAll();
-		(new File(Globals.getOutFilePath(StorageResolver.DataFlag))).delete();
+		try {
+			StorageResolver.delete(dataResolver.getPath() + StorageResolver.DataFlag);
+		} catch (IOException e) {
+			Log.e(InsteadApplication.ApplicationName, "Error while deleting " + StorageResolver.DataFlag, e);
+		}
 		(new File(Globals.getOutFilePath(StorageResolver.Options))).delete();
 		finish();
 	}

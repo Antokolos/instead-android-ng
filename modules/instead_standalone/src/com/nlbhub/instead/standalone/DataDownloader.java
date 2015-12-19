@@ -182,7 +182,7 @@ public class DataDownloader extends Thread {
 			StorageResolver.delete(dataResolver.getPath() + "themes");
 			StorageResolver.delete(dataResolver.getPath() + "languages");
 			StorageResolver.delete(dataResolver.getPath() + "lang");
-            (new File(StorageResolver.getOutFilePath(StorageResolver.DataFlag))).delete();
+			StorageResolver.delete(dataResolver.getPath() + StorageResolver.DataFlag);
 			extractArchive(Parent.getResources().openRawResource(R.raw.games), new SDPathResolver("appdata"));
 			extractArchive(Parent.getResources().openRawResource(R.raw.data), dataResolver);
 			extractArchive(getAppropriateLibsStream(), new SystemPathResolver("libs", Parent.getApplicationContext()));
@@ -194,7 +194,7 @@ public class DataDownloader extends Thread {
 		byte buff[] = InsteadApplication.AppVer(Parent).getBytes();
 		try {
 			try {
-                path = StorageResolver.getOutFilePath(StorageResolver.DataFlag);
+                path = dataResolver.getPath() + StorageResolver.DataFlag;
 				out = new FileOutputStream(path);
 				out.write(buff);
 			} finally {

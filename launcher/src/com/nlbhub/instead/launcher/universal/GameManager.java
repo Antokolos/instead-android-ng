@@ -37,6 +37,7 @@ import android.widget.Toast;
 import com.nlbhub.instead.launcher.simple.FilterConstants;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
+import com.nlbhub.instead.standalone.MainMenuAbstract;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.launcher.simple.Globals;
 import com.nlbhub.instead.launcher.simple.LastGame;
@@ -1002,12 +1003,8 @@ public class GameManager extends ListActivity implements ViewBinder {
 		dwn = false;
 	}
 
-	private boolean isFile(String s) {
-		return (new File(Globals.getOutFilePath(s))).exists();
-	}
-
 	public boolean checkInstall() {
-		return isFile(StorageResolver.DataFlag);
+		return MainMenuAbstract.checkInstall(this);
 	}
 
 	private class ListItem {

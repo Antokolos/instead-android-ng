@@ -24,6 +24,7 @@ import com.google.android.vending.expansion.downloader.*;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.SDLActivity;
 import com.nlbhub.instead.standalone.expansion.APKHelper;
+import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
 import java.io.*;
 import java.util.*;
@@ -171,11 +172,17 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
         }
     }
 
+
     public boolean checkInstall() {
-        String path = StorageResolver.getOutFilePath(StorageResolver.DataFlag);
+        return checkInstall(this);
+    }
+
+    public static boolean checkInstall(Context context) {
+        SystemPathResolver dataResolver = new SystemPathResolver("data", context);
 
         BufferedReader input = null;
         try {
+            String path = dataResolver.getPath() + StorageResolver.DataFlag;
             input = new BufferedReader(new InputStreamReader(
                     new FileInputStream(new File(path)), "UTF-8"));
         } catch (UnsupportedEncodingException e) {
@@ -183,6 +190,8 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
         } catch (FileNotFoundException e) {
             return false;
         } catch (SecurityException e) {
+            return false;
+        } catch (IOException e) {
             return false;
         }
 
@@ -193,7 +202,7 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
             line = input.readLine();
             try {
                 if (line.toLowerCase().matches(
-                        ".*" + InsteadApplication.AppVer(this).toLowerCase() + ".*")) {
+                        ".*" + InsteadApplication.AppVer(context).toLowerCase() + ".*")) {
                     input.close();
                     return true;
                 }
