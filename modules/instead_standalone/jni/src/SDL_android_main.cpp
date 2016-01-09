@@ -188,4 +188,66 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_toggleMenu(JNIEnv* env, jcla
     SDL_PushEvent(&event); // Inject key press of the Escape Key
 }
 
+/**
+ * Simple SDL2 test.
+ * by Robert Stephens http://pastebin.com/TRb6Ph1V
+ * Original code for SDL: http://41j.com/blog/2011/09/simple-sdl-example-in-c/
+ */
+int test_main(int argc, char ** argv) {
+
+    size_t width = 800;
+    size_t height = 600;
+    bool quit = false;
+
+    SDL_Init(SDL_INIT_VIDEO);
+
+    SDL_Window * window = SDL_CreateWindow("SDL2 Pixel Drawing",
+        SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
+
+    SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
+    SDL_Texture * texture = SDL_CreateTexture(renderer,
+        SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, width, height);
+    Uint32 * pixels = new Uint32[width * height];
+    memset(pixels, 255, width * height * sizeof(Uint32));
+
+    while(!quit) {
+        SDL_UpdateTexture(texture, NULL, pixels, width * sizeof(Uint32));
+
+        for(int n=0;n<1000;n++) {
+            int x=rand()%width;
+            int y=rand()%height;
+            pixels[y * width + x] = rand()*100000;
+        }
+
+        SDL_Event event;
+        while(SDL_PollEvent(&event)) {
+            switch (event.type) {
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+            }
+            if(event.key.keysym.sym == SDLK_q) {
+                quit = true;
+                break;
+            }
+            else if(event.key.keysym.sym == SDLK_c) {
+                memset(pixels, 255, width * height * sizeof(Uint32));
+            }
+
+        }
+
+        SDL_RenderClear(renderer);
+        SDL_RenderCopy(renderer, texture, NULL, NULL);
+        SDL_RenderPresent(renderer);
+    }
+
+    delete[] pixels;
+    SDL_DestroyTexture(texture);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
+
 /* vi: set ts=4 sw=4 expandtab: */
