@@ -25,10 +25,26 @@ static int pfd[2];
 static pthread_t thr;
 static const char *tag = "Instead-NG";
 static FILE *logFile;
+int stopIssued = 0;
+pthread_mutex_t stopMutex;
 
-static void *thread_func(void*) {
+static int getStopIssued(void) {
+  int ret = 0;
+  pthread_mutex_lock(&stopMutex);
+  ret = stopIssued;
+  pthread_mutex_unlock(&stopMutex);
+  return ret;
+}
+
+static void setStopIssued(int val) {
+  pthread_mutex_lock(&stopMutex);
+  stopIssued = val;
+  pthread_mutex_unlock(&stopMutex);
+}
+
+static void write_buffer_to_log() {
     ssize_t rdsz;
-    char buf[512];
+    char buf[4096];
     while((rdsz = read(pfd[0], buf, sizeof buf - 1)) > 0) {
         if(buf[rdsz - 1] == '\n') --rdsz;
         buf[rdsz] = 0;  /* add null-terminator */
@@ -38,6 +54,15 @@ static void *thread_func(void*) {
         }
         fflush(logFile);
         usleep(500000);
+    }
+}
+
+static void *thread_func(void*) {
+    while(getStopIssued() == 0) {
+        write_buffer_to_log();
+    }
+    if (logFile != NULL) {
+        fprintf(logFile, "Logger thread is terminating...\n");
     }
     return 0;
 }
@@ -57,7 +82,7 @@ int start_logger(const char *app_name) {
     /* spawn the logging thread */
     if(pthread_create(&thr, 0, thread_func, 0) == -1)
         return -1;
-    pthread_detach(thr);
+    // pthread_detach(thr); -- I'll use pthread_join() instead
     return 0;
 }
 
@@ -154,7 +179,20 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_nativeInit(
     }
     argv[n] = NULL;
 
+    printf("Before instead_main()\n");
     status = SDL_main(n, argv);
+    printf("After instead_main()\n");
+    fflush(NULL);
+    // Stopping the logger thread, if needed. Closing the log file, if it was opened...
+    if (jnativelog != NULL) {
+        // Wait for potentially not logged data
+        usleep(1000000);
+        setStopIssued(1);
+        void* thr_res;
+        pthread_join(thr, &thr_res);
+        // Write to the log anything that can be missed by the thread
+        write_buffer_to_log();
+    }
     if (logFile != NULL) {
         fclose(logFile);
     }
@@ -189,11 +227,100 @@ extern "C" void Java_com_nlbhub_instead_SDLActivity_toggleMenu(JNIEnv* env, jcla
 }
 
 /**
+ * SDL_image test
+ */
+/*int img_test(int argc, char ** argv) {
+    bool quit = false;
+    SDL_Event event;
+
+    SDL_Init(SDL_INIT_VIDEO);
+    IMG_Init(IMG_INIT_PNG);
+
+    SDL_Window* window = SDL_CreateWindow("SDL2 Displaying Image", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, 0);
+
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
+    SDL_Surface* image = IMG_Load("/data/data/com.nlbhub.instead.launcher/app_data/themes/default/bg.png");
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, image);
+
+    while (!quit)
+    {
+        SDL_WaitEvent(&event);
+
+        switch (event.type)
+        {
+            case SDL_QUIT:
+                quit = true;
+                break;
+        }
+
+        //SDL_Rect dstrect = { 5, 5, 320, 240 };
+        //SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+        SDL_RenderCopy(renderer, texture, NULL, NULL);
+        SDL_RenderPresent(renderer);
+    }
+
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(image);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+
+    IMG_Quit();
+    SDL_Quit();
+
+    return 0;
+}
+
+int draw_test(int argc, char* argv[]) {
+  SDL_Window *window;
+  SDL_Renderer *renderer;
+  SDL_Rect rect={50,50,50,50};
+  SDL_Event event;
+  //The font that's going to be used
+  //TTF_Font *font = NULL;
+  //SDL_Surface *text = NULL;
+  //SDL_Texture *message = NULL;
+
+  if (SDL_Init(SDL_INIT_VIDEO) < 0) return 1;
+  //if( TTF_Init() == -1 ) {
+    //return 1;
+  //}
+  //Open the font
+  //font = TTF_OpenFont( "/sdcard/STEINEMU.ttf", 28 );
+
+  window = SDL_CreateWindow("Hallo", 100, 100, 200, 200, SDL_WINDOW_SHOWN);
+  renderer = SDL_CreateRenderer(window, -1,0);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // black
+  SDL_RenderClear(renderer);
+
+  SDL_SetRenderDrawColor(renderer,255,255,255,255); // white
+  SDL_RenderFillRect(renderer,&rect);
+  SDL_RenderPresent(renderer);
+
+  //Render the text
+  //text = TTF_RenderText_Solid( font, argv[0], textColor );
+  //messageRect.x = 10;
+  //messageRect.y = 10;
+  //messageRect.w = 800;
+  //messageRect.h = 25;
+  //message = SDL_CreateTextureFromSurface(renderer, text);
+  //draw_scene(renderer, message);
+  while (1)
+    while(SDL_PollEvent(&event))
+      if (event.type==SDL_QUIT) goto quit;
+  quit:
+  //SDL_FreeSurface(text);
+  //TTF_CloseFont(font);
+  //SDL_DestroyTexture(message);
+  SDL_Quit();
+  return 0;
+}*/
+
+/**
  * Simple SDL2 test.
  * by Robert Stephens http://pastebin.com/TRb6Ph1V
  * Original code for SDL: http://41j.com/blog/2011/09/simple-sdl-example-in-c/
  */
-int test_main(int argc, char ** argv) {
+/*int test_main(int argc, char ** argv) {
 
     size_t width = 800;
     size_t height = 600;
@@ -248,6 +375,6 @@ int test_main(int argc, char ** argv) {
     SDL_Quit();
 
     return 0;
-}
+}*/
 
 /* vi: set ts=4 sw=4 expandtab: */

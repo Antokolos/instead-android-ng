@@ -1,6 +1,6 @@
 /*
   SDL_mixer:  An audio mixer library based on the SDL library
-  Copyright (C) 1997-2013 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -43,24 +43,25 @@ static size_t sdl_read_func(void *ptr, size_t size, size_t nmemb, void *datasour
     return SDL_RWread((SDL_RWops*)datasource, ptr, size, nmemb);
 }
 
-static Sint64 sdl_seek_func(void *datasource, ogg_int64_t offset, int whence)
+static int sdl_seek_func(void *datasource, ogg_int64_t offset, int whence)
 {
-    return SDL_RWseek((SDL_RWops*)datasource, offset, whence);
+    return (int)SDL_RWseek((SDL_RWops*)datasource, offset, whence);
 }
 
-static Sint64 sdl_close_func_freesrc(void *datasource)
+static int sdl_close_func_freesrc(void *datasource)
 {
     return SDL_RWclose((SDL_RWops*)datasource);
 }
 
-static Sint64 sdl_close_func_nofreesrc(void *datasource)
+static int sdl_close_func_nofreesrc(void *datasource)
 {
-    return SDL_RWseek((SDL_RWops*)datasource, 0, RW_SEEK_SET);
+    SDL_RWseek((SDL_RWops*)datasource, 0, RW_SEEK_SET);
+    return 0;
 }
 
-static Sint64 sdl_tell_func(void *datasource)
+static long sdl_tell_func(void *datasource)
 {
-    return SDL_RWtell((SDL_RWops*)datasource);
+    return (long)SDL_RWtell((SDL_RWops*)datasource);
 }
 
 

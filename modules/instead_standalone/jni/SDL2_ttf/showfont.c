@@ -1,6 +1,6 @@
 /*
   showfont:  An example of using the SDL_ttf library with 2D graphics.
-  Copyright (C) 2001-2013 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 2001-2016 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -298,7 +298,7 @@ int main(int argc, char *argv[])
     scene.messageRect.w = text->w;
     scene.messageRect.h = text->h;
     scene.message = SDL_CreateTextureFromSurface(renderer, text);
-    printf("Font is generally %d big, and string is %hd big\n",
+    printf("Font is generally %d big, and string is %d big\n",
                         TTF_FontHeight(font), text->h);
 
     draw_scene(renderer, &scene);

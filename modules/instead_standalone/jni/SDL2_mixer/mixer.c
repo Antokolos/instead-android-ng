@@ -1,6 +1,6 @@
 /*
   SDL_mixer:  An audio mixer library based on the SDL library
-  Copyright (C) 1997-2013 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -32,9 +32,11 @@
 #include "SDL_mixer.h"
 #include "load_aiff.h"
 #include "load_voc.h"
+#include "load_mp3.h"
 #include "load_ogg.h"
 #include "load_flac.h"
 #include "dynamic_flac.h"
+#include "dynamic_fluidsynth.h"
 #include "dynamic_modplug.h"
 #include "dynamic_mod.h"
 #include "dynamic_mp3.h"
@@ -182,7 +184,7 @@ int Mix_Init(int flags)
             result |= MIX_INIT_MOD;
         }
 #else
-        Mix_SetError("Mixer not built with MOD timidity support");
+        Mix_SetError("Mixer not built with MOD mikmod support");
 #endif
     }
     if (flags & MIX_INIT_MP3) {
@@ -190,6 +192,8 @@ int Mix_Init(int flags)
         if ((initialized & MIX_INIT_MP3) || Mix_InitMP3() == 0) {
             result |= MIX_INIT_MP3;
         }
+#elif defined(MP3_MAD_MUSIC)
+        result |= MIX_INIT_MP3;
 #else
         Mix_SetError("Mixer not built with MP3 support");
 #endif
@@ -318,7 +322,7 @@ static void mix_channels(void *udata, Uint8 *stream, int len)
     /* Mix any playing channels... */
     sdl_ticks = SDL_GetTicks();
     for ( i=0; i<num_channels; ++i ) {
-        if( ! mix_channel[i].paused ) {
+        if ( !mix_channel[i].paused ) {
             if ( mix_channel[i].expire > 0 && mix_channel[i].expire < sdl_ticks ) {
                 /* Expiration delay for that channel is reached */
                 mix_channel[i].playing = 0;
@@ -328,7 +332,7 @@ static void mix_channels(void *udata, Uint8 *stream, int len)
                 _Mix_channel_done_playing(i);
             } else if ( mix_channel[i].fading != MIX_NO_FADING ) {
                 Uint32 ticks = sdl_ticks - mix_channel[i].ticks_fade;
-                if( ticks > mix_channel[i].fade_length ) {
+                if ( ticks >= mix_channel[i].fade_length ) {
                     Mix_Volume(i, mix_channel[i].fade_volume_reset); /* Restore the volume */
                     if( mix_channel[i].fading == MIX_FADING_OUT ) {
                         mix_channel[i].playing = 0;
@@ -338,7 +342,7 @@ static void mix_channels(void *udata, Uint8 *stream, int len)
                     }
                     mix_channel[i].fading = MIX_NO_FADING;
                 } else {
-                    if( mix_channel[i].fading == MIX_FADING_OUT ) {
+                    if ( mix_channel[i].fading == MIX_FADING_OUT ) {
                         Mix_Volume(i, (mix_channel[i].fade_volume * (mix_channel[i].fade_length-ticks))
                                    / mix_channel[i].fade_length );
                     } else {
@@ -493,6 +497,9 @@ int Mix_OpenAudio(int frequency, Uint16 format, int nchannels, int chunksize)
 #ifdef FLAC_MUSIC
     add_chunk_decoder("FLAC");
 #endif
+#if defined(MP3_MUSIC) || defined(MP3_MAD_MUSIC)
+    add_chunk_decoder("MP3");
+#endif
 
     audio_opened = 1;
     SDL_PauseAudio(0);
@@ -557,11 +564,23 @@ int Mix_QuerySpec(int *frequency, Uint16 *format, int *channels)
     return(audio_opened);
 }
 
+static int detect_mp3(Uint8 *magic)
+{
+    if ( strncmp((char *)magic, "ID3", 3) == 0 ) {
+        return 1;
+    }
 
-/*
- * !!! FIXME: Ideally, we want a Mix_LoadSample_RW(), which will handle the
- *             generic setup, then call the correct file format loader.
- */
+    /* Detection code lifted from SMPEG */
+    if(((magic[0] & 0xff) != 0xff) || // No sync bits
+       ((magic[1] & 0xf0) != 0xf0) || //
+       ((magic[2] & 0xf0) == 0x00) || // Bitrate is 0
+       ((magic[2] & 0xf0) == 0xf0) || // Bitrate is 15
+       ((magic[2] & 0x0c) == 0x0c) || // Frequency is 3
+       ((magic[1] & 0x06) == 0x00)) { // Layer is 4
+        return(0);
+    }
+    return 1;
+}
 
 /* Load a wave file */
 Mix_Chunk *Mix_LoadWAV_RW(SDL_RWops *src, int freesrc)
@@ -629,6 +648,16 @@ Mix_Chunk *Mix_LoadWAV_RW(SDL_RWops *src, int freesrc)
                     (Uint8 **)&chunk->abuf, &chunk->alen);
             break;
         default:
+#if defined(MP3_MUSIC) || defined(MP3_MAD_MUSIC)
+			if (detect_mp3((Uint8*)&magic))
+			{
+				/* note: send a copy of the mixer spec */
+				wavespec = mixer;
+				loaded = Mix_LoadMP3_RW(src, freesrc, &wavespec,
+						(Uint8 **)&chunk->abuf, &chunk->alen);
+				break;
+			}
+#endif
             SDL_SetError("Unrecognized sound file type");
             if ( freesrc ) {
                 SDL_RWclose(src);
@@ -1067,7 +1096,7 @@ int Mix_FadeOutChannel(int which, int ms)
                 (mix_channel[which].fading != MIX_FADING_OUT) ) {
                 mix_channel[which].fade_volume = mix_channel[which].volume;
                 mix_channel[which].fading = MIX_FADING_OUT;
-                mix_channel[which].fade_length = ms;
+                mix_channel[which].fade_length = (Uint32)ms;
                 mix_channel[which].ticks_fade = SDL_GetTicks();
 
                 /* only change fade_volume_reset if we're not fading. */

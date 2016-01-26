@@ -1,6 +1,6 @@
 /*
   SDL_mixer:  An audio mixer library based on the SDL library
-  Copyright (C) 1997-2013 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -21,7 +21,11 @@
 
 #ifdef MODPLUG_MUSIC
 
-#include "modplug.h"
+#ifdef MODPLUG_HEADER
+#include MODPLUG_HEADER
+#else
+#include <libmodplug/modplug.h>
+#endif
 
 typedef struct {
     int loaded;

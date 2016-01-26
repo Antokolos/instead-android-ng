@@ -1,6 +1,6 @@
 /*
   SDL_ttf:  A companion library to SDL for working with TrueType (tm) fonts
-  Copyright (C) 2001-2013 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 2001-2016 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -135,7 +135,7 @@ static int TTF_byteswapped = 0;
 /* Gets the top row of the underline. The outline
    is taken into account.
 */
-static __inline__ int TTF_underline_top_row(TTF_Font *font)
+static int TTF_underline_top_row(TTF_Font *font)
 {
     /* With outline, the underline_offset is underline_offset+outline. */
     /* So, we don't have to remove the top part of the outline height. */
@@ -147,7 +147,7 @@ static __inline__ int TTF_underline_top_row(TTF_Font *font)
    Need to update row according to height difference between font and glyph:
    font_value - font->ascent + glyph->maxy
 */
-static __inline__ int TTF_Glyph_underline_top_row(TTF_Font *font, c_glyph *glyph)
+static int TTF_Glyph_underline_top_row(TTF_Font *font, c_glyph *glyph)
 {
     return glyph->maxy - font->underline_offset - 1;
 }
@@ -155,7 +155,7 @@ static __inline__ int TTF_Glyph_underline_top_row(TTF_Font *font, c_glyph *glyph
 /* Gets the bottom row of the underline. The outline
    is taken into account.
 */
-static __inline__ int TTF_underline_bottom_row(TTF_Font *font)
+static int TTF_underline_bottom_row(TTF_Font *font)
 {
     int row = TTF_underline_top_row(font) + font->underline_height;
     if ( font->outline  > 0 ) {
@@ -171,7 +171,7 @@ static __inline__ int TTF_underline_bottom_row(TTF_Font *font)
    Need to update row according to height difference between font and glyph:
    font_value - font->ascent + glyph->maxy
 */
-static __inline__ int TTF_Glyph_underline_bottom_row(TTF_Font *font, c_glyph *glyph)
+static int TTF_Glyph_underline_bottom_row(TTF_Font *font, c_glyph *glyph)
 {
     return TTF_underline_bottom_row(font) - font->ascent + glyph->maxy;
 }
@@ -179,7 +179,7 @@ static __inline__ int TTF_Glyph_underline_bottom_row(TTF_Font *font, c_glyph *gl
 /* Gets the top row of the strikethrough. The outline
    is taken into account.
 */
-static __inline__ int TTF_strikethrough_top_row(TTF_Font *font)
+static int TTF_strikethrough_top_row(TTF_Font *font)
 {
     /* With outline, the first text row is 'outline'. */
     /* So, we don't have to remove the top part of the outline height. */
@@ -191,7 +191,7 @@ static __inline__ int TTF_strikethrough_top_row(TTF_Font *font)
    Need to update row according to height difference between font and glyph:
    font_value - font->ascent + glyph->maxy
 */
-static __inline__ int TTF_Glyph_strikethrough_top_row(TTF_Font *font, c_glyph *glyph)
+static int TTF_Glyph_strikethrough_top_row(TTF_Font *font, c_glyph *glyph)
 {
     return TTF_strikethrough_top_row(font) - font->ascent + glyph->maxy;
 }
@@ -231,7 +231,7 @@ static void TTF_drawLine_Solid(const TTF_Font *font, const SDL_Surface *textbuf,
     /* Draw line */
     for ( line=height; line>0 && dst < dst_check; --line ) {
         /* 1 because 0 is the bg color */
-        memset( dst, 1, textbuf->w );
+        SDL_memset( dst, 1, textbuf->w );
         dst += textbuf->pitch;
     }
 }
@@ -251,7 +251,7 @@ static void TTF_drawLine_Shaded(const TTF_Font *font, const SDL_Surface *textbuf
 
     /* Draw line */
     for ( line=height; line>0 && dst < dst_check; --line ) {
-        memset( dst, NUM_GRAYS - 1, textbuf->w );
+        SDL_memset( dst, NUM_GRAYS - 1, textbuf->w );
         dst += textbuf->pitch;
     }
 }
@@ -325,10 +325,9 @@ static void TTF_SetFTError(const char *msg, FT_Error error)
     if ( ! err_msg ) {
         err_msg = "unknown FreeType error";
     }
-    sprintf(buffer, "%s: %s", msg, err_msg);
-    TTF_SetError(buffer);
+    TTF_SetError("%s: %s", msg, err_msg);
 #else
-    TTF_SetError(msg);
+    TTF_SetError("%s", msg);
 #endif /* USE_FREETYPE_ERRORS */
 }
 
@@ -400,7 +399,7 @@ TTF_Font* TTF_OpenFontIndexRW( SDL_RWops *src, int freesrc, int ptsize, long ind
         return NULL;
     }
 
-    font = (TTF_Font*) malloc(sizeof *font);
+    font = (TTF_Font*)SDL_malloc(sizeof *font);
     if ( font == NULL ) {
         TTF_SetError( "Out of memory" );
         if ( freesrc ) {
@@ -408,18 +407,18 @@ TTF_Font* TTF_OpenFontIndexRW( SDL_RWops *src, int freesrc, int ptsize, long ind
         }
         return NULL;
     }
-    memset(font, 0, sizeof(*font));
+    SDL_memset(font, 0, sizeof(*font));
 
     font->src = src;
     font->freesrc = freesrc;
 
-    stream = (FT_Stream)malloc(sizeof(*stream));
+    stream = (FT_Stream)SDL_malloc(sizeof(*stream));
     if ( stream == NULL ) {
         TTF_SetError( "Out of memory" );
         TTF_CloseFont( font );
         return NULL;
     }
-    memset(stream, 0, sizeof(*stream));
+    SDL_memset(stream, 0, sizeof(*stream));
 
     stream->read = RWread;
     stream->descriptor.pointer = src;
@@ -484,11 +483,6 @@ TTF_Font* TTF_OpenFontIndexRW( SDL_RWops *src, int freesrc, int ptsize, long ind
         error = FT_Set_Pixel_Sizes( face,
                 face->available_sizes[ptsize].width,
                 face->available_sizes[ptsize].height );
-        if ( error ) {
-            TTF_SetFTError( "Couldn't set font size", error );
-            TTF_CloseFont( font );
-            return NULL;
-        }
 
         /* With non-scalale fonts, Freetype2 likes to fill many of the
          * font metrics with the value of 0.  The size of the
@@ -549,7 +543,6 @@ TTF_Font* TTF_OpenFontIndex( const char *file, int ptsize, long index )
 {
     SDL_RWops *rw = SDL_RWFromFile(file, "rb");
     if ( rw == NULL ) {
-        TTF_SetError(SDL_GetError());
         return NULL;
     }
     return TTF_OpenFontIndexRW(rw, 1, ptsize, index);
@@ -565,11 +558,11 @@ static void Flush_Glyph( c_glyph* glyph )
     glyph->stored = 0;
     glyph->index = 0;
     if ( glyph->bitmap.buffer ) {
-        free( glyph->bitmap.buffer );
+        SDL_free( glyph->bitmap.buffer );
         glyph->bitmap.buffer = 0;
     }
     if ( glyph->pixmap.buffer ) {
-        free( glyph->pixmap.buffer );
+        SDL_free( glyph->pixmap.buffer );
         glyph->pixmap.buffer = 0;
     }
     glyph->cached = 0;
@@ -646,7 +639,7 @@ static FT_Error Load_Glyph( TTF_Font* font, Uint16 ch, c_glyph* cached, int want
             cached->maxx += font->glyph_overhang;
         }
         if ( TTF_HANDLE_STYLE_ITALIC(font) ) {
-            cached->maxx += (int)ceil(font->glyph_italics);
+            cached->maxx += (int)SDL_ceil(font->glyph_italics);
         }
         cached->stored |= CACHED_METRICS;
     }
@@ -703,7 +696,7 @@ static FT_Error Load_Glyph( TTF_Font* font, Uint16 ch, c_glyph* cached, int want
         } else {
             dst = &cached->pixmap;
         }
-        memcpy( dst, src, sizeof( *dst ) );
+        SDL_memcpy( dst, src, sizeof( *dst ) );
 
         /* FT_Render_Glyph() and .fon fonts always generate a
          * two-color (black and white) glyphslot surface, even
@@ -730,17 +723,17 @@ static FT_Error Load_Glyph( TTF_Font* font, Uint16 ch, c_glyph* cached, int want
             dst->width += bump;
         }
         if ( TTF_HANDLE_STYLE_ITALIC(font) ) {
-            int bump = (int)ceil(font->glyph_italics);
+            int bump = (int)SDL_ceil(font->glyph_italics);
             dst->pitch += bump;
             dst->width += bump;
         }
 
         if (dst->rows != 0) {
-            dst->buffer = (unsigned char *)malloc( dst->pitch * dst->rows );
+            dst->buffer = (unsigned char *)SDL_malloc( dst->pitch * dst->rows );
             if ( !dst->buffer ) {
                 return FT_Err_Out_Of_Memory;
             }
-            memset( dst->buffer, 0, dst->pitch * dst->rows );
+            SDL_memset( dst->buffer, 0, dst->pitch * dst->rows );
 
             for ( i = 0; i < src->rows; i++ ) {
                 int soffset = i * src->pitch;
@@ -850,7 +843,7 @@ static FT_Error Load_Glyph( TTF_Font* font, Uint16 ch, c_glyph* cached, int want
                         }
                     }
                 } else {
-                    memcpy(dst->buffer+doffset,
+                    SDL_memcpy(dst->buffer+doffset,
                            src->buffer+soffset, src->pitch);
                 }
             }
@@ -927,17 +920,17 @@ void TTF_CloseFont( TTF_Font* font )
             FT_Done_Face( font->face );
         }
         if ( font->args.stream ) {
-            free( font->args.stream );
+            SDL_free( font->args.stream );
         }
         if ( font->freesrc ) {
             SDL_RWclose( font->src );
         }
-        free( font );
+        SDL_free( font );
     }
 }
 
 /* Gets the number of bytes used by a null terminated UCS2 string */
-static __inline__ size_t UCS2_len(const Uint16 *text)
+static size_t UCS2_len(const Uint16 *text)
 {
     size_t count = 0;
     while (*text++) {
@@ -1583,7 +1576,7 @@ SDL_Surface *TTF_RenderUTF8_Shaded(TTF_Font *font,
 
     /* Load and render each character */
     textlen = SDL_strlen(text);
-    first = SDL_FALSE;
+    first = SDL_TRUE;
     xstart = 0;
     while ( textlen > 0 ) {
         Uint16 c = UTF8_getch(&text, &textlen);
@@ -2203,9 +2196,38 @@ int TTF_WasInit( void )
     return TTF_initialized;
 }
 
-int TTF_GetFontKerningSize(TTF_Font* font, int prev_index, int index)
+int TTF_GetFontKerningSize(TTF_Font *font, Uint16 previous_ch, Uint16 ch)
 {
+    int error;
+    int glyph_index, prev_index;
     FT_Vector delta;
-    FT_Get_Kerning( font->face, prev_index, index, ft_kerning_default, &delta );
+
+    if (ch == UNICODE_BOM_NATIVE || ch == UNICODE_BOM_SWAPPED) {
+        return 0;
+    }
+
+    if (previous_ch == UNICODE_BOM_NATIVE || previous_ch == UNICODE_BOM_SWAPPED) {
+        return 0;
+    }
+
+    error = Find_Glyph(font, ch, CACHED_METRICS);
+    if (error) {
+        TTF_SetFTError("Couldn't find glyph", error);
+        return -1;
+    }
+    glyph_index = font->current->index;
+
+    error = Find_Glyph(font, previous_ch, CACHED_METRICS);
+    if (error) {
+        TTF_SetFTError("Couldn't find glyph", error);
+        return -1;
+    }
+    prev_index = font->current->index;
+
+    error = FT_Get_Kerning(font->face, prev_index, glyph_index, ft_kerning_default, &delta);
+    if (error) {
+        TTF_SetFTError("Couldn't get glyph kerning", error);
+        return -1;
+    }
     return (delta.x >> 6);
 }

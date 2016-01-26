@@ -58,7 +58,8 @@ public class SDLActivity extends SDLActivityBase {
 	}
 	*/
 
-	public void loadLibs() {
+	@Override
+	public void loadLibraries() {
 		try {
 			// I'm using /data/data/myPackage/app_libs (using Ctx.getDir("libs",Context.MODE_PRIVATE); returns that path).
 			String libsDirPath = Ctx.getDir("libs",Context.MODE_PRIVATE).getCanonicalPath() + "/";
@@ -167,14 +168,13 @@ public class SDLActivity extends SDLActivityBase {
 	}
 
 	protected void onCreate(Bundle savedInstanceState) {
+		Ctx = this;
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		// The following line is to workaround AndroidRuntimeException: requestFeature() must be called before adding content
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		settings = SettingsFactory.create(this);
 		keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard());
-		Ctx = this;
-		loadLibs();
 		initExpansionManager(this);
 
         Intent intent = getIntent();
@@ -200,8 +200,6 @@ public class SDLActivity extends SDLActivityBase {
 		if(!settings.getOvVol()) {
 			audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
 		}
-
-
 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -287,11 +285,7 @@ public class SDLActivity extends SDLActivityBase {
 
 	@Override
 	protected void onPause() {
-		nativeSave();
 		if(settings.getScreenOff())wakeLock.release();
-		 Log.v("SDL", "onPause()");
-		//if(!first_run) mSurface.suspend();
-	    //mSurface = null;
 		super.onPause();
 	}
 
@@ -299,8 +293,6 @@ public class SDLActivity extends SDLActivityBase {
 	protected void onResume() {
 		super.onResume();
 		if(settings.getScreenOff())wakeLock.acquire();
-		 Log.v("SDL", "onResume()");
-		// if(!first_run) mSurface.resume();
 	}
 
 	public static void refreshOff(){
@@ -357,7 +349,8 @@ public class SDLActivity extends SDLActivityBase {
 	public static native void nativeQuit();
 	public static native void nativePause();
 	public static native void nativeResume();
-	public static native void onNativeResize(int x, int y, int format);
+	public static native void onNativeDropFile(String filename);
+	public static native void onNativeResize(int x, int y, int format, float rate);
 	public static native int onNativePadDown(int device_id, int keycode);
 	public static native int onNativePadUp(int device_id, int keycode);
 	public static native void onNativeJoy(int device_id, int axis,
@@ -367,32 +360,20 @@ public class SDLActivity extends SDLActivityBase {
 	public static native void onNativeKeyDown(int keycode);
 	public static native void onNativeKeyUp(int keycode);
 	public static native void onNativeKeyboardFocusLost();
+	public static native void onNativeMouse(int button, int action, float x, float y);
 	public static native void onNativeTouch(int touchDevId, int pointerFingerId,
 											int action, float x,
 											float y, float p);
 	public static native void onNativeAccel(float x, float y, float z);
 	public static native void onNativeSurfaceChanged();
 	public static native void onNativeSurfaceDestroyed();
-	public static native void nativeFlipBuffers();
 	public static native int nativeAddJoystick(int device_id, String name,
 											   int is_accelerometer, int nbuttons,
 											   int naxes, int nhats, int nballs);
 	public static native int nativeRemoveJoystick(int device_id);
-
-	public static native void nativeSave();
-	public static native void nativeStop();
+	public static native String nativeGetHint(String name);
 
     // Java functions called from C
-
-	public static void flipBuffers() {
-		SDLActivity.nativeFlipBuffers();
-	}
-
-	public static boolean setActivityTitle(String title) {
-		// Called from SDLMain() thread and can't directly affect the view
-		return getSingleton().sendCommand(COMMAND_CHANGE_TITLE, title);
-	}
-
 
 	private PowerManager.WakeLock wakeLock = null;
 

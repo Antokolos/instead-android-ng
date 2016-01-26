@@ -1,6 +1,6 @@
 /*
   SDL_mixer:  An audio mixer library based on the SDL library
-  Copyright (C) 1997-2013 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -574,7 +574,7 @@ Mix_Music *Mix_LoadMUS(const char *file)
 
     /* We need to know if a specific error occurs; if not, we'll set a
      * generic one, so we clear the current one. */
-    Mix_SetError("");
+    SDL_ClearError();
     music = Mix_LoadMUSType_RW(src, type, SDL_TRUE);
     if ( music == NULL && Mix_GetError()[0] == '\0' ) {
         Mix_SetError("Unrecognized music format");

@@ -323,7 +323,7 @@ usage( void )
 }
 
 
-int  a3k_main( int argc, const char* const*  argv )
+int  main( int argc, const char* const*  argv )
 {
   int           from_stdin = 0;
   int           verbose = 0;

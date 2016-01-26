@@ -2360,9 +2360,9 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 MAJOR_VERSION=2
 MINOR_VERSION=0
-MICRO_VERSION=12
-INTERFACE_AGE=2
-BINARY_AGE=12
+MICRO_VERSION=13
+INTERFACE_AGE=3
+BINARY_AGE=13
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$MICRO_VERSION
 
 
@@ -11676,7 +11676,7 @@ case "$host" in
     *-*-cygwin* | *-*-mingw32*)
         if test "$build" != "$host"; then # cross-compiling
             # Default cross-compile location
-            ac_default_prefix=/usr/local/cross-tools/i386-mingw32
+            ac_default_prefix=/usr/local/cross-tools/$host
         else
             # Look for the location of the tools and install there
             if test "$BUILD_PREFIX" != ""; then

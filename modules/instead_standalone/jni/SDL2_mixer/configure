@@ -906,7 +906,7 @@ enable_music_midi
 enable_music_midi_timidity
 enable_music_midi_native
 enable_music_midi_fluidsynth
-enable_music_fluidsynth_shared
+enable_music_midi_fluidsynth_shared
 enable_music_ogg
 enable_music_ogg_tremor
 enable_music_ogg_shared
@@ -2439,9 +2439,9 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 #
 MAJOR_VERSION=2
 MINOR_VERSION=0
-MICRO_VERSION=0
-INTERFACE_AGE=0
-BINARY_AGE=0
+MICRO_VERSION=1
+INTERFACE_AGE=1
+BINARY_AGE=1
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$MICRO_VERSION
 
 
@@ -11065,13 +11065,13 @@ case "$host" in
     *mingw32ce*)
         #VERSION_SOURCES="$srcdir/version.rc"
         EXE=".exe"
-	;;
+    ;;
     *-*-cygwin* | *-*-mingw32*)
         VERSION_SOURCES="$srcdir/version.rc"
         EXE=".exe"
         if test "$build" != "$host"; then # cross-compiling
             # Default cross-compile location
-            ac_default_prefix=/usr/local/cross-tools/i386-mingw32
+            ac_default_prefix=/usr/local/cross-tools/$host
         else
             # Look for the location of the tools and install there
             if test "$BUILD_PREFIX" != ""; then
@@ -11148,7 +11148,7 @@ find_lib()
     else
         host_lib_path="/usr/$base_libdir /usr/local/$base_libdir"
     fi
-    for path in $gcc_bin_path $gcc_lib_path $env_lib_path $host_lib_path; do
+    for path in $env_lib_path $gcc_bin_path $gcc_lib_path $host_lib_path; do
         lib=`ls -- $path/$1 2>/dev/null | sed -e '/\.so\..*\./d' -e 's,.*/,,' | sort | tail -1`
         if test x$lib != x; then
             echo $lib
@@ -11817,8 +11817,8 @@ fi
 
 	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-                            ac_fn_c_check_header_mongrel "$LINENO" "modplug.h" "ac_cv_header_modplug_h" "$ac_includes_default"
-if test "x$ac_cv_header_modplug_h" = xyes; then :
+                            ac_fn_c_check_header_mongrel "$LINENO" "libmodplug/modplug.h" "ac_cv_header_libmodplug_modplug_h" "$ac_includes_default"
+if test "x$ac_cv_header_libmodplug_modplug_h" = xyes; then :
   have_libmodplug_hdr=yes
 fi
 
@@ -11870,8 +11870,8 @@ fi
 
 
 elif test $pkg_failed = untried; then
-	            ac_fn_c_check_header_mongrel "$LINENO" "modplug.h" "ac_cv_header_modplug_h" "$ac_includes_default"
-if test "x$ac_cv_header_modplug_h" = xyes; then :
+	            ac_fn_c_check_header_mongrel "$LINENO" "libmodplug/modplug.h" "ac_cv_header_libmodplug_modplug_h" "$ac_includes_default"
+if test "x$ac_cv_header_libmodplug_modplug_h" = xyes; then :
   have_libmodplug_hdr=yes
 fi
 
@@ -11954,7 +11954,7 @@ fi
             echo "-- dynamic libmodplug -> $modplug_lib"
             EXTRA_CFLAGS="$EXTRA_CFLAGS -DMODPLUG_DYNAMIC=\\\"$modplug_lib\\\""
         else
-	        EXTRA_LDFLAGS="$EXTRA_LDFLAGS $MODPLUG_LIBS"
+            EXTRA_LDFLAGS="$EXTRA_LDFLAGS $MODPLUG_LIBS"
         fi
     else
         { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: *** Unable to find ModPlug library (http://modplug-xmms.sourceforge.net/)" >&5
@@ -12095,7 +12095,7 @@ $as_echo "$as_me: WARNING: *** Unable to find MikMod library (http://mikmod.raph
 fi
 
 if test x$have_libmodplug != xyes -a x$have_libmikmod != xyes ; then
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: MOD support disabled" >&5
+    { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: MOD support disabled" >&5
 $as_echo "$as_me: WARNING: MOD support disabled" >&2;}
 fi
 
@@ -12161,9 +12161,9 @@ else
   enable_music_midi_fluidsynth=yes
 fi
 
-    # Check whether --enable-music-fluidsynth-shared was given.
-if test "${enable_music_fluidsynth_shared+set}" = set; then :
-  enableval=$enable_music_fluidsynth_shared;
+    # Check whether --enable-music-midi-fluidsynth-shared was given.
+if test "${enable_music_midi_fluidsynth_shared+set}" = set; then :
+  enableval=$enable_music_midi_fluidsynth_shared;
 else
   enable_music_midi_fluidsynth_shared=yes
 fi
@@ -12251,7 +12251,7 @@ fi
 if test x$enable_music_midi_timidity != xyes -a \
         x$use_music_midi_native != xyes -a x$use_music_midi_native != xyes_cpp -a \
         x$have_fluidsynth != xyes; then
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: MIDI support disabled" >&5
+    { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: MIDI support disabled" >&5
 $as_echo "$as_me: WARNING: MIDI support disabled" >&2;}
 fi
 
@@ -12897,6 +12897,11 @@ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
 $as_echo "$have_libmad" >&6; }
     if test x$have_libmad = xyes; then
         SOURCES="$SOURCES $srcdir/music_mad.c"
+        if echo "$SOURCES" | grep "load_mp3.c" >/dev/null; then
+            :
+        else
+            SOURCES="$SOURCES $srcdir/load_mp3.c"
+        fi
         EXTRA_CFLAGS="$EXTRA_CFLAGS -DMP3_MAD_MUSIC"
         EXTRA_LDFLAGS="$EXTRA_LDFLAGS -lmad"
     else

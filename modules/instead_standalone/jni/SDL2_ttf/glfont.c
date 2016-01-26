@@ -1,6 +1,6 @@
 /*
   glfont:  An example of using the SDL_ttf library with OpenGL.
-  Copyright (C) 2001-2013 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 2001-2016 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -382,7 +382,7 @@ int main(int argc, char *argv[])
     y = (HEIGHT - text->h)/2;
     w = text->w;
     h = text->h;
-    printf("Font is generally %d big, and string is %hd big\n",
+    printf("Font is generally %d big, and string is %d big\n",
                         TTF_FontHeight(font), text->h);
 
     /* Convert the text into an OpenGL texture */
