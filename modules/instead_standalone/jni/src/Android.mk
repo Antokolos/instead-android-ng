@@ -4,6 +4,8 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := main
 
+SDL_PATH := ../SDL2
+
 ifndef SDL_JAVA_PACKAGE_PATH
 $(error Please define SDL_JAVA_PACKAGE_PATH to the path of your Java package with dots replaced with underscores, for example "com_example_SanAngeles")
 endif
@@ -11,7 +13,7 @@ endif
 #APP_SUBDIRS := $(patsubst $(LOCAL_PATH)/%, %, $(shell find $(LOCAL_PATH)/src -type d))
 SUBDIR := instead/src/sdl-instead
 
-LOCAL_SRC_FILES := SDL_android_main.cpp $(SUBDIR)/snprintf.c $(SUBDIR)/graphics.c $(SUBDIR)/idf.c $(SUBDIR)/input.c $(SUBDIR)/game.c $(SUBDIR)/list.c $(SUBDIR)/tinymt32.c $(SUBDIR)/main.c $(SUBDIR)/lfs.c $(SUBDIR)/instead.c $(SUBDIR)/sound.c $(SUBDIR)/SDL_rotozoom.c $(SUBDIR)/SDL_anigif.c $(SUBDIR)/SDL_gfxBlitFunc.c $(SUBDIR)/config.c $(SUBDIR)/themes.c $(SUBDIR)/menu.c $(SUBDIR)/util.c $(SUBDIR)/cache.c $(SUBDIR)/unzip.c $(SUBDIR)/ioapi.c $(SUBDIR)/unpack.c $(SUBDIR)/unix.c
+LOCAL_SRC_FILES := instead_launcher.cpp $(SDL_PATH)/src/main/android/SDL_android_main.c $(SUBDIR)/snprintf.c $(SUBDIR)/graphics.c $(SUBDIR)/idf.c $(SUBDIR)/input.c $(SUBDIR)/game.c $(SUBDIR)/list.c $(SUBDIR)/tinymt32.c $(SUBDIR)/main.c $(SUBDIR)/lfs.c $(SUBDIR)/instead.c $(SUBDIR)/sound.c $(SUBDIR)/SDL_rotozoom.c $(SUBDIR)/SDL_anigif.c $(SUBDIR)/SDL_gfxBlitFunc.c $(SUBDIR)/config.c $(SUBDIR)/themes.c $(SUBDIR)/menu.c $(SUBDIR)/util.c $(SUBDIR)/cache.c $(SUBDIR)/unzip.c $(SUBDIR)/ioapi.c $(SUBDIR)/unpack.c $(SUBDIR)/unix.c
 LOCAL_H_FILES := $(SUBDIR)/snprintf.h $(SUBDIR)/cache.h $(SUBDIR)/config.h $(SUBDIR)/externals.h $(SUBDIR)/game.h $(SUBDIR)/tinymt32.h $(SUBDIR)/graphics.h $(SUBDIR)/input.h $(SUBDIR)/instead.h $(SUBDIR)/internals.h $(SUBDIR)/ioapi.h $(SUBDIR)/iowin32.h $(SUBDIR)/list.h \
 	$(SUBDIR)/menu.h $(SUBDIR)/SDL_anigif.h $(SUBDIR)/SDL_gfxBlitFunc.h $(SUBDIR)/SDL_rotozoom.h $(SUBDIR)/sound.h $(SUBDIR)/themes.h $(SUBDIR)/unzip.h $(SUBDIR)/util.h $(SUBDIR)/android.h 
 
@@ -43,8 +45,6 @@ LOCAL_CFLAGS += -DVERSION=\"2.3.0\" -DANDROID -D_LOCAL_APPDATA -D_HAVE_ICONV -DS
 LOCAL_CFLAGS += -DGAMES_PATH=\"${GAMESPATH}/\" -DTHEME_PATH=\"${THEMEPATH}/\" -D_SDL_MOD_BUG
 
 LOCAL_CFLAGS +=  -DLANG_PATH=\"${LANGPATH}/\" -DSTEAD_PATH=\"${STEADPATH}/\" -DT $(EXTRA_CFLAGS)
-
-
 
 LOCAL_SHARED_LIBRARIES := SDL2 SDL2_ttf SDL2_mixer SDL2_image 
 

@@ -2,7 +2,13 @@
 <manifest android:installLocation="auto" android:versionCode="121000"
     android:versionName="1.2.1" package="com.nlbhub.instead.launcher" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
-    <application android:name=".LauncherApplication" android:allowBackup="false" android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="@string/app_name">
+    <application 
+        android:name=".LauncherApplication"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name">
         <!-- android:name=".standalone.MainMenu" for standalone app, android:name=".universal.UniversalMainMenu" for universal app -->
         <activity android:icon="@drawable/icon"
             android:label="@string/app_name" android:name=".universal.UniversalMainMenu" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation">
@@ -83,7 +89,12 @@
         <activity android:name=".universal.FavoritList" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
         <activity android:name=".universal.GameDirs" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
     </application>
+
     <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="15"/>
+
+     <!-- OpenGL ES 2.0 -->
+    <uses-feature android:glEsVersion="0x00020000" />
+
     <!-- Required to access Google Play Licensing (used for APK expansion files AKA obb) -->
     <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
 

@@ -1,4 +1,4 @@
-package com.nlbhub.instead;
+package org.libsdl.app;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +33,7 @@ import android.content.pm.ActivityInfo;
 /**
     SDL Activity
 */
-public abstract class SDLActivityBase extends Activity {
+public class SDLActivity extends Activity {
     private static final String TAG = "SDL";
 
     // Keep track of the paused state
@@ -48,8 +48,8 @@ public abstract class SDLActivityBase extends Activity {
     public static boolean mSeparateMouseAndTouch;
 
     // Main components
-    protected static SDLActivityBase mSingleton;
-    protected static SDLSurfaceBase mSurface;
+    protected static SDLActivity mSingleton;
+    protected static SDLSurface mSurface;
     protected static View mTextEdit;
     protected static ViewGroup mLayout;
     protected static SDLJoystickHandler mJoystickHandler;
@@ -406,7 +406,33 @@ public abstract class SDLActivityBase extends Activity {
 
     // C functions we call
     public static native int nativeInit(Object arguments);
-
+    public static native void nativeLowMemory();
+    public static native void nativeQuit();
+    public static native void nativePause();
+    public static native void nativeResume();
+    public static native void onNativeDropFile(String filename);
+    public static native void onNativeResize(int x, int y, int format, float rate);
+    public static native int onNativePadDown(int device_id, int keycode);
+    public static native int onNativePadUp(int device_id, int keycode);
+    public static native void onNativeJoy(int device_id, int axis,
+                                          float value);
+    public static native void onNativeHat(int device_id, int hat_id,
+                                          int x, int y);
+    public static native void onNativeKeyDown(int keycode);
+    public static native void onNativeKeyUp(int keycode);
+    public static native void onNativeKeyboardFocusLost();
+    public static native void onNativeMouse(int button, int action, float x, float y);
+    public static native void onNativeTouch(int touchDevId, int pointerFingerId,
+                                            int action, float x,
+                                            float y, float p);
+    public static native void onNativeAccel(float x, float y, float z);
+    public static native void onNativeSurfaceChanged();
+    public static native void onNativeSurfaceDestroyed();
+    public static native int nativeAddJoystick(int device_id, String name,
+                                               int is_accelerometer, int nbuttons,
+                                               int naxes, int nhats, int nballs);
+    public static native int nativeRemoveJoystick(int device_id);
+    public static native String nativeGetHint(String name);
 
     /**
      * This method is called by SDL using JNI.
@@ -661,11 +687,11 @@ public abstract class SDLActivityBase extends Activity {
     public InputStream openAPKExpansionInputStream(String fileName) throws IOException {
         // Get a ZipResourceFile representing a merger of both the main and patch files
         if (expansionFile == null) {
-            String mainHint = SDLActivity.nativeGetHint("SDL_ANDROID_APK_EXPANSION_MAIN_FILE_VERSION");
+            String mainHint = nativeGetHint("SDL_ANDROID_APK_EXPANSION_MAIN_FILE_VERSION");
             if (mainHint == null) {
                 return null; // no expansion use if no main version was set
             }
-            String patchHint = SDLActivity.nativeGetHint("SDL_ANDROID_APK_EXPANSION_PATCH_FILE_VERSION");
+            String patchHint = nativeGetHint("SDL_ANDROID_APK_EXPANSION_PATCH_FILE_VERSION");
             if (patchHint == null) {
                 return null; // no expansion use if no patch version was set
             }
@@ -921,6 +947,19 @@ public abstract class SDLActivityBase extends Activity {
     }
 }
 
+/**
+    Simple nativeInit() runnable
+*/
+class SDLMain implements Runnable {
+    @Override
+    public void run() {
+        // Runs SDL_main()
+        SDLActivity.nativeInit(SDLActivity.mSingleton.getArguments());
+
+        //Log.v("SDL", "SDL thread terminated");
+    }
+}
+
 
 /**
     SDLSurface. This is what we draw on, so we need to know when it's created
@@ -928,7 +967,7 @@ public abstract class SDLActivityBase extends Activity {
 
     Because of this, that's where we set up the SDL thread
 */
-abstract class SDLSurfaceBase extends SurfaceView implements SurfaceHolder.Callback,
+class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     View.OnKeyListener, View.OnTouchListener, SensorEventListener  {
 
     // Sensors
@@ -939,7 +978,7 @@ abstract class SDLSurfaceBase extends SurfaceView implements SurfaceHolder.Callb
     protected static float mWidth, mHeight;
 
     // Startup
-    public SDLSurfaceBase(Context context) {
+    public SDLSurface(Context context) {
         super(context);
         getHolder().addCallback(this);
 
@@ -1096,20 +1135,33 @@ abstract class SDLSurfaceBase extends SurfaceView implements SurfaceHolder.Callb
             // This is the entry point to the C app.
             // Start up the C app thread and enable sensor input for the first time
 
+            final Thread sdlThread = new Thread(new SDLMain(), "SDLThread");
+            enableSensor(Sensor.TYPE_ACCELEROMETER, true);
+            sdlThread.start();
+
             // Set up a listener thread to catch when the native thread ends
-            SDLActivity.mSDLThread = initThread();
+            SDLActivity.mSDLThread = new Thread(new Runnable(){
+                @Override
+                public void run(){
+                    try {
+                        sdlThread.join();
+                    }
+                    catch(Exception e){}
+                    finally{
+                        // Native thread has finished
+                        if (! SDLActivity.mExitCalledFromJava) {
+                            SDLActivity.handleNativeExit();
+                        }
+                    }
+                }
+            }, "SDLThreadListener");
+            SDLActivity.mSDLThread.start();
         }
 
         if (SDLActivity.mHasFocus) {
             SDLActivity.handleResume();
         }
     }
-
-    /**
-     * Added by Anton P. Kolosov
-     * @return
-     */
-    protected abstract Thread initThread();
 
     // Key events
     @Override
