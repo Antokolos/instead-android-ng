@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.content.Context;
 import android.widget.RemoteViews;
 import android.appwidget.AppWidgetManager;
+import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.launcher.R;
-import com.nlbhub.instead.SDLActivity;
 
 public class GameIcon extends AppWidgetProvider {
 	
@@ -107,7 +107,7 @@ static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
     	}
 */
         
-        Intent active = new Intent(context, SDLActivity.class);
+        Intent active = new Intent(context, STEADActivity.class);
         active.setAction(game);
 
         PendingIntent actionPendingIntent = PendingIntent.getActivity(context, 0, active, 0);

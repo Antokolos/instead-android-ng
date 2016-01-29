@@ -1,7 +1,7 @@
 package com.nlbhub.instead.input;
 
 import android.view.KeyEvent;
-import com.nlbhub.instead.SDLActivity;
+import org.libsdl.app.SDLActivity;
 
 public class Keys {
 

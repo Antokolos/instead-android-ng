@@ -19,11 +19,11 @@ import android.view.Window;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.launcher.simple.Globals;
-import com.nlbhub.instead.SDLActivity;
 
 public class Shortcut extends Activity {
 	private Handler h = new Handler();
@@ -75,7 +75,7 @@ public class Shortcut extends Activity {
 		  if(StorageResolver.isWorking(game) || (game.endsWith(".idf") &&
 				  (new File(Globals.getOutFilePath(StorageResolver.GameDir
 		    				+ game)).exists()))){	
-			Intent myIntent = new Intent(this, SDLActivity.class);
+			Intent myIntent = new Intent(this, STEADActivity.class);
 			Bundle b = new Bundle();
 			b.putString("game", game);
 			myIntent.putExtras(b);

@@ -1,3 +1,5 @@
+#include <SDL.h>
+#include <jni.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <android/log.h>
@@ -71,18 +73,21 @@ int start_logger(const char *app_name) {
     return 0;
 }
 
+extern "C" int instead_main(int argc, char** argv);
+
 /* Start up the SDL app */
 extern "C" int SDL_main(int argc, char** argv) {
-    const char* nativelog = argc >= 2 ? argv[1] : NULL;
-    const char* path = argc >= 3 ? argv[2] : NULL;
-    const char* appdata = argc >= 4 ? argv[3] : NULL;
-    const char* gamespath = argc >= 5 ? argv[4] : NULL;
-    const char* res = argc >= 6 ? argv[5] : NULL;
-    const char* game = argc >= 7 ? argv[6] : NULL;
-    const char* idf = argc >= 8 ? argv[7] : NULL;
-    const char* music = argc >= 9 ? argv[8] : NULL;
-    const char* owntheme = argc >= 10 ? argv[9] : NULL;
-    const char* theme = argc >= 11 ? argv[10] : NULL;
+    __android_log_write(ANDROID_LOG_DEBUG, tag, "Entering INSTEAD launcher...");
+    char* nativelog = argc >= 2 ? argv[1] : NULL;
+    char* path = argc >= 3 ? argv[2] : NULL;
+    char* appdata = argc >= 4 ? argv[3] : NULL;
+    char* gamespath = argc >= 5 ? argv[4] : NULL;
+    char* res = argc >= 6 ? argv[5] : NULL;
+    char* game = argc >= 7 ? argv[6] : NULL;
+    char* idf = argc >= 8 ? argv[7] : NULL;
+    char* music = argc >= 9 ? argv[8] : NULL;
+    char* owntheme = argc >= 10 ? argv[9] : NULL;
+    char* theme = argc >= 11 ? argv[10] : NULL;
     
     if (nativelog != NULL) {
         logFile = fopen(nativelog, "w");
@@ -104,44 +109,44 @@ extern "C" int SDL_main(int argc, char** argv) {
     
     if (res != NULL) {
         printf("res = %s\n", res);
-        argv[n++] = SDL_strdup("-mode");
-        argv[n++] = res;
+        _argv[n++] = SDL_strdup("-mode");
+        _argv[n++] = res;
     }
     if (appdata != NULL) {
         printf("appdata = %s\n", appdata);
-        argv[n++] = SDL_strdup("-appdata");
-        argv[n++] = appdata;
+        _argv[n++] = SDL_strdup("-appdata");
+        _argv[n++] = appdata;
     }
     if (gamespath != NULL) {
         printf("gamespath = %s\n", gamespath);
-        argv[n++] = SDL_strdup("-gamespath");
-        argv[n++] = gamespath;
+        _argv[n++] = SDL_strdup("-gamespath");
+        _argv[n++] = gamespath;
     }
     if (idf != NULL) {
         printf("idf = %s\n", idf);
-        argv[n++] = idf;
+        _argv[n++] = idf;
     } else if (game != NULL) {
         printf("game = %s\n", game);
-        argv[n++] = SDL_strdup("-game");
-        argv[n++] = game;
+        _argv[n++] = SDL_strdup("-game");
+        _argv[n++] = game;
     }
     if (music == NULL) {
         printf("Without music = YES\n");
-        argv[n++] = SDL_strdup("-nosound");
+        _argv[n++] = SDL_strdup("-nosound");
     }
     if (owntheme != NULL) {
         printf("Force own theme = YES\n");
-        argv[n++] = SDL_strdup("-owntheme");
+        _argv[n++] = SDL_strdup("-owntheme");
     }
     if (theme != NULL) {
         printf("theme = %s\n", theme);
-        argv[n++] = SDL_strdup("-theme");
-        argv[n++] = theme;
+        _argv[n++] = SDL_strdup("-theme");
+        _argv[n++] = theme;
     }
-    argv[n] = NULL;
+    _argv[n] = NULL;
 
     printf("Before instead_main()\n");
-    status = instead_main(n, argv);
+    status = instead_main(n, _argv);
     printf("After instead_main()\n");
     fflush(NULL);
     // Stopping the logger thread, if needed. Closing the log file, if it was opened...
@@ -161,7 +166,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     return status;
 }
 
-extern "C" void Java_com_nlbhub_instead_SDLActivity_toggleMenu(JNIEnv* env, jclass cls) {
+extern "C" void Java_com_nlbhub_instead_STEADActivity_toggleMenu(JNIEnv* env, jclass cls) {
     printf("Menu toggle command issued\n");
     SDL_Event event;
 

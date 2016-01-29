@@ -27,11 +27,11 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SimpleAdapter.ViewBinder;
+import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.launcher.simple.Globals;
-import com.nlbhub.instead.SDLActivity;
 
 public class FavoritList extends ListActivity  implements ViewBinder  {
 	private static final String LIST_TEXT = "list_text";
@@ -223,7 +223,7 @@ public class FavoritList extends ListActivity  implements ViewBinder  {
 		  if(StorageResolver.isWorking(game) || (game.endsWith(".idf") &&
 				  (new File(Globals.getOutFilePath(StorageResolver.GameDir
 		    				+ game)).exists()))){	
-			Intent myIntent = new Intent(this, SDLActivity.class);
+			Intent myIntent = new Intent(this, STEADActivity.class);
 			Bundle b = new Bundle();
 			b.putString("game", game);
 			myIntent.putExtras(b);

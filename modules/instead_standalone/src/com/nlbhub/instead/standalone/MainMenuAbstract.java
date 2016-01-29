@@ -22,7 +22,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import com.google.android.vending.expansion.downloader.*;
 import com.nlbhub.instead.R;
-import com.nlbhub.instead.SDLActivity;
+import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.standalone.expansion.APKHelper;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
@@ -165,7 +165,7 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
 
     protected void startAppAlt() {
         if (checkInstall()) {
-            Intent myIntent = new Intent(this, SDLActivity.class);
+            Intent myIntent = new Intent(this, STEADActivity.class);
             startActivity(myIntent);
         } else {
             checkRC();

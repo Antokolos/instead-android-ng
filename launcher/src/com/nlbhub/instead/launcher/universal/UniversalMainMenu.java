@@ -9,13 +9,13 @@ import android.util.Log;
 import android.view.*;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.launcher.universal.nlb.NLBGameManager;
 import com.nlbhub.instead.launcher.simple.ContentFileData;
 import com.nlbhub.instead.launcher.simple.Globals;
 import com.nlbhub.instead.launcher.simple.MainMenu;
-import com.nlbhub.instead.SDLActivity;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -155,7 +155,7 @@ public class UniversalMainMenu extends MainMenu {
 
     private void startApp(String g) {
         if (checkInstall()) {
-            Intent myIntent = new Intent(this, SDLActivity.class);
+            Intent myIntent = new Intent(this, STEADActivity.class);
             Bundle b = new Bundle();
             b.putString("game", g);
             myIntent.putExtras(b);

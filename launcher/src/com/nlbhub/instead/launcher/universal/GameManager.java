@@ -34,6 +34,7 @@ import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.launcher.simple.FilterConstants;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
@@ -41,7 +42,6 @@ import com.nlbhub.instead.standalone.MainMenuAbstract;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.launcher.simple.Globals;
 import com.nlbhub.instead.launcher.simple.LastGame;
-import com.nlbhub.instead.SDLActivity;
 
 public class GameManager extends ListActivity implements ViewBinder {
 
@@ -906,7 +906,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 			String title = gl.getInf(GameList.TITLE, index.get(item_index));
 			if(!isURQ(title)) return;
 			lastGame.setLast(title, game);
-			Intent myIntent = new Intent(this, SDLActivity.class);
+			Intent myIntent = new Intent(this, STEADActivity.class);
 			Bundle b = new Bundle();
 			b.putString("game", game);
 			myIntent.putExtras(b);

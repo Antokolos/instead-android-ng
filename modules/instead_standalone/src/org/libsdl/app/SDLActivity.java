@@ -29,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.media.*;
 import android.hardware.*;
 import android.content.pm.ActivityInfo;
+import com.nlbhub.instead.STEADActivity;
 
 /**
     SDL Activity
@@ -84,6 +85,10 @@ public class SDLActivity extends Activity {
        for (String lib : getLibraries()) {
           System.loadLibrary(lib);
        }
+    }
+
+    protected KeyEvent.DispatcherState getKeyDispatcherState() {
+        return mSurface.getKeyDispatcherState();
     }
 
     /**
@@ -1166,6 +1171,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     // Key events
     @Override
     public boolean onKey(View  v, int keyCode, KeyEvent event) {
+        int key = STEADActivity.translateKey(keyCode);
         // Dispatch the different events depending on where they come from
         // Some SOURCE_DPAD or SOURCE_GAMEPAD are also SOURCE_KEYBOARD
         // So, we try to process them as DPAD or GAMEPAD events first, if that fails we try them as KEYBOARD
@@ -1173,11 +1179,11 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         if ( (event.getSource() & InputDevice.SOURCE_GAMEPAD) != 0 ||
                    (event.getSource() & InputDevice.SOURCE_DPAD) != 0 ) {
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                if (SDLActivity.onNativePadDown(event.getDeviceId(), keyCode) == 0) {
+                if (SDLActivity.onNativePadDown(event.getDeviceId(), key) == 0) {
                     return true;
                 }
             } else if (event.getAction() == KeyEvent.ACTION_UP) {
-                if (SDLActivity.onNativePadUp(event.getDeviceId(), keyCode) == 0) {
+                if (SDLActivity.onNativePadUp(event.getDeviceId(), key) == 0) {
                     return true;
                 }
             }
@@ -1185,13 +1191,13 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
         if( (event.getSource() & InputDevice.SOURCE_KEYBOARD) != 0) {
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                //Log.v("SDL", "key down: " + keyCode);
-                SDLActivity.onNativeKeyDown(keyCode);
+                //Log.v("SDL", "key down: " + key);
+                SDLActivity.onNativeKeyDown(key);
                 return true;
             }
             else if (event.getAction() == KeyEvent.ACTION_UP) {
-                //Log.v("SDL", "key up: " + keyCode);
-                SDLActivity.onNativeKeyUp(keyCode);
+                //Log.v("SDL", "key up: " + key);
+                SDLActivity.onNativeKeyUp(key);
                 return true;
             }
         }

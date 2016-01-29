@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  * Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this)); // add this to your activity page
- * In my case it is SDLActivity
+ * In my case it is STEADActivity
  * Created by Antokolos on 30.08.15.
  */
 public class ExceptionHandler implements java.lang.Thread.UncaughtExceptionHandler {

@@ -29,12 +29,12 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SimpleAdapter.ViewBinder;
+import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.launcher.simple.Globals;
 import com.nlbhub.instead.launcher.simple.LastGame;
-import com.nlbhub.instead.SDLActivity;
 
 public class GameDirs extends ListActivity  implements ViewBinder  {
 	private final Handler h = new Handler();
@@ -427,7 +427,7 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 	
 	private void startApp(String g) {
 			//Log.d("game",g);
-			Intent myIntent = new Intent(this, SDLActivity.class);
+			Intent myIntent = new Intent(this, STEADActivity.class);
 			Bundle b = new Bundle();
 			b.putString("game", g);
 			myIntent.putExtras(b);
