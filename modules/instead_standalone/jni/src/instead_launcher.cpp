@@ -32,8 +32,8 @@ static void setStopIssued(int val) {
 static void write_buffer_to_log() {
     ssize_t rdsz;
     char buf[4096];
-    while((rdsz = read(pfd[0], buf, sizeof buf - 1)) > 0) {
-        if(buf[rdsz - 1] == '\n') --rdsz;
+    while ((rdsz = read(pfd[0], buf, sizeof buf - 1)) > 0) {
+        if (buf[rdsz - 1] == '\n') --rdsz;
         buf[rdsz] = 0;  /* add null-terminator */
         __android_log_write(ANDROID_LOG_DEBUG, tag, buf);
         if (logFile != NULL) {
@@ -41,11 +41,14 @@ static void write_buffer_to_log() {
         }
         fflush(logFile);
         usleep(500000);
+        if (getStopIssued() != 0) {
+            break;
+        }
     }
 }
 
 static void *thread_func(void*) {
-    while(getStopIssued() == 0) {
+    while (getStopIssued() == 0) {
         write_buffer_to_log();
     }
     if (logFile != NULL) {
@@ -78,16 +81,16 @@ extern "C" int instead_main(int argc, char** argv);
 /* Start up the SDL app */
 extern "C" int SDL_main(int argc, char** argv) {
     __android_log_write(ANDROID_LOG_DEBUG, tag, "Entering INSTEAD launcher...");
-    char* nativelog = argc >= 2 ? argv[1] : NULL;
-    char* path = argc >= 3 ? argv[2] : NULL;
-    char* appdata = argc >= 4 ? argv[3] : NULL;
-    char* gamespath = argc >= 5 ? argv[4] : NULL;
-    char* res = argc >= 6 ? argv[5] : NULL;
-    char* game = argc >= 7 ? argv[6] : NULL;
-    char* idf = argc >= 8 ? argv[7] : NULL;
-    char* music = argc >= 9 ? argv[8] : NULL;
-    char* owntheme = argc >= 10 ? argv[9] : NULL;
-    char* theme = argc >= 11 ? argv[10] : NULL;
+    const char* nativelog = argc >= 2 ? argv[1] : NULL;
+    const char* path = argc >= 3 ? argv[2] : NULL;
+    const char* appdata = argc >= 4 ? argv[3] : NULL;
+    const char* gamespath = argc >= 5 ? argv[4] : NULL;
+    const char* res = argc >= 6 ? argv[5] : NULL;
+    const char* game = argc >= 7 ? argv[6] : NULL;
+    const char* idf = argc >= 8 ? argv[7] : NULL;
+    const char* music = argc >= 9 ? argv[8] : NULL;
+    const char* owntheme = argc >= 10 ? argv[9] : NULL;
+    const char* theme = argc >= 11 ? argv[10] : NULL;
     
     if (nativelog != NULL) {
         logFile = fopen(nativelog, "w");
@@ -103,32 +106,32 @@ extern "C" int SDL_main(int argc, char** argv) {
         chdir(path);
     }
 
-    _argv[0] = argv[0];
+    _argv[0] = SDL_strdup(argv[0]);
 
     _argv[n++] = SDL_strdup("-nostdgames");
     
     if (res != NULL) {
         printf("res = %s\n", res);
         _argv[n++] = SDL_strdup("-mode");
-        _argv[n++] = res;
+        _argv[n++] = SDL_strdup(res);
     }
     if (appdata != NULL) {
         printf("appdata = %s\n", appdata);
         _argv[n++] = SDL_strdup("-appdata");
-        _argv[n++] = appdata;
+        _argv[n++] = SDL_strdup(appdata);
     }
     if (gamespath != NULL) {
         printf("gamespath = %s\n", gamespath);
         _argv[n++] = SDL_strdup("-gamespath");
-        _argv[n++] = gamespath;
+        _argv[n++] = SDL_strdup(gamespath);
     }
     if (idf != NULL) {
         printf("idf = %s\n", idf);
-        _argv[n++] = idf;
+        _argv[n++] = SDL_strdup(idf);
     } else if (game != NULL) {
         printf("game = %s\n", game);
         _argv[n++] = SDL_strdup("-game");
-        _argv[n++] = game;
+        _argv[n++] = SDL_strdup(game);
     }
     if (music == NULL) {
         printf("Without music = YES\n");
@@ -141,7 +144,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     if (theme != NULL) {
         printf("theme = %s\n", theme);
         _argv[n++] = SDL_strdup("-theme");
-        _argv[n++] = theme;
+        _argv[n++] = SDL_strdup(theme);
     }
     _argv[n] = NULL;
 
@@ -151,16 +154,15 @@ extern "C" int SDL_main(int argc, char** argv) {
     fflush(NULL);
     // Stopping the logger thread, if needed. Closing the log file, if it was opened...
     if (nativelog != NULL) {
-        // Wait for potentially not logged data
-        usleep(1000000);
         setStopIssued(1);
         void* thr_res;
         pthread_join(thr, &thr_res);
-        // Write to the log anything that can be missed by the thread
-        write_buffer_to_log();
     }
     if (logFile != NULL) {
         fclose(logFile);
+    }
+    for (int i = 0; i < n; ++i) {
+        SDL_free(_argv[i]);
     }
     
     return status;
