@@ -10,9 +10,4 @@ public class DummyKeyboardAdapter implements KeyboardAdapter {
     public void init(Activity activity) {
         // no op
     }
-
-    @Override
-    public void showKeyboard() {
-        // no op
-    }
 }

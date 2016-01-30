@@ -19,9 +19,4 @@ public class NativeKeyboardAdapter implements KeyboardAdapter {
         inputLayout = new InputLayout(activity);
         activity.addContentView(inputLayout, InputLayout.getParams());
     }
-
-    @Override
-    public void showKeyboard() {
-        inputLayout.open();
-    }
 }

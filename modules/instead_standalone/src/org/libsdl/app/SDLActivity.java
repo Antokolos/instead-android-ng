@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.lang.reflect.Method;
 
+import android.annotation.TargetApi;
 import android.app.*;
 import android.content.*;
 import android.text.InputType;
@@ -1171,7 +1172,6 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     // Key events
     @Override
     public boolean onKey(View  v, int keyCode, KeyEvent event) {
-        int key = STEADActivity.translateKey(keyCode);
         // Dispatch the different events depending on where they come from
         // Some SOURCE_DPAD or SOURCE_GAMEPAD are also SOURCE_KEYBOARD
         // So, we try to process them as DPAD or GAMEPAD events first, if that fails we try them as KEYBOARD
@@ -1179,11 +1179,11 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         if ( (event.getSource() & InputDevice.SOURCE_GAMEPAD) != 0 ||
                    (event.getSource() & InputDevice.SOURCE_DPAD) != 0 ) {
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                if (SDLActivity.onNativePadDown(event.getDeviceId(), key) == 0) {
+                if (SDLActivity.onNativePadDown(event.getDeviceId(), keyCode) == 0) {
                     return true;
                 }
             } else if (event.getAction() == KeyEvent.ACTION_UP) {
-                if (SDLActivity.onNativePadUp(event.getDeviceId(), key) == 0) {
+                if (SDLActivity.onNativePadUp(event.getDeviceId(), keyCode) == 0) {
                     return true;
                 }
             }
@@ -1192,12 +1192,12 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         if( (event.getSource() & InputDevice.SOURCE_KEYBOARD) != 0) {
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                 //Log.v("SDL", "key down: " + key);
-                SDLActivity.onNativeKeyDown(key);
+                SDLActivity.onNativeKeyDown(keyCode);
                 return true;
             }
             else if (event.getAction() == KeyEvent.ACTION_UP) {
                 //Log.v("SDL", "key up: " + key);
-                SDLActivity.onNativeKeyUp(key);
+                SDLActivity.onNativeKeyUp(keyCode);
                 return true;
             }
         }
@@ -1499,6 +1499,7 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
         public ArrayList<InputDevice.MotionRange> hats;
     }
     static class RangeComparator implements Comparator<InputDevice.MotionRange> {
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
         @Override
         public int compare(InputDevice.MotionRange arg0, InputDevice.MotionRange arg1) {
             return arg0.getAxis() - arg1.getAxis();
@@ -1512,6 +1513,7 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
         mJoysticks = new ArrayList<SDLJoystick>();
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
     @Override
     public void pollInputDevices() {
         int[] deviceIds = InputDevice.getDeviceIds();
@@ -1592,6 +1594,7 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
         return null;
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
     @Override
     public boolean handleMotionEvent(MotionEvent event) {
         if ( (event.getSource() & InputDevice.SOURCE_JOYSTICK) != 0) {
@@ -1622,8 +1625,10 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
     }
 }
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 class SDLGenericMotionListener_API12 implements View.OnGenericMotionListener {
     // Generic Motion (mouse hover, joystick...) events go here
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
     @Override
     public boolean onGenericMotion(View v, MotionEvent event) {
         float x, y;

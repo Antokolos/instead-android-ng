@@ -76,6 +76,27 @@ int start_logger(const char *app_name) {
     return 0;
 }
 
+int is_blank(const char* str) {
+    if (str == NULL) {
+        return 1;
+    }
+    if (str[0] == '\0') {
+        return 1;
+    }
+    return 0;
+}
+
+
+int is_not_blank(const char* str) {
+    if (str == NULL) {
+        return 0;
+    }
+    if (str[0] == '\0') {
+        return 0;
+    }
+    return 1;
+}
+
 extern "C" int instead_main(int argc, char** argv);
 
 /* Start up the SDL app */
@@ -110,38 +131,38 @@ extern "C" int SDL_main(int argc, char** argv) {
 
     _argv[n++] = SDL_strdup("-nostdgames");
     
-    if (res != NULL) {
+    if (is_not_blank(res)) {
         printf("res = %s\n", res);
         _argv[n++] = SDL_strdup("-mode");
         _argv[n++] = SDL_strdup(res);
     }
-    if (appdata != NULL) {
+    if (is_not_blank(appdata)) {
         printf("appdata = %s\n", appdata);
         _argv[n++] = SDL_strdup("-appdata");
         _argv[n++] = SDL_strdup(appdata);
     }
-    if (gamespath != NULL) {
+    if (is_not_blank(gamespath)) {
         printf("gamespath = %s\n", gamespath);
         _argv[n++] = SDL_strdup("-gamespath");
         _argv[n++] = SDL_strdup(gamespath);
     }
-    if (idf != NULL) {
+    if (is_not_blank(idf)) {
         printf("idf = %s\n", idf);
         _argv[n++] = SDL_strdup(idf);
-    } else if (game != NULL) {
+    } else if (is_not_blank(game)) {
         printf("game = %s\n", game);
         _argv[n++] = SDL_strdup("-game");
         _argv[n++] = SDL_strdup(game);
     }
-    if (music == NULL) {
+    if (is_blank(music)) {
         printf("Without music = YES\n");
         _argv[n++] = SDL_strdup("-nosound");
     }
-    if (owntheme != NULL) {
+    if (is_not_blank(owntheme)) {
         printf("Force own theme = YES\n");
         _argv[n++] = SDL_strdup("-owntheme");
     }
-    if (theme != NULL) {
+    if (is_not_blank(theme)) {
         printf("theme = %s\n", theme);
         _argv[n++] = SDL_strdup("-theme");
         _argv[n++] = SDL_strdup(theme);
@@ -164,6 +185,9 @@ extern "C" int SDL_main(int argc, char** argv) {
     for (int i = 0; i < n; ++i) {
         SDL_free(_argv[i]);
     }
+    
+    // Kill it with fire, or else we'll get the error when restarting the activity
+    exit(status);
     
     return status;
 }

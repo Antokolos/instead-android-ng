@@ -1,21 +1,16 @@
 package com.nlbhub.instead;
 
-import android.annotation.TargetApi;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.hardware.Sensor;
 import android.media.AudioManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.PowerManager;
 import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
+import com.nlbhub.instead.input.Keys;
 import com.nlbhub.instead.standalone.*;
 import org.libsdl.app.SDLActivity;
 
@@ -26,14 +21,12 @@ import java.io.IOException;
  * Created by Antokolos on 29.01.16.
  */
 public class STEADActivity extends org.libsdl.app.SDLActivity {
-    private boolean first_run = true;
     private static ExpansionMounter expansionMounterMain = null;
     private static StorageManager storageManager = null;
     private static Display display;
     private static String game = null;
     private static String idf = null;
     private static Settings settings;
-    private static KeyboardAdapter keyboardAdapter;
     private static AudioManager audioManager;
     private static SDLActivity Ctx;
 
@@ -89,10 +82,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         return args;
     }
 
-    public static KeyboardAdapter getKeyboardAdapter(){
-        return keyboardAdapter;
-    }
-
     public static ExpansionMounter getExpansionMounterMain() {
         return expansionMounterMain;
     }
@@ -144,15 +133,14 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
                 if (event.isTracking() && !event.isCanceled()) {
                     toggleMenu();
                     return true;
-
                 }
             }
-            return super.dispatchKeyEvent(event);
-        } else {
-            return super.dispatchKeyEvent(event);
         }
+
+        return translateKeyEvent(event);
     }
 
+    /*
     public static void setVol(int dvol){
 
         int minvol = 0;
@@ -166,6 +154,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         }
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curvol, 0);
     }
+    */
 
     public static Settings getSettings() {
         return settings;
@@ -173,7 +162,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
 
     // Setup
     private synchronized void initExpansionManager(Context context) {
-        InsteadApplication app = (InsteadApplication) getApplication();
         if (expansionMounterMain == null) {
             if (storageManager == null) {
                 storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
@@ -196,7 +184,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         settings = SettingsFactory.create(this);
-        keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard());
+        KeyboardFactory.create(this, settings.getKeyboard());
         initExpansionManager(this);
 
         Intent intent = getIntent();
@@ -229,38 +217,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, InsteadApplication.ApplicationName);
 
-        /*
-        Let's try to remove this strange code...
-        h = new Handler();
-
-        IntentFilter filter = new IntentFilter(Intent.ACTION_USER_PRESENT);
-        //filter.addAction(Intent.ACTION_SCREEN_OFF);
-        //filter.addAction(Intent. ACTION_SCREEN_ON);
-        mReceiver= new ScreenReceiver();
-        registerReceiver(mReceiver, filter);
-        */
-
         display = getWindowManager().getDefaultDisplay();
-
-        //if(first_run){
-        first_run=false;
-
-        //Log.d("Game", intent.getStringExtra("game"));
-        //if(idf!=null) Log.d("idf", idf);
-        //if(game!=null){Log.v("SDL", "Start game: "+game); }else{Log.v("SDL", "Start default game");};
-        //finish();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putBoolean("first_run", first_run);
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        first_run = savedInstanceState.getBoolean("first_run");
     }
 
     @Override
@@ -308,20 +265,25 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         return idf;
     }
 
-    // Used in org.libsdl.app.SDLSurface.onKey()
-    public static int translateKey(int keyCode) {
-        int key = keyCode;
+    private boolean translateKeyEvent(KeyEvent keyEvent) {
+        int keyCode = keyEvent.getKeyCode();
+        int action = keyEvent.getAction();
+        boolean isDown = (action == KeyEvent.ACTION_DOWN) || (action == KeyEvent.ACTION_MULTIPLE);
 
         if (STEADActivity.getSettings().getOvVol()) {
             switch (keyCode) {
                 case KeyEvent.KEYCODE_VOLUME_UP:
-                    key = KeyEvent.KEYCODE_DPAD_UP;
-                    break;
+                    if (isDown) {
+                        Keys.down(KeyEvent.KEYCODE_PAGE_UP, false);
+                    }
+                    return true;
                 case KeyEvent.KEYCODE_VOLUME_DOWN:
-                    key = KeyEvent.KEYCODE_DPAD_DOWN;
-                    break;
+                    if (isDown) {
+                        Keys.down(KeyEvent.KEYCODE_PAGE_DOWN, false);
+                    }
+                    return true;
             }
-        } else {
+        }/* else {
             switch (keyCode) {
                 case KeyEvent.KEYCODE_VOLUME_UP:
                     STEADActivity.setVol(1);
@@ -330,7 +292,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
                     STEADActivity.setVol(-1);
                     break;
             }
-        }
-        return key;
+        }*/
+        return super.dispatchKeyEvent(keyEvent);
     }
 }

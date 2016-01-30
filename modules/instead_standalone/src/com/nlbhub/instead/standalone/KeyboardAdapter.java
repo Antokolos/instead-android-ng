@@ -7,5 +7,4 @@ import android.app.Activity;
  */
 public interface KeyboardAdapter {
     void init(Activity activity);
-    void showKeyboard();
 }
