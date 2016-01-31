@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nlbhub.instead.redhood"
-    android:versionCode="105001"
+    android:versionCode="105002"
     android:versionName="1.0.5">
 
     <uses-sdk android:minSdkVersion="15" />
@@ -29,7 +29,7 @@
         />
         <service android:name="com.nlbhub.instead.standalone.expansion.InsteadDownloaderService" />
         <receiver android:name="com.nlbhub.instead.standalone.expansion.InsteadAlarmReceiver" />
-        <activity android:name="com.nlbhub.instead.SDLActivity" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.nlbhub.instead.STEADActivity" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
     </application>
     <!-- Required to access Google Play Licensing (used for APK expansion files AKA obb) -->
     <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
