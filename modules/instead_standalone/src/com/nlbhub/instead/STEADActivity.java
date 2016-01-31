@@ -170,7 +170,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
             expansionMounterMain = (
                     new ExpansionMounter(
                             storageManager,
-                            StorageResolver.getObbFilePath(((InsteadApplication) getApplication()).getMainObb(context), context)
+                            StorageResolver.getObbFilePath(((ObbSupportedApplication) getApplication()).getMainObb(), context)
                     )
             );
             expansionMounterMain.mountExpansion();
