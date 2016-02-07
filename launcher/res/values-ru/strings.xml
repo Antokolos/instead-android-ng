@@ -115,6 +115,6 @@
     <string name="virtkey">Виртуальная клавиатура</string>
     <string name="virtkey_t">Для показа клавиатуры в играх нажмите на иконку клавиатуры внизу экрана</string>
     <string name="volume">Громкость:</string>
-    <string name="override_vol">VolUp/VolDown как Up/Down</string>
+    <string name="override_vol">Переопределить VolUp/VolDown</string>
     <string name="add_cut">Игра Instead (ярлык)</string>
 </resources>

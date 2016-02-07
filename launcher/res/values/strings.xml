@@ -119,6 +119,6 @@
     <string name="virtkey">Virtual keyboard</string>
     <string name="virtkey_t">To display keyboard press the keyboard icon at the bottom of the screen</string>
     <string name="volume">Volume:</string>
-    <string name="override_vol">VolUp/VolDown as Up/Down</string>
+    <string name="override_vol">Override VolUp/VolDown</string>
     <string name="add_cut">Instead game (shortcut)</string>
 </resources>

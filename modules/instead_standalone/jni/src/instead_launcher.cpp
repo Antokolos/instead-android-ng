@@ -120,7 +120,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     
     /* Run the application code! */
     int status;
-    char* _argv[15];
+    char* _argv[17];
     int n = 1;
     if (path != NULL) {
         printf("path = %s\n", path);
@@ -130,11 +130,15 @@ extern "C" int SDL_main(int argc, char** argv) {
     _argv[0] = SDL_strdup(argv[0]);
 
     _argv[n++] = SDL_strdup("-nostdgames");
-    
+    _argv[n++] = SDL_strdup("-fullscreen");
+    _argv[n++] = SDL_strdup("-mode");
+    _argv[n++] = SDL_strdup("-1x-1");
+
     if (is_not_blank(res)) {
-        printf("res = %s\n", res);
-        _argv[n++] = SDL_strdup("-mode");
-        _argv[n++] = SDL_strdup(res);
+        printf("-hires is ON\n");
+        _argv[n++] = SDL_strdup("-hires");
+    } else {
+        printf("-hires is OFF");
     }
     if (is_not_blank(appdata)) {
         printf("appdata = %s\n", appdata);

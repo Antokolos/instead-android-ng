@@ -1,14 +1,18 @@
 package com.nlbhub.instead;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.storage.StorageManager;
 import android.util.Log;
-import android.view.*;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.nlbhub.instead.input.Keys;
 import com.nlbhub.instead.standalone.*;
@@ -23,12 +27,12 @@ import java.io.IOException;
 public class STEADActivity extends org.libsdl.app.SDLActivity {
     private static ExpansionMounter expansionMounterMain = null;
     private static StorageManager storageManager = null;
-    private static Display display;
     private static String game = null;
     private static String idf = null;
     private static Settings settings;
     private static AudioManager audioManager;
     private static SDLActivity Ctx;
+    private boolean systemUIShown = true;
 
     // Load the .so
 
@@ -57,11 +61,62 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         }
     }
 
+    /**
+     * NB: use hideSystemUISafe in your code!
+     */
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void hideSystemUI() {
+        View mDecorView = getWindow().getDecorView();
+        mDecorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LOW_PROFILE
+                | View.SYSTEM_UI_FLAG_IMMERSIVE);
+    }
+
+    public void hideSystemUISafe() {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            hideSystemUI();
+            systemUIShown = false;
+        }
+    }
+
+    /**
+     * NB: use showSystemUISafe in your code!
+     */
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void showSystemUI() {
+        View mDecorView = getWindow().getDecorView();
+        mDecorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+    }
+
+    public void showSystemUISafe() {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            showSystemUI();
+            systemUIShown = true;
+        }
+    }
+
+    public void toggleSystemUISafe() {
+        if (systemUIShown) {
+            hideSystemUISafe();
+        } else {
+            showSystemUISafe();
+        }
+    }
+
+    /**
+     * Gets arguments for launch.
+     * With side effect: hides system UI if possible
+     * @return
+     */
     @Override
     protected String[] getArguments() {
         final ExpansionMounter expansionMounter = getExpansionMounterMain();
-        final String bundledGameName = StorageResolver.getBundledGameName(expansionMounter);
-        lockOrientationIfNeeded(bundledGameName);
         final String appdata = StorageResolver.getAppDataPath(expansionMounter);
         final String gamespath = StorageResolver.getGamesPath(expansionMounter);
         Settings settings = getSettings();
@@ -73,7 +128,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         args[1] = getDataDir();
         args[2] = appdata;
         args[3] = gamespath;
-        args[4] = (enforceResolution) ? getRes(bundledGameName) : "-1x-1";
+        args[4] = (enforceResolution) ? "Y" : null; // The exact value is unimportant, if NOT null, then -hires will be added
         args[5] = getGame();
         args[6] = getIdf();
         args[7] = settings.isMusic() ? "Y" : null;  // The exact value is unimportant, if null, then -nosound will be added
@@ -90,22 +145,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         return Ctx;
     }
 
-    public void lockOrientationIfNeeded(final String bundledGameName) {
-        if (settings.isEnforceresolution()) {
-            if (isPortrait(bundledGameName)) {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            } else {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            }
-        }
-    }
-
-    private boolean isPortrait(final String bundledGameName) {
-        // bundled game game can be not so simple if using standalone game in obb file
-        final String realBundledGameName = (game == null || StorageResolver.BundledGame.equals(game)) ? bundledGameName : game;
-        return ThemeHelper.isPortrait(this, expansionMounterMain, settings, realBundledGameName, idf);
-    }
-
     /*
     This method should be added to org.libsdl.app.SDLActivity
     protected KeyEvent.DispatcherState getKeyDispatcherState() {
@@ -113,14 +152,8 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     }
     */
 
-    /**
-     * See http://android-developers.blogspot.ru/2009_12_01_archive.html
-     * @param event
-     * @return
-     */
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+    public boolean processKey(KeyEvent event, int keyCode, KeyHandler keyHandler) {
+        if (event.getKeyCode() == keyCode) {
             if (event.getAction() == KeyEvent.ACTION_DOWN
                     && event.getRepeatCount() == 0) {
 
@@ -131,30 +164,52 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
             } else if (event.getAction() == KeyEvent.ACTION_UP) {
                 getKeyDispatcherState().handleUpEvent(event);
                 if (event.isTracking() && !event.isCanceled()) {
-                    toggleMenu();
+                    keyHandler.handle();
                     return true;
                 }
             }
         }
-
-        return translateKeyEvent(event);
+        return false;
     }
 
-    /*
-    public static void setVol(int dvol){
-
-        int minvol = 0;
-        int maxvol = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        int curvol = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        curvol += dvol;
-        if(curvol<minvol) {
-            curvol = minvol;
-        } else if (curvol>maxvol){
-            curvol = maxvol;
+    /**
+     * See http://android-developers.blogspot.ru/2009_12_01_archive.html
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (processKey(event, KeyEvent.KEYCODE_BACK, new KeyHandler() {
+            @Override
+            public void handle() {
+                toggleMenu();
+            }
+        })) {
+            return true;
         }
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, curvol, 0);
+
+        if (STEADActivity.getSettings().getOvVol()) {
+            if (processKey(event, KeyEvent.KEYCODE_VOLUME_DOWN, new KeyHandler() {
+                @Override
+                public void handle() {
+                    toggleMenu();
+                }
+            })) {
+                return true;
+            }
+
+            if (processKey(event, KeyEvent.KEYCODE_VOLUME_UP, new KeyHandler() {
+                @Override
+                public void handle() {
+                    toggleSystemUISafe();
+                }
+            })) {
+                return true;
+            }
+        }
+
+        return super.dispatchKeyEvent(event);
     }
-    */
 
     public static Settings getSettings() {
         return settings;
@@ -177,8 +232,21 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean("systemUIShown", systemUIShown);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        systemUIShown = savedInstanceState.getBoolean("systemUIShown");
+    }
+    
     protected void onCreate(Bundle savedInstanceState) {
         Ctx = this;
+        systemUIShown = savedInstanceState == null || savedInstanceState.getBoolean("systemUIShown");
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
         // The following line is to workaround AndroidRuntimeException: requestFeature() must be called before adding content
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -216,8 +284,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, InsteadApplication.ApplicationName);
-
-        display = getWindowManager().getDefaultDisplay();
+        hideSystemUISafe();
     }
 
     @Override
@@ -237,26 +304,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
 
     private PowerManager.WakeLock wakeLock = null;
 
-    private static int getMin(int x, int y) {
-        return (x < y) ? x : y;
-    }
-
-    private static int getMax(int x, int y) {
-        return (x >= y) ? x : y;
-    }
-
-    public String getRes(final String bundledGameName) {
-        int x = display.getWidth();
-        int y = display.getHeight();
-        int longside = getMax(x, y);
-        int shortside = getMin(x, y);
-        if (isPortrait(bundledGameName)) {
-            return shortside + "x" + longside;
-        } else {
-            return longside + "x" + shortside;
-        }
-    }
-
     public static String getGame() {
         return game;
     }
@@ -265,34 +312,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         return idf;
     }
 
-    private boolean translateKeyEvent(KeyEvent keyEvent) {
-        int keyCode = keyEvent.getKeyCode();
-        int action = keyEvent.getAction();
-        boolean isDown = (action == KeyEvent.ACTION_DOWN) || (action == KeyEvent.ACTION_MULTIPLE);
-
-        if (STEADActivity.getSettings().getOvVol()) {
-            switch (keyCode) {
-                case KeyEvent.KEYCODE_VOLUME_UP:
-                    if (isDown) {
-                        Keys.down(KeyEvent.KEYCODE_PAGE_UP, false);
-                    }
-                    return true;
-                case KeyEvent.KEYCODE_VOLUME_DOWN:
-                    if (isDown) {
-                        Keys.down(KeyEvent.KEYCODE_PAGE_DOWN, false);
-                    }
-                    return true;
-            }
-        }/* else {
-            switch (keyCode) {
-                case KeyEvent.KEYCODE_VOLUME_UP:
-                    STEADActivity.setVol(1);
-                    break;
-                case KeyEvent.KEYCODE_VOLUME_DOWN:
-                    STEADActivity.setVol(-1);
-                    break;
-            }
-        }*/
-        return super.dispatchKeyEvent(keyEvent);
+    private interface KeyHandler {
+        void handle();
     }
 }

@@ -265,11 +265,7 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
         final float xVGA = (float)320 / (float)240;
         final float HVGA = (float)480 / (float)320;
 
-        String suff = "";
-
-
-        suff = "-"+ThemeHelper.PORTRAIT_KEY.toUpperCase();
-
+        String suff = "-PORTRAIT";
 
         String locale = null;
         if (Locale.getDefault().toString().equals("ru_RU")
