@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
-import com.nlbhub.instead.input.Keys;
 import com.nlbhub.instead.standalone.*;
 import org.libsdl.app.SDLActivity;
 
@@ -32,7 +31,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     private static Settings settings;
     private static AudioManager audioManager;
     private static SDLActivity Ctx;
-    private boolean systemUIShown = true;
 
     // Load the .so
 
@@ -79,7 +77,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     public void hideSystemUISafe() {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             hideSystemUI();
-            systemUIShown = false;
         }
     }
 
@@ -97,12 +94,26 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     public void showSystemUISafe() {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             showSystemUI();
-            systemUIShown = true;
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public boolean isSystemUIShown() {
+        View mDecorView = getWindow().getDecorView();
+        int vis = mDecorView.getWindowSystemUiVisibility();
+        return (vis & (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LOW_PROFILE)) == 0;
+    }
+
+    public boolean isSystemUIShownSafe() {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return isSystemUIShown();
+        } else {
+            return true;
         }
     }
 
     public void toggleSystemUISafe() {
-        if (systemUIShown) {
+        if (isSystemUIShownSafe()) {
             hideSystemUISafe();
         } else {
             showSystemUISafe();
@@ -232,21 +243,8 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         }
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putBoolean("systemUIShown", systemUIShown);
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        systemUIShown = savedInstanceState.getBoolean("systemUIShown");
-    }
-    
     protected void onCreate(Bundle savedInstanceState) {
         Ctx = this;
-        systemUIShown = savedInstanceState == null || savedInstanceState.getBoolean("systemUIShown");
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
         // The following line is to workaround AndroidRuntimeException: requestFeature() must be called before adding content
         requestWindowFeature(Window.FEATURE_NO_TITLE);

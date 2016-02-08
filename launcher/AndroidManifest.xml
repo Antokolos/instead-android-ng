@@ -20,10 +20,11 @@
         <activity android:name="org.libsdl.app.SDLActivity"
             android:label="@string/app_name"
             android:configChanges="keyboardHidden|orientation"
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen"
         />
         <service android:name="com.nlbhub.instead.standalone.expansion.InsteadDownloaderService" />
         <receiver android:name="com.nlbhub.instead.standalone.expansion.InsteadAlarmReceiver" />
-        <activity android:name="com.nlbhub.instead.STEADActivity" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.nlbhub.instead.STEADActivity" android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
         <activity android:name=".universal.GameManager" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
         <activity android:name=".universal.nlb.NLBGameManager" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
         <activity android:name=".simple.Options" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
