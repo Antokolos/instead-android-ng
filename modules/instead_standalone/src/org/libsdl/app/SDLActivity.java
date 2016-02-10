@@ -92,6 +92,21 @@ public class SDLActivity extends Activity {
         return mSurface.getKeyDispatcherState();
     }
 
+    @SuppressWarnings("UnusedDeclaration")
+    public void rotateLandscape() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void rotatePortrait() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public void unlockRotation() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+
     /**
      * This method is called by SDL before starting the native application thread.
      * It can be overridden to provide the arguments after the application name.
@@ -411,7 +426,7 @@ public class SDLActivity extends Activity {
     }
 
     // C functions we call
-    public static native int nativeInit(Object arguments);
+    public static native int nativeInitMain(Object obj, Object arguments);
     public static native void nativeLowMemory();
     public static native void nativeQuit();
     public static native void nativePause();
@@ -960,7 +975,7 @@ class SDLMain implements Runnable {
     @Override
     public void run() {
         // Runs SDL_main()
-        SDLActivity.nativeInit(SDLActivity.mSingleton.getArguments());
+        SDLActivity.nativeInitMain(SDLActivity.mSingleton, SDLActivity.mSingleton.getArguments());
 
         //Log.v("SDL", "SDL thread terminated");
     }

@@ -191,10 +191,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     for (int i = 0; i < n; ++i) {
         SDL_free(_argv[i]);
     }
-    
-    // Kill it with fire, or else we'll get the error when restarting the activity
-    exit(status);
-    
+
     return status;
 }
 

@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -63,7 +62,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
      * NB: use hideSystemUISafe in your code!
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    private void hideSystemUI() {
+    private void hideSystemUI_KITKAT() {
         mDecorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -73,9 +72,12 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE);
     }
 
-    public void hideSystemUISafe() {
+    public boolean hideSystemUISafe() {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            hideSystemUI();
+            hideSystemUI_KITKAT();
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -285,7 +287,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     }
 
     private void registerTouchListeners() {
-        View contentView = mSurface;
+        final View contentView = mSurface;
         contentView.setClickable(true);
         final GestureDetector clickDetector = new GestureDetector(
                 this,
@@ -293,17 +295,18 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
                     @Override
                     public boolean onSingleTapUp(MotionEvent e) {
                         boolean visible = isSystemUIShownSafe();
+                        boolean handled = false;
                         if (visible) {
-                            hideSystemUISafe();
+                            handled = hideSystemUISafe();
                         }
-                        return true;
+                        return handled || super.onSingleTapUp(e);
                     }
                 }
         );
         contentView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                return clickDetector.onTouchEvent(motionEvent);
+                return clickDetector.onTouchEvent(motionEvent) || ((View.OnTouchListener) mSurface).onTouch(view, motionEvent);
             }
         });
     }
