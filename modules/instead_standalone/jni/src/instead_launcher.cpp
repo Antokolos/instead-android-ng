@@ -112,6 +112,8 @@ extern "C" int SDL_main(int argc, char** argv) {
     const char* music = argc >= 9 ? argv[8] : NULL;
     const char* owntheme = argc >= 10 ? argv[9] : NULL;
     const char* theme = argc >= 11 ? argv[10] : NULL;
+    const char* modes = argc >= 12 ? argv[11] : NULL;
+
     
     if (nativelog != NULL) {
         logFile = fopen(nativelog, "w");
@@ -131,14 +133,14 @@ extern "C" int SDL_main(int argc, char** argv) {
 
     _argv[n++] = SDL_strdup("-nostdgames");
     _argv[n++] = SDL_strdup("-fullscreen");
-    _argv[n++] = SDL_strdup("-mode");
-    _argv[n++] = SDL_strdup("-1x-1");
-
+    _argv[n++] = SDL_strdup("-modes");
+    _argv[n++] = SDL_strdup(modes);
+    
     if (is_not_blank(res)) {
         printf("-hires is ON\n");
         _argv[n++] = SDL_strdup("-hires");
     } else {
-        printf("-hires is OFF");
+        printf("-hires is OFF\n");
     }
     if (is_not_blank(appdata)) {
         printf("appdata = %s\n", appdata);

@@ -3,16 +3,14 @@ package com.nlbhub.instead;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.storage.StorageManager;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.*;
 import android.widget.Toast;
 import com.nlbhub.instead.standalone.*;
 import org.libsdl.app.SDLActivity;
@@ -29,8 +27,10 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     private static String game = null;
     private static String idf = null;
     private static Settings settings;
-    private static AudioManager audioManager;
     private static SDLActivity Ctx;
+    private String modes;
+    private PowerManager.WakeLock wakeLock = null;
+    private View mDecorView;
 
     // Load the .so
 
@@ -64,7 +64,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void hideSystemUI() {
-        View mDecorView = getWindow().getDecorView();
         mDecorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -85,7 +84,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void showSystemUI() {
-        View mDecorView = getWindow().getDecorView();
         mDecorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
@@ -99,7 +97,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public boolean isSystemUIShown() {
-        View mDecorView = getWindow().getDecorView();
         int vis = mDecorView.getWindowSystemUiVisibility();
         return (vis & (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LOW_PROFILE)) == 0;
     }
@@ -134,17 +131,18 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         boolean nativeLogEnabled = settings.isNativelog();
         boolean enforceResolution = settings.isEnforceresolution();
         String nativeLogPath = nativeLogEnabled ? StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/native.log" : null;
-        String[] args = new String[10];
+        String[] args = new String[11];
         args[0] = nativeLogPath;
         args[1] = getDataDir();
         args[2] = appdata;
         args[3] = gamespath;
         args[4] = (enforceResolution) ? "Y" : null; // The exact value is unimportant, if NOT null, then -hires will be added
-        args[5] = getGame();
-        args[6] = getIdf();
+        args[5] = game;
+        args[6] = idf;
         args[7] = settings.isMusic() ? "Y" : null;  // The exact value is unimportant, if null, then -nosound will be added
         args[8] = settings.isOwntheme() ? "Y" : null;  // The exact value is unimportant, if NOT null, then -owntheme will be added
         args[9] = settings.getTheme();
+        args[10] = modes;
         return args;
     }
 
@@ -199,7 +197,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
             return true;
         }
 
-        if (STEADActivity.getSettings().getOvVol()) {
+        if (settings.getOvVol()) {
             if (processKey(event, KeyEvent.KEYCODE_VOLUME_DOWN, new KeyHandler() {
                 @Override
                 public void handle() {
@@ -273,42 +271,76 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
             }
         }
 
-        if(!settings.getOvVol()) {
-            audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-        }
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, InsteadApplication.ApplicationName);
-        hideSystemUISafe();
+        mDecorView = getWindow().getDecorView();
+        if (settings.getOvVol()) {
+            hideSystemUISafe();
+            registerTouchListeners();
+        }
+        modes = getModes();
+    }
+
+    private void registerTouchListeners() {
+        View contentView = mSurface;
+        contentView.setClickable(true);
+        final GestureDetector clickDetector = new GestureDetector(
+                this,
+                new GestureDetector.SimpleOnGestureListener() {
+                    @Override
+                    public boolean onSingleTapUp(MotionEvent e) {
+                        boolean visible = isSystemUIShownSafe();
+                        if (visible) {
+                            hideSystemUISafe();
+                        }
+                        return true;
+                    }
+                }
+        );
+        contentView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return clickDetector.onTouchEvent(motionEvent);
+            }
+        });
+    }
+
+    private String getModes() {
+        StringBuilder result = new StringBuilder();
+        Display display = getWindowManager().getDefaultDisplay();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        int width = display.getWidth();
+        int height = display.getHeight();
+        result.append(String.format("%dx%d", width, height)).append(",");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        width = display.getWidth();
+        height = display.getHeight();
+        result.append(String.format("%dx%d", width, height));
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        return result.toString();
     }
 
     @Override
     protected void onPause() {
-        if(settings.getScreenOff())wakeLock.release();
+        if (settings.getScreenOff()) {
+            wakeLock.release();
+        }
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(settings.getScreenOff())wakeLock.acquire();
+        if (settings.getScreenOff()) {
+            wakeLock.acquire();
+        }
     }
 
     // C functions we call
     public static native void toggleMenu();
-
-    private PowerManager.WakeLock wakeLock = null;
-
-    public static String getGame() {
-        return game;
-    }
-
-    public static String getIdf() {
-        return idf;
-    }
 
     private interface KeyHandler {
         void handle();
