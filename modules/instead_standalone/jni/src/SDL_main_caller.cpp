@@ -18,6 +18,12 @@ extern "C" void rotate_landscape() {
     }
 }
 
+extern "C" void unlock_rotation() {
+    if (pRotator) {
+        pRotator->unlock_rotation();
+    }
+}
+
 extern "C" JNIEXPORT int JNICALL Java_org_libsdl_app_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jobject array);
 
 /* Start up the SDL app */
