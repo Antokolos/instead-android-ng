@@ -9,7 +9,7 @@ public class Settings {
     public static final boolean MUSIC_DEFAULT = true;
     public static final boolean NATIVE_LOG_DEFAULT = false;
     public static final boolean ENFORCE_RESOLUTION_DEFAULT = true;
-    public static final boolean OV_VOL_DEFAULT = true;
+    public static final boolean OV_VOL_DEFAULT = false;
     public static final boolean KEYBOARD_DEFAULT = false;
     public static final boolean SCREEN_OFF_DEFAULT = false;
     public static final boolean OWNTHEME_DEFAULT = true;
