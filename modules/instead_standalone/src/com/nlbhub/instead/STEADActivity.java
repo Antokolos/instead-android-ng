@@ -30,6 +30,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     private String modes;
     private PowerManager.WakeLock wakeLock = null;
     private View mDecorView;
+    private KeyboardAdapter keyboardAdapter;
 
     // Load the .so
 
@@ -116,6 +117,14 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
             hideSystemUISafe();
         } else {
             showSystemUISafe();
+        }
+    }
+
+    public void toggleKeyboard() {
+        if (keyboardAdapter.isActive()) {
+            keyboardAdapter.close();
+        } else {
+            keyboardAdapter.open();
         }
     }
 
@@ -212,7 +221,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
             if (processKey(event, KeyEvent.KEYCODE_VOLUME_UP, new KeyHandler() {
                 @Override
                 public void handle() {
-                    toggleSystemUISafe();
+                    toggleKeyboard();
                 }
             })) {
                 return true;
@@ -250,7 +259,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         settings = SettingsFactory.create(this);
-        KeyboardFactory.create(this, settings.getKeyboard());
+        keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard(), settings.getOvVol());
         initExpansionManager(this);
 
         Intent intent = getIntent();

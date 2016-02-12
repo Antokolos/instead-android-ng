@@ -8,7 +8,7 @@ import android.util.Log;
  */
 public class KeyboardFactory {
     private static final String KEYBOARD_FACTORY_ERROR = "KeyboardFactory problem";
-    public static KeyboardAdapter create(Activity activity, boolean keyboardEnabled) {
+    public static KeyboardAdapter create(Activity activity, boolean keyboardEnabled, boolean withoutControl) {
         KeyboardAdapter result = null;
         if (keyboardEnabled) {
             try {
@@ -24,7 +24,7 @@ public class KeyboardFactory {
         if (result == null) {
             result = new DummyKeyboardAdapter();
         }
-        result.init(activity);
+        result.init(activity, withoutControl);
         return result;
     }
 }

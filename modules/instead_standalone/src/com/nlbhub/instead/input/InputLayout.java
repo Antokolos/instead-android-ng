@@ -53,6 +53,11 @@ public class InputLayout extends RelativeLayout {
         im.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    public boolean isActive() {
+        InputMethodManager im = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        return im.isActive(view);
+    }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         int action = event.getAction();
