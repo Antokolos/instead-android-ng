@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -16,6 +17,8 @@ import org.libsdl.app.SDLActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Antokolos on 29.01.16.
@@ -27,10 +30,10 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     private static String idf = null;
     private static Settings settings;
     private static SDLActivity Ctx;
-    private String modes;
     private PowerManager.WakeLock wakeLock = null;
     private View mDecorView;
     private KeyboardAdapter keyboardAdapter;
+    private List<Point> modes;
 
     // Load the .so
 
@@ -120,14 +123,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         }
     }
 
-    public void toggleKeyboard() {
-        if (keyboardAdapter.isActive()) {
-            keyboardAdapter.close();
-        } else {
-            keyboardAdapter.open();
-        }
-    }
-
     /**
      * Gets arguments for launch.
      * With side effect: hides system UI if possible
@@ -153,9 +148,24 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         args[7] = settings.isMusic() ? "Y" : null;  // The exact value is unimportant, if null, then -nosound will be added
         args[8] = settings.isOwntheme() ? "Y" : null;  // The exact value is unimportant, if NOT null, then -owntheme will be added
         args[9] = settings.getTheme();
-        args[10] = modes;
+        args[10] = getModesString();
         return args;
     }
+
+    private String getModesString() {
+        int lastIdx = modes.size() - 1;
+        if (lastIdx < 0) {
+            return "";
+        }
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < lastIdx; i++) {
+            Point mode = modes.get(i);
+            result.append(String.format("%dx%d", mode.x, mode.y)).append(",");
+        }
+        Point mode = modes.get(lastIdx);
+        result.append(String.format("%dx%d", mode.x, mode.y));
+        return result.toString();
+     }
 
     public static ExpansionMounter getExpansionMounterMain() {
         return expansionMounterMain;
@@ -221,7 +231,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
             if (processKey(event, KeyEvent.KEYCODE_VOLUME_UP, new KeyHandler() {
                 @Override
                 public void handle() {
-                    toggleKeyboard();
+                    keyboardAdapter.open();
                 }
             })) {
                 return true;
@@ -320,19 +330,19 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         });
     }
 
-    private String getModes() {
-        StringBuilder result = new StringBuilder();
+    private List<Point> getModes() {
+        List<Point> result = new ArrayList<Point>();
         Display display = getWindowManager().getDefaultDisplay();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         int width = display.getWidth();
         int height = display.getHeight();
-        result.append(String.format("%dx%d", width, height)).append(",");
+        result.add(new Point(width, height));
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         width = display.getWidth();
         height = display.getHeight();
-        result.append(String.format("%dx%d", width, height));
+        result.add(new Point(width, height));
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-        return result.toString();
+        return result;
     }
 
     @Override
@@ -340,6 +350,8 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         if (settings.getScreenOff()) {
             wakeLock.release();
         }
+        // will work even if already closed... I hope :)
+        keyboardAdapter.close();
         super.onPause();
     }
 

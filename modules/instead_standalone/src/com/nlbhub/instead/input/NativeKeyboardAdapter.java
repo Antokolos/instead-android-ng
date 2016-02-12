@@ -1,8 +1,6 @@
 package com.nlbhub.instead.input;
 
 import android.app.Activity;
-import android.content.Context;
-import android.view.inputmethod.InputMethodManager;
 import com.nlbhub.instead.standalone.KeyboardAdapter;
 
 /**
@@ -18,10 +16,8 @@ public class NativeKeyboardAdapter implements KeyboardAdapter {
 
     @Override
     public void init(Activity activity, boolean withoutControl) {
-        inputLayout = new InputLayout(activity);
-        if (!withoutControl) {
-            activity.addContentView(inputLayout, InputLayout.getParams());
-        }
+        inputLayout = new InputLayout(activity, withoutControl);
+        activity.addContentView(inputLayout, InputLayout.getParams());
     }
 
     public void open() {
@@ -30,9 +26,5 @@ public class NativeKeyboardAdapter implements KeyboardAdapter {
 
     public void close() {
         inputLayout.close();
-    }
-
-    public boolean isActive() {
-        return inputLayout.isActive();
     }
 }

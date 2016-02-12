@@ -20,9 +20,4 @@ public class DummyKeyboardAdapter implements KeyboardAdapter {
     public void close() {
         // no op
     }
-
-    @Override
-    public boolean isActive() {
-        return false;
-    }
 }

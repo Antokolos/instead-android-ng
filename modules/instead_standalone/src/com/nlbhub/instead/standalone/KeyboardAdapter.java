@@ -9,5 +9,4 @@ public interface KeyboardAdapter {
     void init(Activity activity, boolean withoutControl);
     void open();
     void close();
-    boolean isActive();
 }

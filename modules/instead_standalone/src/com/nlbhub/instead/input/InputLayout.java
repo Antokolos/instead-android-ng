@@ -21,7 +21,7 @@ public class InputLayout extends RelativeLayout {
     private ImageButton kbdButton;
     private View view;
 
-    public InputLayout(Context context) {
+    public InputLayout(Context context, boolean withoutControl) {
         super(context);
         view = ((Activity) context).getLayoutInflater().inflate(R.layout.inputlayout, null, false);
         view.setFocusable(true);
@@ -30,12 +30,17 @@ public class InputLayout extends RelativeLayout {
         setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
         addView(view);
         kbdButton = (ImageButton) findViewById(R.id.kbdButton);
-        kbdButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                open();
-            }
-        });
+        if (withoutControl) {
+            kbdButton.setBackgroundResource(R.drawable.empty);
+        } else {
+            kbdButton.setBackgroundResource(R.drawable.kbd32);
+            kbdButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    open();
+                }
+            });
+        }
     }
 
     public static ViewGroup.LayoutParams getParams() {
@@ -51,11 +56,6 @@ public class InputLayout extends RelativeLayout {
     public void close() {
         InputMethodManager im = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         im.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
-    public boolean isActive() {
-        InputMethodManager im = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        return im.isActive(view);
     }
 
     @Override
