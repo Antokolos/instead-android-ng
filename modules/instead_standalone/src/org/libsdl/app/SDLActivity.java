@@ -93,18 +93,18 @@ public class SDLActivity extends Activity {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void rotateLandscape() {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    public static void rotateLandscape() {
+        mSingleton.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void rotatePortrait() {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    public static void rotatePortrait() {
+        mSingleton.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void unlockRotation() {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    public static void unlockRotation() {
+        mSingleton.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     /**
@@ -426,7 +426,8 @@ public class SDLActivity extends Activity {
     }
 
     // C functions we call
-    public static native int nativeInitMain(Object obj, Object arguments);
+    public static native int nativeInitMain(Object arguments);
+    public static native int nativeInit(Object arguments);
     public static native void nativeLowMemory();
     public static native void nativeQuit();
     public static native void nativePause();
@@ -975,7 +976,7 @@ class SDLMain implements Runnable {
     @Override
     public void run() {
         // Runs SDL_main()
-        SDLActivity.nativeInitMain(SDLActivity.mSingleton, SDLActivity.mSingleton.getArguments());
+        SDLActivity.nativeInitMain(SDLActivity.mSingleton.getArguments());
 
         //Log.v("SDL", "SDL thread terminated");
     }

@@ -16,17 +16,17 @@ int stopIssued = 0;
 pthread_mutex_t stopMutex;
 
 static int getStopIssued(void) {
-  int ret = 0;
-  pthread_mutex_lock(&stopMutex);
-  ret = stopIssued;
-  pthread_mutex_unlock(&stopMutex);
-  return ret;
+    int ret = 0;
+    pthread_mutex_lock(&stopMutex);
+    ret = stopIssued;
+    pthread_mutex_unlock(&stopMutex);
+    return ret;
 }
 
 static void setStopIssued(int val) {
-  pthread_mutex_lock(&stopMutex);
-  stopIssued = val;
-  pthread_mutex_unlock(&stopMutex);
+    pthread_mutex_lock(&stopMutex);
+    stopIssued = val;
+    pthread_mutex_unlock(&stopMutex);
 }
 
 static void write_buffer_to_log() {

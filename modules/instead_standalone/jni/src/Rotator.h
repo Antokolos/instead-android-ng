@@ -6,14 +6,12 @@ class Rotator {
     private:
         JNIEnv* env;
         jclass cls;
-        jobject obj;
     public:
-        Rotator(JNIEnv* env, jclass cls, jobject obj);
+        Rotator(JNIEnv* env, jclass cls);
+        ~Rotator();
 
         void rotate_landscape();
-
         void rotate_portrait();
-
         void unlock_rotation();
 };
 

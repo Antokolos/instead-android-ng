@@ -1,36 +1,14 @@
-#ifdef __ANDROID__
-
 #include "Rotator.h"
 #include <SDL.h>
 #include <jni.h>
 
-Rotator* pRotator;
-
-extern "C" void rotate_portrait() {
-    if (pRotator) {
-        pRotator->rotate_portrait();
-    }
-}
-
-extern "C" void rotate_landscape() {
-    if (pRotator) {
-        pRotator->rotate_landscape();
-    }
-}
-
-extern "C" void unlock_rotation() {
-    if (pRotator) {
-        pRotator->unlock_rotation();
-    }
-}
-
 extern "C" JNIEXPORT int JNICALL Java_org_libsdl_app_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jobject array);
 
 /* Start up the SDL app */
-extern "C" JNIEXPORT int JNICALL Java_org_libsdl_app_SDLActivity_nativeInitMain(JNIEnv* env, jclass cls, jobject obj, jobject array)
+extern "C" JNIEXPORT int JNICALL Java_org_libsdl_app_SDLActivity_nativeInitMain(JNIEnv* env, jclass cls, jobject array)
 {
     int status;
-    pRotator = new Rotator(env, cls, obj);
+    Rotator* pRotator = new Rotator(env, cls);
     
     status = Java_org_libsdl_app_SDLActivity_nativeInit(env, cls, array);
     
@@ -41,7 +19,3 @@ extern "C" JNIEXPORT int JNICALL Java_org_libsdl_app_SDLActivity_nativeInitMain(
 
     return status;
 }
-
-#endif /* __ANDROID__ */
-
-/* vi: set ts=4 sw=4 expandtab: */
