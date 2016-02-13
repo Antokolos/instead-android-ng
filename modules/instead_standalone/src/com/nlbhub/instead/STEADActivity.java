@@ -1,17 +1,16 @@
 package com.nlbhub.instead;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
+import com.nlbhub.instead.input.Keys;
 import com.nlbhub.instead.standalone.*;
 import org.libsdl.app.SDLActivity;
 
@@ -24,12 +23,12 @@ import java.util.List;
  * Created by Antokolos on 29.01.16.
  */
 public class STEADActivity extends org.libsdl.app.SDLActivity {
-    private static ExpansionMounter expansionMounterMain = null;
-    private static StorageManager storageManager = null;
-    private static String game = null;
-    private static String idf = null;
-    private static Settings settings;
-    private static SDLActivity Ctx;
+    private ExpansionMounter expansionMounterMain = null;
+    private StorageManager storageManager = null;
+    private String game = null;
+    private String idf = null;
+    private Settings settings;
+    private SDLActivity Ctx;
     private PowerManager.WakeLock wakeLock = null;
     private View mDecorView;
     private KeyboardAdapter keyboardAdapter;
@@ -59,67 +58,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         } catch (IOException e) {
             Log.e("SDL", "Cannot retrieve data dir", e);
             throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * NB: use hideSystemUISafe in your code!
-     */
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    private void hideSystemUI_KITKAT() {
-        mDecorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LOW_PROFILE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE);
-    }
-
-    public boolean hideSystemUISafe() {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            hideSystemUI_KITKAT();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * NB: use showSystemUISafe in your code!
-     */
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    private void showSystemUI() {
-        mDecorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-    }
-
-    public void showSystemUISafe() {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            showSystemUI();
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public boolean isSystemUIShown() {
-        int vis = mDecorView.getWindowSystemUiVisibility();
-        return (vis & (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LOW_PROFILE)) == 0;
-    }
-
-    public boolean isSystemUIShownSafe() {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            return isSystemUIShown();
-        } else {
-            return true;
-        }
-    }
-
-    public void toggleSystemUISafe() {
-        if (isSystemUIShownSafe()) {
-            hideSystemUISafe();
-        } else {
-            showSystemUISafe();
         }
     }
 
@@ -167,11 +105,11 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         return result.toString();
      }
 
-    public static ExpansionMounter getExpansionMounterMain() {
+    public ExpansionMounter getExpansionMounterMain() {
         return expansionMounterMain;
     }
 
-    public static SDLActivity getCtx() {
+    public SDLActivity getCtx() {
         return Ctx;
     }
 
@@ -218,30 +156,33 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
             return true;
         }
 
-        if (settings.getOvVol()) {
-            if (processKey(event, KeyEvent.KEYCODE_VOLUME_DOWN, new KeyHandler() {
-                @Override
-                public void handle() {
-                    toggleMenu();
-                }
-            })) {
-                return true;
-            }
+        return translateKeyEvent(event);
+    }
 
-            if (processKey(event, KeyEvent.KEYCODE_VOLUME_UP, new KeyHandler() {
-                @Override
-                public void handle() {
-                    keyboardAdapter.open();
-                }
-            })) {
-                return true;
+    private boolean translateKeyEvent(KeyEvent keyEvent) {
+        int keyCode = keyEvent.getKeyCode();
+        int action = keyEvent.getAction();
+        boolean isDown = (action == KeyEvent.ACTION_DOWN) || (action == KeyEvent.ACTION_MULTIPLE);
+
+        if (settings.getOvVol()) {
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_VOLUME_UP:
+                    if (isDown) {
+                        Keys.down(KeyEvent.KEYCODE_PAGE_UP, false);
+                    }
+                    return true;
+                case KeyEvent.KEYCODE_VOLUME_DOWN:
+                    if (isDown) {
+                        Keys.down(KeyEvent.KEYCODE_PAGE_DOWN, false);
+                    }
+                    return true;
             }
         }
 
-        return super.dispatchKeyEvent(event);
+        return super.dispatchKeyEvent(keyEvent);
     }
 
-    public static Settings getSettings() {
+    public Settings getSettings() {
         return settings;
     }
 
@@ -269,7 +210,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         settings = SettingsFactory.create(this);
-        keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard(), settings.getOvVol());
+        keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard());
         initExpansionManager(this);
 
         Intent intent = getIntent();
@@ -298,36 +239,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, InsteadApplication.ApplicationName);
         mDecorView = getWindow().getDecorView();
-        if (settings.getOvVol()) {
-            hideSystemUISafe();
-            registerTouchListeners();
-        }
         modes = getModes();
-    }
-
-    private void registerTouchListeners() {
-        final View contentView = mSurface;
-        contentView.setClickable(true);
-        final GestureDetector clickDetector = new GestureDetector(
-                this,
-                new GestureDetector.SimpleOnGestureListener() {
-                    @Override
-                    public boolean onSingleTapUp(MotionEvent e) {
-                        boolean visible = isSystemUIShownSafe();
-                        boolean handled = false;
-                        if (visible) {
-                            handled = hideSystemUISafe();
-                        }
-                        return handled || super.onSingleTapUp(e);
-                    }
-                }
-        );
-        contentView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return clickDetector.onTouchEvent(motionEvent) || ((View.OnTouchListener) mSurface).onTouch(view, motionEvent);
-            }
-        });
     }
 
     private List<Point> getModes() {

@@ -21,7 +21,7 @@ public class InputLayout extends RelativeLayout {
     private ImageButton kbdButton;
     private View view;
 
-    public InputLayout(Context context, boolean withoutControl) {
+    public InputLayout(Context context) {
         super(context);
         view = ((Activity) context).getLayoutInflater().inflate(R.layout.inputlayout, null, false);
         view.setFocusable(true);
@@ -30,17 +30,13 @@ public class InputLayout extends RelativeLayout {
         setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
         addView(view);
         kbdButton = (ImageButton) findViewById(R.id.kbdButton);
-        if (withoutControl) {
-            kbdButton.setBackgroundResource(R.drawable.empty);
-        } else {
-            kbdButton.setBackgroundResource(R.drawable.kbd32);
-            kbdButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    open();
-                }
-            });
-        }
+        kbdButton.setBackgroundResource(R.drawable.kbd32);
+        kbdButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                open();
+            }
+        });
     }
 
     public static ViewGroup.LayoutParams getParams() {

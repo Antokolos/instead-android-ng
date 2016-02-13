@@ -15,8 +15,8 @@ public class NativeKeyboardAdapter implements KeyboardAdapter {
     }
 
     @Override
-    public void init(Activity activity, boolean withoutControl) {
-        inputLayout = new InputLayout(activity, withoutControl);
+    public void init(Activity activity) {
+        inputLayout = new InputLayout(activity);
         activity.addContentView(inputLayout, InputLayout.getParams());
     }
 

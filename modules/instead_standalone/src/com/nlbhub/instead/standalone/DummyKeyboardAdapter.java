@@ -7,7 +7,7 @@ import android.app.Activity;
  */
 public class DummyKeyboardAdapter implements KeyboardAdapter {
     @Override
-    public void init(Activity activity, boolean withoutControl) {
+    public void init(Activity activity) {
         // no op
     }
 

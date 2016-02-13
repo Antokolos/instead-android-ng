@@ -305,7 +305,7 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
             }
         }
 
-        String s = "game = "+StorageResolver.BundledGame +"\nkbd = 2\nautosave = 1\nowntheme = 1\nhl = 0\nclick = 1\nmusic = 1\nfscale = 12\njustify = 0\n"
+        String s = "game = "+StorageResolver.BundledGame +"\nkbd = 2\nautosave = 1\nowntheme = 1\nhl = 0\nclick = 1\nmusic = 1\nfscale = 0\njustify = 0\n"
                 + locale + theme + "\n";
         return s;
     }
