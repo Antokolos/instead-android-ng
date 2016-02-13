@@ -113,9 +113,9 @@
 	<game>
 		<name>catesc</name>
 		<title>Побег кота</title>
-		<version>0.4</version>
-		<url>http://instead-games.ru/download/instead-catesc-0.4.zip</url>
-		<size>3181114</size>
+		<version>0.6</version>
+		<url>http://instead-games.ru/download/instead-catesc-0.6.zip</url>
+		<size>3181642</size>
 		<lang>ru</lang>
 		<descurl>http://instead-games.ru/game.php?ID=149</descurl>
 	</game>
@@ -173,9 +173,9 @@
 	<game>
 		<name>rangers</name>
 		<title>Космические рейнджеры</title>
-		<version>1.8</version>
-		<url>http://instead-games.ru/download/instead-rangers-1.8.zip</url>
-		<size>9702881</size>
+		<version>1.8.1</version>
+		<url>http://instead-games.ru/download/instead-rangers-1.8.1.zip</url>
+		<size>47323769</size> 
 		<lang>ru</lang>
 		<descurl>http://instead-games.ru/game.php?ID=126</descurl>
 	</game>

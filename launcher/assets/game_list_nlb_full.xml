@@ -9,7 +9,6 @@
 		<lang>ru</lang>
 		<descurl>http://nlbproject.com/games/redhood</descurl>
 	</game>
-
 	<game>
 		<name>return_of_red_hood</name>
 		<title>Return of Red Hood</title>
@@ -19,4 +18,32 @@
 		<lang>en</lang>
 		<descurl>http://nlbproject.com/games/redhood</descurl>
 	</game>
+	<game>
+		<name>frontier</name>
+		<title>Фронтир</title>
+		<version>1.2</version>
+		<url>http://nlbproject.com/dist/games/instead-frontier-1.2.zip</url>
+		<size>192413722</size>
+		<lang>ru</lang>
+		<descurl>http://instead.syscall.ru/talk/index.php/365</descurl>
+	</game>
+	<game>
+		<name>am_i_a_monster</name>
+		<title>Я монстр?</title>
+		<version>1.02</version>
+		<url>http://nlbproject.com/dist/games/instead-am_i_a_monster-1.02.zip</url>
+		<size>26957117</size>
+		<lang>ru</lang>
+		<descurl>http://instead.syscall.ru/talk/index.php/364-am-i-a-monster</descurl>
+	</game>
+	<game>
+		<name>am_i_a_monster</name>
+		<title>Am I a monster?</title>
+		<version>1.02</version>
+		<url>http://nlbproject.com/dist/games/instead-am_i_a_monster-1.02.zip</url>
+		<size>26957117</size>
+		<lang>en</lang>
+		<descurl>http://instead.syscall.ru/talk/index.php/364-am-i-a-monster</descurl>
+	</game>
+
 </game_list>
