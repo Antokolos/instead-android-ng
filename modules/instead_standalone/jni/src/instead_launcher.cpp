@@ -141,6 +141,7 @@ extern "C" int SDL_main(int argc, char** argv) {
         _argv[n++] = SDL_strdup("-hires");
     } else {
         printf("-hires is OFF\n");
+        _argv[n++] = SDL_strdup("-nohires");
     }
     if (is_not_blank(appdata)) {
         printf("appdata = %s\n", appdata);
