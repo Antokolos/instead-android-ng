@@ -31,11 +31,20 @@ then
         mkdir ./games/bundled
         cp -r ./instead/games/tutorial3/* ./games/bundled/
         cp ./instead/lang/* $RESPATH/data/lang
+        rm -f $RESPATH/data/lang/CMakeLists.txt
+        rm -f $RESPATH/data/lang/Makefile
+        rm -f $RESPATH/data/lang/Makefile.windows
     fi
     zip -r $RESPATH/games.zip ./games
     rm -rf ./games
     cp ./instead/stead/* $RESPATH/data/stead
+    rm -f $RESPATH/data/stead/CMakeLists.txt
+    rm -f $RESPATH/data/stead/Makefile
+    rm -f $RESPATH/data/stead/Makefile.windows
     cp -r ./instead/themes/* $RESPATH/data/themes
+    rm -f $RESPATH/data/themes/CMakeLists.txt
+    rm -f $RESPATH/data/themes/Makefile
+    rm -f $RESPATH/data/themes/Makefile.windows
     cd $RESPATH/data
     zip -r ./../data.zip .nomedia *
     cd ..
