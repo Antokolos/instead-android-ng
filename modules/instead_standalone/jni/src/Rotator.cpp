@@ -54,7 +54,7 @@ void Rotator::rotate_portrait() {
 
 void Rotator::unlock_rotation() {
     JNIEnv* env = this->env;
-    jmethodID unlockRotation = env->GetMethodID(this->cls, "unlockRotation", "()V");
+    jmethodID unlockRotation = env->GetStaticMethodID(this->cls, "unlockRotation", "()V");
     if (unlockRotation) {
         env->CallStaticVoidMethod(this->cls, unlockRotation);
     } else {
