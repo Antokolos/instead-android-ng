@@ -158,6 +158,14 @@ public class XmlDownloader extends Thread {
 		// Status.setMessage( Parent.getString(R.string.finish));
 		DownloadComplete = true;
 
+		// TODO: all this code should be rewritten...
+		Parent.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Parent.checkCurrentList();
+			}
+		});
+
 		Parent.setXmlGood();
 		if (!Parent.onpause)
 			initParent();

@@ -20,12 +20,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
-import android.view.ContextMenu;
+import android.view.*;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -76,6 +72,8 @@ public class GameManager extends ListActivity implements ViewBinder {
 	private ListView listView;
 	private LastGame lastGame;
 	private final Handler h = new Handler();
+
+	private ArrayList<String> filesCheckList;
 
 	protected int getBasicListNo() {
         return Globals.BASIC;
@@ -216,8 +214,8 @@ public class GameManager extends ListActivity implements ViewBinder {
 				}
 
 		});
+		filesCheckList = new ArrayList<String>();
 
-		
 		checkXml();
 	}
 
@@ -981,11 +979,25 @@ public class GameManager extends ListActivity implements ViewBinder {
 	}
 
 	protected void checkXml() {
-		if (!(new File(getFilesDir() + "/" + getGameListName(listNo)).exists())) {
+		final String gameListName = getGameListName(listNo);
+		if (!(new File(getFilesDir() + "/" + gameListName).exists()) || !isGameListChecked(gameListName)) {
 			listDownload();
 		} else {
 			listUpdate();
 		}
+	}
+
+	public void checkCurrentList() {
+		final String gameListName = getGameListName(listNo);
+		filesCheckList.add(gameListName);
+		View entry = findViewById(R.id.loadingText);
+		if (entry != null) {
+			((ViewManager) entry.getParent()).removeView(entry);
+		}
+	}
+
+	private boolean isGameListChecked(String gameListName) {
+		return filesCheckList.contains(gameListName);
 	}
 
 	@Override
@@ -1022,6 +1034,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 //		savedInstanceState.putBoolean("list_save", list_save);
 		savedInstanceState.putInt("listpos", listpos);
 		savedInstanceState.putInt("toppos", toppos);
+		savedInstanceState.putStringArrayList("filesCheckList", filesCheckList);
 		/*		savedInstanceState.putString("lang_filter", lang_filter);
 		savedInstanceState.putInt("listNo", listNo);
 		savedInstanceState.putInt("filter", filter); */
@@ -1038,6 +1051,10 @@ public class GameManager extends ListActivity implements ViewBinder {
 		onpause = savedInstanceState.getBoolean("onpause");
 		listpos = savedInstanceState.getInt("listpos");
 		toppos = savedInstanceState.getInt("toppos");
+		filesCheckList = savedInstanceState.getStringArrayList("filesCheckList");
+		if (filesCheckList == null) {
+			filesCheckList = new ArrayList<String>();
+		}
 		//	lang_filter = savedInstanceState.getString("lang_filter");
 	//	listNo = savedInstanceState.getInt("listNo");
 	//	filter = savedInstanceState.getInt("filter");

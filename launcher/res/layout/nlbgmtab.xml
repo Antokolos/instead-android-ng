@@ -99,11 +99,20 @@
 		android:layout_height="fill_parent" android:layout_gravity="center_horizontal"
 		android:layout_weight="1">
 		<LinearLayout android:layout_height="fill_parent"
-			android:orientation="vertical" android:layout_width="wrap_content">
+			android:orientation="vertical" android:layout_width="wrap_content" android:background="@drawable/wallpaper">
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceLarge"
+					android:text="@string/wait_text"
+					android:id="@+id/loadingText"
+					android:layout_gravity="center_horizontal"/>
+
 			<ListView android:id="@android:id/list" android:scrollbars="vertical"
 				android:scrollbarAlwaysDrawVerticalTrack="true"
 				android:layout_width="fill_parent" android:layout_height="fill_parent"
-				android:smoothScrollbar="true" android:background="@drawable/wallpaper"/>
+				android:smoothScrollbar="true"/>
 		</LinearLayout>
 	</TableRow>
 </TableLayout>

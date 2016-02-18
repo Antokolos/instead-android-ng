@@ -55,6 +55,7 @@
     <string name="ag_new">Not installed</string>
     <string name="ag_update">Need update</string>
     <string name="ag_status">Status</string>
+    <string name="wait_text">Please wait…</string>
     <string name="dwncancel">Downloading canceled!</string>
     <string name="langru">Russian</string>
     <string name="langen">English</string>

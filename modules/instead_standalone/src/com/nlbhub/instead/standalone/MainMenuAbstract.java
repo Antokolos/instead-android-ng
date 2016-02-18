@@ -1,5 +1,6 @@
 package com.nlbhub.instead.standalone;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.os.Messenger;
 import android.os.storage.StorageManager;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
@@ -305,9 +307,52 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
             }
         }
 
-        String s = "game = "+StorageResolver.BundledGame +"\nkbd = 2\nautosave = 1\nowntheme = 1\nhl = 0\nclick = 1\nmusic = 1\nfscale = 0\njustify = 0\n"
+        String s = "game = "+StorageResolver.BundledGame
+                +"\nkbd = 2\nautosave = 1\nowntheme = 1\nhl = 0\nclick = 1\nmusic = 1"
+                + (isTabletDevice() ? "\nfscale = 0" : "\nfscale = 10")
+                + "\njustify = 0\n"
                 + locale + theme + "\n";
         return s;
+    }
+
+    /**
+     * Checks if the device is a tablet or a phone
+     * See this post: http://stackoverflow.com/questions/5832368/tablet-or-phone-android
+     * There's an opinion that question "Tablet or phone" is wrong, but for now I want to use the
+     * easiest possible solution here...
+     *
+     * @return Returns true if the device is a Tablet
+     */
+    public boolean isTabletDevice() {
+        Context activityContext = this;
+        // Verifies if the Generalized Size of the device is XLARGE to be
+        // considered a Tablet
+        boolean xlarge = ((activityContext.getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                Configuration.SCREENLAYOUT_SIZE_XLARGE);
+
+        // If XLarge, checks if the Generalized Density is at least MDPI
+        // (160dpi)
+        if (xlarge) {
+            DisplayMetrics metrics = new DisplayMetrics();
+            Activity activity = (Activity) activityContext;
+            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+            // MDPI=160, DEFAULT=160, DENSITY_HIGH=240, DENSITY_MEDIUM=160,
+            // DENSITY_TV=213, DENSITY_XHIGH=320
+            if (metrics.densityDpi == DisplayMetrics.DENSITY_DEFAULT
+                    || metrics.densityDpi == DisplayMetrics.DENSITY_HIGH
+                    || metrics.densityDpi == DisplayMetrics.DENSITY_MEDIUM
+                    || metrics.densityDpi == DisplayMetrics.DENSITY_TV
+                    || metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH) {
+
+                // Yes, this is a tablet!
+                return true;
+            }
+        }
+
+        // No, this is not a tablet!
+        return false;
     }
 
     private float getResRatio() {
