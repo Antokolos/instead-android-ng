@@ -57,8 +57,6 @@ class GameDownloader extends Thread {
 			cb.Status = Status;
 			Parent.runOnUiThread(cb);
 		}
-		
-		
 	}
 
 	public GameDownloader(GameManager gameManager, String url, String name,
