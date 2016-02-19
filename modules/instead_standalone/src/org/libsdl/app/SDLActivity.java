@@ -426,7 +426,6 @@ public class SDLActivity extends Activity {
     }
 
     // C functions we call
-    public static native int nativeInitMain(Object arguments);
     public static native int nativeInit(Object arguments);
     public static native void nativeLowMemory();
     public static native void nativeQuit();
@@ -976,7 +975,7 @@ class SDLMain implements Runnable {
     @Override
     public void run() {
         // Runs SDL_main()
-        SDLActivity.nativeInitMain(SDLActivity.mSingleton.getArguments());
+        SDLActivity.nativeInit(SDLActivity.mSingleton.getArguments());
 
         //Log.v("SDL", "SDL thread terminated");
     }

@@ -113,7 +113,6 @@ extern "C" int SDL_main(int argc, char** argv) {
     const char* owntheme = argc >= 10 ? argv[9] : NULL;
     const char* theme = argc >= 11 ? argv[10] : NULL;
     const char* modes = argc >= 12 ? argv[11] : NULL;
-
     
     if (nativelog != NULL) {
         logFile = fopen(nativelog, "w");
@@ -192,6 +191,9 @@ extern "C" int SDL_main(int argc, char** argv) {
     for (int i = 0; i < n; ++i) {
         SDL_free(_argv[i]);
     }
+    
+    // Kill it with fire, or else we'll get the error when restarting the activity
+    exit(status);
 
     return status;
 }
@@ -211,6 +213,43 @@ extern "C" void Java_com_nlbhub_instead_STEADActivity_toggleMenu(JNIEnv* env, jc
     event.key.keysym.mod = 0; // from SDL_Keymod
 
     SDL_PushEvent(&event); // Inject key press of the Escape Key
+}
+
+extern "C" JNIEnv* Android_JNI_GetEnv(void);
+
+extern "C" jclass Android_JNI_GetActivityClass();
+
+extern "C" void rotate_landscape() {
+    JNIEnv* env = Android_JNI_GetEnv();
+    jclass cls = Android_JNI_GetActivityClass();
+    jmethodID rotateLandscape = env->GetStaticMethodID(cls, "rotateLandscape", "()V");
+    if (rotateLandscape) {
+        env->CallStaticVoidMethod(cls, rotateLandscape);
+    } else {
+        printf("rotateLandscape() method not found in the SDLActivity class!\n");
+    }
+}
+
+extern "C" void rotate_portrait() {
+    JNIEnv* env = Android_JNI_GetEnv();
+    jclass cls = Android_JNI_GetActivityClass();
+    jmethodID rotatePortrait = env->GetStaticMethodID(cls, "rotatePortrait", "()V");
+    if (rotatePortrait) {
+        env->CallStaticVoidMethod(cls, rotatePortrait);
+    } else {
+        printf("rotatePortrait() method not found in the SDLActivity class!\n");
+    }
+}
+
+extern "C" void unlock_rotation() {
+    JNIEnv* env = Android_JNI_GetEnv();
+    jclass cls = Android_JNI_GetActivityClass();
+    jmethodID unlockRotation = env->GetStaticMethodID(cls, "unlockRotation", "()V");
+    if (unlockRotation) {
+        env->CallStaticVoidMethod(cls, unlockRotation);
+    } else {
+        printf("unlockRotation() method not found in the SDLActivity class!\n");
+    }
 }
 
 /* vi: set ts=4 sw=4 expandtab: */
