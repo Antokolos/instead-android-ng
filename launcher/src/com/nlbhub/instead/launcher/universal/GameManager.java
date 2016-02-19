@@ -225,8 +225,6 @@ public class GameManager extends ListActivity implements ViewBinder {
 		openCtxMenu();		
 	}
 	
-	
-	
 	private void openGame(){
 		if (gl.getFlag(index.get(item_index)) == FilterConstants.INSTALLED ||
 				gl.getFlag(index.get(item_index)) == FilterConstants.UPDATE	) {
@@ -234,8 +232,6 @@ public class GameManager extends ListActivity implements ViewBinder {
 			} else {
 			gameDownload();
 			}
-		
-		
 	}
 	
 	private void openCtxMenu(){
