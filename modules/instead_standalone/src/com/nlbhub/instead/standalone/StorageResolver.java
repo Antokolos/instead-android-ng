@@ -1,10 +1,11 @@
 package com.nlbhub.instead.standalone;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Environment;
-import android.os.storage.StorageManager;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
 import java.io.File;
@@ -97,6 +98,7 @@ public class StorageResolver {
         return result;
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static String getObbFilePath(final String filename, Context context) {
         return context.getObbDir() + "/" + filename;
     };
@@ -115,13 +117,13 @@ public class StorageResolver {
     }
 
     public static String getGamesPath(ExpansionMounter expansionMounter) {
-        final String expansionFilePath = expansionMounter.getExpansionFilePath();
+        final String expansionFilePath = (expansionMounter != null) ? expansionMounter.getExpansionFilePath() : null;
         final String appdata = getAppDataPath(expansionMounter);
         return (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
     }
 
     public static String getAppDataPath(ExpansionMounter expansionMounter) {
-        final String expansionFilePath = expansionMounter.getExpansionFilePath();
+        final String expansionFilePath = (expansionMounter != null) ? expansionMounter.getExpansionFilePath() : null;
         final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
         String resultPath = StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/" + getAppDataFolderName(bundledGameDirParent);
         File resultDir = new File(resultPath);

@@ -1,11 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:installLocation="auto" android:versionCode="130000"
-    android:versionName="1.3.0" package="com.nlbhub.instead.launcher" xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest android:installLocation="auto" android:versionCode="131000"
+    android:versionName="1.3.1" package="com.nlbhub.instead.launcher" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="12"/>
+
+    <!-- OpenGL ES 2.0 -->
+    <uses-feature android:glEsVersion="0x00020000" />
+
+    <!-- Required to access Google Play Licensing (used for APK expansion files AKA obb) -->
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+
+    <!-- Required to poll the state of the network connection and respond to changes (required for obb) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Required to check whether Wi-Fi is enabled (required for obb) -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+    <!-- Required to download files from Google Play and INSTEAD repositories -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Required to keep CPU alive while downloading files (AND to keep screen awake in-game) -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Required to read and write the files on shared storage -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application 
         android:name=".LauncherApplication"
         android:allowBackup="false"
-        android:hardwareAccelerated="true"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
         android:icon="@drawable/icon"
         android:label="@string/app_name">
@@ -20,11 +43,11 @@
         <activity android:name="org.libsdl.app.SDLActivity"
             android:label="@string/app_name"
             android:configChanges="keyboardHidden|orientation"
-            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
         />
         <service android:name="com.nlbhub.instead.standalone.expansion.InsteadDownloaderService" />
         <receiver android:name="com.nlbhub.instead.standalone.expansion.InsteadAlarmReceiver" />
-        <activity android:name="com.nlbhub.instead.STEADActivity" android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.nlbhub.instead.STEADActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
         <activity android:name=".universal.GameManager" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
         <activity android:name=".universal.nlb.NLBGameManager" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
         <activity android:name=".simple.Options" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
@@ -46,12 +69,12 @@
                 <data android:scheme="file"/>
                 <data android:scheme="content"/>
                 <data android:host="*"/>
-                <data android:pathPattern=".*\\.ZIP"/>
-                <data android:pathPattern=".*\\.zip"/>
-                <data android:pathPattern=".*\\.QM"/>
-                <data android:pathPattern=".*\\.qm"/>
-                <data android:pathPattern=".*\\.IDF"/>
-                <data android:pathPattern=".*\\.idf"/>
+                <data android:pathPattern="/.*\\.ZIP"/>
+                <data android:pathPattern="/.*\\.zip"/>
+                <data android:pathPattern="/.*\\.QM"/>
+                <data android:pathPattern="/.*\\.qm"/>
+                <data android:pathPattern="/.*\\.IDF"/>
+                <data android:pathPattern="/.*\\.idf"/>
                 <data android:mimeType="*/*"/>
             </intent-filter>
             <intent-filter>
@@ -62,12 +85,15 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-                <data android:pathPattern=".*\\.ZIP"/>
-                <data android:pathPattern=".*\\.zip"/>
-                <data android:pathPattern=".*\\.QM"/>
-                <data android:pathPattern=".*\\.qm"/>
-                <data android:pathPattern=".*\\.IDF"/>
-                <data android:pathPattern=".*\\.idf"/>
+                <data android:scheme="file"/>
+                <data android:scheme="content"/>
+                <data android:host="*"/>
+                <data android:pathPattern="/.*\\.ZIP"/>
+                <data android:pathPattern="/.*\\.zip"/>
+                <data android:pathPattern="/.*\\.QM"/>
+                <data android:pathPattern="/.*\\.qm"/>
+                <data android:pathPattern="/.*\\.IDF"/>
+                <data android:pathPattern="/.*\\.idf"/>
                 <data android:mimeType="*/*"/>
             </intent-filter>
         </activity>
@@ -94,28 +120,4 @@
         <activity android:name=".universal.FavoritList" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
         <activity android:name=".universal.GameDirs" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
     </application>
-
-    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="15"/>
-
-     <!-- OpenGL ES 2.0 -->
-    <uses-feature android:glEsVersion="0x00020000" />
-
-    <!-- Required to access Google Play Licensing (used for APK expansion files AKA obb) -->
-    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
-
-    <!-- Required to poll the state of the network connection and respond to changes (required for obb) -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <!-- Required to check whether Wi-Fi is enabled (required for obb) -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
-    <!-- Required to download files from Google Play and INSTEAD repositories -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- Required to keep CPU alive while downloading files (AND to keep screen awake in-game) -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <!-- Required to read and write the files on shared storage -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>

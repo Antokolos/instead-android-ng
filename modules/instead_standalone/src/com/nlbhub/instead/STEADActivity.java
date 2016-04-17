@@ -1,9 +1,11 @@
 package com.nlbhub.instead;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.storage.StorageManager;
@@ -24,13 +26,11 @@ import java.util.List;
  */
 public class STEADActivity extends org.libsdl.app.SDLActivity {
     private ExpansionMounter expansionMounterMain = null;
-    private StorageManager storageManager = null;
     private String game = null;
     private String idf = null;
     private Settings settings;
     private SDLActivity Ctx;
     private PowerManager.WakeLock wakeLock = null;
-    private View mDecorView;
     private KeyboardAdapter keyboardAdapter;
     private List<Point> modes;
 
@@ -68,9 +68,8 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
      */
     @Override
     protected String[] getArguments() {
-        final ExpansionMounter expansionMounter = getExpansionMounterMain();
-        final String appdata = StorageResolver.getAppDataPath(expansionMounter);
-        final String gamespath = StorageResolver.getGamesPath(expansionMounter);
+        final String appdata = StorageResolver.getAppDataPath(expansionMounterMain);
+        final String gamespath = StorageResolver.getGamesPath(expansionMounterMain);
         Settings settings = getSettings();
         boolean nativeLogEnabled = settings.isNativelog();
         boolean enforceResolution = settings.isEnforceresolution();
@@ -104,10 +103,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         result.append(String.format("%dx%d", mode.x, mode.y));
         return result.toString();
      }
-
-    public ExpansionMounter getExpansionMounterMain() {
-        return expansionMounterMain;
-    }
 
     public SDLActivity getCtx() {
         return Ctx;
@@ -187,11 +182,10 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     }
 
     // Setup
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private synchronized void initExpansionManager(Context context) {
         if (expansionMounterMain == null) {
-            if (storageManager == null) {
-                storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
-            }
+            StorageManager storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
             context.getObbDir().mkdir();
             expansionMounterMain = (
                     new ExpansionMounter(
@@ -203,15 +197,33 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         }
     }
 
+    private synchronized void initExpansionManagerSafe(Context context) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            initExpansionManager(context);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void enableHWA() {
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+    }
+
+    private void enableHWASafe() {
+        enableHWA();
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         Ctx = this;
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
         // The following line is to workaround AndroidRuntimeException: requestFeature() must be called before adding content
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        enableHWASafe();
         super.onCreate(savedInstanceState);
         settings = SettingsFactory.create(this);
         keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard());
-        initExpansionManager(this);
+        initExpansionManagerSafe(this);
 
         Intent intent = getIntent();
         if (intent.getAction()!=null) {
@@ -238,7 +250,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, InsteadApplication.ApplicationName);
-        mDecorView = getWindow().getDecorView();
         modes = getModes();
     }
 

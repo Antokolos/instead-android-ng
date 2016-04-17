@@ -30,7 +30,6 @@ import android.graphics.drawable.Drawable;
 import android.media.*;
 import android.hardware.*;
 import android.content.pm.ActivityInfo;
-import com.nlbhub.instead.STEADActivity;
 
 /**
     SDL Activity
