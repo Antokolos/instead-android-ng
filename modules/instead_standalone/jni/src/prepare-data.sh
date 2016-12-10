@@ -37,7 +37,7 @@ then
     fi
     zip -r $RESPATH/games.zip ./games
     rm -rf ./games
-    cp ./instead/stead/* $RESPATH/data/stead
+    cp -r ./instead/stead/* $RESPATH/data/stead
     rm -f $RESPATH/data/stead/CMakeLists.txt
     rm -f $RESPATH/data/stead/Makefile
     rm -f $RESPATH/data/stead/Makefile.windows

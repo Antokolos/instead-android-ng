@@ -11,14 +11,27 @@ $(error Please define SDL_JAVA_PACKAGE_PATH to the path of your Java package wit
 endif
 
 #APP_SUBDIRS := $(patsubst $(LOCAL_PATH)/%, %, $(shell find $(LOCAL_PATH)/src -type d))
-SUBDIR := instead/src/sdl-instead
+SUBDIR := instead/src
+INSTEAD := instead/src/instead
 
-LOCAL_SRC_FILES := instead_launcher.cpp $(SDL_PATH)/src/main/android/SDL_android_main.c $(SUBDIR)/snprintf.c $(SUBDIR)/graphics.c $(SUBDIR)/idf.c $(SUBDIR)/input.c $(SUBDIR)/game.c $(SUBDIR)/list.c $(SUBDIR)/tinymt32.c $(SUBDIR)/main.c $(SUBDIR)/lfs.c $(SUBDIR)/instead.c $(SUBDIR)/sound.c $(SUBDIR)/SDL_rotozoom.c $(SUBDIR)/SDL_anigif.c $(SUBDIR)/SDL_gfxBlitFunc.c $(SUBDIR)/config.c $(SUBDIR)/themes.c $(SUBDIR)/menu.c $(SUBDIR)/util.c $(SUBDIR)/cache.c $(SUBDIR)/unzip.c $(SUBDIR)/ioapi.c $(SUBDIR)/unpack.c $(SUBDIR)/unix.c
-LOCAL_H_FILES := $(SUBDIR)/snprintf.h $(SUBDIR)/cache.h $(SUBDIR)/config.h $(SUBDIR)/externals.h $(SUBDIR)/game.h $(SUBDIR)/tinymt32.h $(SUBDIR)/graphics.h $(SUBDIR)/input.h $(SUBDIR)/instead.h $(SUBDIR)/internals.h $(SUBDIR)/ioapi.h $(SUBDIR)/iowin32.h $(SUBDIR)/list.h \
-	$(SUBDIR)/menu.h $(SUBDIR)/SDL_anigif.h $(SUBDIR)/SDL_gfxBlitFunc.h $(SUBDIR)/SDL_rotozoom.h $(SUBDIR)/sound.h $(SUBDIR)/themes.h $(SUBDIR)/unzip.h $(SUBDIR)/util.h $(SUBDIR)/android.h 
+LOCAL_SRC_FILES := instead_launcher.cpp $(SDL_PATH)/src/main/android/SDL_android_main.c \
+	$(INSTEAD)/cache.c $(INSTEAD)/idf.c $(INSTEAD)/instead.c $(INSTEAD)/lfs.c $(INSTEAD)/list.c $(INSTEAD)/snprintf.c $(INSTEAD)/tinymt32.c $(INSTEAD)/util.c \
+	$(SUBDIR)/instead_bits.c $(SUBDIR)/instead_paths.c $(SUBDIR)/instead_sound.c $(SUBDIR)/instead_sprites.c $(SUBDIR)/instead_timer.c \
+	$(SUBDIR)/graphics.c $(SUBDIR)/input.c $(SUBDIR)/game.c $(SUBDIR)/main.c  $(SUBDIR)/sound.c $(SUBDIR)/config.c \
+	$(SUBDIR)/themes.c $(SUBDIR)/menu.c $(SUBDIR)/util.c  $(SUBDIR)/unzip.c $(SUBDIR)/ioapi.c $(SUBDIR)/unpack.c $(SUBDIR)/unix.c \
+	$(SUBDIR)/SDL_rotozoom.c $(SUBDIR)/SDL_anigif.c $(SUBDIR)/SDL_gfxBlitFunc.c
 
+LOCAL_H_FILES := $(INSTEAD)/cache.h $(INSTEAD)/instead.h $(INSTEAD)/list.h $(INSTEAD)/snprintf.h $(INSTEAD)/tinymt32.h $(INSTEAD)/idf.h $(INSTEAD)/system.h $(INSTEAD)/util.h \
+	$(SUBDIR)/graphics.h $(SUBDIR)/input.h $(SUBDIR)/game.h $(SUBDIR)/sound.h $(SUBDIR)/config.h \
+	$(SUBDIR)/themes.h $(SUBDIR)/menu.h $(SUBDIR)/util.h $(SUBDIR)/unzip.h $(SUBDIR)/ioapi.h \
+	$(SUBDIR)/internals.h $(SUBDIR)/externals.h \
+	$(SUBDIR)/SDL_rotozoom.h $(SUBDIR)/SDL_anigif.h $(SUBDIR)/SDL_gfxBlitFunc.h \
+	$(SUBDIR)/android.h
 
+#	$(SUBDIR)/SDL2_rotozoom.c $(SUBDIR)/wince.c $(SUBDIR)/s60.c $(SUBDIR)/windows.c $(SUBDIR)/iowin32.c $(SUBDIR)/symbian.cpp \
+#	$(SUBDIR)/SDL2_rotozoom.h $(SUBDIR)/iowin32.h $(SUBDIR)/ios.h $(SUBDIR)/s60.h $(SUBDIR)/wince.h \
 #DATAPATH=/sdcard/Instead-NG
+#DATAPATH=/data/data/com.nlbhub.instead.launcher/app_data
 DATAPATH=.
 
 STEADPATH=$(DATAPATH)/stead
@@ -40,7 +53,7 @@ LOCAL_CFLAGS := \
 				-I$(LOCAL_PATH)/../libiconv/libiconv/include \
 				-I$(LOCAL_PATH)/..
 
-LOCAL_CFLAGS += -DVERSION=\"2.4.0\" -DANDROID -DNOMAIN -D_LOCAL_APPDATA -D_HAVE_ICONV -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) -D_CUR_DIR=$(DATAPATH)
+LOCAL_CFLAGS += -DVERSION=\"2.5.0\" -DANDROID -DNOMAIN -D_USE_SDL -D_LOCAL_APPDATA -D_HAVE_ICONV -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) -D_CUR_DIR=$(DATAPATH)
 
 LOCAL_CFLAGS += -DGAMES_PATH=\"${GAMESPATH}/\" -DTHEME_PATH=\"${THEMEPATH}/\" -D_SDL_MOD_BUG
 

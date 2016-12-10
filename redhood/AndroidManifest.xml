@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nlbhub.instead.redhood"
-    android:versionCode="105004"
+    android:versionCode="105005"
     android:versionName="1.0.5">
 
-    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="12" />
+    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="11" />
 
     <!-- OpenGL ES 2.0 -->
     <uses-feature android:glEsVersion="0x00020000" />
