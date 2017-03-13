@@ -10,6 +10,7 @@ import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by Antokolos on 09.10.15.
@@ -19,7 +20,7 @@ public class StorageResolver {
     public static final String SaveDir = "appdata/saves/";
     public static final String Options = "appdata/insteadrc";
     public static final String Themes = "themes";
-    public static final String MainLua = "/main.lua";
+    public static final String[] MainLuaFiles = {"main.lua", "main3.lua"};
     public static final String DataFlag = ".version";
     public static final String BundledGame = "bundled";
 
@@ -112,8 +113,13 @@ public class StorageResolver {
     };
 
     public static boolean isWorking(String f){
-        String path = getOutFilePath(GameDir) + "/" + f + MainLua;
-        return (new File(path)).isFile();
+        for (String mainLuaFile : MainLuaFiles) {
+            String path = getOutFilePath(GameDir + "/" + f, mainLuaFile);
+            if (new File(path).isFile()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static String getGamesPath(ExpansionMounter expansionMounter) {

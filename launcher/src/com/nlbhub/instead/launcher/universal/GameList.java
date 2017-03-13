@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -175,25 +176,22 @@ public class GameList {
 
 	private void flagsScan() {
 		Log.d("Instead-NG","Rescan games flags!");
-		String path;
 
 		for (int i = 0; i < getLength(); i++) {
-			path = Globals.getOutFilePath(StorageResolver.GameDir + name.get(i)
-					+ "/main.lua");
+			Map<String, String> paths = Globals.getOutFilePaths(StorageResolver.GameDir + name.get(i), StorageResolver.MainLuaFiles);
 
-			if (checkFile(path)) {
-
-				if (getVerFromFile(path, i)) {
-					flag.add(i, INSTALLED);
-				} else {
-					flag.add(i, UPDATE);
+			int pathFlag = NEW;
+			for (String path : paths.values()) {
+				if (checkFile(path)) {
+					if (getVerFromFile(path, i)) {
+						pathFlag = INSTALLED;
+					} else {
+						pathFlag = UPDATE;
+					}
+					break;
 				}
-
-			} else {
-				flag.add(i,NEW);
 			}
-			
-
+			flag.add(i, pathFlag);
 		}
 		Globals.FlagSync = false ;
 	}
@@ -231,7 +229,7 @@ public class GameList {
 					}
 
 				} catch (NullPointerException e) {
-
+					// TODO: remove catch NPE!!!
 					// FIXME Вылит с тех игр, в которых явно не указана
 					// версия...
 					input.close();
@@ -251,17 +249,7 @@ public class GameList {
 	}
 
 	private boolean checkFile(String path) {
-		InputStream file = null;
-		try {
-			file = new FileInputStream(path);
-		} catch (FileNotFoundException e) {
-		} catch (SecurityException e) {
-		}
-		;
-		if (file != null) {
-			return true;
-		}
-		return false;
+		return new File(path).exists();
 	}
 
 	private boolean readXML() {

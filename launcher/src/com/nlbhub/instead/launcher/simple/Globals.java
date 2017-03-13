@@ -6,7 +6,7 @@ import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.StorageResolver;
 
 import java.io.*;
-import java.util.Locale;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -94,6 +94,14 @@ public class Globals {
         return StorageResolver.getOutFilePath(subDir, filename);
     };
 
+	public static Map<String, String> getOutFilePaths(final String subDir, final String[] filenames) {
+		Map<String, String> result = new HashMap<String, String>();
+		for (String filename : filenames) {
+			result.put(filename, StorageResolver.getOutFilePath(subDir, filename));
+		}
+		return result;
+	};
+
 	public static String getOutGamePath(final String filename) {
 		return getStorage() + InsteadApplication.ApplicationName + "/" + GameDir + filename;
 	};
@@ -109,34 +117,37 @@ public class Globals {
 				|| Locale.getDefault().toString().equals("be")) {
 			 lang = Lang.RU;
 		}
-		String path = Globals.getOutFilePath(GameDir) + "/" + t + MainLua;
+		Map<String, String> paths = Globals.getOutFilePaths(GameDir + "/" + t, MainLuaFiles);
 		String line = null;
 		String ru = null;
 		String en = null;
 //		boolean urq = false;
 		BufferedReader input = null;
 		try {
-				input = new BufferedReader(new InputStreamReader(
-				new FileInputStream(new File(path)), "UTF-8"));
-				for (int i =0; i < N ; i++){
-					line = input.readLine();	
-					if(line!=null){
-						if (line.matches(".*\\$Name\\(ru\\):.*")){			
+			for (String path : paths.values()) {
+				File file = new File(path);
+				if (!file.exists()) {
+					continue;
+				}
+				input = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+				for (int i = 0; i < N; i++) {
+					line = input.readLine();
+					if (line != null) {
+						if (line.matches(".*\\$Name\\(ru\\):.*")) {
 							ru = matchUrl(line, ".*\\$Name\\(ru\\):(.*)\\$");
-						} else 
-							if(line.matches(".*\\$Name:.*")) {
-								en = matchUrl(line, ".*\\$Name:(.*)\\$");
-							}
+						} else if (line.matches(".*\\$Name:.*")) {
+							en = matchUrl(line, ".*\\$Name:(.*)\\$");
+						}
 							/*
 							else if (line.matches(".*urq.lua.*")) {
 								urq = true;
 							}
 							*/
-							}
+					}
 				}
 				input.close();
-
-
+				break;
+			}
 		} catch (Exception e) {
 			Log.e("INSTEAD","Title 1", e);
 			return t;

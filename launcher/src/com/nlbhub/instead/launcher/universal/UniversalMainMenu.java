@@ -49,7 +49,7 @@ public class UniversalMainMenu extends MainMenu {
         stringBuilder.append("games/");
         stringBuilder.append(g);
         String out = stringBuilder.toString();
-        if(!(new File(rangpath+StorageResolver.MainLua)).exists()){
+        if (!checkMainFile(rangpath)) {
             Toast.makeText(this, getString(R.string.need_rangers), Toast.LENGTH_LONG).show();
             return;
         }
@@ -61,6 +61,15 @@ public class UniversalMainMenu extends MainMenu {
         }
         Globals.closeQm();
         Toast.makeText(this, getString(R.string.rangers_inst), Toast.LENGTH_LONG).show();
+    }
+
+    private boolean checkMainFile(String rangpath) {
+        for (String mainLuaFile : StorageResolver.MainLuaFiles) {
+            if (new File(rangpath, mainLuaFile).exists()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void ZipInstall() {
