@@ -18,12 +18,12 @@ LOCAL_SRC_FILES := instead_launcher.cpp $(SDL_PATH)/src/main/android/SDL_android
 	$(INSTEAD)/cache.c $(INSTEAD)/idf.c $(INSTEAD)/instead.c $(INSTEAD)/lfs.c $(INSTEAD)/list.c $(INSTEAD)/snprintf.c $(INSTEAD)/tinymt32.c $(INSTEAD)/util.c \
 	$(SUBDIR)/instead_bits.c $(SUBDIR)/instead_paths.c $(SUBDIR)/instead_sound.c $(SUBDIR)/instead_sprites.c $(SUBDIR)/instead_timer.c \
 	$(SUBDIR)/graphics.c $(SUBDIR)/input.c $(SUBDIR)/game.c $(SUBDIR)/main.c  $(SUBDIR)/sound.c $(SUBDIR)/config.c \
-	$(SUBDIR)/themes.c $(SUBDIR)/menu.c $(SUBDIR)/util.c  $(SUBDIR)/unzip.c $(SUBDIR)/ioapi.c $(SUBDIR)/unpack.c $(SUBDIR)/unix.c \
+	$(SUBDIR)/themes.c $(SUBDIR)/menu.c $(SUBDIR)/utils.c  $(SUBDIR)/unzip.c $(SUBDIR)/ioapi.c $(SUBDIR)/unpack.c $(SUBDIR)/unix.c \
 	$(SUBDIR)/SDL_rotozoom.c $(SUBDIR)/SDL_anigif.c $(SUBDIR)/SDL_gfxBlitFunc.c
 
 LOCAL_H_FILES := $(INSTEAD)/cache.h $(INSTEAD)/instead.h $(INSTEAD)/list.h $(INSTEAD)/snprintf.h $(INSTEAD)/tinymt32.h $(INSTEAD)/idf.h $(INSTEAD)/system.h $(INSTEAD)/util.h \
 	$(SUBDIR)/graphics.h $(SUBDIR)/input.h $(SUBDIR)/game.h $(SUBDIR)/sound.h $(SUBDIR)/config.h \
-	$(SUBDIR)/themes.h $(SUBDIR)/menu.h $(SUBDIR)/util.h $(SUBDIR)/unzip.h $(SUBDIR)/ioapi.h \
+	$(SUBDIR)/themes.h $(SUBDIR)/menu.h $(SUBDIR)/utils.h $(SUBDIR)/unzip.h $(SUBDIR)/ioapi.h \
 	$(SUBDIR)/internals.h $(SUBDIR)/externals.h \
 	$(SUBDIR)/SDL_rotozoom.h $(SUBDIR)/SDL_anigif.h $(SUBDIR)/SDL_gfxBlitFunc.h \
 	$(SUBDIR)/android.h
@@ -59,9 +59,9 @@ LOCAL_CFLAGS += -DGAMES_PATH=\"${GAMESPATH}/\" -DTHEME_PATH=\"${THEMEPATH}/\" -D
 
 LOCAL_CFLAGS +=  -DLANG_PATH=\"${LANGPATH}/\" -DSTEAD_PATH=\"${STEADPATH}/\" -DT $(EXTRA_CFLAGS)
 
-LOCAL_SHARED_LIBRARIES := SDL2 SDL2_ttf SDL2_mixer SDL2_image 
+LOCAL_SHARED_LIBRARIES := SDL2 SDL2_ttf SDL2_mixer SDL2_image
 
-LOCAL_STATIC_LIBRARIES := lua freetype libiconv
+LOCAL_STATIC_LIBRARIES := luajit freetype libiconv
 
 LOCAL_LDFLAGS := -Lobj/local/armeabi
 

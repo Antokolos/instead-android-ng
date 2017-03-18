@@ -2,7 +2,17 @@
 
 export ROOT_DIR=$(pwd)
 export PROJECT_PATH=$ROOT_DIR/modules/instead_standalone
-export NDK_HOME="/usr/local/apps/android-ndk-r10e"
+export LUAJIT_PATH=$PROJECT_PATH/jni/LuaJIT
+export NDK_HOME="/usr/local/apps/android-ndk-r14"
+cd $LUAJIT_PATH
+mkdir out
+mkdir out/armeabi
+mkdir out/armeabi-v7a
+mkdir out/x86
+./make_armeabi.sh
+./make_armeabi-v7a.sh
+./make_x86.sh
+cd $ROOT_DIR
 $NDK_HOME/ndk-build clean NDK_PROJECT_PATH=$PROJECT_PATH NDK_APPLICATION_MK=$ROOT_DIR/Application.mk
 $ROOT_DIR/clean.sh
 $NDK_HOME/ndk-build NDK_PROJECT_PATH=$PROJECT_PATH NDK_APPLICATION_MK=$ROOT_DIR/Application.mk
@@ -26,3 +36,5 @@ for f in $(ls *.so)
 do
   cat /dev/null > $f
 done
+cd $LUAJIT_PATH
+rm -rf out
