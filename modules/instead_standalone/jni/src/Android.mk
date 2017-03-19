@@ -65,7 +65,7 @@ LOCAL_STATIC_LIBRARIES := luajit freetype libiconv
 
 LOCAL_LDFLAGS := -Lobj/local/armeabi
 
-LOCAL_LDLIBS := -lGLESv1_CM -lGLESv2 -landroid -llog
+LOCAL_LDLIBS := -lGLESv1_CM -lGLESv2 -landroid -llog -lm -ldl
 
 LOCAL_LDFLAGS += $(APPLICATION_ADDITIONAL_LDFLAGS)
 
