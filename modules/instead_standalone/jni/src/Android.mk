@@ -48,11 +48,12 @@ LOCAL_CFLAGS := \
 				-I$(LOCAL_PATH)/../SDL2_ttf \
 				-I$(LOCAL_PATH)/../png \
 				-I$(LOCAL_PATH)/../jpeg-9 \
-				-I$(LOCAL_PATH)/../lua/lua/src \
+				-I$(LOCAL_PATH)/../LuaJIT/src \
 				-I$(LOCAL_PATH)/../freetype/include \
 				-I$(LOCAL_PATH)/../libiconv/libiconv/include \
 				-I$(LOCAL_PATH)/..
 
+#				-I$(LOCAL_PATH)/../lua/lua/src
 LOCAL_CFLAGS += -DVERSION=\"2.5.0\" -DANDROID -DNOMAIN -D_USE_SDL -D_LOCAL_APPDATA -D_HAVE_ICONV -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) -D_CUR_DIR=$(DATAPATH)
 
 LOCAL_CFLAGS += -DGAMES_PATH=\"${GAMESPATH}/\" -DTHEME_PATH=\"${THEMEPATH}/\" -D_SDL_MOD_BUG

@@ -121,7 +121,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     
     /* Run the application code! */
     int status;
-    char* _argv[17];
+    char* _argv[18];
     int n = 1;
     if (path != NULL) {
         printf("path = %s\n", path);
@@ -130,6 +130,7 @@ extern "C" int SDL_main(int argc, char** argv) {
 
     _argv[0] = SDL_strdup(argv[0]);
 
+    _argv[n++] = SDL_strdup("-standalone");
     _argv[n++] = SDL_strdup("-nostdgames");
     _argv[n++] = SDL_strdup("-fullscreen");
     _argv[n++] = SDL_strdup("-modes");
@@ -152,6 +153,7 @@ extern "C" int SDL_main(int argc, char** argv) {
         _argv[n++] = SDL_strdup("-gamespath");
         _argv[n++] = SDL_strdup(gamespath);
     }
+    // TODO: pass -profile parameter
     if (is_not_blank(idf)) {
         printf("idf = %s\n", idf);
         _argv[n++] = SDL_strdup(idf);
