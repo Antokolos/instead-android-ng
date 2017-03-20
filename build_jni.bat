@@ -12,12 +12,12 @@ mkdir out\armeabi
 mkdir out\armeabi-v7a
 mkdir out\x86
 cd %LUAJIT_PATH%
-.\make_armeabi.bat
-.\make_armeabi-v7a.bat
-.\make_x86.bat
+call .\make_armeabi.bat
+call .\make_armeabi-v7a.bat
+call .\make_x86.bat
 cd %ROOT_DIR%
 %NDK_HOME%\ndk-build clean NDK_PROJECT_PATH=%PROJECT_PATH% NDK_APPLICATION_MK=%ROOT_DIR%\Application.mk
-%ROOT_DIR%\clean.bat
+call %ROOT_DIR%\clean.bat
 %NDK_HOME%\ndk-build NDK_PROJECT_PATH=%PROJECT_PATH% NDK_APPLICATION_MK=%ROOT_DIR%\Application.mk
 set LIBS_HOME=%PROJECT_PATH%\libs
 set RAW_HOME=%PROJECT_PATH%\res\raw

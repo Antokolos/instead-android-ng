@@ -7,4 +7,4 @@ set NDKARCH=-march=armv7-a -mfloat-abi=softfp -Wl,--fix-cortex-a8
 mingw32-make HOST_CC="gcc -m32" CROSS=%NDKP% TARGET_FLAGS="%NDKF% %NDKARCH%" TARGET_SYS=Linux clean
 mingw32-make HOST_CC="gcc -m32" CROSS=%NDKP% TARGET_FLAGS="%NDKF% %NDKARCH%" TARGET_SYS=Linux
 copy .\src\libluajit.a .\..\LuaJIT_m\out\armeabi-v7a\
-.\make_clean.bat
+call .\make_clean.bat
