@@ -16,15 +16,15 @@ call .\make_armeabi.bat
 call .\make_armeabi-v7a.bat
 call .\make_x86.bat
 cd %ROOT_DIR%
-%NDK_HOME%\ndk-build clean NDK_PROJECT_PATH=%PROJECT_PATH% NDK_APPLICATION_MK=%ROOT_DIR%\Application.mk
-call %ROOT_DIR%\clean.bat
-%NDK_HOME%\ndk-build NDK_PROJECT_PATH=%PROJECT_PATH% NDK_APPLICATION_MK=%ROOT_DIR%\Application.mk
+call %NDK_HOME%\ndk-build clean NDK_PROJECT_PATH=%PROJECT_PATH% NDK_APPLICATION_MK=%ROOT_DIR%\Application.mk
+call .\clean.bat
+call %NDK_HOME%\ndk-build NDK_PROJECT_PATH=%PROJECT_PATH% NDK_APPLICATION_MK=%ROOT_DIR%\Application.mk
 set LIBS_HOME=%PROJECT_PATH%\libs
 set RAW_HOME=%PROJECT_PATH%\res\raw
 cd %LIBS_HOME%\armeabi
 %A7Z% a %RAW_HOME%\libs_armeabi.zip *.so
 for %%f in (.\*.so) do copy /Y nul: %%f
-cd $LIBS_HOME\armeabi-v7a
+cd %LIBS_HOME%\armeabi-v7a
 %A7Z% a %RAW_HOME%\libs_armeabi_v7a.zip *.so
 for %%f in (.\*.so) do copy /Y nul: %%f
 cd %LIBS_HOME%\x86
