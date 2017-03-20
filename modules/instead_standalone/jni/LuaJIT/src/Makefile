@@ -504,8 +504,11 @@ ALL_T= $(LUAJIT_T) $(LUAJIT_A) $(LUAJIT_SO) $(HOST_T)
 ALL_HDRGEN= lj_bcdef.h lj_ffdef.h lj_libdef.h lj_recdef.h lj_folddef.h \
 	    host/buildvm_arch.h
 ALL_GEN= $(LJVM_S) $(ALL_HDRGEN) $(LIB_VMDEFP)
-WIN_RM= *.obj *.lib *.exp *.dll *.exe *.manifest *.pdb *.ilk
-ALL_RM= $(ALL_T) $(ALL_GEN) *.o host/*.o $(WIN_RM)
+# Anton P. Kolosov -- There is no actual Windows build, and these files break the build
+#WIN_RM= *.obj *.lib *.exp *.dll *.exe *.manifest *.pdb *.ilk
+WIN_RM=
+# Anton P. Kolosov -- changed host/*.o to host//*.o
+ALL_RM= $(ALL_T) $(ALL_GEN) *.o host//*.o $(WIN_RM)
 
 ##############################################################################
 # Build mode handling.

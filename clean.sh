@@ -1,4 +1,4 @@
 #!/bin/sh
 
-export PRJ="./project"
-rm -rf $PRJ/bin $PRJ/gen $PRJ/libs $PRJ/obj
+export PRJ="./modules/instead_standalone"
+rm -rf $PRJ/bin $PRJ/gen $PRJ/obj
