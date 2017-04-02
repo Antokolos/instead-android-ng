@@ -25,7 +25,7 @@
     <string name="delgame">Игра удалена</string>
     <string name="basic">Официальный</string>
     <string name="repo">Выбор списка игр</string>
-    <string name="alter">Не официальный</string>
+    <string name="alter">Неофициальный</string>
     <string name="options">Настройки</string>
     <string name="save">Сохранить</string>
     <string name="cancel">Отмена</string>
