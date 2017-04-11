@@ -1,6 +1,8 @@
 package com.nlbhub.instead.launcher.universal.nlb;
 
 import android.app.ProgressDialog;
+import com.nlbhub.instead.PropertiesBean;
+import com.nlbhub.instead.PropertyManager;
 import com.nlbhub.instead.launcher.simple.Globals;
 import com.nlbhub.instead.launcher.universal.GameManager;
 import com.nlbhub.instead.launcher.universal.XmlDownloader;
@@ -14,11 +16,13 @@ public class NLBXmlDownloader extends XmlDownloader {
     }
 
     protected String getGameListDownloadUrl() {
-        return Globals.GameListNLBDemoDownloadUrl;
+        PropertiesBean properties = PropertyManager.getProperties();
+        return properties.getGameListNLBDemoDownloadUrl();
     }
 
     protected String getGameListAltDownloadUrl() {
-        return Globals.GameListNLBFullDownloadUrl;
+        PropertiesBean properties = PropertyManager.getProperties();
+        return properties.getGameListNLBFullDownloadUrl();
     }
 
     protected String getGameListFileName() {

@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import com.google.android.vending.expansion.downloader.*;
+import com.nlbhub.instead.PropertyManager;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.standalone.expansion.APKHelper;
@@ -123,6 +124,7 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
         dialog.setCancelable(false);
         setContentView(R.layout.mnhead);
 
+        PropertyManager.init(new File(StorageResolver.getStorage()));
         ListView listView = getListView();
         registerForContextMenu(listView);
         showMenu();

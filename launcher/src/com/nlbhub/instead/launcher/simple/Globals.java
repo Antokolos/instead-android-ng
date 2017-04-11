@@ -22,10 +22,6 @@ public class Globals {
 	public static final String GameListAltFileName = "game_list_alt.xml";
     public static final String GameListNLBDemosFileName = "game_list_nlb_demos.xml";
     public static final String GameListNLBFullFileName = "game_list_nlb_full.xml";
-	public static final String GameListDownloadUrl = "http://instead.syscall.ru/pool/game_list.xml";
-	public static final String GameListAltDownloadUrl = "http://instead-games.ru/xml.php";
-    public static final String GameListNLBDemoDownloadUrl = "http://nlbproject.com/m/services/getdemogames";
-    public static final String GameListNLBFullDownloadUrl = "http://nlbproject.com/m/services/getfullgames";
 	public static final String DirURQ = "urq";
 	public static final String StringURQ = "\\[URQ\\]";
 	public static final String PORTRET_KEY = "portrait";

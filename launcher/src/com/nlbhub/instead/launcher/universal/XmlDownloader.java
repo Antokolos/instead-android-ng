@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
+import com.nlbhub.instead.PropertiesBean;
+import com.nlbhub.instead.PropertyManager;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.launcher.simple.Globals;
 import org.apache.http.HttpResponse;
@@ -49,11 +51,13 @@ public class XmlDownloader extends Thread {
 	}
 
 	protected String getGameListDownloadUrl() {
-        return Globals.GameListDownloadUrl;
+		PropertiesBean properties = PropertyManager.getProperties();
+        return properties.getGameListDownloadUrl();
     }
 
     protected String getGameListAltDownloadUrl() {
-        return Globals.GameListAltDownloadUrl;
+		PropertiesBean properties = PropertyManager.getProperties();
+		return properties.getGameListAltDownloadUrl();
     }
 
     protected String getGameListFileName() {
