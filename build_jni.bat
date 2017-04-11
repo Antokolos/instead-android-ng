@@ -28,7 +28,7 @@ cd %LIBS_HOME%\armeabi-v7a
 %A7Z% a %RAW_HOME%\libs_armeabi_v7a.zip *.so
 for %%f in (.\*.so) do copy /Y nul: %%f
 cd %LIBS_HOME%\x86
-%A7Z% %RAW_HOME%\libs_x86.zip *.so
+%A7Z% a %RAW_HOME%\libs_x86.zip *.so
 for %%f in (.\*.so) do copy /Y nul: %%f
 cd %LUAJITM_PATH%
 rd /s /q out
