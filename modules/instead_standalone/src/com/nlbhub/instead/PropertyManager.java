@@ -1,5 +1,8 @@
 package com.nlbhub.instead;
 
+import com.nlbhub.instead.standalone.MainMenuAbstract;
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,9 +19,9 @@ public class PropertyManager {
     private static final Logger LOG = Logger.getLogger("com.nlbhub.instead.PropertyManager");
     private static PropertiesBean properties;
 
-    public static void init(File configDir) {
+    public static void init(MainMenuAbstract parent, File configDir) {
         try {
-            properties = readProperties(configDir);
+            properties = readProperties(parent, configDir);
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getMessage());
             properties = new PropertiesBean();
@@ -29,7 +32,7 @@ public class PropertyManager {
         return properties;
     }
 
-    private static PropertiesBean readProperties(File configDir) throws IOException {
+    private static PropertiesBean readProperties(MainMenuAbstract parent, File configDir) throws IOException {
         PropertiesBean result = new PropertiesBean();
         Properties prop = new Properties();
         InputStream input = null;
@@ -40,7 +43,9 @@ public class PropertyManager {
             }
             File configFile = new File(configDir, "config.properties");
             if (!configFile.exists()) {
-                throw new IOException("Config file " + configFile.getCanonicalPath() + " does not exist!");
+                LOG.log(Level.INFO, "Config file " + configFile.getCanonicalPath() + " does not exist! Default config file will be created.");
+                FileUtils.copyInputStreamToFile(parent.getResources().openRawResource(R.raw.config), configFile);
+                return result;
             }
 
             input = new FileInputStream(configFile);

@@ -123,8 +123,7 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
         setContentView(R.layout.mnhead);
-
-        PropertyManager.init(new File(StorageResolver.getStorage()));
+        PropertyManager.init(this, new File(StorageResolver.getProgramDirOnSD()));
         ListView listView = getListView();
         registerForContextMenu(listView);
         showMenu();

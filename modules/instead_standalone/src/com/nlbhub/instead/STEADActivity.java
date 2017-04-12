@@ -73,7 +73,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         Settings settings = getSettings();
         boolean nativeLogEnabled = settings.isNativelog();
         boolean enforceResolution = settings.isEnforceresolution();
-        String nativeLogPath = nativeLogEnabled ? StorageResolver.getStorage() + InsteadApplication.ApplicationName + "/native.log" : null;
+        String nativeLogPath = nativeLogEnabled ? StorageResolver.getProgramDirOnSD() + "/native.log" : null;
         String[] args = new String[11];
         args[0] = nativeLogPath;
         args[1] = getDataDir();

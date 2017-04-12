@@ -148,32 +148,12 @@ public class DataDownloader extends Thread {
 		}
 	}
 
-	/**
-	 * This method does migration from old program dir on SD to new.
-	 * Was introduced during 1.1.1 -> 1.1.2 migration, should be commented out or deleted after 1.1.3, though it is
-	 * no harm to leave it as it is.
-	 * TODO: Remove this method after 1.1.3
-	 * @deprecated
-	 * @param programDirOnSD
-	 */
-	private void doMigration(File programDirOnSD) {
-		try {
-			File oldProgramDirOnSD = new File(StorageResolver.getStorage111() + InsteadApplication.ApplicationName);
-			if (!programDirOnSD.exists()) {
-                FileUtils.moveDirectory(oldProgramDirOnSD, programDirOnSD);
-            }
-		} catch (IOException ignore) {
-			// well, bad luck...
-		}
-	}
-
 	@Override
 	public void run() {
 		String path = null;
 		SystemPathResolver dataResolver = new SystemPathResolver("data", Parent.getApplicationContext());
 
-		File programDirOnSD = new File(StorageResolver.getStorage() + InsteadApplication.ApplicationName);
-		doMigration(programDirOnSD);
+		File programDirOnSD = new File(StorageResolver.getProgramDirOnSD());
 		programDirOnSD.mkdir();
 		(new File(programDirOnSD, "appdata")).mkdir();
 
