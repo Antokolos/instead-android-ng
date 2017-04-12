@@ -1,30 +1,24 @@
 package com.nlbhub.instead.launcher.simple;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Spinner;
-import com.nlbhub.instead.standalone.InsteadApplication;
+import android.view.*;
+import android.widget.*;
 import com.nlbhub.instead.launcher.R;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.nlbhub.instead.standalone.StorageResolver.getThemesDirectory;
 
 public class Options extends Activity {
 	private Button reset;
@@ -163,8 +157,7 @@ public class Options extends Activity {
 	private List<String> getThemesList() {
 		List<String> ls = new ArrayList<String>();
 		try {
-			SystemPathResolver pathResolver = new SystemPathResolver("data", getApplicationContext());
-			File f = new File(pathResolver.resolvePath("themes"));
+			File f = getThemesDirectory(this);
 			if(f.isDirectory()){
             if(f.list().length>0){
                 String files[] = f.list();

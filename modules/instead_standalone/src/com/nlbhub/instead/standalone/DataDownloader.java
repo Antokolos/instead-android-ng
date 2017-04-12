@@ -163,7 +163,9 @@ public class DataDownloader extends Thread {
 			StorageResolver.delete(dataResolver.getPath() + "languages");
 			StorageResolver.delete(dataResolver.getPath() + "lang");
 			StorageResolver.delete(dataResolver.getPath() + StorageResolver.DataFlag);
-			extractArchive(Parent.getResources().openRawResource(R.raw.games), new SDPathResolver("appdata"));
+			SDPathResolver appdata = new SDPathResolver("appdata");
+			extractArchive(Parent.getResources().openRawResource(R.raw.games), appdata);
+			extractArchive(Parent.getResources().openRawResource(R.raw.themes), appdata);
 			extractArchive(Parent.getResources().openRawResource(R.raw.data), dataResolver);
 			extractArchive(getAppropriateLibsStream(), new SystemPathResolver("libs", Parent.getApplicationContext()));
 		} catch (IOException e) {

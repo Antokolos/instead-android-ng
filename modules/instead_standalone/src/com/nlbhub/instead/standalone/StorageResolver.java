@@ -1,11 +1,13 @@
 package com.nlbhub.instead.standalone;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
+import com.nlbhub.instead.standalone.fs.SDPathResolver;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
 import java.io.File;
@@ -19,7 +21,7 @@ public class StorageResolver {
     public static final String GameDir = "appdata/games/";
     public static final String SaveDir = "appdata/saves/";
     public static final String Options = "appdata/insteadrc";
-    public static final String Themes = "themes";
+    public static final String ThemesDir = "appdata/themes/";
     public static final String[] MainLuaFiles = {"main.lua", "main3.lua"};
     public static final String DataFlag = ".version";
     public static final String BundledGame = "bundled";
@@ -61,17 +63,35 @@ public class StorageResolver {
         return getStorage() + InsteadApplication.ApplicationName;
     }
 
+    public static String getThemesDirectoryOrNull(Activity activity) {
+        try {
+            return getThemesDirectory(activity).getCanonicalPath();
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static File getThemesDirectory(Activity activity) throws IOException {
+        SDPathResolver pathResolver = new SDPathResolver("appdata");
+        File themes = new File(pathResolver.resolvePath("themes"));
+        if (themes.isDirectory()) {
+            return themes;
+        }
+        SystemPathResolver systemPathResolver = new SystemPathResolver("data", activity.getApplicationContext());
+        return new File(systemPathResolver.resolvePath("themes"));
+    }
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static String getObbFilePath(final String filename, Context context) {
         return context.getObbDir() + "/" + filename;
     };
 
     public static String getOutFilePath(final String filename) {
-        return getStorage() + InsteadApplication.ApplicationName + "/" + filename;
+        return getProgramDirOnSD() + "/" + filename;
     };
 
     public static String getOutFilePath(final String subDir, final String filename) {
-        return getStorage() + InsteadApplication.ApplicationName + "/" + subDir + "/" + filename;
+        return getProgramDirOnSD() + "/" + subDir + "/" + filename;
     };
 
     public static boolean isWorking(String f){

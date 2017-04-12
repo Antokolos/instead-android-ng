@@ -99,7 +99,7 @@ public class Globals {
 	};
 
 	public static String getOutGamePath(final String filename) {
-		return getStorage() + InsteadApplication.ApplicationName + "/" + GameDir + filename;
+		return getProgramDirOnSD() + "/" + GameDir + filename;
 	};
 
 	public static String getTitle(String t){

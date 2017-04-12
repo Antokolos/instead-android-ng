@@ -74,7 +74,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         boolean nativeLogEnabled = settings.isNativelog();
         boolean enforceResolution = settings.isEnforceresolution();
         String nativeLogPath = nativeLogEnabled ? StorageResolver.getProgramDirOnSD() + "/native.log" : null;
-        String[] args = new String[11];
+        String[] args = new String[12];
         args[0] = nativeLogPath;
         args[1] = getDataDir();
         args[2] = appdata;
@@ -85,7 +85,8 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         args[7] = settings.isMusic() ? "Y" : null;  // The exact value is unimportant, if null, then -nosound will be added
         args[8] = settings.isOwntheme() ? "Y" : null;  // The exact value is unimportant, if NOT null, then -owntheme will be added
         args[9] = settings.getTheme();
-        args[10] = getModesString();
+        args[10] = StorageResolver.getThemesDirectoryOrNull(this);
+        args[11] = getModesString();
         return args;
     }
 

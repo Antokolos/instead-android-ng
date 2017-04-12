@@ -112,7 +112,8 @@ extern "C" int SDL_main(int argc, char** argv) {
     const char* music = argc >= 9 ? argv[8] : NULL;
     const char* owntheme = argc >= 10 ? argv[9] : NULL;
     const char* theme = argc >= 11 ? argv[10] : NULL;
-    const char* modes = argc >= 12 ? argv[11] : NULL;
+    const char* themespath = argc >= 12 ? argv[11] : NULL;
+    const char* modes = argc >= 13 ? argv[12] : NULL;
     
     if (nativelog != NULL) {
         logFile = fopen(nativelog, "w");
@@ -121,7 +122,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     
     /* Run the application code! */
     int status;
-    char* _argv[18];
+    char* _argv[19];
     int n = 1;
     if (path != NULL) {
         printf("path = %s\n", path);
@@ -152,6 +153,11 @@ extern "C" int SDL_main(int argc, char** argv) {
         printf("gamespath = %s\n", gamespath);
         _argv[n++] = SDL_strdup("-gamespath");
         _argv[n++] = SDL_strdup(gamespath);
+    }
+    if (is_not_blank(themespath)) {
+        printf("themespath = %s\n", themespath);
+        _argv[n++] = SDL_strdup("-themespath");
+        _argv[n++] = SDL_strdup(themespath);
     }
     // TODO: pass -profile parameter
     if (is_not_blank(idf)) {
