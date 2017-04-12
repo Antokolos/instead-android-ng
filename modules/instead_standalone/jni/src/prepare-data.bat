@@ -6,6 +6,7 @@ set TOOLSDIR=C:\Program Files (x86)\Android\android-sdk\tools
 if exist "%TOOLSDIR%\jobb.bat" (
     del /Q %RESPATH%\data.zip
     del /Q %RESPATH%\games.zip
+    del /Q %RESPATH%\themes.zip
     mkdir %RESPATH%\data
     if exist "%CUR_DIR%/bundled.zip" (
         echo "Creation of archives from bundled game archive is not supported for now, use *nix Systems"
@@ -42,12 +43,14 @@ if exist "%TOOLSDIR%\jobb.bat" (
     del /Q %RESPATH%\data\stead\CMakeLists.txt
     del /Q %RESPATH%\data\stead\Makefile
     del /Q %RESPATH%\data\stead\Makefile.windows
-    robocopy %CUR_DIR%\instead\themes\ %RESPATH%\data\themes /MIR
+    robocopy %CUR_DIR%\instead\themes\ %RESPATH%\data\themes /S
     del /Q %RESPATH%\data\themes\CMakeLists.txt
     del /Q %RESPATH%\data\themes\Makefile
     del /Q %RESPATH%\data\themes\Makefile.windows
     cd %RESPATH%\data
     %A7Z% a %RESPATH%\data.zip .nomedia *
+    move .nomedia themes
+    %A7Z% a %RESPATH%\themes.zip themes
     cd ..
     rd /S /Q data
 ) else (

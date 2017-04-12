@@ -7,6 +7,7 @@ if [ -f $TOOLSDIR/jobb ]
 then
     rm $RESPATH/data.zip
     rm $RESPATH/games.zip
+    rm $RESPATH/themes.zip
     mkdir $RESPATH/data
     if [ -f ./bundled.zip ]
     then
@@ -47,6 +48,8 @@ then
     rm -f $RESPATH/data/themes/Makefile.windows
     cd $RESPATH/data
     zip -r ./../data.zip .nomedia *
+    mv .nomedia themes
+    zip -r ./../themes.zip themes
     cd ..
     rm -rf data
 else
