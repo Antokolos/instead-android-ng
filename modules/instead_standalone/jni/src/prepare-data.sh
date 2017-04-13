@@ -30,6 +30,7 @@ then
         mkdir ./games
         echo Bundled game archive does not exist, using tutorial3 game as default
         mkdir ./games/bundled
+        touch ./games/.nomedia        
         cp -r ./instead/games/tutorial3/* ./games/bundled/
         cp ./instead/lang/* $RESPATH/data/lang
         rm -f $RESPATH/data/lang/CMakeLists.txt
@@ -46,10 +47,11 @@ then
     rm -f $RESPATH/data/themes/CMakeLists.txt
     rm -f $RESPATH/data/themes/Makefile
     rm -f $RESPATH/data/themes/Makefile.windows
-    cd $RESPATH/data
-    zip -r ./../data.zip .nomedia *
-    mv .nomedia themes
+    cd $RESPATH/data    
+    cp .nomedia themes
     zip -r ./../themes.zip themes
+    rm -rf themes
+    zip -r ./../data.zip .nomedia *    
     cd ..
     rm -rf data
 else

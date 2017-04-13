@@ -29,6 +29,7 @@ if exist "%TOOLSDIR%\jobb.bat" (
     ) else (
         %A7Z% x -o%RESPATH%\data %CUR_DIR%\data.zip
         mkdir %CUR_DIR%\games
+        copy /y NUL %CUR_DIR%\games\.nomedia >NUL
         echo Bundled game archive does not exist, using tutorial3 game as default
         mkdir %CUR_DIR%\games\bundled
         robocopy %CUR_DIR%\instead\games\tutorial3\ %CUR_DIR%\games\bundled\ /MIR
@@ -47,10 +48,11 @@ if exist "%TOOLSDIR%\jobb.bat" (
     del /Q %RESPATH%\data\themes\CMakeLists.txt
     del /Q %RESPATH%\data\themes\Makefile
     del /Q %RESPATH%\data\themes\Makefile.windows
-    cd %RESPATH%\data
-    %A7Z% a %RESPATH%\data.zip .nomedia *
-    move .nomedia themes
+    cd %RESPATH%\data    
+    copy /y .nomedia themes
     %A7Z% a %RESPATH%\themes.zip themes
+    rd /S /Q themes
+    %A7Z% a %RESPATH%\data.zip .nomedia *    
     cd ..
     rd /S /Q data
 ) else (
