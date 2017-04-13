@@ -1,18 +1,13 @@
 package com.nlbhub.instead.standalone;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
-import com.nlbhub.instead.standalone.fs.SDPathResolver;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Created by Antokolos on 09.10.15.
@@ -63,22 +58,12 @@ public class StorageResolver {
         return getStorage() + InsteadApplication.ApplicationName;
     }
 
-    public static String getThemesDirectoryOrNull(Activity activity) {
-        try {
-            return getThemesDirectory(activity).getCanonicalPath();
-        } catch (IOException e) {
-            return null;
-        }
+    public static String getThemesDirectoryPath() {
+        return getOutFilePath(ThemesDir);
     }
 
-    public static File getThemesDirectory(Activity activity) throws IOException {
-        SDPathResolver pathResolver = new SDPathResolver("appdata");
-        File themes = new File(pathResolver.resolvePath("themes"));
-        if (themes.isDirectory()) {
-            return themes;
-        }
-        SystemPathResolver systemPathResolver = new SystemPathResolver("data", activity.getApplicationContext());
-        return new File(systemPathResolver.resolvePath("themes"));
+    public static File getThemesDirectory() throws IOException {
+        return new File(getThemesDirectoryPath());
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)

@@ -50,13 +50,11 @@ public class XmlDownloader extends Thread {
 
 	}
 
-	protected String getGameListDownloadUrl() {
-		PropertiesBean properties = PropertyManager.getProperties();
+	protected String getGameListDownloadUrl(PropertiesBean properties) {
         return properties.getGameListDownloadUrl();
     }
 
-    protected String getGameListAltDownloadUrl() {
-		PropertiesBean properties = PropertyManager.getProperties();
+    protected String getGameListAltDownloadUrl(PropertiesBean properties) {
 		return properties.getGameListAltDownloadUrl();
     }
 
@@ -68,31 +66,29 @@ public class XmlDownloader extends Thread {
         return Globals.GameListAltFileName;
     }
 
-    public XmlDownloader(GameManager GameManager, ProgressDialog _Status,
-			int src) {
-
+    public XmlDownloader(GameManager GameManager, ProgressDialog _Status, int src) {
+		final PropertiesBean properties = PropertyManager.getProperties(GameManager);
 		switch (src) {
-		case Globals.BASIC:
-		case Globals.NLBDEMO:
-			gameListUrl = getGameListDownloadUrl();
-			gameListFileName = getGameListFileName();
-			break;
-		case Globals.ALTER:
-		case Globals.NLBFULL:
-			gameListUrl = getGameListAltDownloadUrl();
-			gameListFileName = getGameListAltFileName();
-			break;
-		default:
-            gameListUrl = getGameListDownloadUrl();
-            gameListFileName = getGameListFileName();
+			case Globals.BASIC:
+			case Globals.NLBDEMO:
+				gameListUrl = getGameListDownloadUrl(properties);
+				gameListFileName = getGameListFileName();
+				break;
+			case Globals.ALTER:
+			case Globals.NLBFULL:
+				gameListUrl = getGameListAltDownloadUrl(properties);
+				gameListFileName = getGameListAltFileName();
+				break;
+			default:
+				gameListUrl = getGameListDownloadUrl(properties);
+				gameListFileName = getGameListFileName();
 		}
 
 		Parent = GameManager;
 		DownloadComplete = false;
-		if (!Parent.onpause)
+		if (!Parent.onpause) {
 			Status = new StatusWriter(_Status, GameManager);
-		// Status.setMessage(
-		// Parent.getString(R.string.connect)+" "+gameListUrl);
+		}
 		this.start();
 	}
 

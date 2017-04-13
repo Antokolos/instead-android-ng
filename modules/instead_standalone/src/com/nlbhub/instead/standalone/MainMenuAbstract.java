@@ -11,7 +11,6 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Messenger;
-import android.os.storage.StorageManager;
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -123,7 +122,6 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
         setContentView(R.layout.mnhead);
-        PropertyManager.init(this, new File(StorageResolver.getProgramDirOnSD()));
         ListView listView = getListView();
         registerForContextMenu(listView);
         showMenu();

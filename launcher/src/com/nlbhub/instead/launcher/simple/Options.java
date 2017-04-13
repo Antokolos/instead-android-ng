@@ -157,7 +157,7 @@ public class Options extends Activity {
 	private List<String> getThemesList() {
 		List<String> ls = new ArrayList<String>();
 		try {
-			File f = getThemesDirectory(this);
+			File f = getThemesDirectory();
 			if(f.isDirectory()){
             if(f.list().length>0){
                 String files[] = f.list();

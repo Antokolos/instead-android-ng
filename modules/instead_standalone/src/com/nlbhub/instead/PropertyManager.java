@@ -1,8 +1,9 @@
 package com.nlbhub.instead;
 
+import android.app.Activity;
 import android.util.Log;
 import com.nlbhub.instead.standalone.InsteadApplication;
-import com.nlbhub.instead.standalone.MainMenuAbstract;
+import com.nlbhub.instead.standalone.StorageResolver;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -10,29 +11,24 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.logging.Level;
 
 /**
  * @author Anton P. Kolosov
  * @version 1.0
  */
 public class PropertyManager {
-    private static PropertiesBean properties;
 
-    public static void init(MainMenuAbstract parent, File configDir) {
+    public static PropertiesBean getProperties(Activity parent) {
+        File configDir = new File(StorageResolver.getProgramDirOnSD());
         try {
-            properties = readProperties(parent, configDir);
+            return readProperties(parent, configDir);
         } catch (IOException e) {
             Log.e(InsteadApplication.ApplicationName, e.getMessage());
-            properties = new PropertiesBean();
+            return new PropertiesBean();
         }
     }
 
-    public static PropertiesBean getProperties() {
-        return properties;
-    }
-
-    private static PropertiesBean readProperties(MainMenuAbstract parent, File configDir) throws IOException {
+    private static PropertiesBean readProperties(Activity parent, File configDir) throws IOException {
         PropertiesBean result = new PropertiesBean();
         Properties prop = new Properties();
         InputStream input = null;

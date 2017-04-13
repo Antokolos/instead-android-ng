@@ -15,13 +15,11 @@ public class NLBXmlDownloader extends XmlDownloader {
         super(GameManager, _Status, src);
     }
 
-    protected String getGameListDownloadUrl() {
-        PropertiesBean properties = PropertyManager.getProperties();
+    protected String getGameListDownloadUrl(PropertiesBean properties) {
         return properties.getGameListNLBDemoDownloadUrl();
     }
 
-    protected String getGameListAltDownloadUrl() {
-        PropertiesBean properties = PropertyManager.getProperties();
+    protected String getGameListAltDownloadUrl(PropertiesBean properties) {
         return properties.getGameListNLBFullDownloadUrl();
     }
 
