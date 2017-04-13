@@ -1,5 +1,7 @@
 package com.nlbhub.instead;
 
+import android.util.Log;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.standalone.MainMenuAbstract;
 import org.apache.commons.io.FileUtils;
 
@@ -9,21 +11,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Anton P. Kolosov
  * @version 1.0
  */
 public class PropertyManager {
-    private static final Logger LOG = Logger.getLogger("com.nlbhub.instead.PropertyManager");
     private static PropertiesBean properties;
 
     public static void init(MainMenuAbstract parent, File configDir) {
         try {
             properties = readProperties(parent, configDir);
         } catch (IOException e) {
-            LOG.log(Level.SEVERE, e.getMessage());
+            Log.e(InsteadApplication.ApplicationName, e.getMessage());
             properties = new PropertiesBean();
         }
     }
@@ -43,7 +43,7 @@ public class PropertyManager {
             }
             File configFile = new File(configDir, "config.properties");
             if (!configFile.exists()) {
-                LOG.log(Level.INFO, "Config file " + configFile.getCanonicalPath() + " does not exist! Default config file will be created.");
+                Log.i(InsteadApplication.ApplicationName, "Config file " + configFile.getCanonicalPath() + " does not exist! Default config file will be created.");
                 FileUtils.copyInputStreamToFile(parent.getResources().openRawResource(R.raw.config), configFile);
                 return result;
             }
