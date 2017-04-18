@@ -1,6 +1,8 @@
 package com.nlbhub.instead.launcher.universal;
 
+import android.util.Log;
 import com.nlbhub.instead.launcher.R;
+import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.launcher.simple.Globals;
 import org.apache.http.client.methods.*;
@@ -251,11 +253,9 @@ class GameDownloader extends Thread {
 		try {
             new File((new File(path).getParentFile().getCanonicalPath())).mkdirs();
         } catch (IOException e) {
-            // TODO: ignore for now, but should rewrite it...
+            Log.e(InsteadApplication.ApplicationName, "Cannot mkdirs for path = " + path, e);
         }
 	}
-
-	;
 
 	private void initParent() {
 		class Callback implements Runnable {
