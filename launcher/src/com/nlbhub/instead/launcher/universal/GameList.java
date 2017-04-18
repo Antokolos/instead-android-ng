@@ -293,7 +293,7 @@ public class GameList {
 		// //Log.d(Globals.TAG,"Nodes: "+length);
 		for (int i = 0; i < length; i++) {
 	
-			//name.add(na);
+			name.add(na);
 			url.add(na);	
 			version.add(na);
 			title.add(na);
