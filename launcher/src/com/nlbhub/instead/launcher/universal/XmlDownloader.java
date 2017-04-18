@@ -127,7 +127,7 @@ public class XmlDownloader extends Thread {
 		}
 
 		//(new File(Globals.getOutFilePath(gameListFileName))).delete();
-		(new File(Parent.getFilesDir()+"/"+gameListFileName)).delete();
+		(new File(Parent.getFilesDir(), gameListFileName)).delete();
 			
 		try {
 			if (!Parent.onpause)

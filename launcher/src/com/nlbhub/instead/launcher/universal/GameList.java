@@ -299,7 +299,8 @@ public class GameList {
 			title.add(na);
 			descurl.add(na);
 			lang.add(na);
-			size.add(na);			
+			bytesize.add(0);
+			size.add(na);
 			processItemNode(nodes.item(i),i);
 		}
 
@@ -309,42 +310,45 @@ public class GameList {
 		for (int i = 0; i < itemNode.getChildNodes().getLength(); i++) {
 			Node subnode = ((NodeList) itemNode.getChildNodes()).item(i);
 
-			if (subnode.getNodeName().toLowerCase().equals(ITEM_NAME)) {
-				name.add(n,subnode.getFirstChild().getNodeValue());
+			Node firstChild = subnode.getFirstChild();
+			if (firstChild == null) {
+				continue;
+			}
+			String nodeValue = firstChild.getNodeValue();
+			String nodeName = subnode.getNodeName();
+			String nodeNameLowerCase = nodeName != null ? nodeName.toLowerCase() : "";
+
+			if (nodeNameLowerCase.equals(ITEM_NAME)) {
+				name.set(n, nodeValue);
 			}
 
-			if (subnode.getNodeName().toLowerCase().equals(ITEM_TITLE)) {
-				title.add(n,subnode.getFirstChild().getNodeValue());
+			if (nodeNameLowerCase.equals(ITEM_TITLE)) {
+				title.set(n, nodeValue);
 			}
 
-			if (subnode.getNodeName().toLowerCase().equals(ITEM_URL)) {
-				url.add(n,subnode.getFirstChild().getNodeValue());
+			if (nodeNameLowerCase.equals(ITEM_URL)) {
+				url.set(n, nodeValue);
 			}
 
-			if (subnode.getNodeName().toLowerCase().equals(ITEM_VERSION)) {
-				version.add(n,subnode.getFirstChild().getNodeValue());
+			if (nodeNameLowerCase.equals(ITEM_VERSION)) {
+				version.set(n, nodeValue);
 			}
 
-			if (subnode.getNodeName().toLowerCase().equals(ITEM_DESCURL)) {
-				descurl.add(n,subnode.getFirstChild().getNodeValue());
+			if (nodeNameLowerCase.equals(ITEM_DESCURL)) {
+				descurl.set(n, nodeValue);
 			}
 
-			if (subnode.getNodeName().toLowerCase().equals(ITEM_LANG)) {
-				lang.add(n,subnode.getFirstChild().getNodeValue());
+			if (nodeNameLowerCase.equals(ITEM_LANG)) {
+				lang.set(n, nodeValue);
 			}
 
-			if (subnode.getNodeName().toLowerCase().equals(ITEM_SIZE)) {
-				bytesize.add(Integer.parseInt(subnode.getFirstChild()
-						.getNodeValue()));
-				float b = Float.parseFloat(subnode.getFirstChild()
-						.getNodeValue());
-				BigDecimal bigDecimal = new BigDecimal(
-						Float.toString((b / 1024) / 1024));
+			if (nodeNameLowerCase.equals(ITEM_SIZE)) {
+				bytesize.set(n, nodeValue != null ? Integer.parseInt(nodeValue) : 0);
+				float b = nodeValue != null ? Float.parseFloat(nodeValue) : 0.0f;
+				BigDecimal bigDecimal = new BigDecimal(Float.toString((b / 1024) / 1024));
 				bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_UP);
 
-				size.add(n,bigDecimal.toString() + " "
-						+ Parent.getString(R.string.mb));
-
+				size.set(n, bigDecimal.toString() + " " + Parent.getString(R.string.mb));
 			}
 
 		}
