@@ -192,7 +192,8 @@ class GameDownloader extends Thread {
 			OutputStream out = null;
 			path = Globals.getOutFilePath(StorageResolver.GameDir + entry.getName());
 
-			
+			createEntryDirs(path);
+
 			try {
 				out = new FileOutputStream(path);
 			} catch (FileNotFoundException e) {
@@ -244,7 +245,17 @@ class GameDownloader extends Thread {
 		Parent.setDownGood();
 		if (!Parent.onpause)
 			initParent();
-	};
+	}
+
+	private void createEntryDirs(String path) {
+		try {
+            new File((new File(path).getParentFile().getCanonicalPath())).mkdirs();
+        } catch (IOException e) {
+            // TODO: ignore for now, but should rewrite it...
+        }
+	}
+
+	;
 
 	private void initParent() {
 		class Callback implements Runnable {
