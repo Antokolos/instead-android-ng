@@ -65,7 +65,7 @@
     <string name="gmlist">游戏列表</string>
     <string name="na">不选择不同</string>
     <string name="nodata">数据文件没有找到！</string>
-    <string name="about_instead">Written by Peter Kosyh \'2009-2011\n\nPorted to Android by Aleksey Mahno \'2010-2011\n\nFurther Android port development by Anton P. Kolosov \'2015\n\nHomepage:\nhttp://instead.syscall.ru</string>
+    <string name="about_instead">Written by Peter Kosyh \'2009-2017\n\nPorted to Android by Aleksey Mahno \'2010-2011\n\nFurther Android port development by Anton P. Kolosov \'2015-2017\n\nHomepage:\nhttp://instead.syscall.ru</string>
     <string name="conerror">连接错误</string>
     <string name="sizeyesno">你想继续下载？</string>
     <string name="delsaves">删除保存游戏？</string>

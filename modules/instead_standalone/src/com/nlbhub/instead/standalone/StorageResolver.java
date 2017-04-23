@@ -21,10 +21,9 @@ public class StorageResolver {
     public static final String DataFlag = ".version";
     public static final String BundledGame = "bundled";
 
-    public static String getStorage(){
-        final Context context = InsteadApplication.getAppContext();
-
-        String result = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
+    public static String getStorage() {
+        Settings settings = SettingsFactory.create(InsteadApplication.getAppContext());
+        String result = getExternalStorage();
 
         String extStorageState = Environment.getExternalStorageState();
         boolean canRead;
@@ -39,13 +38,8 @@ public class StorageResolver {
             canWrite = false;
             canRead = false;
         }
-        if (!canRead || !canWrite) {
-            try {
-                SystemPathResolver downloadResolver = new SystemPathResolver("dwn", context);
-                result = downloadResolver.getPath();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        if (!canRead || !canWrite || settings.isEnforceSystemStorage()) {
+            result = getSystemStorage();
         }
         File dir = new File(result);
         if (!dir.exists()) {
@@ -54,8 +48,30 @@ public class StorageResolver {
         return result;
     }
 
-    public static String getProgramDirOnSD() {
+    public static String getExternalStorage() {
+        return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
+    }
+
+    public static String getSystemStorage() {
+        final Context context = InsteadApplication.getAppContext();
+        try {
+            SystemPathResolver downloadResolver = new SystemPathResolver("dwn", context);
+            return downloadResolver.getPath();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String getDefaultProgramDir() {
         return getStorage() + InsteadApplication.ApplicationName;
+    }
+
+    public static String getProgramDirOnSDCard() {
+        return getExternalStorage() + InsteadApplication.ApplicationName;
+    }
+
+    public static String getProgramDirInSystemMemory() {
+        return getSystemStorage() + InsteadApplication.ApplicationName;
     }
 
     public static String getThemesDirectoryPath() {
@@ -72,11 +88,11 @@ public class StorageResolver {
     };
 
     public static String getOutFilePath(final String filename) {
-        return getProgramDirOnSD() + "/" + filename;
+        return getDefaultProgramDir() + "/" + filename;
     };
 
     public static String getOutFilePath(final String subDir, final String filename) {
-        return getProgramDirOnSD() + "/" + subDir + "/" + filename;
+        return getDefaultProgramDir() + "/" + subDir + "/" + filename;
     };
 
     public static boolean isWorking(String f){
@@ -98,7 +114,7 @@ public class StorageResolver {
     public static String getAppDataPath(ExpansionMounter expansionMounter) {
         final String expansionFilePath = (expansionMounter != null) ? expansionMounter.getExpansionFilePath() : null;
         final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
-        String resultPath = StorageResolver.getProgramDirOnSD() + "/" + getAppDataFolderName(bundledGameDirParent);
+        String resultPath = StorageResolver.getDefaultProgramDir() + "/" + getAppDataFolderName(bundledGameDirParent);
         File resultDir = new File(resultPath);
         if (!resultDir.exists()) {
             // TODO: directories creation should be moved somewhere, this metod should only get things

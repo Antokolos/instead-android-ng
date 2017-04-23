@@ -20,6 +20,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.nlbhub.instead.STEADActivity;
+import com.nlbhub.instead.standalone.ExceptionHandler;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.StorageResolver;
@@ -34,6 +35,7 @@ public class Shortcut extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		super.onCreate(savedInstanceState);
         final Intent intent = getIntent();
         final String action = intent.getAction();

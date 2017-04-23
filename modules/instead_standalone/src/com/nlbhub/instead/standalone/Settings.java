@@ -13,6 +13,7 @@ public class Settings {
     public static final boolean KEYBOARD_DEFAULT = false;
     public static final boolean SCREEN_OFF_DEFAULT = false;
     public static final boolean OWNTHEME_DEFAULT = true;
+    public static final boolean ENFORCE_SYSTEM_STORAGE_DEFAULT = false;
     public static final String THEME_DEFAULT = "default";
     private boolean music;
     private boolean nativelog;
@@ -21,6 +22,7 @@ public class Settings {
     private boolean keyboard;
     private boolean screenOff;
     private boolean owntheme;
+    private boolean enforceSystemStorage;
     private String theme;
 
     public Settings() {
@@ -32,6 +34,7 @@ public class Settings {
         screenOff = SCREEN_OFF_DEFAULT;
         owntheme = OWNTHEME_DEFAULT;
         theme = THEME_DEFAULT;
+        enforceSystemStorage = ENFORCE_SYSTEM_STORAGE_DEFAULT;
     }
 
     public void init(Context p) {
@@ -46,6 +49,7 @@ public class Settings {
         screenOff = SCREEN_OFF_DEFAULT;
         owntheme = OWNTHEME_DEFAULT;
         theme = THEME_DEFAULT;
+        enforceSystemStorage = ENFORCE_SYSTEM_STORAGE_DEFAULT;
     }
 
     public boolean isMusic() {
@@ -110,5 +114,13 @@ public class Settings {
 
     public void setTheme(String theme) {
         this.theme = theme;
+    }
+
+    public boolean isEnforceSystemStorage() {
+        return enforceSystemStorage;
+    }
+
+    public void setEnforceSystemStorage(boolean enforceSystemStorage) {
+        this.enforceSystemStorage = enforceSystemStorage;
     }
 }

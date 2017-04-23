@@ -19,7 +19,7 @@ import java.util.Properties;
 public class PropertyManager {
 
     public static PropertiesBean getProperties(Activity parent) {
-        File configDir = new File(StorageResolver.getProgramDirOnSD());
+        File configDir = new File(StorageResolver.getDefaultProgramDir());
         try {
             return readProperties(parent, configDir);
         } catch (IOException e) {
@@ -49,12 +49,12 @@ public class PropertyManager {
             // load a properties file
             prop.load(input);
 
-            String ffi = getTrimmedProperty(prop, "instead-ng.parameters.ffi");
+            String standalone = getTrimmedProperty(prop, "instead-ng.parameters.standalone");
             String gameListDownloadUrl = getTrimmedProperty(prop, "instead-ng.parameters.game-list-download-url");
             String gameListAltDownloadUrl = getTrimmedProperty(prop, "instead-ng.parameters.game-list-alt-download-url");
             String gameListNLBDemoDownloadUrl = getTrimmedProperty(prop, "instead-ng.parameters.game-list-nlb-demo-download-url");
             String gameListNLBFullDownloadUrl = getTrimmedProperty(prop, "instead-ng.parameters.game-list-nlb-full-download-url");
-            result.setFfi("true".equalsIgnoreCase(ffi));
+            result.setStandalone("true".equalsIgnoreCase(standalone));
             result.setGameListDownloadUrl(gameListDownloadUrl);
             result.setGameListAltDownloadUrl(gameListAltDownloadUrl);
             result.setGameListNLBDemoDownloadUrl(gameListNLBDemoDownloadUrl);

@@ -1,7 +1,6 @@
 package com.nlbhub.instead.launcher.simple;
 
 import android.util.Log;
-import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.StorageResolver;
 
@@ -69,10 +68,6 @@ public class Globals {
 		}
 	}
 
-	public static String getStorage(){
-		return StorageResolver.getStorage();
-	}
-
 	public static String getGamePath(String f){
 		return getOutFilePath(GameDir+f);
 	}
@@ -99,7 +94,7 @@ public class Globals {
 	};
 
 	public static String getOutGamePath(final String filename) {
-		return getProgramDirOnSD() + "/" + GameDir + filename;
+		return getDefaultProgramDir() + "/" + GameDir + filename;
 	};
 
 	public static String getTitle(String t){

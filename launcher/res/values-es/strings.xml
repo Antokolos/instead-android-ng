@@ -65,7 +65,7 @@
     <string name="gmlist">Lista de juegos</string>
     <string name="na">No avaible</string>
     <string name="nodata">Archivos de datos no encontrado!</string>
-    <string name="about_instead">Written by Peter Kosyh \'2009-2011\n\nPorted to Android by Aleksey Mahno \'2010-2011\n\nFurther Android port development by Anton P. Kolosov \'2015\n\nHomepage:\nhttp://instead.syscall.ru</string>
+    <string name="about_instead">Written by Peter Kosyh \'2009-2017\n\nPorted to Android by Aleksey Mahno \'2010-2011\n\nFurther Android port development by Anton P. Kolosov \'2015-2017\n\nHomepage:\nhttp://instead.syscall.ru</string>
     <string name="conerror">Error de conexión</string>
     <string name="sizeyesno">¿Desea continuar con la descarga?</string>
     <string name="delsaves">Eliminar guardar juego?</string>

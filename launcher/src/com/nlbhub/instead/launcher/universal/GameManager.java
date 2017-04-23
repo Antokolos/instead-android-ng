@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.launcher.simple.FilterConstants;
+import com.nlbhub.instead.standalone.ExceptionHandler;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.MainMenuAbstract;
@@ -109,6 +110,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		super.onCreate(savedInstanceState);
 		
 		index = new ArrayList<Integer>();

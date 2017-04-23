@@ -45,7 +45,7 @@ public class ExceptionHandler implements java.lang.Thread.UncaughtExceptionHandl
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(
                 new Date());
 
-        File dir = new File(StorageResolver.getProgramDirOnSD());
+        File dir = new File(StorageResolver.getDefaultProgramDir());
         if (!dir.exists()) {
             dir.mkdirs();
         }

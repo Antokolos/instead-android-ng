@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.nlbhub.instead.launcher.R;
+import com.nlbhub.instead.standalone.ExceptionHandler;
 
 public class AboutGame extends Activity {
 	private TextView tstatus;
@@ -26,6 +27,7 @@ public class AboutGame extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.about);

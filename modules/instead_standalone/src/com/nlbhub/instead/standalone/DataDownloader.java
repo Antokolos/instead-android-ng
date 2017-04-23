@@ -12,8 +12,6 @@ import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.apache.commons.io.FileUtils;
-
 public class DataDownloader extends Thread {
 	class StatusWriter {
 		private ProgressDialog Status;
@@ -153,9 +151,9 @@ public class DataDownloader extends Thread {
 		String path = null;
 		SystemPathResolver dataResolver = new SystemPathResolver("data", Parent.getApplicationContext());
 
-		File programDirOnSD = new File(StorageResolver.getProgramDirOnSD());
-		programDirOnSD.mkdir();
-		(new File(programDirOnSD, "appdata")).mkdir();
+		File defaultProgramDir = new File(StorageResolver.getDefaultProgramDir());
+		defaultProgramDir.mkdir();
+		(new File(defaultProgramDir, "appdata")).mkdir();
 
 		try {
 			StorageResolver.delete(dataResolver.getPath() + "stead");

@@ -112,6 +112,7 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
         // The following line is to workaround AndroidRuntimeException: requestFeature() must be called before adding content
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);

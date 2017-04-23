@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.nlbhub.instead.launcher.simple.ContentFileData;
 import com.nlbhub.instead.launcher.simple.Globals;
+import com.nlbhub.instead.standalone.ExceptionHandler;
 
 public class IntentLauncher extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
 		String action = intent.getAction();

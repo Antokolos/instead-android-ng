@@ -44,6 +44,7 @@ public class LastGame extends Settings {
  		super.setOvVol(pr.get("keyvol", Settings.OV_VOL_DEFAULT));
 		super.setOwntheme(pr.get("owntheme", Settings.OWNTHEME_DEFAULT));
 		super.setTheme(pr.get("theme", Settings.THEME_DEFAULT));
+		super.setEnforceSystemStorage(pr.get("enforceSystemStorage", Settings.ENFORCE_SYSTEM_STORAGE_DEFAULT));
  		flagsync = pr.get("flagsync", true);
 	}
 	
@@ -186,7 +187,7 @@ public class LastGame extends Settings {
  		pr.set("keyvol", getOvVol());
 		pr.set("owntheme", isOwntheme());
 		pr.set("theme", getTheme());
+		pr.set("enforceSystemStorage", isEnforceSystemStorage());
 		pr.commit();
 	}
-	
 }

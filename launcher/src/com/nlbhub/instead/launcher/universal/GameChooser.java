@@ -23,6 +23,7 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.nlbhub.instead.launcher.R;
+import com.nlbhub.instead.standalone.ExceptionHandler;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.launcher.simple.Globals;
 
@@ -40,6 +41,7 @@ private static final String TITLE_KEY = "title_";
 	  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
