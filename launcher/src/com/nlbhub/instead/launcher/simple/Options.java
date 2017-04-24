@@ -162,6 +162,9 @@ public class Options extends Activity {
                         return;
                     }
                     if (programDirInSystemMemory.exists()) {
+                        if (programDirInSystemMemory.getCanonicalPath().equalsIgnoreCase(programDirOnSDCard.getCanonicalPath())) {
+                            return;
+                        }
                         FileUtils.deleteDirectory(programDirInSystemMemory);
                     } else {
                         new File(StorageResolver.getSystemStorage()).mkdirs();
@@ -186,6 +189,9 @@ public class Options extends Activity {
                         return;
                     }
                     if (programDirOnSDCard.exists()) {
+                        if (programDirInSystemMemory.getCanonicalPath().equalsIgnoreCase(programDirOnSDCard.getCanonicalPath())) {
+                            return;
+                        }
                         FileUtils.deleteDirectory(programDirOnSDCard);
                     } else {
                         new File(StorageResolver.getExternalStorage()).mkdirs();
