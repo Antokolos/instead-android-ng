@@ -128,4 +128,5 @@
     <string name="volume">Volume:</string>
     <string name="override_vol">Override VolUp/VolDown</string>
     <string name="add_cut">Instead game (shortcut)</string>
+    <string name="placeholder">Placeholder</string>
 </resources>

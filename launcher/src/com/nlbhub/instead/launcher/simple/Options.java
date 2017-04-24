@@ -33,6 +33,7 @@ public class Options extends Activity {
     private CheckBox scroff;
     private CheckBox keyb;
     private CheckBox keyvol;
+    private TextView textViewPaths;
     private CheckBox enforceSystemStorage;
     private Spinner spinner;
     private LastGame lastGame;
@@ -47,6 +48,8 @@ public class Options extends Activity {
 
         setContentView(R.layout.options);
 
+        textViewPaths = (TextView) findViewById(R.id.textViewPaths);
+        setPathsText();
         reset = (Button) findViewById(R.id.reset);
 
         reset.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +102,16 @@ public class Options extends Activity {
 
         });
 
+    }
+
+    private void setPathsText() {
+        try {
+            File programDirInSystemMemory = new File(StorageResolver.getProgramDirInSystemMemory());
+            File programDirOnSDCard = new File(StorageResolver.getProgramDirOnSDCard());
+            textViewPaths.setText(String.format("System path\t: %s\nSD-card path\t: %s", programDirInSystemMemory.getCanonicalPath(), programDirOnSDCard.getCanonicalPath()));
+        } catch (IOException e) {
+            textViewPaths.setText("Error when retrieving paths!");
+        }
     }
 
     @Override

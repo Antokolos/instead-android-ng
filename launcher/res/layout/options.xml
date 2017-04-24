@@ -124,6 +124,16 @@
 						android:textAppearance="?android:attr/textAppearanceSmall"
 						android:textSize="12sp" />
 
+				<TextView
+						android:id="@+id/textViewPaths"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="10dip"
+						android:maxWidth="100dip"
+						android:text="@string/placeholder"
+						android:textAppearance="?android:attr/textAppearanceSmall"
+						android:textSize="12sp" />
+
 				<TableRow>
 					<CheckBox android:text="@string/enforceSystemStorage" android:id="@+id/enforceSystemStorage"
 							android:textSize="20sp" android:layout_height="65dip" android:layout_width="wrap_content" android:layout_weight="1"></CheckBox>
