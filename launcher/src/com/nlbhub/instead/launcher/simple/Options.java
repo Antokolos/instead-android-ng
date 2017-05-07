@@ -235,7 +235,7 @@ public class Options extends Activity {
         (new File(this.getFilesDir() + "/" + Globals.GameListAltFileName)).delete();
         (new File(this.getFilesDir() + "/" + Globals.GameListNLBDemosFileName)).delete();
         (new File(this.getFilesDir() + "/" + Globals.GameListNLBFullFileName)).delete();
-        lastGame.clearAll();
+        lastGame.clearAll(this);
         try {
             StorageResolver.delete(dataResolver.getPath() + StorageResolver.DataFlag);
         } catch (IOException e) {

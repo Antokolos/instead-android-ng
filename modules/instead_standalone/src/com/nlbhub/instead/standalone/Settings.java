@@ -1,20 +1,13 @@
 package com.nlbhub.instead.standalone;
 
 import android.content.Context;
+import com.nlbhub.instead.PropertiesBean;
+import com.nlbhub.instead.PropertyManager;
 
 /**
  * Created by Antokolos on 09.10.15.
  */
 public class Settings {
-    public static final boolean MUSIC_DEFAULT = true;
-    public static final boolean NATIVE_LOG_DEFAULT = false;
-    public static final boolean ENFORCE_RESOLUTION_DEFAULT = true;
-    public static final boolean OV_VOL_DEFAULT = false;
-    public static final boolean KEYBOARD_DEFAULT = false;
-    public static final boolean SCREEN_OFF_DEFAULT = false;
-    public static final boolean OWNTHEME_DEFAULT = true;
-    public static final boolean ENFORCE_SYSTEM_STORAGE_DEFAULT = false;
-    public static final String THEME_DEFAULT = "default";
     private boolean music;
     private boolean nativelog;
     private boolean enforceresolution;
@@ -25,31 +18,33 @@ public class Settings {
     private boolean enforceSystemStorage;
     private String theme;
 
-    public Settings() {
-        music = MUSIC_DEFAULT;
-        nativelog = NATIVE_LOG_DEFAULT;
-        enforceresolution = ENFORCE_RESOLUTION_DEFAULT;
-        ovVol = OV_VOL_DEFAULT;
-        keyboard = KEYBOARD_DEFAULT;
-        screenOff = SCREEN_OFF_DEFAULT;
-        owntheme = OWNTHEME_DEFAULT;
-        theme = THEME_DEFAULT;
-        enforceSystemStorage = ENFORCE_SYSTEM_STORAGE_DEFAULT;
+    protected Settings() {
     }
 
     public void init(Context p) {
+        PropertiesBean properties = PropertyManager.getProperties(p);
+        music = properties.isMusic();
+        nativelog = properties.isNativeLog();
+        enforceresolution = properties.isEnforceResolution();
+        ovVol = properties.isOvVol();
+        keyboard = properties.isKeyboard();
+        screenOff = properties.isScreenOff();
+        owntheme = properties.isOwnTheme();
+        theme = properties.getTheme();
+        enforceSystemStorage = properties.isEnforceSystemStorage();
     }
 
-    public void clearAll() {
-        music = MUSIC_DEFAULT;
-        nativelog = NATIVE_LOG_DEFAULT;
-        enforceresolution = ENFORCE_RESOLUTION_DEFAULT;
-        ovVol = OV_VOL_DEFAULT;
-        keyboard = KEYBOARD_DEFAULT;
-        screenOff = SCREEN_OFF_DEFAULT;
-        owntheme = OWNTHEME_DEFAULT;
-        theme = THEME_DEFAULT;
-        enforceSystemStorage = ENFORCE_SYSTEM_STORAGE_DEFAULT;
+    public void clearAll(Context context) {
+        PropertiesBean properties = PropertyManager.getProperties(context);
+        music = properties.isMusic();
+        nativelog = properties.isNativeLog();
+        enforceresolution = properties.isEnforceResolution();
+        ovVol = properties.isOvVol();
+        keyboard = properties.isKeyboard();
+        screenOff = properties.isScreenOff();
+        owntheme = properties.isOwnTheme();
+        theme = properties.getTheme();
+        enforceSystemStorage = properties.isEnforceSystemStorage();
     }
 
     public boolean isMusic() {
