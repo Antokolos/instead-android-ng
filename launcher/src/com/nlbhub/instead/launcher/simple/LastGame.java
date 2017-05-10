@@ -1,8 +1,6 @@
 package com.nlbhub.instead.launcher.simple;
 
 import android.content.Context;
-import com.nlbhub.instead.PropertiesBean;
-import com.nlbhub.instead.PropertyManager;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.Settings;
@@ -18,15 +16,13 @@ public class LastGame extends Settings {
     private MyPrefs pr;
     private boolean flagsync;
 
-	@SuppressWarnings("unused")
 	public LastGame() {
-		// This constructor is used in SettingsFactory. Do not use it in another places, or immediately follow it by init.
 		super();
 	}
 
 	// TODO: maybe remove this contructor and make all initialization of this class via SettingsFactory
 	public LastGame(Context p) {
-		super();
+		this();
 		init(p);
 	}
 
@@ -40,25 +36,15 @@ public class LastGame extends Settings {
  		lang = pr.get("lang", Globals.Lang.ALL);
  		name = pr.get("name", StorageResolver.BundledGame);
  		title = pr.get("title", title_def);
-		PropertiesBean properties = PropertyManager.getProperties(p);
-		final boolean music = properties.isMusic();
-		final boolean nativelog = properties.isNativeLog();
-		final boolean enforceresolution = properties.isEnforceResolution();
-		final boolean ovVol = properties.isOvVol();
-		final boolean keyboard = properties.isKeyboard();
-		final boolean screenOff = properties.isScreenOff();
-		final boolean owntheme = properties.isOwnTheme();
-		final String theme = properties.getTheme();
-		final boolean enforceSystemStorage = properties.isEnforceSystemStorage();
-		super.setMusic(pr.get("music", music));
-        super.setNativelog(pr.get("nativelog", nativelog));
-		super.setEnforceresolution(pr.get("enforceresolution", enforceresolution));
- 		super.setScreenOff(pr.get("scroff", screenOff));
- 		super.setKeyboard(pr.get("keyb", keyboard));
- 		super.setOvVol(pr.get("keyvol", ovVol));
-		super.setOwntheme(pr.get("owntheme", owntheme));
-		super.setTheme(pr.get("theme", theme));
-		super.setEnforceSystemStorage(pr.get("enforceSystemStorage", enforceSystemStorage));
+		super.setMusic(pr.get("music", Settings.MUSIC_DEFAULT));
+        super.setNativelog(pr.get("nativelog", Settings.NATIVE_LOG_DEFAULT));
+		super.setEnforceresolution(pr.get("enforceresolution", Settings.ENFORCE_RESOLUTION_DEFAULT));
+ 		super.setScreenOff(pr.get("scroff", Settings.SCREEN_OFF_DEFAULT));
+ 		super.setKeyboard(pr.get("keyb", Settings.KEYBOARD_DEFAULT));
+ 		super.setOvVol(pr.get("keyvol", Settings.OV_VOL_DEFAULT));
+		super.setOwntheme(pr.get("owntheme", Settings.OWNTHEME_DEFAULT));
+		super.setTheme(pr.get("theme", Settings.THEME_DEFAULT));
+		super.setEnforceSystemStorage(pr.get("enforceSystemStorage", Settings.ENFORCE_SYSTEM_STORAGE_DEFAULT));
  		flagsync = pr.get("flagsync", true);
 	}
 	
@@ -69,8 +55,8 @@ public class LastGame extends Settings {
 	}
 
 	@Override
-	public void clearAll(Context context){
-        super.clearAll(context);
+	public void clearAll(){
+        super.clearAll();
 		flagsync = true;
 		filtr = FilterConstants.ALL;
  		list =  Globals.BASIC;		

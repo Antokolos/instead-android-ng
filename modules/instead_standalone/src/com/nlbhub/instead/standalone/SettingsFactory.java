@@ -13,7 +13,8 @@ public class SettingsFactory {
         try {
             result = (Settings) Class.forName("com.nlbhub.instead.launcher.simple.LastGame").newInstance();
         } catch (ClassNotFoundException e) {
-            Log.i(InsteadApplication.ApplicationName, SETTINGS_FACTORY_ERROR, e);
+            //Log.i(InsteadApplication.ApplicationName, SETTINGS_FACTORY_ERROR, e);
+            Log.i(InsteadApplication.ApplicationName, "LastGame class not found, standalone mode is assumed");
         } catch (InstantiationException e) {
             Log.i(InsteadApplication.ApplicationName, SETTINGS_FACTORY_ERROR, e);
         } catch (IllegalAccessException e) {
