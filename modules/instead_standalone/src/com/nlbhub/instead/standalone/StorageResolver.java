@@ -63,15 +63,15 @@ public class StorageResolver {
     }
 
     public static String getDefaultProgramDir() {
-        return getStorage() + InsteadApplication.ApplicationName;
+        return getStorage() + ((ObbSupportedApplication) InsteadApplication.getAppContext()).getApplicationMainFolderName();
     }
 
     public static String getProgramDirOnSDCard() {
-        return getExternalStorage() + InsteadApplication.ApplicationName;
+        return getExternalStorage() + ((ObbSupportedApplication) InsteadApplication.getAppContext()).getApplicationMainFolderName();
     }
 
     public static String getProgramDirInSystemMemory() {
-        return getSystemStorage() + InsteadApplication.ApplicationName;
+        return getSystemStorage() + ((ObbSupportedApplication) InsteadApplication.getAppContext()).getApplicationMainFolderName();
     }
 
     public static String getThemesDirectoryPath() {

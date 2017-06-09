@@ -3,6 +3,7 @@ package com.nlbhub.instead.launcher.simple;
 import android.content.Context;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
+import com.nlbhub.instead.standalone.ObbSupportedApplication;
 import com.nlbhub.instead.standalone.Settings;
 import com.nlbhub.instead.standalone.StorageResolver;
 
@@ -29,7 +30,7 @@ public class LastGame extends Settings {
 	@Override
 	public void init(Context p) {
 		super.init(p);
-		pr = new MyPrefs(p, InsteadApplication.ApplicationName);
+		pr = new MyPrefs(p, ((ObbSupportedApplication) p).getApplicationMainFolderName());
 		title_def =  p.getString(R.string.bundledgame);
  		filtr = pr.get("filtr", FilterConstants.ALL);
  		list = pr.get("list", Globals.BASIC);		

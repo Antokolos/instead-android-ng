@@ -60,6 +60,8 @@ public abstract class ObbSupportedApplication extends Application {
         return true;
     }
 
+    public abstract String getApplicationMainFolderName();
+
     public abstract String getPublicKey();
 
     public abstract byte[] getSALT();

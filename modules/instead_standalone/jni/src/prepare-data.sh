@@ -19,7 +19,7 @@ then
         export GAMENAME=`ls -1 ./games/games`
         # The following folder will be used instead of appdata folder (personal preferences & saves folder)
         mkdir $RESPATH/data/$GAMENAME
-        $TOOLSDIR/jobb -v -pn com.nlbhub.instead.barbariancaves -pv 171000 -d ./games -o ./main.171000.com.nlbhub.instead.barbariancaves.obb
+        $TOOLSDIR/jobb -v -pn com.nlbhub.instead.barbariancaves -pv 184000 -d ./games -o ./main.184000.com.nlbhub.instead.barbariancaves.obb
         # Create (almost) empty archive structure for games, we will use OBB file for actual game content
         rm -rf ./games/games
         mkdir ./games/bundled

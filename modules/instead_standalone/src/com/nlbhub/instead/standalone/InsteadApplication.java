@@ -24,6 +24,11 @@ public class InsteadApplication extends ObbSupportedApplication {
     // You must override the following methods in your application
 
     @Override
+    public String getApplicationMainFolderName() {
+        return ApplicationName;
+    }
+
+    @Override
     public String getPublicKey() {
         return BASE64_PUBLIC_KEY;
     }
