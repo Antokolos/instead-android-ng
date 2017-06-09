@@ -6,7 +6,6 @@ import java.util.List;
 import android.content.Context;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
-import com.nlbhub.instead.standalone.ObbSupportedApplication;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.launcher.simple.MyPrefs;
 

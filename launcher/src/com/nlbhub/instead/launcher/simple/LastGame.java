@@ -30,7 +30,7 @@ public class LastGame extends Settings {
 	@Override
 	public void init(Context p) {
 		super.init(p);
-		pr = new MyPrefs(p, ((ObbSupportedApplication) p).getApplicationMainFolderName());
+		pr = new MyPrefs(p, ((ObbSupportedApplication) InsteadApplication.getAppContext()).getApplicationMainFolderName());
 		title_def =  p.getString(R.string.bundledgame);
  		filtr = pr.get("filtr", FilterConstants.ALL);
  		list = pr.get("list", Globals.BASIC);		
