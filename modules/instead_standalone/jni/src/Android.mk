@@ -19,14 +19,14 @@ LOCAL_SRC_FILES := instead_launcher.cpp $(SDL_PATH)/src/main/android/SDL_android
 	$(SUBDIR)/instead_bits.c $(SUBDIR)/instead_paths.c $(SUBDIR)/instead_sound.c $(SUBDIR)/instead_sprites.c $(SUBDIR)/instead_timer.c \
 	$(SUBDIR)/graphics.c $(SUBDIR)/input.c $(SUBDIR)/game.c $(SUBDIR)/main.c  $(SUBDIR)/sound.c $(SUBDIR)/config.c \
 	$(SUBDIR)/themes.c $(SUBDIR)/menu.c $(SUBDIR)/utils.c  $(SUBDIR)/unzip.c $(SUBDIR)/ioapi.c $(SUBDIR)/unpack.c $(SUBDIR)/unix.c \
-	$(SUBDIR)/SDL_rotozoom.c $(SUBDIR)/SDL_anigif.c $(SUBDIR)/SDL_gfxBlitFunc.c
+	$(SUBDIR)/SDL_rotozoom.c $(SUBDIR)/SDL_anigif.c $(SUBDIR)/SDL_gfxBlitFunc.c $(SUBDIR)/noise1234.c
 
 LOCAL_H_FILES := $(INSTEAD)/cache.h $(INSTEAD)/instead.h $(INSTEAD)/list.h $(INSTEAD)/snprintf.h $(INSTEAD)/tinymt32.h $(INSTEAD)/idf.h $(INSTEAD)/system.h $(INSTEAD)/util.h \
 	$(SUBDIR)/graphics.h $(SUBDIR)/input.h $(SUBDIR)/game.h $(SUBDIR)/sound.h $(SUBDIR)/config.h \
 	$(SUBDIR)/themes.h $(SUBDIR)/menu.h $(SUBDIR)/utils.h $(SUBDIR)/unzip.h $(SUBDIR)/ioapi.h \
 	$(SUBDIR)/internals.h $(SUBDIR)/externals.h \
 	$(SUBDIR)/SDL_rotozoom.h $(SUBDIR)/SDL_anigif.h $(SUBDIR)/SDL_gfxBlitFunc.h \
-	$(SUBDIR)/android.h
+	$(SUBDIR)/android.h $(SUBDIR)/noise1234.h
 
 #	$(SUBDIR)/SDL2_rotozoom.c $(SUBDIR)/wince.c $(SUBDIR)/s60.c $(SUBDIR)/windows.c $(SUBDIR)/iowin32.c $(SUBDIR)/symbian.cpp \
 #	$(SUBDIR)/SDL2_rotozoom.h $(SUBDIR)/iowin32.h $(SUBDIR)/ios.h $(SUBDIR)/s60.h $(SUBDIR)/wince.h \
@@ -54,7 +54,7 @@ LOCAL_CFLAGS := \
 				-I$(LOCAL_PATH)/..
 
 #				-I$(LOCAL_PATH)/../lua/lua/src
-LOCAL_CFLAGS += -DVERSION=\"3.0.1\" -DANDROID -DNOMAIN -D_USE_SDL -D_LOCAL_APPDATA -D_HAVE_ICONV -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) -D_CUR_DIR=$(DATAPATH)
+LOCAL_CFLAGS += -DVERSION=\"3.1.0\" -DANDROID -DNOMAIN -D_USE_SDL -D_LOCAL_APPDATA -D_HAVE_ICONV -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) -D_CUR_DIR=$(DATAPATH)
 
 LOCAL_CFLAGS += -DGAMES_PATH=\"${GAMESPATH}/\" -DTHEME_PATH=\"${THEMEPATH}/\" -D_SDL_MOD_BUG
 
