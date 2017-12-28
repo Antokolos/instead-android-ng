@@ -1,4 +1,3 @@
-
 # The namespace in Java file, with dots replaced with underscores
 SDL_JAVA_PACKAGE_PATH := com_nlbhub_instead
 

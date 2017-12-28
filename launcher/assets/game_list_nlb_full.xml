@@ -21,9 +21,9 @@
 	<game>
 		<name>frontier</name>
 		<title>Фронтир</title>
-		<version>1.2</version>
-		<url>http://nlbproject.com/dist/games/instead-frontier-1.2.zip</url>
-		<size>192413722</size>
+		<version>1.21</version>
+		<url>http://nlbproject.com/dist/games/instead-frontier-1.21.zip</url>
+		<size>192673256</size>
 		<lang>ru</lang>
 		<descurl>http://instead.syscall.ru/talk/index.php/365</descurl>
 	</game>
@@ -45,5 +45,13 @@
 		<lang>en</lang>
 		<descurl>http://instead.syscall.ru/talk/index.php/364-am-i-a-monster</descurl>
 	</game>
-
+	<game>
+		<name>dice_game_big_pig</name>
+		<title>Игра в кости "Большая Свинья"</title>
+		<version>1.2</version>
+		<url>http://nlbproject.com/dist/games/instead-dice_game_big_pig-1.2.zip</url>
+		<size>26892945</size>
+		<lang>ru</lang>
+		<descurl>https://instead.syscall.ru/talk/index.php/408</descurl>
+	</game>
 </game_list>
