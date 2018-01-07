@@ -1,6 +1,6 @@
 /*
   SDL_image:  An example image loading library for use with SDL
-  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2017 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -29,9 +29,6 @@
  * A good test suite of BMP images is available at:
  * http://entropymine.com/jason/bmpsuite/bmpsuite/html/bmpsuite.html
  */
-
-#include <stdio.h>
-#include <string.h>
 
 #include "SDL_image.h"
 
@@ -248,7 +245,7 @@ static SDL_Surface *LoadBMP_RW (SDL_RWops *src, int freesrc)
     /* The Win32 BITMAPINFOHEADER struct (40 bytes) */
     Uint32 biSize;
     Sint32 biWidth;
-    Sint32 biHeight;
+    Sint32 biHeight = 0;
     Uint16 biPlanes;
     Uint16 biBitCount;
     Uint32 biCompression;

@@ -1,6 +1,6 @@
 /*
   SDL_image:  An example image loading library for use with SDL
-  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2017 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -21,17 +21,13 @@
 
 /* A simple library to load images of various formats as SDL surfaces */
 
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-
 #include "SDL_image.h"
 
 #define ARRAYSIZE(a) (sizeof(a) / sizeof((a)[0]))
 
 /* Table of image detection and loading functions */
 static struct {
-    char *type;
+    const char *type;
     int (SDLCALL *is)(SDL_RWops *src);
     SDL_Surface *(SDLCALL *load)(SDL_RWops *src);
 } supported[] = {
@@ -46,6 +42,7 @@ static struct {
     { "PCX", IMG_isPCX, IMG_LoadPCX_RW },
     { "PNG", IMG_isPNG, IMG_LoadPNG_RW },
     { "PNM", IMG_isPNM, IMG_LoadPNM_RW }, /* P[BGP]M share code */
+    { "SVG", IMG_isSVG, IMG_LoadSVG_RW },
     { "TIF", IMG_isTIF, IMG_LoadTIF_RW },
     { "XCF", IMG_isXCF, IMG_LoadXCF_RW },
     { "XPM", IMG_isXPM, IMG_LoadXPM_RW },
@@ -60,15 +57,15 @@ const SDL_version *IMG_Linked_Version(void)
     return(&linked_version);
 }
 
-extern int IMG_InitJPG();
-extern void IMG_QuitJPG();
-extern int IMG_InitPNG();
-extern void IMG_QuitPNG();
-extern int IMG_InitTIF();
-extern void IMG_QuitTIF();
+extern int IMG_InitJPG(void);
+extern void IMG_QuitJPG(void);
+extern int IMG_InitPNG(void);
+extern void IMG_QuitPNG(void);
+extern int IMG_InitTIF(void);
+extern void IMG_QuitTIF(void);
 
-extern int IMG_InitWEBP();
-extern void IMG_QuitWEBP();
+extern int IMG_InitWEBP(void);
+extern void IMG_QuitWEBP(void);
 
 static int initialized = 0;
 

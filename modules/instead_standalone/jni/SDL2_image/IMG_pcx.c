@@ -1,6 +1,6 @@
 /*
   SDL_image:  An example image loading library for use with SDL
-  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2017 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -32,8 +32,6 @@
  *  single-planar packed-pixel formats other than 8bpp
  *  4-plane 32bpp format with a fourth "intensity" plane
  */
-#include <stdio.h>
-#include <stdlib.h>
 
 #include "SDL_endian.h"
 

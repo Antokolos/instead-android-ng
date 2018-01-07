@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_system.h>
 #include <jni.h>
 #include <unistd.h>
 #include <pthread.h>
@@ -229,41 +230,46 @@ extern "C" void Java_com_nlbhub_instead_STEADActivity_toggleMenu(JNIEnv* env, jc
     SDL_PushEvent(&event); // Inject key press of the Escape Key
 }
 
-extern "C" JNIEnv* Android_JNI_GetEnv(void);
-
-extern "C" jclass Android_JNI_GetActivityClass();
-
 extern "C" void rotate_landscape() {
-    JNIEnv* env = Android_JNI_GetEnv();
-    jclass cls = Android_JNI_GetActivityClass();
-    jmethodID rotateLandscape = env->GetStaticMethodID(cls, "rotateLandscape", "()V");
+    JNIEnv *env = (JNIEnv*) SDL_AndroidGetJNIEnv();
+    jobject activity = (jobject) SDL_AndroidGetActivity();
+    jclass clazz(env->GetObjectClass(activity));
+    jmethodID rotateLandscape = env->GetStaticMethodID(clazz, "rotateLandscape", "()V");
     if (rotateLandscape) {
-        env->CallStaticVoidMethod(cls, rotateLandscape);
+        env->CallStaticVoidMethod(clazz, rotateLandscape);
     } else {
         printf("rotateLandscape() method not found in the SDLActivity class!\n");
     }
+    env->DeleteLocalRef(activity);
+    env->DeleteLocalRef(clazz);
 }
 
 extern "C" void rotate_portrait() {
-    JNIEnv* env = Android_JNI_GetEnv();
-    jclass cls = Android_JNI_GetActivityClass();
-    jmethodID rotatePortrait = env->GetStaticMethodID(cls, "rotatePortrait", "()V");
+    JNIEnv *env = (JNIEnv*) SDL_AndroidGetJNIEnv();
+    jobject activity = (jobject) SDL_AndroidGetActivity();
+    jclass clazz(env->GetObjectClass(activity));
+    jmethodID rotatePortrait = env->GetStaticMethodID(clazz, "rotatePortrait", "()V");
     if (rotatePortrait) {
-        env->CallStaticVoidMethod(cls, rotatePortrait);
+        env->CallStaticVoidMethod(clazz, rotatePortrait);
     } else {
         printf("rotatePortrait() method not found in the SDLActivity class!\n");
     }
+    env->DeleteLocalRef(activity);
+    env->DeleteLocalRef(clazz);
 }
 
 extern "C" void unlock_rotation() {
-    JNIEnv* env = Android_JNI_GetEnv();
-    jclass cls = Android_JNI_GetActivityClass();
-    jmethodID unlockRotation = env->GetStaticMethodID(cls, "unlockRotation", "()V");
+    JNIEnv *env = (JNIEnv*) SDL_AndroidGetJNIEnv();
+    jobject activity = (jobject) SDL_AndroidGetActivity();
+    jclass clazz(env->GetObjectClass(activity));
+    jmethodID unlockRotation = env->GetStaticMethodID(clazz, "unlockRotation", "()V");
     if (unlockRotation) {
-        env->CallStaticVoidMethod(cls, unlockRotation);
+        env->CallStaticVoidMethod(clazz, unlockRotation);
     } else {
         printf("unlockRotation() method not found in the SDLActivity class!\n");
     }
+    env->DeleteLocalRef(activity);
+    env->DeleteLocalRef(clazz);
 }
 
 /* vi: set ts=4 sw=4 expandtab: */

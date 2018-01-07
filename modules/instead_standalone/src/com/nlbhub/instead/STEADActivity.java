@@ -43,7 +43,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
             String libsDirPath = Ctx.getDir("libs", Context.MODE_PRIVATE).getCanonicalPath() + "/";
             System.load(libsDirPath + "libSDL2.so");
             System.load(libsDirPath + "libSDL2_image.so");
-            System.load(libsDirPath + "libsmpeg2.so");
+            System.load(libsDirPath + "libmpg123.so");
             System.load(libsDirPath + "libSDL2_mixer.so");
             System.load(libsDirPath + "libSDL2_ttf.so");
             System.load(libsDirPath + "libmain.so");

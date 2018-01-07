@@ -1,6 +1,6 @@
 /*
   SDL_image:  An example image loading library for use with SDL
-  Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2017 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -41,11 +41,6 @@
  * TODO: include rgb.txt here. The full table (from solaris 2.6) only
  * requires about 13K in binary form.
  */
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
 
 #include "SDL_image.h"
 
@@ -888,7 +883,7 @@ static int color_to_rgb(char *spec, int speclen, Uint32 *rgb)
             break;
         }
         buf[6] = '\0';
-        *rgb = SDL_strtol(buf, NULL, 16);
+        *rgb = (Uint32)SDL_strtol(buf, NULL, 16);
         return 1;
     } else {
         int i;
@@ -1088,7 +1083,7 @@ static SDL_Surface *load_xpm(char **xpm, SDL_RWops *src)
             if (nametype == 's')
                 continue;      /* skip symbolic colour names */
 
-            if (!color_to_rgb(colname, p - colname, &rgb))
+            if (!color_to_rgb(colname, (int)(p - colname), &rgb))
                 continue;
 
             SDL_memcpy(nextkey, line, cpp);
