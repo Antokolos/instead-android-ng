@@ -224,6 +224,11 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         enableHWASafe();
         super.onCreate(savedInstanceState);
+
+        // We will always show navigation panels, because immersive mode is only for Android >= 4.4 and we want to maintain backward compatibility
+        int iFlags = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        getWindow().getDecorView().setSystemUiVisibility(iFlags);
+
         settings = SettingsFactory.create(this);
         keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard());
         initExpansionManagerSafe(this);
