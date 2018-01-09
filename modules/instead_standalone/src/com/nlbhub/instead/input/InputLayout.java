@@ -20,10 +20,12 @@ public class InputLayout extends RelativeLayout {
     public static final int IN_MAX = 16;
     private ImageButton kbdButton;
     private View view;
+    private Activity activity;
 
     public InputLayout(Context context) {
         super(context);
-        view = ((Activity) context).getLayoutInflater().inflate(R.layout.inputlayout, null, false);
+        activity = ((Activity) context);
+        view = activity.getLayoutInflater().inflate(R.layout.inputlayout, null, false);
         view.setFocusable(true);
         view.setFocusableInTouchMode(true);
         setLayoutParams(getParams());
@@ -47,6 +49,7 @@ public class InputLayout extends RelativeLayout {
         InputMethodManager im = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         view.requestFocus();
         im.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+        activity.onWindowFocusChanged(true);  // keyboard input not working bug
     }
 
     public void close() {
