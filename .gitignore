@@ -34,3 +34,4 @@
 #**/libs/ -- zero-size anyway, let's leave it
 **/obj/
 modules/instead_standalone/jni/src/instead/
+Instead-NG-KS.keystore

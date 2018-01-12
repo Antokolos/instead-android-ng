@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game_list version="1.0">
  <game>
-  <name>portrets</name>
-  <title>Вокзальные портреты</title>
-  <image>http://instead-games.ru/games/screenshots/20171102025219833.JPG</image>
-  <version>2.1</version>
-  <url>http://instead-games.ru//download/instead-portrets-2.1.zip</url>
-  <size>2943276</size>
+  <name>baloon_v0.5.4</name>
+  <title>На воздушном шаре через Ла-Манш</title>
+  <image>http://instead-games.ru/games/screenshots/20171219212401593.png</image>
+  <version>0.5.4</version>
+  <url>http://instead-games.ru//download/instead-baloon_v0.5.4-0.5.4.zip</url>
+  <size>25440359</size>
   <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=280</descurl>
+  <descurl>http://instead-games.ru/game.php?ID=285</descurl>
+ </game>
+ <game>
+  <name>back_transition</name>
+  <title>Обратный Переход</title>
+  <image>http://instead-games.ru/games/screenshots/20171220141332788.png</image>
+  <version>0.08</version>
+  <url>http://instead-games.ru//download/instead-back_transition-0.08.zip</url>
+  <size>33768618</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=286</descurl>
  </game>
  <game>
   <name>library</name>
@@ -19,6 +29,16 @@
   <size>1311678</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=283</descurl>
+ </game>
+ <game>
+  <name>portrets</name>
+  <title>Вокзальные портреты</title>
+  <image>http://instead-games.ru/games/screenshots/20171102025219833.JPG</image>
+  <version>2.1</version>
+  <url>http://instead-games.ru//download/instead-portrets-2.1.zip</url>
+  <size>2943276</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=280</descurl>
  </game>
  <game>
   <name>Valley_of_the_Dolls</name>
@@ -1419,16 +1439,6 @@
   <size>1646276</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=34</descurl>
- </game>
- <game>
-  <name>dn_mission_autograph</name>
-  <title>Death Note: Миссия &lt;&lt;Автограф&gt;&gt;</title>
-  <image>http://instead-games.ru/games/screenshots/20121225165716637.jpg</image>
-  <version>0.1.1</version>
-  <url>http://instead-games.ru//download/instead-dn_mission_autograph-0.1.1.zip</url>
-  <size>7706</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=23</descurl>
  </game>
  <game>
   <name>dn_mary_in_the_note</name>
