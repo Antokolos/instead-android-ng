@@ -14,10 +14,17 @@ import com.nlbhub.instead.PropertyManager;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.launcher.simple.Globals;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.ProgressDialog;
+import org.apache.http.impl.conn.SingleClientConnManager;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
 
 public class XmlDownloader extends Thread {
 
@@ -107,15 +114,19 @@ public class XmlDownloader extends Thread {
 		request.addHeader("Accept", "*/*");
 		HttpResponse response = null;
 		try {
-			DefaultHttpClient client = new DefaultHttpClient();
-			client.getParams().setBooleanParameter(
-					"http.protocol.handle-redirects", true);			
+			SchemeRegistry schemeRegistry = new SchemeRegistry();
+			schemeRegistry.register(new Scheme("http", SSLSocketFactory.getSocketFactory(), 80));
+			schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
+			HttpParams params = new BasicHttpParams();
+			params.setBooleanParameter("http.protocol.handle-redirects", true);
+			SingleClientConnManager mgr = new SingleClientConnManager(params, schemeRegistry);
+			HttpClient client = new DefaultHttpClient(mgr, params);
 			response = client.execute(request);
 		} catch (IOException e) {
-		} catch (NullPointerException e) {
+			// See https://stackoverflow.com/questions/18126372/safely-fixing-javax-net-ssl-sslpeerunverifiedexception-no-peer-certificate
+			// in case of javax.net.ssl.SSLPeerUnverifiedException: No peer certificate
+			// This can mean that your server has incorrect certificate chain and you must fix it
 		}
-		
-	
 
 		if (response == null) {
 			if (!Parent.onpause)
