@@ -115,6 +115,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     const char* themespath = argc >= 12 ? argv[11] : NULL;
     const char* standalone = argc >= 13 ? argv[12] : NULL;
     const char* modes = argc >= 14 ? argv[13] : NULL;
+    const char* nocursor = argc >= 15 ? argv[14] : NULL;
     
     if (nativelog != NULL) {
         logFile = fopen(nativelog, "w");
@@ -123,7 +124,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     
     /* Run the application code! */
     int status;
-    char* _argv[19];
+    char* _argv[20];
     int n = 1;
     if (path != NULL) {
         printf("path = %s\n", path);
@@ -149,6 +150,12 @@ extern "C" int SDL_main(int argc, char** argv) {
     } else {
         printf("-hires is OFF\n");
         _argv[n++] = SDL_strdup("-nohires");
+    }
+    if (is_not_blank(nocursor)) {
+        printf("-nocursor is ON\n");
+        _argv[n++] = SDL_strdup("-nocursor");
+    } else {
+        printf("-nocursor is OFF\n");
     }
     if (is_not_blank(appdata)) {
         printf("appdata = %s\n", appdata);

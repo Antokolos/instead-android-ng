@@ -12,6 +12,7 @@ public class Settings {
     public static final boolean OV_VOL_DEFAULT = false;
     public static final boolean KEYBOARD_DEFAULT = false;
     public static final boolean SCREEN_OFF_DEFAULT = false;
+    public static final boolean NO_CURSOR_DEFAULT = false;
     public static final boolean OWNTHEME_DEFAULT = true;
     public static final boolean ENFORCE_SYSTEM_STORAGE_DEFAULT = false;
     public static final String THEME_DEFAULT = "default";
@@ -21,6 +22,7 @@ public class Settings {
     private boolean ovVol;
     private boolean keyboard;
     private boolean screenOff;
+    private boolean nocursor;
     private boolean owntheme;
     private boolean enforceSystemStorage;
     private String theme;
@@ -32,6 +34,7 @@ public class Settings {
         ovVol = OV_VOL_DEFAULT;
         keyboard = KEYBOARD_DEFAULT;
         screenOff = SCREEN_OFF_DEFAULT;
+        nocursor = NO_CURSOR_DEFAULT;
         owntheme = OWNTHEME_DEFAULT;
         theme = THEME_DEFAULT;
         enforceSystemStorage = ENFORCE_SYSTEM_STORAGE_DEFAULT;
@@ -47,6 +50,7 @@ public class Settings {
         ovVol = OV_VOL_DEFAULT;
         keyboard = KEYBOARD_DEFAULT;
         screenOff = SCREEN_OFF_DEFAULT;
+        nocursor = NO_CURSOR_DEFAULT;
         owntheme = OWNTHEME_DEFAULT;
         theme = THEME_DEFAULT;
         enforceSystemStorage = ENFORCE_SYSTEM_STORAGE_DEFAULT;
@@ -98,6 +102,14 @@ public class Settings {
 
     public void setScreenOff(boolean screenOff) {
         this.screenOff = screenOff;
+    }
+
+    public boolean isNoCursor() {
+        return nocursor;
+    }
+
+    public void setNoCursor(boolean nocursor) {
+        this.nocursor = nocursor;
     }
 
     public boolean isOwntheme() {

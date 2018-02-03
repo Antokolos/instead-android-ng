@@ -54,6 +54,11 @@
 						android:textSize="20sp" android:layout_height="65dip" android:layout_width="wrap_content" android:layout_weight="1"></CheckBox>
 				</TableRow>
 
+				<TableRow>
+					<CheckBox android:text="@string/nocursor" android:id="@+id/nocursor"
+							android:textSize="20sp" android:layout_height="65dip" android:layout_width="wrap_content" android:layout_weight="1"></CheckBox>
+				</TableRow>
+
 			   <TableRow>
 					<CheckBox android:text="@string/override_vol" android:id="@+id/volkey"
 						android:textSize="20sp" android:layout_height="65dip" android:layout_width="wrap_content" android:layout_weight="1"></CheckBox>

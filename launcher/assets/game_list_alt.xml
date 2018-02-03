@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game_list version="1.0">
  <game>
+  <name>back_transition</name>
+  <title>Обратный Переход</title>
+  <image>http://instead-games.ru/games/screenshots/20171220141332788.png</image>
+  <version>0.09</version>
+  <url>http://instead-games.ru//download/instead-back_transition-0.09.zip</url>
+  <size>27632155</size>
+  <lang>ru</lang>
+  <descurl>http://instead-games.ru/game.php?ID=286</descurl>
+ </game>
+ <game>
   <name>baloon_v0.5.4</name>
   <title>На воздушном шаре через Ла-Манш</title>
   <image>http://instead-games.ru/games/screenshots/20171219212401593.png</image>
@@ -9,16 +19,6 @@
   <size>25440359</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=285</descurl>
- </game>
- <game>
-  <name>back_transition</name>
-  <title>Обратный Переход</title>
-  <image>http://instead-games.ru/games/screenshots/20171220141332788.png</image>
-  <version>0.08</version>
-  <url>http://instead-games.ru//download/instead-back_transition-0.08.zip</url>
-  <size>33768618</size>
-  <lang>ru</lang>
-  <descurl>http://instead-games.ru/game.php?ID=286</descurl>
  </game>
  <game>
   <name>library</name>
@@ -393,10 +393,10 @@
  <game>
   <name>urq</name>
   <title>Модуль URQ</title>
-  <image>http://instead-games.ru/games/screenshots/20140306110729636.jpg</image>
+  <image>http://instead-games.ru/games/screenshots/</image>
   <version>2.0</version>
   <url>http://instead-games.ru//download/instead-urq-2.0.zip</url>
-  <size>134045</size>
+  <size>137363</size>
   <lang>ru</lang>
   <descurl>http://instead-games.ru/game.php?ID=151</descurl>
  </game>
