@@ -93,6 +93,7 @@
     <string name="systosd_msg">This operation will clear everything in INSTEAD-NG folder on SD card and move game and save files from system memory to SD.\nAlso, please be patient, this operation can take several minutes.\nContinue anyway?</string>
     <string name="atention">Attention!</string>
     <string name="scroff">Keep the screen turned on</string>
+    <string name="nocursor">Hide cursor</string>
     <string name="theme">Theme: </string>
     <string name="portrait">Portrait screen orientation</string>
     <string name="dirlist">All games</string>

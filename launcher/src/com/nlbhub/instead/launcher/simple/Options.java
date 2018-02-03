@@ -31,6 +31,7 @@ public class Options extends Activity {
     private CheckBox nativelog;
     private CheckBox enforceresolution;
     private CheckBox scroff;
+    private CheckBox nocursor;
     private CheckBox keyb;
     private CheckBox keyvol;
     private TextView textViewPaths;
@@ -81,6 +82,7 @@ public class Options extends Activity {
         nativelog = (CheckBox) findViewById(R.id.nativelog);
         enforceresolution = (CheckBox) findViewById(R.id.enforceresolution);
         scroff = (CheckBox) findViewById(R.id.scroff);
+        nocursor = (CheckBox) findViewById(R.id.nocursor);
         keyb = (CheckBox) findViewById(R.id.virtkey);
         enforceSystemStorage = (CheckBox) findViewById(R.id.enforceSystemStorage);
         keyvol = (CheckBox) findViewById(R.id.volkey);
@@ -276,6 +278,7 @@ public class Options extends Activity {
         nativelog.setChecked(lastGame.isNativelog());
         enforceresolution.setChecked(lastGame.isEnforceresolution());
         scroff.setChecked(lastGame.getScreenOff());
+        nocursor.setChecked(lastGame.isNoCursor());
         keyb.setChecked(lastGame.getKeyboard());
         keyvol.setChecked(lastGame.getOvVol());
         music.setChecked(lastGame.isMusic());
@@ -299,6 +302,7 @@ public class Options extends Activity {
         lastGame.setNativelog(nativelog.isChecked());
         lastGame.setEnforceresolution(enforceresolution.isChecked());
         lastGame.setScreenOff(scroff.isChecked());
+        lastGame.setNoCursor(nocursor.isChecked());
         lastGame.setKeyboard(keyb.isChecked());
         lastGame.setOvVol(keyvol.isChecked());
         lastGame.setMusic(music.isChecked());

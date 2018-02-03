@@ -88,6 +88,7 @@
     <string name="systosd_msg">Эта операция удалит всё в папке INSTEAD-NG на SD-карте и переместит папки с играми и сохранениями из системной памяти на SD-карту.\nКроме того, придётся потерпеть, данная операция может продлиться несколько минут.\nПродолжить?</string>
     <string name="atention">Внимание!</string>
     <string name="scroff">Держать экран включенным</string>
+    <string name="nocursor">Спрятать курсор</string>
     <string name="theme">Тема: </string>
     <string name="portrait">Портретная ориентация экрана</string>
     <string name="dirlist">Все игры</string>

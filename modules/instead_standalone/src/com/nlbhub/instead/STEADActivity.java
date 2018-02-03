@@ -72,10 +72,11 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         final String gamespath = StorageResolver.getGamesPath(expansionMounterMain);
         final PropertiesBean properties = PropertyManager.getProperties(this);
         Settings settings = getSettings();
+        boolean nocursor = settings.isNoCursor();
         boolean nativeLogEnabled = settings.isNativelog();
         boolean enforceResolution = settings.isEnforceresolution();
         String nativeLogPath = nativeLogEnabled ? StorageResolver.getDefaultProgramDir() + "/native.log" : null;
-        String[] args = new String[13];
+        String[] args = new String[14];
         args[0] = nativeLogPath;
         args[1] = getDataDir();
         args[2] = appdata;
@@ -89,6 +90,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         args[10] = StorageResolver.getThemesDirectoryPath();
         args[11] = properties.isStandalone() ? "Y" : null;
         args[12] = getModesString();
+        args[13] = (nocursor) ? "Y" : null;
         return args;
     }
 

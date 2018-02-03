@@ -41,6 +41,7 @@ public class LastGame extends Settings {
         super.setNativelog(pr.get("nativelog", Settings.NATIVE_LOG_DEFAULT));
 		super.setEnforceresolution(pr.get("enforceresolution", Settings.ENFORCE_RESOLUTION_DEFAULT));
  		super.setScreenOff(pr.get("scroff", Settings.SCREEN_OFF_DEFAULT));
+		super.setNoCursor(pr.get("nocursor", Settings.NO_CURSOR_DEFAULT));
  		super.setKeyboard(pr.get("keyb", Settings.KEYBOARD_DEFAULT));
  		super.setOvVol(pr.get("keyvol", Settings.OV_VOL_DEFAULT));
 		super.setOwntheme(pr.get("owntheme", Settings.OWNTHEME_DEFAULT));
@@ -141,7 +142,12 @@ public class LastGame extends Settings {
 		super.setScreenOff(b);
 		Commit();
 	}
-	
+
+	public void setNoCursor(boolean b){
+		super.setNoCursor(b);
+		Commit();
+	}
+
 	public void setKeyboard(boolean b){
 		super.setKeyboard(b);
 		Commit();
@@ -184,6 +190,7 @@ public class LastGame extends Settings {
         pr.set("nativelog", isNativelog());
 		pr.set("enforceresolution", isEnforceresolution());
  		pr.set("scroff", getScreenOff());
+		pr.set("nocursor", isNoCursor());
  		pr.set("keyb", getKeyboard());
  		pr.set("keyvol", getOvVol());
 		pr.set("owntheme", isOwntheme());
