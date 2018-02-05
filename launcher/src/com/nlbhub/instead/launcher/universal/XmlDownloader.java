@@ -16,6 +16,7 @@ import com.nlbhub.instead.launcher.simple.Globals;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
@@ -115,7 +116,7 @@ public class XmlDownloader extends Thread {
 		HttpResponse response = null;
 		try {
 			SchemeRegistry schemeRegistry = new SchemeRegistry();
-			schemeRegistry.register(new Scheme("http", SSLSocketFactory.getSocketFactory(), 80));
+			schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
 			schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
 			HttpParams params = new BasicHttpParams();
 			params.setBooleanParameter("http.protocol.handle-redirects", true);
