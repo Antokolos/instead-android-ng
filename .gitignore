@@ -35,3 +35,9 @@
 **/obj/
 modules/instead_standalone/jni/src/instead/
 Instead-NG-KS.keystore
+modules/instead_standalone/res/raw/data.zip
+modules/instead_standalone/res/raw/games.zip
+modules/instead_standalone/res/raw/libs_armeabi.zip
+modules/instead_standalone/res/raw/libs_armeabi_v7a.zip
+modules/instead_standalone/res/raw/libs_x86.zip
+modules/instead_standalone/res/raw/themes.zip
