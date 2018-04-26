@@ -180,8 +180,8 @@ public class MainMenu extends MainMenuAbstract {
         //	(new File(Globals.getOutFilePath(Globals.Options))).delete();
         (new File(this.getFilesDir()+"/"+Globals.GameListFileName)).delete();
         (new File(this.getFilesDir()+"/"+Globals.GameListAltFileName)).delete();
-        (new File(this.getFilesDir()+"/"+Globals.GameListNLBDemosFileName)).delete();
-        (new File(this.getFilesDir()+"/"+Globals.GameListNLBFullFileName)).delete();
+        (new File(this.getFilesDir()+"/"+Globals.NLBProjectGamesFileName)).delete();
+        (new File(this.getFilesDir()+"/"+Globals.CommunityGamesFileName)).delete();
         //	lastGame.clearAll();
     }
 
@@ -189,8 +189,8 @@ public class MainMenu extends MainMenuAbstract {
     protected void copyAdditionalAssets() {
         copyXml(Globals.GameListFileName);
         copyXml(Globals.GameListAltFileName);
-        copyXml(Globals.GameListNLBDemosFileName);
-        copyXml(Globals.GameListNLBFullFileName);
+        copyXml(Globals.NLBProjectGamesFileName);
+        copyXml(Globals.CommunityGamesFileName);
     }
 
     private void copyXml(String p){

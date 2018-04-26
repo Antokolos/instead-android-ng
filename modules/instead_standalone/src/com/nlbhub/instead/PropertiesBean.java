@@ -8,8 +8,8 @@ public class PropertiesBean {
     private boolean standalone = false;
     private String gameListDownloadUrl = "http://instead.syscall.ru/pool/game_list.xml";
     private String gameListAltDownloadUrl = "http://instead-games.ru/xml.php";
-    private String gameListNLBDemoDownloadUrl = "http://nlbproject.com/m/services/getdemogames";
-    private String gameListNLBFullDownloadUrl = "http://nlbproject.com/m/services/getfullgames";
+    private String gameListNLBProjectDownloadUrl = "https://nlbproject.com/hub/services/nlbproject_games";
+    private String gameListCommunityDownloadUrl = "https://nlbproject.com/hub/services/community_games";
 
     public boolean isStandalone() {
         return standalone;
@@ -35,19 +35,19 @@ public class PropertiesBean {
         this.gameListAltDownloadUrl = gameListAltDownloadUrl;
     }
 
-    public String getGameListNLBDemoDownloadUrl() {
-        return gameListNLBDemoDownloadUrl;
+    public String getGameListNLBProjectDownloadUrl() {
+        return gameListNLBProjectDownloadUrl;
     }
 
-    public void setGameListNLBDemoDownloadUrl(String gameListNLBDemoDownloadUrl) {
-        this.gameListNLBDemoDownloadUrl = gameListNLBDemoDownloadUrl;
+    public void setGameListNLBProjectDownloadUrl(String gameListNLBDemoDownloadUrl) {
+        this.gameListNLBProjectDownloadUrl = gameListNLBDemoDownloadUrl;
     }
 
-    public String getGameListNLBFullDownloadUrl() {
-        return gameListNLBFullDownloadUrl;
+    public String getGameListCommunityDownloadUrl() {
+        return gameListCommunityDownloadUrl;
     }
 
-    public void setGameListNLBFullDownloadUrl(String gameListNLBFullDownloadUrl) {
-        this.gameListNLBFullDownloadUrl = gameListNLBFullDownloadUrl;
+    public void setGameListCommunityDownloadUrl(String gameListNLBFullDownloadUrl) {
+        this.gameListCommunityDownloadUrl = gameListNLBFullDownloadUrl;
     }
 }

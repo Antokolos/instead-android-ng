@@ -78,12 +78,12 @@ public class XmlDownloader extends Thread {
 		final PropertiesBean properties = PropertyManager.getProperties(GameManager);
 		switch (src) {
 			case Globals.BASIC:
-			case Globals.NLBDEMO:
+			case Globals.NLBPROJECT_GAMES:
 				gameListUrl = getGameListDownloadUrl(properties);
 				gameListFileName = getGameListFileName();
 				break;
 			case Globals.ALTER:
-			case Globals.NLBFULL:
+			case Globals.COMMUNITY_GAMES:
 				gameListUrl = getGameListAltDownloadUrl(properties);
 				gameListFileName = getGameListAltFileName();
 				break;

@@ -76,18 +76,18 @@
 				android:layout_height="wrap_content" android:orientation="horizontal"
 				android:gravity="center" android:layout_width="fill_parent">
 
-				<Button android:text="@string/nlbdemo" android:id="@+id/basic_btn"
-					android:layout_height="50dip" android:background="@drawable/tab_c"
-					android:layout_weight="1" 
-					android:layout_width="0dip" android:textSize="17sp"
-					android:shadowDx="1" android:shadowDy="1" android:shadowRadius="1"
-					android:shadowColor="#444444"></Button>
-				<Button android:text="@string/nlbfull" android:id="@+id/alter_btn"
-					android:layout_height="50dip" android:background="@drawable/tab"
-					android:layout_weight="1"
-					android:layout_width="0dip" android:shadowColor="#444444"
-					android:shadowDx="1" android:shadowDy="1" android:shadowRadius="1"
-					android:textSize="17sp"></Button>
+				<Button android:text="@string/nlbproject_tab" android:id="@+id/basic_btn"
+						android:layout_height="50dip" android:background="@drawable/tab_c"
+						android:layout_weight="1"
+						android:layout_width="0dip" android:textSize="17sp"
+						android:shadowDx="1" android:shadowDy="1" android:shadowRadius="1"
+						android:shadowColor="#444444"></Button>
+				<Button android:text="@string/community_tab" android:id="@+id/alter_btn"
+						android:layout_height="50dip" android:background="@drawable/tab"
+						android:layout_weight="1"
+						android:layout_width="0dip" android:shadowColor="#444444"
+						android:shadowDx="1" android:shadowDy="1" android:shadowRadius="1"
+						android:textSize="17sp"></Button>
 
 
 			</LinearLayout>
