@@ -73,9 +73,9 @@
 	<game>
 		<name>provodnik</name>
 		<title>Проводник</title>
-		<version>0.9</version>
-		<url>http://instead-games.ru//download/instead-provodnik-0.9.zip</url>
-		<size>14895162</size>
+		<version>1.0</version>
+		<url>http://instead-games.ru//download/instead-provodnik-1.0.zip</url>
+		<size>14895174</size>
 		<lang>ru</lang>
 		<descurl>http://instead-games.ru/game.php?ID=247</descurl>
 	</game>
@@ -213,9 +213,9 @@
 	<game>
 		<name>insteadose5</name>
 		<title>ИНСТЕДОЗ №5</title>
-		<version>0.9</version>
-		<url>http://instead-games.ru//download/instead-insteadose5-0.9.zip</url>
-		<size>16259116</size>
+		<version>1.0</version>
+		<url>http://instead-games.ru//download/instead-insteadose5-1.0.zip</url>
+		<size>16259123</size>
 		<lang>ru</lang>
 		<descurl>http://instead-games.ru/game.php?ID=252</descurl>
 	</game>
@@ -255,7 +255,7 @@
 		<title>[URQ] Модуль URQ</title>
 		<version>2.0</version>
 		<url>http://instead-games.ru//download/instead-urq-2.0.zip</url>
-		<size>134045</size>
+		<size>137363</size>
 		<lang>ru</lang>
 		<descurl>http://instead-games.ru/game.php?ID=151</descurl>
 	</game>
