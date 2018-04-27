@@ -10,12 +10,12 @@ import com.nlbhub.instead.launcher.universal.GameManager;
 public class NLBGameManager extends GameManager {
     @Override
     protected int getBasicListNo() {
-        return Globals.NLBDEMO;
+        return Globals.NLBPROJECT_GAMES;
     }
 
     @Override
     protected int getAlterListNo() {
-        return Globals.NLBFULL;
+        return Globals.COMMUNITY_GAMES;
     }
 
     protected int getLayoutResID() {
@@ -24,12 +24,12 @@ public class NLBGameManager extends GameManager {
 
     @Override
     protected String getGameListFileName() {
-        return Globals.GameListNLBDemosFileName;
+        return Globals.NLBProjectGamesFileName;
     }
 
     @Override
     protected String getGameListAltFileName() {
-        return Globals.GameListNLBFullFileName;
+        return Globals.CommunityGamesFileName;
     }
 
     @Override

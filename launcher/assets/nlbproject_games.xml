@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game_list version="1.0">
+	<game>
+		<name>barbarian_caves_demo</name>
+		<title>The Barbarian and the Subterranean Caves (Demo)</title>
+		<version>1.85</version>
+		<url>https://nlbproject.com/dist/games/nlbproject/instead-barbarian_caves_demo-1.85.zip</url>
+		<size>64023743</size>
+		<lang>en,ru</lang>
+		<descurl>https://nlbproject.com/hub/games</descurl>
+	</game>
+</game_list>

@@ -52,13 +52,13 @@ public class PropertyManager {
             String standalone = getTrimmedProperty(prop, "instead-ng.parameters.standalone");
             String gameListDownloadUrl = getTrimmedProperty(prop, "instead-ng.parameters.game-list-download-url");
             String gameListAltDownloadUrl = getTrimmedProperty(prop, "instead-ng.parameters.game-list-alt-download-url");
-            String gameListNLBDemoDownloadUrl = getTrimmedProperty(prop, "instead-ng.parameters.game-list-nlb-demo-download-url");
-            String gameListNLBFullDownloadUrl = getTrimmedProperty(prop, "instead-ng.parameters.game-list-nlb-full-download-url");
+            String gameListNLBProjectDownloadUrl = getTrimmedProperty(prop, "instead-ng.parameters.game-list-nlbproject-download-url");
+            String gameListCommunityDownloadUrl = getTrimmedProperty(prop, "instead-ng.parameters.game-list-community-download-url");
             result.setStandalone("true".equalsIgnoreCase(standalone));
             result.setGameListDownloadUrl(gameListDownloadUrl);
             result.setGameListAltDownloadUrl(gameListAltDownloadUrl);
-            result.setGameListNLBDemoDownloadUrl(gameListNLBDemoDownloadUrl);
-            result.setGameListNLBFullDownloadUrl(gameListNLBFullDownloadUrl);
+            result.setGameListNLBProjectDownloadUrl(gameListNLBProjectDownloadUrl);
+            result.setGameListCommunityDownloadUrl(gameListCommunityDownloadUrl);
             return result;
         } finally {
             if (input != null) {

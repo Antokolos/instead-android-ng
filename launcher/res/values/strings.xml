@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Instead-NG</string>
     <string name="run">Start game</string>
-    <string name="gmlist">Community games</string>
-    <string name="nlbgmlist">NLB project games</string>
+    <string name="gmlist">INSTEAD community</string>
+    <string name="nlbgmlist">NLB project</string>
     <string name="exit">Exit</string>
     <string name="downdata">Download file</string>
     <string name="conerror">Connection error</string>
@@ -27,10 +27,10 @@
     <string name="gdwncompl">Game downloaded</string>
     <string name="delgame">Game removed</string>
     <string name="basic">Official</string>
-    <string name="nlbdemo">Demo</string>
+    <string name="nlbproject_tab">Our games</string>
     <string name="repo">List of games</string>
     <string name="alter">Not official</string>
-    <string name="nlbfull">Full</string>
+    <string name="community_tab">Community games</string>
     <string name="options">Settings</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
@@ -82,7 +82,7 @@
     <string name="ver">Version</string>
     <string name="bundledgame">BundledGame</string>
     <string name="gmwhat">Install and launch community games</string>
-    <string name="nlbgmwhat">Install and launch NLB project games</string>
+    <string name="nlbgmwhat">Install and launch NLB project games and games from community</string>
     <string name="optwhat">Screen, sound and font</string>
     <string name="marketon">Rate, write a comment</string>
     <string name="market">Instead-NG on the Market</string>

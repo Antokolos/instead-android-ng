@@ -235,8 +235,8 @@ public class Options extends Activity {
         SystemPathResolver dataResolver = new SystemPathResolver("data", this);
         (new File(this.getFilesDir() + "/" + Globals.GameListFileName)).delete();
         (new File(this.getFilesDir() + "/" + Globals.GameListAltFileName)).delete();
-        (new File(this.getFilesDir() + "/" + Globals.GameListNLBDemosFileName)).delete();
-        (new File(this.getFilesDir() + "/" + Globals.GameListNLBFullFileName)).delete();
+        (new File(this.getFilesDir() + "/" + Globals.NLBProjectGamesFileName)).delete();
+        (new File(this.getFilesDir() + "/" + Globals.CommunityGamesFileName)).delete();
         lastGame.clearAll();
         try {
             StorageResolver.delete(dataResolver.getPath() + StorageResolver.DataFlag);
