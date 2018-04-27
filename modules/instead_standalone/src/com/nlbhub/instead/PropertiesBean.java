@@ -5,11 +5,11 @@ package com.nlbhub.instead;
  * @version 1.0
  */
 public class PropertiesBean {
-    private boolean standalone = false;
-    private String gameListDownloadUrl = "http://instead.syscall.ru/pool/game_list.xml";
-    private String gameListAltDownloadUrl = "http://instead-games.ru/xml.php";
-    private String gameListNLBProjectDownloadUrl = "https://nlbproject.com/hub/services/nlbproject_games";
-    private String gameListCommunityDownloadUrl = "https://nlbproject.com/hub/services/community_games";
+    private boolean standalone;
+    private String gameListDownloadUrl;
+    private String gameListAltDownloadUrl;
+    private String gameListNLBProjectDownloadUrl;
+    private String gameListCommunityDownloadUrl;
 
     public boolean isStandalone() {
         return standalone;
@@ -39,15 +39,15 @@ public class PropertiesBean {
         return gameListNLBProjectDownloadUrl;
     }
 
-    public void setGameListNLBProjectDownloadUrl(String gameListNLBDemoDownloadUrl) {
-        this.gameListNLBProjectDownloadUrl = gameListNLBDemoDownloadUrl;
+    public void setGameListNLBProjectDownloadUrl(String gameListNLBProjectDownloadUrl) {
+        this.gameListNLBProjectDownloadUrl = gameListNLBProjectDownloadUrl;
     }
 
     public String getGameListCommunityDownloadUrl() {
         return gameListCommunityDownloadUrl;
     }
 
-    public void setGameListCommunityDownloadUrl(String gameListNLBFullDownloadUrl) {
-        this.gameListCommunityDownloadUrl = gameListNLBFullDownloadUrl;
+    public void setGameListCommunityDownloadUrl(String gameListCommunityDownloadUrl) {
+        this.gameListCommunityDownloadUrl = gameListCommunityDownloadUrl;
     }
 }
