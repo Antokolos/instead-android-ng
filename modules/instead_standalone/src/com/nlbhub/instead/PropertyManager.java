@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -17,6 +19,14 @@ import java.util.Properties;
  * @version 1.0
  */
 public class PropertyManager {
+
+    private static Map<String, String> DEFAULT_VALUES = new HashMap<String, String>() {{
+        put("instead-ng.parameters.standalone", "false");
+        put("instead-ng.parameters.game-list-download-url", "http://instead.syscall.ru/pool/game_list.xml");
+        put("instead-ng.parameters.game-list-alt-download-url", "http://instead-games.ru/xml.php");
+        put("instead-ng.parameters.game-list-nlbproject-download-url", "https://nlbproject.com/hub/services/nlbproject_games");
+        put("instead-ng.parameters.game-list-community-download-url", "https://nlbproject.com/hub/services/community_games");
+    }};
 
     public static PropertiesBean getProperties(Activity parent) {
         File configDir = new File(StorageResolver.getDefaultProgramDir());
@@ -69,8 +79,8 @@ public class PropertyManager {
 
     private static String getTrimmedProperty(Properties prop, String propertyName) {
         String property = prop.getProperty(propertyName);
-        if (property == null) {
-            return "";
+        if (property == null || "".equals(property.trim())) {
+            return DEFAULT_VALUES.get(propertyName);
         }
         return property.trim();
     }
