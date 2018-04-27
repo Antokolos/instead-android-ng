@@ -81,8 +81,8 @@
     <string name="mailme">Send me email</string>
     <string name="ver">Version</string>
     <string name="bundledgame">BundledGame</string>
-    <string name="gmwhat">Install and launch community games</string>
-    <string name="nlbgmwhat">Install and launch NLB project games and games from community</string>
+    <string name="gmwhat">INSTEAD community games</string>
+    <string name="nlbgmwhat">Non-Linear Text Quests</string>
     <string name="optwhat">Screen, sound and font</string>
     <string name="marketon">Rate, write a comment</string>
     <string name="market">Instead-NG on the Market</string>
