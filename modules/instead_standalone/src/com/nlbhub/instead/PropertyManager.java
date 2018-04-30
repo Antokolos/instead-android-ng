@@ -19,13 +19,12 @@ import java.util.Properties;
  * @version 1.0
  */
 public class PropertyManager {
-
-    private static Map<String, String> DEFAULT_VALUES = new HashMap<String, String>() {{
-        put("instead-ng.parameters.standalone", "false");
-        put("instead-ng.parameters.game-list-download-url", "http://instead.syscall.ru/pool/game_list.xml");
-        put("instead-ng.parameters.game-list-alt-download-url", "http://instead-games.ru/xml.php");
-        put("instead-ng.parameters.game-list-nlbproject-download-url", "https://nlbproject.com/hub/services/nlbproject_games");
-        put("instead-ng.parameters.game-list-community-download-url", "https://nlbproject.com/hub/services/community_games");
+    public static Map<String, String> DEFAULT_VALUES = new HashMap<String, String>() {{
+        put("instead-ng.parameters.standalone", String.valueOf(PropertiesBean.STANDALONE));
+        put("instead-ng.parameters.game-list-download-url", PropertiesBean.GAME_LIST_DOWNLOAD_URL);
+        put("instead-ng.parameters.game-list-alt-download-url", PropertiesBean.GAME_LIST_ALT_DOWNLOAD_URL);
+        put("instead-ng.parameters.game-list-nlbproject-download-url", PropertiesBean.GAME_LIST_NLBPROJECT_DOWNLOAD_URL);
+        put("instead-ng.parameters.game-list-community-download-url", PropertiesBean.GAME_LIST_COMMUNITY_DOWNLOAD_URL);
     }};
 
     public static PropertiesBean getProperties(Activity parent) {
