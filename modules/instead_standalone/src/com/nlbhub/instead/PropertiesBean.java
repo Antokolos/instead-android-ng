@@ -1,15 +1,24 @@
 package com.nlbhub.instead;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Anton P. Kolosov
  * @version 1.0
  */
 public class PropertiesBean {
-    private boolean standalone;
-    private String gameListDownloadUrl;
-    private String gameListAltDownloadUrl;
-    private String gameListNLBProjectDownloadUrl;
-    private String gameListCommunityDownloadUrl;
+    public static final boolean STANDALONE = false;
+    public static final String GAME_LIST_DOWNLOAD_URL = "http://instead.syscall.ru/pool/game_list.xml";
+    public static final String GAME_LIST_ALT_DOWNLOAD_URL = "http://instead-games.ru/xml.php";
+    public static final String GAME_LIST_NLBPROJECT_DOWNLOAD_URL = "https://nlbproject.com/hub/services/nlbproject_games";
+    public static final String GAME_LIST_COMMUNITY_DOWNLOAD_URL = "https://nlbproject.com/hub/services/community_games";
+
+    private boolean standalone = STANDALONE;
+    private String gameListDownloadUrl = GAME_LIST_DOWNLOAD_URL;
+    private String gameListAltDownloadUrl = GAME_LIST_ALT_DOWNLOAD_URL;
+    private String gameListNLBProjectDownloadUrl = GAME_LIST_NLBPROJECT_DOWNLOAD_URL;
+    private String gameListCommunityDownloadUrl = GAME_LIST_COMMUNITY_DOWNLOAD_URL;
 
     public boolean isStandalone() {
         return standalone;
