@@ -38,6 +38,8 @@ then
     zip -r $RESPATH/games.zip ./games
     rm -rf ./games
     cp -r ./instead/stead/* $RESPATH/data/stead
+    cp -r ./lua/* $RESPATH/data/stead/stead2/
+    cp -r ./lua/* $RESPATH/data/stead/stead3/
     rm -f $RESPATH/data/stead/CMakeLists.txt
     rm -f $RESPATH/data/stead/Makefile
     rm -f $RESPATH/data/stead/Makefile.windows
