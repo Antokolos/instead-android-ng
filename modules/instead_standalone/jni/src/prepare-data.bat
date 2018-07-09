@@ -41,6 +41,8 @@ if exist "%TOOLSDIR%\jobb.bat" (
     %A7Z% a %RESPATH%\games.zip %CUR_DIR%\games
     rd /S /Q %CUR_DIR%\games
     robocopy %CUR_DIR%\instead\stead\ %RESPATH%\data\stead /MIR
+    robocopy %CUR_DIR%\lua\stead2\ %RESPATH%\data\stead\stead2 /MIR
+    robocopy %CUR_DIR%\lua\stead3\ %RESPATH%\data\stead\stead3 /MIR
     del /Q %RESPATH%\data\stead\CMakeLists.txt
     del /Q %RESPATH%\data\stead\Makefile
     del /Q %RESPATH%\data\stead\Makefile.windows
