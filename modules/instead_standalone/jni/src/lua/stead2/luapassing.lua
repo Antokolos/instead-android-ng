@@ -17,18 +17,19 @@ local clearAchievementFunc = function(achievementName)
 end
 
 function init()
-    _statsInitDone = false;
+    statsInitDone = false;
 end
 
+-- Native implementation of statsAPI was removed for Android
 statsAPI = {
     init = function()
         print("Initializing API...\n");
-        if (_statsInitDone) then
+        if (statsInitDone) then
             print("Already initialized!\n");
             return 0.0;
         else
             initFunc();
-            _statsInitDone = true;
+            statsInitDone = true;
             print("API initialized.\n");
             return 1.0;
         end
@@ -82,6 +83,13 @@ statsAPI = {
         return 0.0;
     end,
     openURL = function(url)
-        p(url);
+        if not instead.atleast(3, 2) then
+            p(url);
+        else
+            instead_clipboard(url);
+            p(url .. " [copied to clipboard]");
+        end
     end
 }
+
+return statsAPI;
