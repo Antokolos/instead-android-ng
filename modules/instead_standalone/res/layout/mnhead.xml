@@ -2,7 +2,7 @@
 <LinearLayout android:id="@+id/Linear01"
         android:layout_width="fill_parent" android:layout_height="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical">
+        android:orientation="vertical" android:background="#011322">
 
 <TableLayout 
     android:layout_width="fill_parent"
@@ -14,7 +14,7 @@
 
 
 <LinearLayout android:id="@+id/Linear10" 
-	android:orientation="vertical" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1">
+	android:orientation="vertical" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1" android:background="#011322">
 
 	<RelativeLayout android:id="@+id/Linear11"
 	android:layout_height="wrap_content" android:background="@drawable/header"
@@ -50,12 +50,12 @@
                 android:scrollbars="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                 android:scrollbarAlwaysDrawVerticalTrack="true" android:smoothScrollbar="true" android:background="@drawable/wallpaper"/>
+				android:scrollbarAlwaysDrawVerticalTrack="true" android:smoothScrollbar="true" android:background="@drawable/wallpaper"/>
         </LinearLayout>
     </TableRow>
 </TableLayout>
      <LinearLayout android:layout_height="wrap_content" android:layout_marginTop="-20dip" android:layout_width="fill_parent" android:gravity="center" android:id="@+id/LinearLayout06" android:background="#393c39">
-        <TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:textSize="12sp" android:layout_height="fill_parent" android:gravity="center" android:text="@string/by" android:layout_marginRight="4dip"></TextView>
+        <TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:textSize="12sp" android:layout_height="fill_parent" android:gravity="center" android:text="@string/by" android:textColor="#ffffff" android:layout_marginRight="4dip"></TextView>
         <TextView android:id="@+id/email" android:layout_width="wrap_content" android:textSize="12sp" android:layout_height="fill_parent" android:gravity="center" android:text="@string/email" android:textColor="#6677ff" android:layout_marginLeft="5dip"></TextView>
 
         </LinearLayout>
