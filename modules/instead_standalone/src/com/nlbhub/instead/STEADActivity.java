@@ -52,7 +52,11 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         }
     }
 
-    private String getDataDir() {
+    public File getDataDir() {
+        return new File(getDataDirString());
+    }
+
+    private String getDataDirString() {
         try {
             return getDir("data",Context.MODE_PRIVATE).getCanonicalPath() + "/";
         } catch (IOException e) {
@@ -78,7 +82,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         String nativeLogPath = nativeLogEnabled ? StorageResolver.getDefaultProgramDir() + "/native.log" : null;
         String[] args = new String[14];
         args[0] = nativeLogPath;
-        args[1] = getDataDir();
+        args[1] = getDataDirString();
         args[2] = appdata;
         args[3] = gamespath;
         args[4] = (enforceResolution) ? "Y" : null; // The exact value is unimportant, if NOT null, then -hires will be added

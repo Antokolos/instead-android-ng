@@ -49,7 +49,10 @@ public class StorageResolver {
     }
 
     public static String getExternalStorage() {
-        return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
+        final Context context = InsteadApplication.getAppContext();
+        File externalFilesDir = context.getExternalFilesDir(null);
+        externalFilesDir.mkdirs();
+        return externalFilesDir + "/";
     }
 
     public static String getSystemStorage() {

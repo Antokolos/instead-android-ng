@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export RESPATH=./../../res/raw
-export TOOLSDIR=/usr/local/apps/android-sdk-macosx/tools
+export TOOLSDIR=/usr/local/apps/android-sdk-macosx/bin
 
 if [ -f $TOOLSDIR/jobb ]
 then
@@ -19,7 +19,7 @@ then
         export GAMENAME=`ls -1 ./games/games`
         # The following folder will be used instead of appdata folder (personal preferences & saves folder)
         mkdir $RESPATH/data/$GAMENAME
-        $TOOLSDIR/jobb -v -pn com.nlbhub.instead.barbariancaves -pv 185005 -d ./games -o ./main.185005.com.nlbhub.instead.barbariancaves.obb
+        $TOOLSDIR/jobb -v -pn com.nlbhub.instead.barbariancaves -pv 187010 -d ./games -o ./main.187010.com.nlbhub.instead.barbariancaves.obb
         # Create (almost) empty archive structure for games, we will use OBB file for actual game content
         rm -rf ./games/games
         mkdir ./games/bundled
