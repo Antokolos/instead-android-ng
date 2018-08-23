@@ -32,7 +32,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     private SDLActivity Ctx;
     private PowerManager.WakeLock wakeLock = null;
     private KeyboardAdapter keyboardAdapter;
-    private List<Point> modes;
 
     // Load the .so
 
@@ -93,25 +92,9 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         args[9] = settings.getTheme();
         args[10] = StorageResolver.getThemesDirectoryPath();
         args[11] = properties.isStandalone() ? "Y" : null;
-        args[12] = getModesString();
         args[13] = (nocursor) ? "Y" : null;
         return args;
     }
-
-    private String getModesString() {
-        int lastIdx = modes.size() - 1;
-        if (lastIdx < 0) {
-            return "";
-        }
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < lastIdx; i++) {
-            Point mode = modes.get(i);
-            result.append(String.format("%dx%d", mode.x, mode.y)).append(",");
-        }
-        Point mode = modes.get(lastIdx);
-        result.append(String.format("%dx%d", mode.x, mode.y));
-        return result.toString();
-     }
 
     public SDLActivity getCtx() {
         return Ctx;
@@ -264,22 +247,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, InsteadApplication.ApplicationName);
-        modes = getModes();
-    }
-
-    private List<Point> getModes() {
-        List<Point> result = new ArrayList<Point>();
-        Display display = getWindowManager().getDefaultDisplay();
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        int width = display.getWidth();
-        int height = display.getHeight();
-        result.add(new Point(width, height));
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        width = display.getWidth();
-        height = display.getHeight();
-        result.add(new Point(width, height));
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-        return result;
     }
 
     @Override

@@ -8,24 +8,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import com.nlbhub.instead.PropertiesBean;
 import com.nlbhub.instead.PropertyManager;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.launcher.simple.Globals;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.conn.scheme.PlainSocketFactory;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.scheme.SchemeRegistry;
-import org.apache.http.conn.ssl.SSLSocketFactory;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import android.app.ProgressDialog;
-import org.apache.http.impl.conn.SingleClientConnManager;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
 
 public class XmlDownloader extends Thread {
 
@@ -111,25 +101,42 @@ public class XmlDownloader extends Thread {
 		}
 		// Parent.ShowDialog();
 
-		HttpGet request = new HttpGet(gameListUrl);
-		request.addHeader("Accept", "*/*");
-		HttpResponse response = null;
+		HttpURLConnection conn = null;
 		try {
-			SchemeRegistry schemeRegistry = new SchemeRegistry();
-			schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-			schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
-			HttpParams params = new BasicHttpParams();
-			params.setBooleanParameter("http.protocol.handle-redirects", true);
-			SingleClientConnManager mgr = new SingleClientConnManager(params, schemeRegistry);
-			HttpClient client = new DefaultHttpClient(mgr, params);
-			response = client.execute(request);
-		} catch (IOException e) {
+			URL url = new URL(gameListUrl);
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setReadTimeout(5000);
+			conn.addRequestProperty("Accept", "*/*");
+			boolean redirect = false;
+			// normally, 3xx is redirect
+			int status = conn.getResponseCode();
+			if (status != HttpURLConnection.HTTP_OK) {
+				if (status == HttpURLConnection.HTTP_MOVED_TEMP
+						|| status == HttpURLConnection.HTTP_MOVED_PERM
+						|| status == HttpURLConnection.HTTP_SEE_OTHER)
+					redirect = true;
+			}
+			if (redirect) {
+
+				// get redirect url from "location" header field
+				String newUrl = conn.getHeaderField("Location");
+
+				// get the cookie if need, for login
+				String cookies = conn.getHeaderField("Set-Cookie");
+
+				// open the new connnection again
+				conn = (HttpURLConnection) new URL(newUrl).openConnection();
+				conn.setRequestMethod("GET");
+				conn.setReadTimeout(5000);
+				conn.setRequestProperty("Cookie", cookies);
+				conn.addRequestProperty("Accept", "*/*");
+			}
+		} catch (Exception e) {
 			// See https://stackoverflow.com/questions/18126372/safely-fixing-javax-net-ssl-sslpeerunverifiedexception-no-peer-certificate
 			// in case of javax.net.ssl.SSLPeerUnverifiedException: No peer certificate
 			// This can mean that your server has incorrect certificate chain and you must fix it
-		}
 
-		if (response == null) {
 			if (!Parent.onpause)
 				Status.setMessage(Parent.getString(R.string.conerror) + " "
 						+ gameListUrl);
@@ -150,8 +157,10 @@ public class XmlDownloader extends Thread {
 
 		BufferedReader input = null;
 		try {
-			input = new BufferedReader(new InputStreamReader(response
-					.getEntity().getContent(), "UTF-8"));
+			int responseCode = conn.getResponseCode();
+			if (responseCode == HttpURLConnection.HTTP_OK) {
+				input = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+			}
 		} catch (UnsupportedEncodingException e) {
 		} catch (IllegalStateException e) {
 		} catch (IOException e) {

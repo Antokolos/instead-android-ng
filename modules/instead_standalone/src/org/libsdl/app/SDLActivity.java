@@ -2,7 +2,7 @@ package org.libsdl.app;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
+import java.util.*;
 import java.lang.reflect.Method;
 
 import android.app.*;
@@ -131,6 +131,14 @@ public class SDLActivity extends Activity {
     @SuppressWarnings("UnusedDeclaration")
     public static void unlockRotation() {
         mSingleton.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+
+    @SuppressWarnings("UnusedDeclaration")
+    public static String getScreenSize() {
+        Display display = mSingleton.getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return String.format(Locale.getDefault(), "%dx%d", size.x, size.y);
     }
 
     /**
