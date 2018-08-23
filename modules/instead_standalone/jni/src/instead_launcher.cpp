@@ -114,8 +114,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     const char* theme = argc >= 11 ? argv[10] : NULL;
     const char* themespath = argc >= 12 ? argv[11] : NULL;
     const char* standalone = argc >= 13 ? argv[12] : NULL;
-    const char* modes = argc >= 14 ? argv[13] : NULL;
-    const char* nocursor = argc >= 15 ? argv[14] : NULL;
+    const char* nocursor = argc >= 14 ? argv[13] : NULL;
     
     if (nativelog != NULL) {
         logFile = fopen(nativelog, "w");
@@ -124,7 +123,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     
     /* Run the application code! */
     int status;
-    char* _argv[20];
+    char* _argv[18];
     int n = 1;
     if (path != NULL) {
         printf("path = %s\n", path);
@@ -135,8 +134,6 @@ extern "C" int SDL_main(int argc, char** argv) {
 
     _argv[n++] = SDL_strdup("-nostdgames");
     _argv[n++] = SDL_strdup("-fullscreen");
-    _argv[n++] = SDL_strdup("-modes");
-    _argv[n++] = SDL_strdup(modes);
 
     if (is_not_blank(standalone)) {
         printf("-standalone is ON\n");
@@ -188,6 +185,8 @@ extern "C" int SDL_main(int argc, char** argv) {
     if (is_not_blank(owntheme)) {
         printf("Force own theme = YES\n");
         _argv[n++] = SDL_strdup("-owntheme");
+    } else {
+        _argv[n++] = SDL_strdup("-notheme");
     }
     if (is_not_blank(theme)) {
         printf("theme = %s\n", theme);
@@ -240,6 +239,21 @@ extern "C" JNIEnv* Android_JNI_GetEnv(void);
 
 extern "C" jclass Android_JNI_GetActivityClass();
 
+extern "C" void get_screen_size(int *w, int *h) {
+    const char *str;
+    JNIEnv* env = Android_JNI_GetEnv();
+    jclass clazz = Android_JNI_GetActivityClass();
+
+    jmethodID method_id = env->GetStaticMethodID(clazz, "getScreenSize", "()Ljava/lang/String;");
+    jstring s = (jstring) env->CallStaticObjectMethod(clazz, method_id);
+
+    str = env->GetStringUTFChars(s, 0);
+    sscanf(str, "%dx%d", w, h);
+    env->ReleaseStringUTFChars(s, str);
+
+    env->DeleteLocalRef(clazz);
+}
+
 extern "C" void rotate_landscape() {
     JNIEnv* env = Android_JNI_GetEnv();
     jclass cls = Android_JNI_GetActivityClass();
@@ -249,6 +263,7 @@ extern "C" void rotate_landscape() {
     } else {
         printf("rotateLandscape() method not found in the SDLActivity class!\n");
     }
+    env->DeleteLocalRef(cls);
 }
 
 extern "C" void rotate_portrait() {
@@ -260,6 +275,7 @@ extern "C" void rotate_portrait() {
     } else {
         printf("rotatePortrait() method not found in the SDLActivity class!\n");
     }
+    env->DeleteLocalRef(cls);
 }
 
 extern "C" void unlock_rotation() {
@@ -271,6 +287,7 @@ extern "C" void unlock_rotation() {
     } else {
         printf("unlockRotation() method not found in the SDLActivity class!\n");
     }
+    env->DeleteLocalRef(cls);
 }
 
 /* vi: set ts=4 sw=4 expandtab: */

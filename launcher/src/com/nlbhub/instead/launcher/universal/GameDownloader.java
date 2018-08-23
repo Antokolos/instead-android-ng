@@ -5,9 +5,9 @@ import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.launcher.simple.Globals;
-import org.apache.http.client.methods.*;
-import org.apache.http.*;
-import org.apache.http.impl.client.*;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.zip.*;
 import java.io.*;
 
@@ -105,28 +105,44 @@ class GameDownloader extends Thread {
 			    }
 		*/
 
-		HttpGet request = new HttpGet(gameUrl);
-		request.addHeader("Accept", "*/*");
-		HttpResponse response = null;
+        HttpURLConnection conn = null;
 		try {
-			DefaultHttpClient client = new DefaultHttpClient();
-			client.getParams().setBooleanParameter(
-					"http.protocol.handle-redirects", true);
-			response = client.execute(request);
-		} catch (IOException e) {
-		} catch (NullPointerException e) {
+			URL url = new URL(gameUrl);
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setReadTimeout(5000);
+			conn.addRequestProperty("Accept", "*/*");
+			boolean redirect = false;
+            // normally, 3xx is redirect
+            int status = conn.getResponseCode();
+            if (status != HttpURLConnection.HTTP_OK) {
+                if (status == HttpURLConnection.HTTP_MOVED_TEMP
+                        || status == HttpURLConnection.HTTP_MOVED_PERM
+                        || status == HttpURLConnection.HTTP_SEE_OTHER)
+                    redirect = true;
+            }
+            if (redirect) {
+
+                // get redirect url from "location" header field
+                String newUrl = conn.getHeaderField("Location");
+
+                // get the cookie if need, for login
+                String cookies = conn.getHeaderField("Set-Cookie");
+
+                // open the new connnection again
+                conn = (HttpURLConnection) new URL(newUrl).openConnection();
+                conn.setRequestMethod("GET");
+                conn.setReadTimeout(5000);
+                conn.setRequestProperty("Cookie", cookies);
+                conn.addRequestProperty("Accept", "*/*");
+            }
+		} catch (Exception e) {
+            if (!Parent.onpause)
+                Status.setMessage(Parent.getString(R.string.conerror) + " "
+                        + gameUrl,op);
+            Parent.onError(Parent.getString(R.string.conerror) + " " + gameUrl);
+            return;
 		}
-
-		if (response == null) {
-			if (!Parent.onpause)
-				Status.setMessage(Parent.getString(R.string.conerror) + " "
-						+ gameUrl,op);
-			Parent.onError(Parent.getString(R.string.conerror) + " " + gameUrl);
-			return;
-
-		}
-
-
 		
 		if (Parent.getStopDwn()) {
 			StorageResolver.delete(new File(Globals.getOutFilePath(gameDir)));
@@ -134,9 +150,6 @@ class GameDownloader extends Thread {
 			Cancel();
 			return;
 		}
-		;
-
-		
 		
 		StorageResolver.delete(new File(Globals.getOutFilePath(gameDir)));
 		try {
@@ -147,8 +160,17 @@ class GameDownloader extends Thread {
 		}
 		ZipInputStream zip = null;
 		try {
-			zip = new ZipInputStream(response.getEntity().getContent());
-		
+		    int responseCode = conn.getResponseCode();
+		    if (responseCode == HttpURLConnection.HTTP_OK) {
+                zip = new ZipInputStream(conn.getInputStream());
+            } else {
+		        String errorString = Parent.getString(R.string.dataerror) + " " + gameUrl + "; Response code = " + responseCode;
+                if (!Parent.onpause) {
+                    Status.setMessage(errorString, op);
+                }
+                Parent.onError(errorString);
+                return;
+            }
 		} catch (java.io.IOException e) {
 			if (!Parent.onpause)
 				Status.setMessage(Parent.getString(R.string.dataerror) + " "
