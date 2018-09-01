@@ -9,7 +9,6 @@
     <string name="ready">Готово</string>
     <string name="agame">Про гру</string>
     <string name="redwn">Скинути налаштування і \n перевстановити файли на SD</string>
-    <string name="basic">Офіційний</string>
     <string name="repo">Вибір списку ігор</string>
     <string name="conferror">Чи не правельно визначено дозвіл екрану! Спробуйте перестворити настроювання!</string>
     <string name="ok">Ок</string>
@@ -59,7 +58,6 @@
     <string name="blang">На Вашій мові</string>
     <string name="menudown">Завантажити гру</string>
     <string name="menunewstart">Почати нову гру</string>
-    <string name="alter">Не офіційний</string>
     <string name="delrc">Установки видалені</string>
     <string name="yes">Так</string>
     <string name="gmlist">Список ігор</string>
@@ -83,4 +81,6 @@
     <string name="scroff">Тримати екран включеним</string>
     <string name="theme">Тема:</string>
     <string name="portrait">Портретна орієнтація екрану</string>
+    <string name="basic">Каталог</string>
+    <string name="alter">Пісочниця</string>
 </resources>

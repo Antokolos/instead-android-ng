@@ -9,7 +9,6 @@
     <string name="ready">准备好</string>
     <string name="agame">关于游戏</string>
     <string name="redwn">复位和\ n重新安装在SD中的文件</string>
-    <string name="basic">官方</string>
     <string name="repo">游戏名单</string>
     <string name="conferror">屏幕分辨率是错的！再次尝试重新配置！</string>
     <string name="ok">OK</string>
@@ -59,7 +58,6 @@
     <string name="blang">你的语言</string>
     <string name="menudown">下载游戏</string>
     <string name="menunewstart">开始新游戏</string>
-    <string name="alter">不是官方</string>
     <string name="delrc">设置删除！</string>
     <string name="yes">没错！</string>
     <string name="gmlist">游戏列表</string>
@@ -82,4 +80,6 @@
     <string name="scroff">保持屏幕开启</string>
     <string name="theme">Theme:</string>
     <string name="portrait">Portrait screen orientation</string>
+    <string name="basic">目录</string>
+    <string name="alter">砂箱</string>
 </resources>

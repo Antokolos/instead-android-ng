@@ -9,7 +9,6 @@
     <string name="ready">Pronto</string>
     <string name="agame">A proposito di gioco</string>
     <string name="redwn">Reset e \n reinstallare i file sulla scheda SD</string>
-    <string name="basic">Ufficiale</string>
     <string name="repo">Lista dei giochi</string>
     <string name="conferror">Risoluzione dello schermo è sbagliata! Provare a riconfigurare di nuovo!</string>
     <string name="ok">Ok</string>
@@ -59,7 +58,6 @@
     <string name="blang">La tua lingua</string>
     <string name="menudown">Scarica gioco</string>
     <string name="menunewstart">Inizia nuovo gioco</string>
-    <string name="alter">Non ufficiale</string>
     <string name="delrc">Impostazioni cancellato!</string>
     <string name="yes">Sì!</string>
     <string name="gmlist">Gioco lista</string>
@@ -83,4 +81,6 @@
     <string name="scroff">Mantenere lo schermo acceso</string>
     <string name="theme">Tema:</string>
     <string name="portrait">Ritratto orientamento dello schermo</string>
+    <string name="basic">Elenco</string>
+    <string name="alter">Sandbox</string>
 </resources>

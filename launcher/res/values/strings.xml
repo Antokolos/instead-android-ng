@@ -3,7 +3,7 @@
     <string name="app_name">Instead-NG</string>
     <string name="run">Start game</string>
     <string name="gmlist">INSTEAD community</string>
-    <string name="nlbgmlist">NLB project</string>
+    <string name="nlbgmlist">Non-Linear Text Quests</string>
     <string name="exit">Exit</string>
     <string name="downdata">Download file</string>
     <string name="conerror">Connection error</string>
@@ -26,11 +26,10 @@
     <string name="delrc">Settings deleted!</string>
     <string name="gdwncompl">Game downloaded</string>
     <string name="delgame">Game removed</string>
-    <string name="basic">Official</string>
-    <string name="nlbproject_tab">Our games</string>
+    <string name="nlbproject_tab">NLB project</string>
     <string name="repo">List of games</string>
-    <string name="alter">Not official</string>
-    <string name="community_tab">Community games</string>
+    <string name="alter">Sandbox</string>
+    <string name="community_tab">Community</string>
     <string name="options">Settings</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
@@ -130,4 +129,5 @@
     <string name="override_vol">Override VolUp/VolDown</string>
     <string name="add_cut">Instead game (shortcut)</string>
     <string name="placeholder">Placeholder</string>
+    <string name="basic">Catalogue</string>
 </resources>

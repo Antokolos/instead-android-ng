@@ -25,9 +25,7 @@
     <string name="delrc">Настройки удалены</string>
     <string name="gdwncompl">Игра загружена</string>
     <string name="delgame">Игра удалена</string>
-    <string name="basic">Официальный</string>
     <string name="repo">Выбор списка игр</string>
-    <string name="alter">Неофициальный</string>
     <string name="options">Настройки</string>
     <string name="save">Сохранить</string>
     <string name="cancel">Отмена</string>
@@ -124,4 +122,6 @@
     <string name="volume">Громкость:</string>
     <string name="override_vol">Переопределить VolUp/VolDown</string>
     <string name="add_cut">Игра Instead (ярлык)</string>
+    <string name="basic">Каталог</string>
+    <string name="alter">Песочница</string>
 </resources>

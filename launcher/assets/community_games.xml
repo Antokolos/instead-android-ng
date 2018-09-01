@@ -1,12 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game_list version="1.0">
-	<game>
-		<name>cat</name>
-		<title>Returning the Quantum Cat</title>
-		<version>1.6</version>
-		<url>https://nlbproject.com/dist/games/community/instead-cat-1.6.zip</url>
-		<size>4550110</size>
-		<lang>en,ru</lang>
-		<descurl>https://nlbproject.com/hub/games</descurl>
-	</game>
+   <game>
+      <name>watch</name>
+      <title>Watch</title>
+      <version>1.2</version>
+      <url>https://nlbproject.com/dist/games/community/instead-watch-1.2.zip</url>
+      <size>20351580</size>
+      <lang>ru</lang>
+      <standalone>false</standalone>
+      <statid>2374007</statid>
+      <descurl>https://nlbproject.com/hub/game?name=watch</descurl>
+   </game>
+   <game>
+      <name>sturman</name>
+      <title>Shturman</title>
+      <version>0.6.4</version>
+      <url>https://nlbproject.com/dist/games/community/instead-sturman-0.6.4.zip</url>
+      <size>884700</size>
+      <lang>en,ru</lang>
+      <standalone>false</standalone>
+      <statid>2373924</statid>
+      <descurl>https://nlbproject.com/hub/game?name=sturman</descurl>
+   </game>
+   <game>
+      <name>mansion</name>
+      <title>Mansion (Russian and Spanish)</title>
+      <version>1.5</version>
+      <url>https://nlbproject.com/dist/games/community/instead-mansion-1.5.zip</url>
+      <size>15644680</size>
+      <lang>en,ru</lang>
+      <standalone>false</standalone>
+      <statid>2388298</statid>
+      <descurl>https://nlbproject.com/hub/game?name=mansion</descurl>
+   </game>
+   <game>
+      <name>cat_jp</name>
+      <title>Returning the Quantum Cat (Japanese)</title>
+      <version>1.1</version>
+      <url>https://nlbproject.com/dist/games/community/instead-cat_jp-1.1.zip</url>
+      <size>14527626</size>
+      <lang>en</lang>
+      <standalone>false</standalone>
+      <statid>3933731</statid>
+      <descurl>https://nlbproject.com/hub/game?name=cat_jp</descurl>
+   </game>
+   <game>
+      <name>cat</name>
+      <title>Returning the Quantum Cat</title>
+      <version>1.6</version>
+      <url>https://nlbproject.com/dist/games/community/instead-cat-1.6.zip</url>
+      <size>4544620</size>
+      <lang>en,ru</lang>
+      <standalone>false</standalone>
+      <statid>3933731</statid>
+      <descurl>https://nlbproject.com/hub/game?name=cat</descurl>
+   </game>
+   <game>
+      <name>anothermars</name>
+      <title>Another Mars</title>
+      <version>1.5</version>
+      <url>https://nlbproject.com/dist/games/community/instead-anothermars-1.5.zip</url>
+      <size>17235642</size>
+      <lang>ru</lang>
+      <standalone>false</standalone>
+      <statid>2388305</statid>
+      <descurl>https://nlbproject.com/hub/game?name=anothermars</descurl>
+   </game>
 </game_list>
