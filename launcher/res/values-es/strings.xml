@@ -9,7 +9,6 @@
     <string name="ready">Listo</string>
     <string name="agame">Acerca del juego</string>
     <string name="redwn">Restablecer y \n reinstalar los archivos de la SD</string>
-    <string name="basic">Oficial</string>
     <string name="repo">Lista de juegos</string>
     <string name="conferror">Resolución de pantalla es un error! Intente volver a configurar otra vez!</string>
     <string name="ok">Ok</string>
@@ -59,7 +58,6 @@
     <string name="blang">Su idioma</string>
     <string name="menudown">Descarga del juego</string>
     <string name="menunewstart">Iniciar nuevo juego</string>
-    <string name="alter">No es oficial</string>
     <string name="delrc">Eliminado la configuración!</string>
     <string name="yes">¡Sí!</string>
     <string name="gmlist">Lista de juegos</string>
@@ -83,4 +81,6 @@
     <string name="scroff">Mantenga la pantalla se volvió</string>
     <string name="theme">Tema:</string>
     <string name="portrait">Retrato orientación de la pantalla</string>
+    <string name="basic">Catálogo</string>
+    <string name="alter">Sandbox</string>
 </resources>

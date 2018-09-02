@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:installLocation="auto" android:versionCode="147001"
-    android:versionName="1.4.7" package="com.nlbhub.instead.launcher" xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest android:installLocation="auto" android:versionCode="148001"
+    android:versionName="1.4.8" package="com.nlbhub.instead.launcher" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
-    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="26"/>
+    <uses-sdk android:minSdkVersion="13" android:targetSdkVersion="26"/>
 
     <!-- OpenGL ES 2.0 -->
     <uses-feature android:glEsVersion="0x00020000" />

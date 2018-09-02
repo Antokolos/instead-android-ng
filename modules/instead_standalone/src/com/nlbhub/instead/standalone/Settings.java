@@ -15,7 +15,7 @@ public class Settings {
     public static final boolean NO_CURSOR_DEFAULT = false;
     public static final boolean OWNTHEME_DEFAULT = true;
     public static final boolean ENFORCE_SYSTEM_STORAGE_DEFAULT = false;
-    public static final String THEME_DEFAULT = "default";
+    public static final String THEME_DEFAULT = "mobile";
     private boolean music;
     private boolean nativelog;
     private boolean enforceresolution;

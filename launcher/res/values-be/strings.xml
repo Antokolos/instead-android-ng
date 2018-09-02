@@ -9,7 +9,6 @@
     <string name="ready">Гатова</string>
     <string name="agame">Аб гульні</string>
     <string name="redwn">Скінуць налады і \n пераўсталяваць файлы на SD</string>
-    <string name="basic">Афіцыйны</string>
     <string name="repo">Выбар спісу гульняў</string>
     <string name="conferror">Ня правельно вызначана дазвол экрана! Паспрабуйце перастварыць налады!</string>
     <string name="ok">Ок</string>
@@ -59,7 +58,6 @@
     <string name="blang">На вашым мове</string>
     <string name="menudown">Загрузіць гульню</string>
     <string name="menunewstart">Пачаць новую гульню</string>
-    <string name="alter">Не афіцыйны</string>
     <string name="delrc">Налады выдаленыя</string>
     <string name="yes">Ды</string>
     <string name="gmlist">Спіс гульняў</string>
@@ -83,4 +81,6 @@
     <string name="scroff">Трымаць экран уключаным</string>
     <string name="theme">Тэма:</string>
     <string name="portrait">Партрэтная арыентацыя экрана</string>
+    <string name="basic">Каталог</string>
+    <string name="alter">Пясочніца</string>
 </resources>
