@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Antokolos on 29.01.16.
@@ -92,7 +93,8 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         args[9] = settings.getTheme();
         args[10] = StorageResolver.getThemesDirectoryPath();
         args[11] = properties.isStandalone() ? "Y" : null;
-        args[13] = (nocursor) ? "Y" : null;
+        args[12] = (nocursor) ? "Y" : null;
+        args[13] = Locale.getDefault().getLanguage();
         return args;
     }
 

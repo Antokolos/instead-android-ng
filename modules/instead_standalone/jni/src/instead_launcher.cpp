@@ -115,6 +115,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     const char* themespath = argc >= 12 ? argv[11] : NULL;
     const char* standalone = argc >= 13 ? argv[12] : NULL;
     const char* nocursor = argc >= 14 ? argv[13] : NULL;
+    const char* lang = argc >= 15 ? argv[14] : NULL;
     
     if (nativelog != NULL) {
         logFile = fopen(nativelog, "w");
@@ -123,7 +124,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     
     /* Run the application code! */
     int status;
-    char* _argv[18];
+    char* _argv[20];
     int n = 1;
     if (path != NULL) {
         printf("path = %s\n", path);
@@ -186,12 +187,18 @@ extern "C" int SDL_main(int argc, char** argv) {
         printf("Force own theme = YES\n");
         _argv[n++] = SDL_strdup("-owntheme");
     } else {
+        printf("Force own theme = NO\n");
         _argv[n++] = SDL_strdup("-notheme");
     }
     if (is_not_blank(theme)) {
         printf("theme = %s\n", theme);
         _argv[n++] = SDL_strdup("-theme");
         _argv[n++] = SDL_strdup(theme);
+    }
+    if (is_not_blank(lang)) {
+        printf("lang = %s\n", lang);
+        _argv[n++] = SDL_strdup("-lang");
+        _argv[n++] = SDL_strdup(lang);
     }
     _argv[n] = NULL;
 
