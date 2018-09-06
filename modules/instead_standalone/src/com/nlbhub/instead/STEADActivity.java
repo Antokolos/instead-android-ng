@@ -41,6 +41,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         try {
             // I'm using /data/data/myPackage/app_libs (using Ctx.getDir("libs",Context.MODE_PRIVATE); returns that path).
             String libsDirPath = Ctx.getDir("libs", Context.MODE_PRIVATE).getCanonicalPath() + "/";
+            System.load(libsDirPath + "libgnustl_shared.so");
             System.load(libsDirPath + "libSDL2.so");
             System.load(libsDirPath + "libSDL2_image.so");
             System.load(libsDirPath + "libmpg123.so");
