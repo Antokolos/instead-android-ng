@@ -1,36 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<game_list version="1.0">
-   <game>
-      <name>chaperon_new</name>
-      <title>Return of Red Riding Hood, New Adventures</title>
-      <version>1.02</version>
-      <url>https://nlbproject.com/dist/games/nlbproject/instead-chaperon_new-1.02.zip</url>
-      <size>166332962</size>
-      <lang>en,ru</lang>
-      <standalone>true</standalone>
-      <statid>2373777</statid>
-      <descurl>https://nlbproject.com/hub/game?name=chaperon_new</descurl>
-   </game>
-   <game>
-      <name>barbarian_caves_demo</name>
-      <title>The Barbarian and the Subterranean Caves (Demo)</title>
-      <version>1.85</version>
-      <url>https://nlbproject.com/dist/games/nlbproject/instead-barbarian_caves_demo-1.85.zip</url>
-      <size>64062740</size>
-      <lang>en,ru</lang>
-      <standalone>true</standalone>
-      <statid>3941884</statid>
-      <descurl>https://nlbproject.com/hub/game?name=barbarian_caves_demo</descurl>
-   </game>
-   <game>
-      <name>am_i_a_monster_vn</name>
-      <title>Am I a Monster?</title>
-      <version>1.04</version>
-      <url>https://nlbproject.com/dist/games/nlbproject/instead-am_i_a_monster_vn-1.04.zip</url>
-      <size>67398745</size>
-      <lang>en,ru</lang>
-      <standalone>true</standalone>
-      <statid>3941987</statid>
-      <descurl>https://nlbproject.com/hub/game?name=am_i_a_monster_vn</descurl>
-   </game>
+<?xml version="1.0" encoding="UTF-8"?><game_list version="1.0">
+<game>
+<name>chaperon_new</name>
+<title>Return of Red Riding Hood, New Adventures</title>
+<version>1.02</version>
+<url>https://nlbproject.com/dist/games/nlbproject/instead-chaperon_new-1.02.zip</url>
+<size>166342400</size>
+<lang>en,ru</lang>
+<standalone>true</standalone>
+<premium>false</premium>
+<statid>2373777</statid>
+<descurl>https://nlbproject.com/hub/game?name=chaperon_new</descurl>
+</game>
+<game>
+<name>barbarian_caves_demo</name>
+<title>The Barbarian and the Subterranean Caves (Demo)</title>
+<version>1.85</version>
+<url>https://nlbproject.com/dist/games/nlbproject/instead-barbarian_caves_demo-1.85.zip</url>
+<size>64062740</size>
+<lang>en,ru</lang>
+<standalone>true</standalone>
+<premium>false</premium>
+<statid>3941884</statid>
+<descurl>https://nlbproject.com/hub/game?name=barbarian_caves_demo</descurl>
+</game>
+<game>
+<name>am_i_a_monster_vn</name>
+<title>Am I a Monster?</title>
+<version>1.04</version>
+<url>https://nlbproject.com/dist/games/nlbproject/instead-am_i_a_monster_vn-1.04.zip</url>
+<size>67398745</size>
+<lang>en,ru</lang>
+<standalone>true</standalone>
+<premium>false</premium>
+<statid>3941987</statid>
+<descurl>https://nlbproject.com/hub/game?name=am_i_a_monster_vn</descurl>
+</game>
 </game_list>

@@ -9,11 +9,15 @@ cd $LUAJITM_PATH
 mkdir out
 mkdir out/armeabi
 mkdir out/armeabi-v7a
+mkdir out/arm64-v8a
 mkdir out/x86
+mkdir out/x86_64
 cd $LUAJIT_PATH
 ./make_armeabi.sh
 ./make_armeabi-v7a.sh
+./make_arm64-v8a.sh
 ./make_x86.sh
+./make_x86_64.sh
 cd $ROOT_DIR
 $NDK_HOME/ndk-build clean NDK_PROJECT_PATH=$PROJECT_PATH NDK_APPLICATION_MK=$ROOT_DIR/Application.mk
 $ROOT_DIR/clean.sh
@@ -32,8 +36,20 @@ for f in $(ls *.so)
 do
   cat /dev/null > $f
 done
+cd $LIBS_HOME/arm64-v8a
+zip $RAW_HOME/libs_arm64_v8a.zip *.so
+for f in $(ls *.so)
+do
+  cat /dev/null > $f
+done
 cd $LIBS_HOME/x86
 zip $RAW_HOME/libs_x86.zip *.so
+for f in $(ls *.so)
+do
+  cat /dev/null > $f
+done
+cd $LIBS_HOME/x86_64
+zip $RAW_HOME/libs_x86_64.zip *.so
 for f in $(ls *.so)
 do
   cat /dev/null > $f

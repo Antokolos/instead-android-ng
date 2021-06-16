@@ -40,4 +40,6 @@ modules/instead_standalone/res/raw/games.zip
 modules/instead_standalone/res/raw/libs_armeabi.zip
 modules/instead_standalone/res/raw/libs_armeabi_v7a.zip
 modules/instead_standalone/res/raw/libs_x86.zip
+modules/instead_standalone/res/raw/libs_arm64_v8a.zip
+modules/instead_standalone/res/raw/libs_x86_64.zip
 modules/instead_standalone/res/raw/themes.zip

@@ -120,9 +120,25 @@ public class DataDownloader extends Thread {
 		}
 	}
 
+	public static boolean isArm64v8() {
+		try {
+			return Build.VERSION.SDK_INT >= 4 && Build.class.getField("CPU_ABI").get(null).toString().startsWith("arm64-v8a");
+		} catch (Throwable ignore) {}
+
+		return false;
+	}
+
 	public static boolean isArmv7() {
 		try {
 			return Build.VERSION.SDK_INT >= 4 && Build.class.getField("CPU_ABI").get(null).toString().startsWith("armeabi-v7");
+		} catch (Throwable ignore) {}
+
+		return false;
+	}
+
+	public static boolean isX86_64() {
+		try {
+			return Build.VERSION.SDK_INT >= 4 && Build.class.getField("CPU_ABI").get(null).toString().startsWith("x86_64");
 		} catch (Throwable ignore) {}
 
 		return false;
@@ -137,8 +153,12 @@ public class DataDownloader extends Thread {
 	}
 
 	private InputStream getAppropriateLibsStream() {
-		if (isArmv7()) {
+        if (isArm64v8()) {
+            return Parent.getResources().openRawResource(R.raw.libs_arm64_v8a);
+        } else if (isArmv7()) {
 			return Parent.getResources().openRawResource(R.raw.libs_armeabi_v7a);
+		} else if (isX86_64()) {
+			return Parent.getResources().openRawResource(R.raw.libs_x86_64);
 		} else if (isX86()) {
 			return Parent.getResources().openRawResource(R.raw.libs_x86);
 		} else {

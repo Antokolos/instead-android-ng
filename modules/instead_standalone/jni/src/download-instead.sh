@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export INSTEAD_VERSION="3.2.1"
+export INSTEAD_VERSION="3.3.4"
 
 rm -rf instead
 curl -O -L https://github.com/instead-hub/instead/archive/$INSTEAD_VERSION.zip
