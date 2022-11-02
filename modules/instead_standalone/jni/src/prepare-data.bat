@@ -30,9 +30,9 @@ if exist "%TOOLSDIR%\jobb.bat" (
         %A7Z% x -o%RESPATH%\data %CUR_DIR%\data.zip
         mkdir %CUR_DIR%\games
         copy /y NUL %CUR_DIR%\games\.nomedia >NUL
-        echo Bundled game archive does not exist, using tutorial3 game as default
+        echo Bundled game archive does not exist, using tutorial game as default
         mkdir %CUR_DIR%\games\bundled
-        robocopy %CUR_DIR%\instead\games\tutorial3\ %CUR_DIR%\games\bundled\ /MIR
+        robocopy %CUR_DIR%\instead\games\tutorial\ %CUR_DIR%\games\bundled\ /MIR
         robocopy %CUR_DIR%\instead\lang\ %RESPATH%\data\lang /MIR
         del /Q %RESPATH%\data\lang\CMakeLists.txt
         del /Q %RESPATH%\data\lang\Makefile

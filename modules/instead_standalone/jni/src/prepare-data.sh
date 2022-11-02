@@ -25,10 +25,10 @@ then
         mkdir ./games/bundled
         touch ./games/.nomedia
     else
-        echo Bundled game archive does not exist, using tutorial3 game as default
+        echo Bundled game archive does not exist, using tutorial game as default
         mkdir ./games/bundled
         touch ./games/.nomedia        
-        cp -r ./instead/games/tutorial3/* ./games/bundled/
+        cp -r ./instead/games/tutorial/* ./games/bundled/
     fi
     cp ./instead/lang/* $RESPATH/data/lang
     rm -f $RESPATH/data/lang/CMakeLists.txt
