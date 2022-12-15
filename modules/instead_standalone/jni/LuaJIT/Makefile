@@ -10,13 +10,13 @@
 # For MSVC, please follow the instructions given in src/msvcbuild.bat.
 # For MinGW and Cygwin, cd to src and run make with the Makefile there.
 #
-# Copyright (C) 2005-2016 Mike Pall. See Copyright Notice in luajit.h
+# Copyright (C) 2005-2022 Mike Pall. See Copyright Notice in luajit.h
 ##############################################################################
 
 MAJVER=  2
 MINVER=  1
 RELVER=  0
-PREREL=  -beta2
+PREREL=  -beta3
 VERSION= $(MAJVER).$(MINVER).$(RELVER)$(PREREL)
 ABIVER=  5.1
 
@@ -33,7 +33,8 @@ DPREFIX= $(DESTDIR)$(PREFIX)
 INSTALL_BIN=   $(DPREFIX)/bin
 INSTALL_LIB=   $(DPREFIX)/$(MULTILIB)
 INSTALL_SHARE= $(DPREFIX)/share
-INSTALL_INC=   $(DPREFIX)/include/luajit-$(MAJVER).$(MINVER)
+INSTALL_DEFINC= $(DPREFIX)/include/luajit-$(MAJVER).$(MINVER)
+INSTALL_INC=   $(INSTALL_DEFINC)
 
 INSTALL_LJLIBD= $(INSTALL_SHARE)/luajit-$(VERSION)
 INSTALL_JITLIB= $(INSTALL_LJLIBD)/jit
@@ -47,17 +48,18 @@ INSTALL_PKGCONFIG= $(INSTALL_LIB)/pkgconfig
 INSTALL_TNAME= luajit-$(VERSION)
 INSTALL_TSYMNAME= luajit
 INSTALL_ANAME= libluajit-$(ABIVER).a
-INSTALL_SONAME= libluajit-$(ABIVER).so.$(MAJVER).$(MINVER).$(RELVER)
-INSTALL_SOSHORT= libluajit-$(ABIVER).so
-INSTALL_DYLIBNAME= libluajit-$(ABIVER).$(MAJVER).$(MINVER).$(RELVER).dylib
+INSTALL_SOSHORT1= libluajit-$(ABIVER).so
+INSTALL_SOSHORT2= libluajit-$(ABIVER).so.$(MAJVER)
+INSTALL_SONAME= $(INSTALL_SOSHORT2).$(MINVER).$(RELVER)
 INSTALL_DYLIBSHORT1= libluajit-$(ABIVER).dylib
 INSTALL_DYLIBSHORT2= libluajit-$(ABIVER).$(MAJVER).dylib
+INSTALL_DYLIBNAME= libluajit-$(ABIVER).$(MAJVER).$(MINVER).$(RELVER).dylib
 INSTALL_PCNAME= luajit.pc
 
 INSTALL_STATIC= $(INSTALL_LIB)/$(INSTALL_ANAME)
 INSTALL_DYN= $(INSTALL_LIB)/$(INSTALL_SONAME)
-INSTALL_SHORT1= $(INSTALL_LIB)/$(INSTALL_SOSHORT)
-INSTALL_SHORT2= $(INSTALL_LIB)/$(INSTALL_SOSHORT)
+INSTALL_SHORT1= $(INSTALL_LIB)/$(INSTALL_SOSHORT1)
+INSTALL_SHORT2= $(INSTALL_LIB)/$(INSTALL_SOSHORT2)
 INSTALL_T= $(INSTALL_BIN)/$(INSTALL_TNAME)
 INSTALL_TSYM= $(INSTALL_BIN)/$(INSTALL_TSYMNAME)
 INSTALL_PC= $(INSTALL_PKGCONFIG)/$(INSTALL_PCNAME)
@@ -74,9 +76,12 @@ SYMLINK= ln -sf
 INSTALL_X= install -m 0755
 INSTALL_F= install -m 0644
 UNINSTALL= $(RM)
-LDCONFIG= ldconfig -n
+LDCONFIG= ldconfig -n 2>/dev/null
 SED_PC= sed -e "s|^prefix=.*|prefix=$(PREFIX)|" \
             -e "s|^multilib=.*|multilib=$(MULTILIB)|"
+ifneq ($(INSTALL_DEFINC),$(INSTALL_INC))
+  SED_PC+= -e "s|^includedir=.*|includedir=$(INSTALL_INC)|"
+endif
 
 FILE_T= luajit
 FILE_A= libluajit.a
@@ -85,16 +90,22 @@ FILE_MAN= luajit.1
 FILE_PC= luajit.pc
 FILES_INC= lua.h lualib.h lauxlib.h luaconf.h lua.hpp luajit.h
 FILES_JITLIB= bc.lua bcsave.lua dump.lua p.lua v.lua zone.lua \
-	      dis_x86.lua dis_x64.lua dis_arm.lua dis_ppc.lua \
-	      dis_mips.lua dis_mipsel.lua vmdef.lua
+	      dis_x86.lua dis_x64.lua dis_arm.lua dis_arm64.lua \
+	      dis_arm64be.lua dis_ppc.lua dis_mips.lua dis_mipsel.lua \
+	      dis_mips64.lua dis_mips64el.lua vmdef.lua
 
 ifeq (,$(findstring Windows,$(OS)))
-  ifeq (Darwin,$(shell uname -s))
-    INSTALL_SONAME= $(INSTALL_DYLIBNAME)
-    INSTALL_SHORT1= $(INSTALL_LIB)/$(INSTALL_DYLIBSHORT1)
-    INSTALL_SHORT2= $(INSTALL_LIB)/$(INSTALL_DYLIBSHORT2)
-    LDCONFIG= :
-  endif
+  HOST_SYS:= $(shell uname -s)
+else
+  HOST_SYS= Windows
+endif
+TARGET_SYS?= $(HOST_SYS)
+
+ifeq (Darwin,$(TARGET_SYS))
+  INSTALL_SONAME= $(INSTALL_DYLIBNAME)
+  INSTALL_SOSHORT1= $(INSTALL_DYLIBSHORT1)
+  INSTALL_SOSHORT2= $(INSTALL_DYLIBSHORT2)
+  LDCONFIG= :
 endif
 
 ##############################################################################
@@ -114,7 +125,7 @@ install: $(INSTALL_DEP)
 	$(RM) $(INSTALL_DYN) $(INSTALL_SHORT1) $(INSTALL_SHORT2)
 	cd src && test -f $(FILE_SO) && \
 	  $(INSTALL_X) $(FILE_SO) $(INSTALL_DYN) && \
-	  $(LDCONFIG) $(INSTALL_LIB) && \
+	  ( $(LDCONFIG) $(INSTALL_LIB) || : ) && \
 	  $(SYMLINK) $(INSTALL_SONAME) $(INSTALL_SHORT1) && \
 	  $(SYMLINK) $(INSTALL_SONAME) $(INSTALL_SHORT2) || :
 	cd etc && $(INSTALL_F) $(FILE_MAN) $(INSTALL_MAN)

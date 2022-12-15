@@ -1,6 +1,6 @@
 /*
 ** Assembler VM interface definitions.
-** Copyright (C) 2005-2016 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2022 Mike Pall. See Copyright Notice in luajit.h
 */
 
 #ifndef _LJ_VM_H
@@ -17,10 +17,17 @@ LJ_ASMF int lj_vm_cpcall(lua_State *L, lua_CFunction func, void *ud,
 LJ_ASMF int lj_vm_resume(lua_State *L, TValue *base, int nres1, ptrdiff_t ef);
 LJ_ASMF_NORET void LJ_FASTCALL lj_vm_unwind_c(void *cframe, int errcode);
 LJ_ASMF_NORET void LJ_FASTCALL lj_vm_unwind_ff(void *cframe);
+#if LJ_ABI_WIN && LJ_TARGET_X86
+LJ_ASMF_NORET void LJ_FASTCALL lj_vm_rtlunwind(void *cframe, void *excptrec,
+					       void *unwinder, int errcode);
+#endif
 LJ_ASMF void lj_vm_unwind_c_eh(void);
 LJ_ASMF void lj_vm_unwind_ff_eh(void);
 #if LJ_TARGET_X86ORX64
 LJ_ASMF void lj_vm_unwind_rethrow(void);
+#endif
+#if LJ_TARGET_MIPS
+LJ_ASMF void lj_vm_unwind_stub(void);
 #endif
 
 /* Miscellaneous functions. */
@@ -44,6 +51,7 @@ LJ_ASMF void lj_vm_inshook(void);
 LJ_ASMF void lj_vm_rethook(void);
 LJ_ASMF void lj_vm_callhook(void);
 LJ_ASMF void lj_vm_profhook(void);
+LJ_ASMF void lj_vm_IITERN(void);
 
 /* Trace exit handling. */
 LJ_ASMF void lj_vm_exit_handler(void);
@@ -75,10 +83,6 @@ LJ_ASMF int32_t LJ_FASTCALL lj_vm_modi(int32_t, int32_t);
 LJ_ASMF void lj_vm_floor_sse(void);
 LJ_ASMF void lj_vm_ceil_sse(void);
 LJ_ASMF void lj_vm_trunc_sse(void);
-LJ_ASMF void lj_vm_powi_sse(void);
-#define lj_vm_powi	NULL
-#else
-LJ_ASMF double lj_vm_powi(double, int32_t);
 #endif
 #if LJ_TARGET_PPC || LJ_TARGET_ARM64
 #define lj_vm_trunc	trunc
@@ -88,14 +92,10 @@ LJ_ASMF double lj_vm_trunc(double);
 LJ_ASMF double lj_vm_trunc_sf(double);
 #endif
 #endif
-#ifdef LUAJIT_NO_EXP2
-LJ_ASMF double lj_vm_exp2(double);
-#else
-#define lj_vm_exp2	exp2
-#endif
 #if LJ_HASFFI
 LJ_ASMF int lj_vm_errno(void);
 #endif
+LJ_ASMF TValue *lj_vm_next(GCtab *t, uint32_t idx);
 #endif
 
 /* Continuations for metamethods. */

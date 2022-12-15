@@ -1,6 +1,6 @@
 /*
 ** Instruction dispatch handling.
-** Copyright (C) 2005-2016 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2022 Mike Pall. See Copyright Notice in luajit.h
 */
 
 #ifndef _LJ_DISPATCH_H
@@ -31,7 +31,7 @@ extern double __divdf3(double a, double b);
 #define SFGOTDEF(_)
 #endif
 #if LJ_HASJIT
-#define JITGOTDEF(_)	_(lj_trace_exit) _(lj_trace_hot)
+#define JITGOTDEF(_)	_(lj_err_trace) _(lj_trace_exit) _(lj_trace_hot)
 #else
 #define JITGOTDEF(_)
 #endif
@@ -89,12 +89,20 @@ typedef uint16_t HotCount;
 typedef struct GG_State {
   lua_State L;				/* Main thread. */
   global_State g;			/* Global state. */
+#if LJ_TARGET_ARM && !LJ_TARGET_NX
+  /* Make g reachable via K12 encoded DISPATCH-relative addressing. */
+  uint8_t align1[(16-sizeof(global_State))&15];
+#endif
 #if LJ_TARGET_MIPS
   ASMFunction got[LJ_GOT__MAX];		/* Global offset table. */
 #endif
 #if LJ_HASJIT
   jit_State J;				/* JIT state. */
   HotCount hotcount[HOTCOUNT_SIZE];	/* Hot counters. */
+#if LJ_TARGET_ARM && !LJ_TARGET_NX
+  /* Ditto for J. */
+  uint8_t align2[(16-sizeof(jit_State)-sizeof(HotCount)*HOTCOUNT_SIZE)&15];
+#endif
 #endif
   ASMFunction dispatch[GG_LEN_DISP];	/* Instruction dispatch tables. */
   BCIns bcff[GG_NUM_ASMFF];		/* Bytecode for ASM fast functions. */
@@ -107,6 +115,7 @@ typedef struct GG_State {
 #define J2G(J)		(&J2GG(J)->g)
 #define G2J(gl)		(&G2GG(gl)->J)
 #define L2J(L)		(&L2GG(L)->J)
+#define GG_G2J		(GG_OFS(J) - GG_OFS(g))
 #define GG_G2DISP	(GG_OFS(dispatch) - GG_OFS(g))
 #define GG_DISP2G	(GG_OFS(g) - GG_OFS(dispatch))
 #define GG_DISP2J	(GG_OFS(J) - GG_OFS(dispatch))

@@ -1,6 +1,6 @@
 /*
 ** String formatting for floating-point numbers.
-** Copyright (C) 2005-2016 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2022 Mike Pall. See Copyright Notice in luajit.h
 ** Contributed by Peter Cawley.
 */
 
@@ -138,7 +138,7 @@ static uint32_t nd_mul2k(uint32_t* nd, uint32_t ndhi, uint32_t k,
     }
     if (carry_in) {
       nd[++ndhi] = carry_in; carry_in = 0;
-      if(start++ == ndlo) ++ndlo;
+      if (start++ == ndlo) ++ndlo;
     }
     k -= ND_MUL2K_MAX_SHIFT;
   }
@@ -257,7 +257,7 @@ static int nd_similar(uint32_t* nd, uint32_t ndhi, uint32_t* ref, MSize hilen,
   } else {
     prec -= hilen - 9;
   }
-  lua_assert(prec < 9);
+  lj_assertX(prec < 9, "bad precision %d", prec);
   lj_strfmt_wuint9(nd9, nd[ndhi]);
   lj_strfmt_wuint9(ref9, *ref);
   return !memcmp(nd9, ref9, prec) && (nd9[prec] < '5') == (ref9[prec] < '5');
@@ -364,6 +364,7 @@ static char *lj_strfmt_wfnum(SBuf *sb, SFormat sf, lua_Number n, char *p)
       /* Precision is sufficiently low that rescaling will probably work. */
       if ((ndebias = rescale_e[e >> 6])) {
 	t.n = n * rescale_n[e >> 6];
+	if (LJ_UNLIKELY(!e)) t.n *= 1e10, ndebias -= 10;
 	t.u64 -= 2; /* Convert 2ulp below (later we convert 2ulp above). */
 	nd[0] = 0x100000 | (t.u32.hi & 0xfffff);
 	e = ((t.u32.hi >> 20) & 0x7ff) - 1075 - (ND_MUL2K_MAX_SHIFT < 29);
@@ -413,14 +414,14 @@ static char *lj_strfmt_wfnum(SBuf *sb, SFormat sf, lua_Number n, char *p)
 	** Rescaling was performed, but this introduced some error, and might
 	** have pushed us across a rounding boundary. We check whether this
 	** error affected the result by introducing even more error (2ulp in
-	** either direction), and seeing whether a roundary boundary was
+	** either direction), and seeing whether a rounding boundary was
 	** crossed. Having already converted the -2ulp case, we save off its
 	** most significant digits, convert the +2ulp case, and compare them.
 	*/
 	int32_t eidx = e + 70 + (ND_MUL2K_MAX_SHIFT < 29)
 			 + (t.u32.lo >= 0xfffffffe && !(~t.u32.hi << 12));
 	const int8_t *m_e = four_ulp_m_e + eidx * 2;
-	lua_assert(0 <= eidx && eidx < 128);
+	lj_assertG_(G(sbufL(sb)), 0 <= eidx && eidx < 128, "bad eidx %d", eidx);
 	nd[33] = nd[ndhi];
 	nd[32] = nd[(ndhi - 1) & 0x3f];
 	nd[31] = nd[(ndhi - 2) & 0x3f];
@@ -479,7 +480,7 @@ static char *lj_strfmt_wfnum(SBuf *sb, SFormat sf, lua_Number n, char *p)
       if ((prec | (sf & STRFMT_F_ALT))) {
 	/* Emit fractional part. */
 	p[1] = '.'; p += 2;
-	prec -= (q - p); p = q; /* Account for the digits already emitted. */
+	prec -= (MSize)(q - p); p = q; /* Account for digits already emitted. */
 	/* Then emit chunks of 9 digits (this may emit 8 digits too many). */
 	for (i = ndhi; (int32_t)prec > 0 && i != ndlo; prec -= 9) {
 	  i = (i - 1) & 0x3f;
@@ -575,7 +576,7 @@ static char *lj_strfmt_wfnum(SBuf *sb, SFormat sf, lua_Number n, char *p)
 /* Add formatted floating-point number to buffer. */
 SBuf *lj_strfmt_putfnum(SBuf *sb, SFormat sf, lua_Number n)
 {
-  setsbufP(sb, lj_strfmt_wfnum(sb, sf, n, NULL));
+  sb->w = lj_strfmt_wfnum(sb, sf, n, NULL);
   return sb;
 }
 
