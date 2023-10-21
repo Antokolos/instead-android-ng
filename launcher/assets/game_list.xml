@@ -1,21 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game_list version="1.0">
  <game>
+  <name>WormentRemake</name>
+  <date>2023-09-27</date>
+  <title>Червемент-ремейк</title>
+  <author>GrAntSOFT [Гринблат Антон]</author>
+  <description>Червемент-ремейк. Игра представляет собой ремейк первой части Червемента, написанного мной на Delphi ещё аж в 2002-м году. Вот такое вот &amp;quot;20 лет спустя&amp;quot;. ОГРОМНОЕ СПАСИБО за движок INSTEAD Петру Косых и всем, кто помогал ему! Ремейк графики я делал совместно с ботами нейросетей @StableDiffusionWrapperBot и @stable_diffusion_bot</description>
+  <image>https://instead-games.ru/games/screenshots/20230927132135437.png</image>
+  <version>1.0.2</version>
+  <url>https://instead-games.ru//download/instead-WormentRemake-1.0.2.zip</url>
+  <size>19298928</size>
+  <lang>ru</lang>
+  <descurl>https://instead-games.ru/game.php?ID=384</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>WormentRemake</sandbox>
+ </game>
+ <game>
   <name>rangers</name>
-  <date>2022-09-04</date>
+  <date>2023-05-28</date>
   <title>Космические рейнджеры</title>
   <author>Peter Kosyh</author>
   <description>Модуль для проигрывания TGE квестов.</description>
   <image>https://instead-games.ru/games/screenshots/20140314112011710.jpg</image>
-  <version>1.8.2</version>
-  <url>https://instead-games.ru//download/instead-rangers-1.8.2.zip</url>
-  <size>47324005</size>
+  <version>1.8.4</version>
+  <url>https://instead-games.ru//download/instead-rangers-1.8.4.zip</url>
+  <size>47324028</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=126</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>rangers</sandbox>
+ </game>
+ <game>
+  <name>anothermars</name>
+  <date>2023-05-13</date>
+  <title>Другой Марс</title>
+  <author>Пётр Косых</author>
+  <description>Год 2027 от Рождества Христова.&#13;
+&#13;
+Экипаж миссии &amp;quot;Mars One&amp;quot; высаживается на Марс. Задача миссии -- собрать первую марсианскую базу и подготовиться к встрече второго экипажа.&#13;
+&#13;
+Ты -- инженер Александр Морозов, один из четырёх поселенцев. Сегодня, после сборки последнего жилого модуля, ты впервые получил возможность изучить окрестности базы.&#13;
+&#13;
+Надев скафандр и взяв необходимое оборудование, ты направляешься в шлюзовой модуль...</description>
+  <image>https://instead-games.ru/games/screenshots/20180801112543132.png</image>
+  <version>1.9.1</version>
+  <url>https://instead-games.ru//download/instead-anothermars-1.9.1.zip</url>
+  <size>17298197</size>
+  <lang>ru</lang>
+  <descurl>https://instead-games.ru/game.php?ID=298</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>anothermars</sandbox>
+ </game>
+ <game>
+  <name>17rooms-curse</name>
+  <date>2023-05-13</date>
+  <title>17 комнат: Проклятие старого поместья</title>
+  <author>vvollo + авторы оригинала</author>
+  <description>Изначально планировалась только как форк игры «17 комнат» с косметическими изменениями, но он очень быстро оброс идеями и превратился в... римейк? спин-офф? фанфик? Даже не знаю, как правильно назвать :)</description>
+  <image>https://instead-games.ru/games/screenshots/20220413125355109.png</image>
+  <version>2.0.0</version>
+  <url>https://instead-games.ru//download/instead-17rooms-curse-2.0.0.zip</url>
+  <size>775708</size>
+  <lang>ru</lang>
+  <descurl>https://instead-games.ru/game.php?ID=371</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>17rooms-curse</sandbox>
+ </game>
+ <game>
+  <name>library3</name>
+  <date>2023-05-13</date>
+  <title>Библиотека 3: Вторжение</title>
+  <author>Андрей Лобанов</author>
+  <description>Продолжение истории про планету Библиотеку.&#13;
+&#13;
+Специально для паровозика №8.</description>
+  <image>https://instead-games.ru/games/screenshots/20230417191955573.png</image>
+  <version>0.9</version>
+  <url>https://instead-games.ru//download/instead-library3-0.9.zip</url>
+  <size>764795</size>
+  <lang>ru</lang>
+  <descurl>https://instead-games.ru/game.php?ID=379</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>library3</sandbox>
  </game>
  <game>
   <name>quarantine</name>
-  <date>2022-06-14</date>
+  <date>2023-01-03</date>
   <title>Карантин</title>
   <author>Петр Косых</author>
   <description>14 октября 1961 года. 87°52.09 N 147°14.81 E. Секретная дрейфующая полярная станция СП-2. 150 километров от Северного полюса. До начала полярной ночи — 7 дней.&#13;
@@ -32,9 +107,12 @@
   <image>https://instead-games.ru/games/screenshots/20131127193948222.png</image>
   <version>0.4</version>
   <url>https://instead-games.ru//download/instead-quarantine-0.4.zip</url>
-  <size>6073167</size>
+  <size>6064219</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=124</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>quarantine</sandbox>
  </game>
  <game>
   <name>great_grandmas_chest</name>
@@ -48,6 +126,9 @@
   <size>67675</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=22</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>great_grandmas_chest</sandbox>
  </game>
  <game>
   <name>cuba</name>
@@ -63,6 +144,9 @@
   <size>12093491</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=108</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>cuba</sandbox>
  </game>
  <game>
   <name>code_10</name>
@@ -77,6 +161,9 @@
   <size>32531661</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=91</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>code_10</sandbox>
  </game>
  <game>
   <name>dark_planet</name>
@@ -90,6 +177,9 @@
   <size>4014468</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=367</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>dark_planet</sandbox>
  </game>
  <game>
   <name>17rooms</name>
@@ -109,25 +199,9 @@
   <size>758057</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=366</descurl>
- </game>
- <game>
-  <name>anothermars</name>
-  <date>2021-09-08</date>
-  <title>Другой Марс</title>
-  <author>Пётр Косых</author>
-  <description>Год 2027 от Рождества Христова.&#13;
-&#13;
-Экипаж миссии &amp;quot;Mars One&amp;quot; высаживается на Марс. Задача миссии -- собрать первую марсианскую базу и подготовиться к встрече второго экипажа.&#13;
-&#13;
-Ты -- инженер Александр Морозов, один из четырёх поселенцев. Сегодня, после сборки последнего жилого модуля, ты впервые получил возможность изучить окрестности базы.&#13;
-&#13;
-Надев скафандр и взяв необходимое оборудование, ты направляешься в шлюзовой модуль...</description>
-  <image>https://instead-games.ru/games/screenshots/20180801112543132.png</image>
-  <version>1.9</version>
-  <url>https://instead-games.ru//download/instead-anothermars-1.9.zip</url>
-  <size>17298176</size>
-  <lang>ru</lang>
-  <descurl>https://instead-games.ru/game.php?ID=298</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>17rooms</sandbox>
  </game>
  <game>
   <name>snowstorm</name>
@@ -151,6 +225,9 @@
   <size>10089382</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=320</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>snowstorm</sandbox>
  </game>
  <game>
   <name>archive</name>
@@ -172,6 +249,9 @@
   <size>17406766</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=343</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>archive</sandbox>
  </game>
  <game>
   <name>moon9</name>
@@ -196,6 +276,9 @@ https://instead.itch.io/moon9</description>
   <size>6372953</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=360</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>moon9</sandbox>
  </game>
  <game>
   <name>arobot</name>
@@ -213,6 +296,9 @@ https://instead.itch.io/moon9</description>
   <size>228688</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=351</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>arobot</sandbox>
  </game>
  <game>
   <name>awakening</name>
@@ -246,6 +332,9 @@ https://instead.itch.io/moon9</description>
   <size>26848140</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=335</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>awakening</sandbox>
  </game>
  <game>
   <name>time_attack_plane</name>
@@ -259,6 +348,9 @@ https://instead.itch.io/moon9</description>
   <size>2313534</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=361</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>time_attack_plane</sandbox>
  </game>
  <game>
   <name>snowyear</name>
@@ -274,6 +366,9 @@ https://instead.itch.io/moon9</description>
   <size>176135</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=324</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>snowyear</sandbox>
  </game>
  <game>
   <name>tom_from_sheffield</name>
@@ -289,6 +384,9 @@ https://instead.itch.io/moon9</description>
   <size>2847962</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=356</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>tom_from_sheffield</sandbox>
  </game>
  <game>
   <name>tom_from_sheffield_city</name>
@@ -304,6 +402,9 @@ https://instead.itch.io/moon9</description>
   <size>1499812</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=359</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>tom_from_sheffield_city</sandbox>
  </game>
  <game>
   <name>basseynaya</name>
@@ -319,6 +420,9 @@ https://instead.itch.io/moon9</description>
   <size>4365991</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=362</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>basseynaya</sandbox>
  </game>
  <game>
   <name>urzi</name>
@@ -332,6 +436,9 @@ https://instead.itch.io/moon9</description>
   <size>455689</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=341</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urzi</sandbox>
  </game>
  <game>
   <name>dark_crystal</name>
@@ -352,6 +459,9 @@ Le jeu se déroule dans le monde de Tra, où vit un gelfling nommé Jen. Il doit
   <size>6671097</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=350</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>dark_crystal</sandbox>
  </game>
  <game>
   <name>investigator</name>
@@ -365,6 +475,9 @@ Le jeu se déroule dans le monde de Tra, où vit un gelfling nommé Jen. Il doit
   <size>25037462</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=344</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>investigator</sandbox>
  </game>
  <game>
   <name>necromancer_apprentice</name>
@@ -380,6 +493,9 @@ Le jeu se déroule dans le monde de Tra, où vit un gelfling nommé Jen. Il doit
   <size>5520644</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=291</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>necromancer_apprentice</sandbox>
  </game>
  <game>
   <name>r01</name>
@@ -395,6 +511,9 @@ Le jeu se déroule dans le monde de Tra, où vit un gelfling nommé Jen. Il doit
   <size>292196</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=349</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>r01</sandbox>
  </game>
  <game>
   <name>instead-library2</name>
@@ -410,6 +529,9 @@ Le jeu se déroule dans le monde de Tra, où vit un gelfling nommé Jen. Il doit
   <size>2468687</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=346</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>instead-library2</sandbox>
  </game>
  <game>
   <name>princess_asurja</name>
@@ -429,6 +551,9 @@ Le jeu se déroule dans le monde de Tra, où vit un gelfling nommé Jen. Il doit
   <size>22910</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=348</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>princess_asurja</sandbox>
  </game>
  <game>
   <name>lydia</name>
@@ -446,6 +571,9 @@ http://voronkov.name/misc/instead-lydia-windows-1.3.zip</description>
   <size>9374910</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=109</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>lydia</sandbox>
  </game>
  <game>
   <name>button</name>
@@ -459,6 +587,9 @@ http://voronkov.name/misc/instead-lydia-windows-1.3.zip</description>
   <size>12434934</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=271</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>button</sandbox>
  </game>
  <game>
   <name>multicooker</name>
@@ -472,6 +603,9 @@ http://voronkov.name/misc/instead-lydia-windows-1.3.zip</description>
   <size>15204</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=296</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>multicooker</sandbox>
  </game>
  <game>
   <name>lode_runner</name>
@@ -485,6 +619,9 @@ http://voronkov.name/misc/instead-lydia-windows-1.3.zip</description>
   <size>936868</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=84</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>lode_runner</sandbox>
  </game>
  <game>
   <name>mainland</name>
@@ -510,6 +647,9 @@ The game is available in both Russian and English.</description>
   <size>13818960</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=90</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>mainland</sandbox>
  </game>
  <game>
   <name>provodnik</name>
@@ -527,6 +667,9 @@ The game is available in both Russian and English.</description>
   <size>14895171</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=247</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>provodnik</sandbox>
  </game>
  <game>
   <name>shard_of_history</name>
@@ -540,6 +683,9 @@ The game is available in both Russian and English.</description>
   <size>1200636</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=338</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>shard_of_history</sandbox>
  </game>
  <game>
   <name>backside</name>
@@ -553,6 +699,9 @@ The game is available in both Russian and English.</description>
   <size>7305</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=337</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>backside</sandbox>
  </game>
  <game>
   <name>cat</name>
@@ -584,6 +733,9 @@ Outside my cabin the snow is white again. The wood crackles in the fireplace jus
   <size>4550109</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=107</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>cat</sandbox>
  </game>
  <game>
   <name>I.A.G.-Alpha</name>
@@ -605,6 +757,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>18835939</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=331</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>I.A.G.-Alpha</sandbox>
  </game>
  <game>
   <name>bunker</name>
@@ -621,6 +776,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>9546</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=68</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>bunker</sandbox>
  </game>
  <game>
   <name>insteadose_6</name>
@@ -655,6 +813,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>5342868</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=328</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>insteadose_6</sandbox>
  </game>
  <game>
   <name>save_forester</name>
@@ -670,6 +831,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>7425025</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=321</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>save_forester</sandbox>
  </game>
  <game>
   <name>teta-2234</name>
@@ -683,6 +847,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>1361362</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=325</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>teta-2234</sandbox>
  </game>
  <game>
   <name>banana3</name>
@@ -696,6 +863,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>4529</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=326</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>banana3</sandbox>
  </game>
  <game>
   <name>trial_by_mars</name>
@@ -711,6 +881,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>9245362</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=310</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>trial_by_mars</sandbox>
  </game>
  <game>
   <name>tale_hero</name>
@@ -726,6 +899,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>2905131</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=309</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>tale_hero</sandbox>
  </game>
  <game>
   <name>light</name>
@@ -739,6 +915,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>29261</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=311</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>light</sandbox>
  </game>
  <game>
   <name>mansion</name>
@@ -753,6 +932,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>15622207</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=120</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>mansion</sandbox>
  </game>
  <game>
   <name>Mars_Holydays</name>
@@ -768,6 +950,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>484279</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=304</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>Mars_Holydays</sandbox>
  </game>
  <game>
   <name>stars_know_everything</name>
@@ -785,6 +970,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>883154</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=299</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>stars_know_everything</sandbox>
  </game>
  <game>
   <name>wizards_stone</name>
@@ -802,6 +990,9 @@ This game has got 18th place out of 77 entries at IFComp 2018.</description>
   <size>4869628</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=297</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>wizards_stone</sandbox>
  </game>
  <game>
   <name>n.i.i.-alpha</name>
@@ -823,6 +1014,9 @@ Standalone-сборку для Windows можно взять здесь: https:/
   <size>19596811</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=294</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>n.i.i.-alpha</sandbox>
  </game>
  <game>
   <name>watch</name>
@@ -838,6 +1032,9 @@ Standalone-сборку для Windows можно взять здесь: https:/
   <size>20352530</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=292</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>watch</sandbox>
  </game>
  <game>
   <name>shtirlitz</name>
@@ -861,6 +1058,9 @@ Standalone-сборку для Windows можно взять здесь: https:/
   <size>23686247</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=288</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>shtirlitz</sandbox>
  </game>
  <game>
   <name>triffids</name>
@@ -874,6 +1074,9 @@ Standalone-сборку для Windows можно взять здесь: https:/
   <size>72891</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=110</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>triffids</sandbox>
  </game>
  <game>
   <name>hopeless_salvation</name>
@@ -895,6 +1098,9 @@ Standalone-сборку для Windows можно взять здесь: https:/
   <size>121841</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=290</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>hopeless_salvation</sandbox>
  </game>
  <game>
   <name>baloon</name>
@@ -912,6 +1118,9 @@ Standalone-сборку для Windows можно взять здесь: https:/
   <size>25293249</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=285</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>baloon</sandbox>
  </game>
  <game>
   <name>memory</name>
@@ -925,6 +1134,9 @@ Standalone-сборку для Windows можно взять здесь: https:/
   <size>4846175</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=31</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>memory</sandbox>
  </game>
  <game>
   <name>back_transition</name>
@@ -941,6 +1153,9 @@ Standalone-сборку для Windows можно взять здесь: https:/
   <size>27632156</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=286</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>back_transition</sandbox>
  </game>
  <game>
   <name>insteadose5</name>
@@ -964,6 +1179,9 @@ Standalone-сборку для Windows можно взять здесь: https:/
   <size>16259123</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=252</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>insteadose5</sandbox>
  </game>
  <game>
   <name>library</name>
@@ -977,6 +1195,9 @@ Standalone-сборку для Windows можно взять здесь: https:/
   <size>1311678</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=283</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>library</sandbox>
  </game>
  <game>
   <name>portrets</name>
@@ -997,6 +1218,9 @@ UPD: &#13;
   <size>2943276</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=280</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>portrets</sandbox>
  </game>
  <game>
   <name>Valley_of_the_Dolls</name>
@@ -1010,6 +1234,9 @@ UPD: &#13;
   <size>679506</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=284</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>Valley_of_the_Dolls</sandbox>
  </game>
  <game>
   <name>lifter_ii</name>
@@ -1025,6 +1252,9 @@ UPD: &#13;
   <size>2401828</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=138</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>lifter_ii</sandbox>
  </game>
  <game>
   <name>urq-starhummer</name>
@@ -1038,6 +1268,9 @@ UPD: &#13;
   <size>1204741</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=264</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-starhummer</sandbox>
  </game>
  <game>
   <name>sturman</name>
@@ -1051,6 +1284,9 @@ UPD: &#13;
   <size>376946</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=268</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>sturman</sandbox>
  </game>
  <game>
   <name>minerbold</name>
@@ -1075,6 +1311,9 @@ UPD: &#13;
   <size>232406</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=197</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>minerbold</sandbox>
  </game>
  <game>
   <name>capsule</name>
@@ -1094,6 +1333,9 @@ UPD: &#13;
   <size>6506684</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=265</descurl>
+  <accessible>8</accessible>
+  <accessibleComment>В принципе игра доступна,правда графическую задачу придётся решать наугад.</accessibleComment>
+  <sandbox>capsule</sandbox>
  </game>
  <game>
   <name>crash-dive</name>
@@ -1109,6 +1351,9 @@ This game was originally created for the 8-bit atari platform and published in 1
   <size>646640</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=228</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>crash-dive</sandbox>
  </game>
  <game>
   <name>Relicta</name>
@@ -1122,6 +1367,9 @@ This game was originally created for the 8-bit atari platform and published in 1
   <size>90011</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=262</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>Relicta</sandbox>
  </game>
  <game>
   <name>2048</name>
@@ -1135,6 +1383,9 @@ This game was originally created for the 8-bit atari platform and published in 1
   <size>233960</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=263</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>2048</sandbox>
  </game>
  <game>
   <name>urq-lair_of_hydra</name>
@@ -1157,6 +1408,9 @@ ICQ: 499637481&#13;
   <size>142632</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=9</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-lair_of_hydra</sandbox>
  </game>
  <game>
   <name>urq-hamster_1</name>
@@ -1172,6 +1426,9 @@ URQ игра: http://urq.plut.info/taxonomy/term/122</description>
   <size>138658</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=161</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-hamster_1</sandbox>
  </game>
  <game>
   <name>urq-gold_key</name>
@@ -1187,6 +1444,9 @@ URQ игра: http://urq.plut.info/node/23</description>
   <size>299601</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=160</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-gold_key</sandbox>
  </game>
  <game>
   <name>urq-dagger</name>
@@ -1204,6 +1464,9 @@ URQ игра: http://urq.plut.info/node/81</description>
   <size>153032</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=156</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-dagger</sandbox>
  </game>
  <game>
   <name>urq-dagger_2</name>
@@ -1222,6 +1485,9 @@ URQ игра: http://urq.plut.info/node/82</description>
   <size>156166</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=157</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-dagger_2</sandbox>
  </game>
  <game>
   <name>urq-dat_navire</name>
@@ -1239,6 +1505,9 @@ URQ игра: http://urq.plut.info/Dat-Navire</description>
   <size>502712</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=158</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-dat_navire</sandbox>
  </game>
  <game>
   <name>urq-genie_ex_machine</name>
@@ -1254,6 +1523,9 @@ URQ игра: http://urq.plut.info/node/26</description>
   <size>248962</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=159</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-genie_ex_machine</sandbox>
  </game>
  <game>
   <name>urq-hamster_1_en</name>
@@ -1267,6 +1539,9 @@ URQ игра: http://urq.plut.info/node/26</description>
   <size>138593</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=162</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-hamster_1_en</sandbox>
  </game>
  <game>
   <name>urq-hamster_2</name>
@@ -1282,6 +1557,9 @@ URQ игра: http://urq.plut.info/node/73</description>
   <size>138161</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=163</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-hamster_2</sandbox>
  </game>
  <game>
   <name>urq-fairy_hill</name>
@@ -1297,6 +1575,9 @@ URQ игра: http://urq.plut.info/node/73</description>
   <size>672479</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=164</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-fairy_hill</sandbox>
  </game>
  <game>
   <name>urq-kingdom_keperleys</name>
@@ -1312,6 +1593,9 @@ URQ игра: http://urq.plut.info/node/291</description>
   <size>1770889</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=166</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-kingdom_keperleys</sandbox>
  </game>
  <game>
   <name>urq-morphs</name>
@@ -1332,6 +1616,9 @@ URQ игра: http://urq.plut.info/node/391</description>
   <size>154443</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=167</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-morphs</sandbox>
  </game>
  <game>
   <name>urq-cursed_inheritance</name>
@@ -1349,6 +1636,9 @@ URQ игра: http://urq.plut.info/node/391</description>
   <size>743113</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=168</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-cursed_inheritance</sandbox>
  </game>
  <game>
   <name>urq-spite_winds_and_waves</name>
@@ -1373,6 +1663,9 @@ URQ игра: http://urq.plut.info/node/310</description>
   <size>153362</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=169</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-spite_winds_and_waves</sandbox>
  </game>
  <game>
   <name>urq-rendezvous</name>
@@ -1390,6 +1683,9 @@ URQ игра: http://urq.plut.info/node/38</description>
   <size>166845</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=170</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-rendezvous</sandbox>
  </game>
  <game>
   <name>urq-return_of_the_hamster</name>
@@ -1408,6 +1704,9 @@ http://urq.plut.info/node/116</description>
   <size>150218</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=171</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-return_of_the_hamster</sandbox>
  </game>
  <game>
   <name>urq-unexpected_passenger</name>
@@ -1423,6 +1722,9 @@ URQ игра: http://urq.plut.info/node/271</description>
   <size>176305</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=173</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-unexpected_passenger</sandbox>
  </game>
  <game>
   <name>urq-vinny_the_pooh</name>
@@ -1442,6 +1744,9 @@ URQ игра: http://urq.plut.info/node/27</description>
   <size>150412</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=174</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-vinny_the_pooh</sandbox>
  </game>
  <game>
   <name>urq-winter_adventure</name>
@@ -1459,6 +1764,9 @@ URQ игра: http://urq.plut.info/node/28</description>
   <size>1012385</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=175</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-winter_adventure</sandbox>
  </game>
  <game>
   <name>urq-alice</name>
@@ -1476,6 +1784,9 @@ URQ игра: http://urq.plut.info/node/118</description>
   <size>149524</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=176</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-alice</sandbox>
  </game>
  <game>
   <name>urq-shadow_over_rivercross</name>
@@ -1499,6 +1810,9 @@ URQ игра: http://urq.plut.info/node/48</description>
   <size>283303</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=172</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-shadow_over_rivercross</sandbox>
  </game>
  <game>
   <name>star-empire</name>
@@ -1512,6 +1826,9 @@ URQ игра: http://urq.plut.info/node/48</description>
   <size>984069</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=256</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>star-empire</sandbox>
  </game>
  <game>
   <name>urq</name>
@@ -1527,6 +1844,9 @@ URQ игра: http://urq.plut.info/node/48</description>
   <size>137363</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=151</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq</sandbox>
  </game>
  <game>
   <name>urq-in_rye</name>
@@ -1544,6 +1864,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>3413855</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=165</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-in_rye</sandbox>
  </game>
  <game>
   <name>instedoz1</name>
@@ -1565,6 +1888,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>8869204</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=125</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>instedoz1</sandbox>
  </game>
  <game>
   <name>schizophrenia</name>
@@ -1578,6 +1904,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>2709207</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=211</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>schizophrenia</sandbox>
  </game>
  <game>
   <name>toilet3in1</name>
@@ -1603,6 +1932,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>63499695</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=45</descurl>
+  <accessible>8</accessible>
+  <accessibleComment>Доступна только первая игра из трилогии.</accessibleComment>
+  <sandbox>toilet3in1</sandbox>
  </game>
  <game>
   <name>hotdog</name>
@@ -1616,6 +1948,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>30283482</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=42</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>hotdog</sandbox>
  </game>
  <game>
   <name>boat</name>
@@ -1629,6 +1964,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>10210206</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=230</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>boat</sandbox>
  </game>
  <game>
   <name>conan_dancing_god</name>
@@ -1646,6 +1984,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>32305393</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=242</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>conan_dancing_god</sandbox>
  </game>
  <game>
   <name>insteadose_4</name>
@@ -1659,6 +2000,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>19054414</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=227</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>insteadose_4</sandbox>
  </game>
  <game>
   <name>constellation2</name>
@@ -1676,6 +2020,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>2436818</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=130</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>constellation2</sandbox>
  </game>
  <game>
   <name>mountains_madness</name>
@@ -1693,6 +2040,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>8442748</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=202</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>mountains_madness</sandbox>
  </game>
  <game>
   <name>alien_park</name>
@@ -1701,11 +2051,15 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <author>Дударь Дмитрий</author>
   <description>Конец света уже близко. Вас ждёт survival horror, загадки, 12 жутких монстров и 3 различные концовки. Добро пожаловать в ALIEN PARK.</description>
   <image>https://instead-games.ru/games/screenshots/20160417195202401.jpg</image>
-  <version>1.0</version>
+  <version>1.0&#13;
+--</version>
   <url>https://instead-games.ru//download/instead-alien_park-1.0.zip</url>
   <size>98632450</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=223</descurl>
+  <accessible>8</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>alien_park</sandbox>
  </game>
  <game>
   <name>planet_anunak</name>
@@ -1720,6 +2074,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>38593662</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=221</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>planet_anunak</sandbox>
  </game>
  <game>
   <name>frontier</name>
@@ -1735,6 +2092,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>192673256</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=224</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>frontier</sandbox>
  </game>
  <game>
   <name>detectiveq</name>
@@ -1751,6 +2111,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>16626591</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=222</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>detectiveq</sandbox>
  </game>
  <game>
   <name>tower60</name>
@@ -1767,6 +2130,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>29260172</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=215</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>tower60</sandbox>
  </game>
  <game>
   <name>eiforia</name>
@@ -1782,6 +2148,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>6062686</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=213</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>eiforia</sandbox>
  </game>
  <game>
   <name>rock</name>
@@ -1799,6 +2168,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>9990332</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=214</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>rock</sandbox>
  </game>
  <game>
   <name>am_i_a_monster</name>
@@ -1814,6 +2186,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>26998136</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=212</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>am_i_a_monster</sandbox>
  </game>
  <game>
   <name>catesc</name>
@@ -1831,6 +2206,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>3181642</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=149</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>catesc</sandbox>
  </game>
  <game>
   <name>last_hope</name>
@@ -1851,6 +2229,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>3241675</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=11</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>last_hope</sandbox>
  </game>
  <game>
   <name>dead_or_alive</name>
@@ -1870,6 +2251,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>1558902</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=10</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>dead_or_alive</sandbox>
  </game>
  <game>
   <name>toilet_again</name>
@@ -1884,6 +2268,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>8136916</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=19</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>toilet_again</sandbox>
  </game>
  <game>
   <name>constellation_3</name>
@@ -1899,6 +2286,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>35757183</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=56</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>constellation_3</sandbox>
  </game>
  <game>
   <name>journey</name>
@@ -1914,6 +2304,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>4277813</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=25</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>journey</sandbox>
  </game>
  <game>
   <name>fallout_quest</name>
@@ -1927,6 +2320,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>1149304</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=35</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>fallout_quest</sandbox>
  </game>
  <game>
   <name>last_raider</name>
@@ -1940,6 +2336,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>142845</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=38</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>last_raider</sandbox>
  </game>
  <game>
   <name>ilines</name>
@@ -1955,6 +2354,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>858118</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=140</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>ilines</sandbox>
  </game>
  <game>
   <name>crossworlds</name>
@@ -1971,6 +2373,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>192329</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=41</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>crossworlds</sandbox>
  </game>
  <game>
   <name>mindtricks</name>
@@ -1984,6 +2389,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>23493663</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=44</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>mindtricks</sandbox>
  </game>
  <game>
   <name>mirror</name>
@@ -2001,6 +2409,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>10492459</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=46</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>mirror</sandbox>
  </game>
  <game>
   <name>starfighter</name>
@@ -2014,6 +2425,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>289531</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=47</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>starfighter</sandbox>
  </game>
  <game>
   <name>constellation</name>
@@ -2032,6 +2446,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>1990203</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=49</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>constellation</sandbox>
  </game>
  <game>
   <name>kingdom_of_grain</name>
@@ -2054,6 +2471,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>150776</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=69</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>kingdom_of_grain</sandbox>
  </game>
  <game>
   <name>ungodly_earth</name>
@@ -2077,6 +2497,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>1385059</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=71</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>ungodly_earth</sandbox>
  </game>
  <game>
   <name>kayleth</name>
@@ -2095,6 +2518,9 @@ URQ игра: http://ifwiki.ru/Во_ржи:_куча_неприятностей<
   <size>7442146</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=73</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>kayleth</sandbox>
  </game>
  <game>
   <name>roboto</name>
@@ -2117,6 +2543,9 @@ beep beep&#13;
   <size>589268</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=77</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>roboto</sandbox>
  </game>
  <game>
   <name>apple_day</name>
@@ -2130,6 +2559,9 @@ beep beep&#13;
   <size>2220227</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=83</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>apple_day</sandbox>
  </game>
  <game>
   <name>bear</name>
@@ -2155,6 +2587,9 @@ beep beep&#13;
   <size>9843252</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=85</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>bear</sandbox>
  </game>
  <game>
   <name>satori</name>
@@ -2168,6 +2603,9 @@ beep beep&#13;
   <size>3840121</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=94</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>satori</sandbox>
  </game>
  <game>
   <name>infected</name>
@@ -2182,6 +2620,9 @@ beep beep&#13;
   <size>6741833</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=103</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>infected</sandbox>
  </game>
  <game>
   <name>transition</name>
@@ -2196,6 +2637,9 @@ beep beep&#13;
   <size>171896906</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=104</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>transition</sandbox>
  </game>
  <game>
   <name>steelrat</name>
@@ -2209,6 +2653,9 @@ beep beep&#13;
   <size>1798013</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=114</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>steelrat</sandbox>
  </game>
  <game>
   <name>ferryman</name>
@@ -2230,6 +2677,9 @@ max-superman_at_mail_dot_ru</description>
   <size>10512987</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=112</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>ferryman</sandbox>
  </game>
  <game>
   <name>project_b</name>
@@ -2243,6 +2693,9 @@ max-superman_at_mail_dot_ru</description>
   <size>155898</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=117</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>project_b</sandbox>
  </game>
  <game>
   <name>woodcutter</name>
@@ -2260,6 +2713,9 @@ max-superman_at_mail_dot_ru</description>
   <size>7347424</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=118</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>woodcutter</sandbox>
  </game>
  <game>
   <name>lifter</name>
@@ -2273,6 +2729,9 @@ max-superman_at_mail_dot_ru</description>
   <size>6200493</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=119</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>lifter</sandbox>
  </game>
  <game>
   <name>lifter2</name>
@@ -2290,6 +2749,9 @@ max-superman_at_mail_dot_ru</description>
   <size>16740350</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=121</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>lifter2</sandbox>
  </game>
  <game>
   <name>star_heritage_1</name>
@@ -2306,6 +2768,9 @@ max-superman_at_mail_dot_ru</description>
   <size>90448781</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=122</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>star_heritage_1</sandbox>
  </game>
  <game>
   <name>ivan</name>
@@ -2323,6 +2788,9 @@ max-superman_at_mail_dot_ru</description>
   <size>595069</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=123</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>ivan</sandbox>
  </game>
  <game>
   <name>solitaire</name>
@@ -2338,6 +2806,9 @@ max-superman_at_mail_dot_ru</description>
   <size>3834436</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=135</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>solitaire</sandbox>
  </game>
  <game>
   <name>oldstory</name>
@@ -2353,6 +2824,9 @@ max-superman_at_mail_dot_ru</description>
   <size>2534494</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=137</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>oldstory</sandbox>
  </game>
  <game>
   <name>insteadose3</name>
@@ -2368,6 +2842,9 @@ max-superman_at_mail_dot_ru</description>
   <size>18359863</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=147</descurl>
+  <accessible>8</accessible>
+  <accessibleComment>В принципе почти что можно пройти, только в некоторых моментах желательно сохранятся, т.к из-за срабатывания таймера игра может стать непроходимой. Также таймер сработает в конце игры,но это уже нестрашно.</accessibleComment>
+  <sandbox>insteadose3</sandbox>
  </game>
  <game>
   <name>mtungu_airplane</name>
@@ -2387,6 +2864,9 @@ max-superman_at_mail_dot_ru</description>
   <size>3198454</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=154</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>mtungu_airplane</sandbox>
  </game>
  <game>
   <name>ludd</name>
@@ -2402,6 +2882,9 @@ max-superman_at_mail_dot_ru</description>
   <size>3170485</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=200</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>ludd</sandbox>
  </game>
  <game>
   <name>mission_tourist</name>
@@ -2415,6 +2898,9 @@ max-superman_at_mail_dot_ru</description>
   <size>89258</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=210</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>mission_tourist</sandbox>
  </game>
  <game>
   <name>city_of_mists</name>
@@ -2431,6 +2917,9 @@ Nov, 2014.</description>
   <size>15021968</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=194</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>city_of_mists</sandbox>
  </game>
  <game>
   <name>hoppers</name>
@@ -2446,6 +2935,9 @@ Nov, 2014.</description>
   <size>49471</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=208</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>hoppers</sandbox>
  </game>
  <game>
   <name>fallout-another-side</name>
@@ -2463,6 +2955,9 @@ Nov, 2014.</description>
   <size>47781146</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=95</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>fallout-another-side</sandbox>
  </game>
  <game>
   <name>clara</name>
@@ -2478,6 +2973,9 @@ Nov, 2014.</description>
   <size>7281786</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=203</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>clara</sandbox>
  </game>
  <game>
   <name>september</name>
@@ -2497,6 +2995,9 @@ Nov, 2014.</description>
   <size>8115602</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=201</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>september</sandbox>
  </game>
  <game>
   <name>hands_off</name>
@@ -2514,6 +3015,9 @@ JIghtuse &amp;lt;jightuse_at_gmail_dot_com&amp;gt;</description>
   <size>25216</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=101</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>hands_off</sandbox>
  </game>
  <game>
   <name>fatal_things</name>
@@ -2535,6 +3039,9 @@ Web-версия: http://vvproject.ru/game/fatal_things&#13;
   <size>7797037</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=195</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>fatal_things</sandbox>
  </game>
  <game>
   <name>return_of_red_hood</name>
@@ -2552,6 +3059,9 @@ Did You ever think how the fate of the characters would turn out, if not Red Hoo
   <size>101782567</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=189</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>return_of_red_hood</sandbox>
  </game>
  <game>
   <name>new_year</name>
@@ -2567,6 +3077,9 @@ Did You ever think how the fate of the characters would turn out, if not Red Hoo
   <size>3867898</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=190</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>new_year</sandbox>
  </game>
  <game>
   <name>sector-37</name>
@@ -2585,6 +3098,9 @@ Did You ever think how the fate of the characters would turn out, if not Red Hoo
   <size>17881498</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=191</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>sector-37</sandbox>
  </game>
  <game>
   <name>signal</name>
@@ -2599,6 +3115,9 @@ Did You ever think how the fate of the characters would turn out, if not Red Hoo
   <size>31278276</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=188</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>signal</sandbox>
  </game>
  <game>
   <name>resident_evil_id</name>
@@ -2612,6 +3131,9 @@ Did You ever think how the fate of the characters would turn out, if not Red Hoo
   <size>41844502</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=93</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>resident_evil_id</sandbox>
  </game>
  <game>
   <name>lifter_3.1</name>
@@ -2625,6 +3147,9 @@ Did You ever think how the fate of the characters would turn out, if not Red Hoo
   <size>9925227</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=132</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>lifter_3.1</sandbox>
  </game>
  <game>
   <name>urq-man_from_never</name>
@@ -2645,6 +3170,9 @@ URQ игра: http://urq.plut.info/node/404</description>
   <size>2645139</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=155</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>urq-man_from_never</sandbox>
  </game>
  <game>
   <name>the_work</name>
@@ -2662,6 +3190,9 @@ URQ игра: http://urq.plut.info/node/404</description>
   <size>372544</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=181</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>the_work</sandbox>
  </game>
  <game>
   <name>nightmare_manor</name>
@@ -2680,6 +3211,9 @@ URQ игра: http://urq.plut.info/node/404</description>
   <size>12720813</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=178</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>nightmare_manor</sandbox>
  </game>
  <game>
   <name>one_day</name>
@@ -2693,6 +3227,9 @@ URQ игра: http://urq.plut.info/node/404</description>
   <size>9890654</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=148</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>one_day</sandbox>
  </game>
  <game>
   <name>goblin</name>
@@ -2709,6 +3246,9 @@ URQ игра: http://urq.plut.info/node/404</description>
   <size>102304874</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=146</descurl>
+  <accessible>1</accessible>
+  <accessibleComment>В принципе почти что можно пройти,только в некоторых моментах желательно сохранятся,т.к из-за срабатывания таймера игра может стать непроходимой. Также таймер сработает в конце игры,но это уже нестрашно.</accessibleComment>
+  <sandbox>goblin</sandbox>
  </game>
  <game>
   <name>bearded</name>
@@ -2722,6 +3262,9 @@ URQ игра: http://urq.plut.info/node/404</description>
   <size>9714</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=79</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>bearded</sandbox>
  </game>
  <game>
   <name>rikki_tikki_tavi</name>
@@ -2740,6 +3283,9 @@ URQ игра: http://urq.plut.info/node/404</description>
   <size>18274479</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=18</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>rikki_tikki_tavi</sandbox>
  </game>
  <game>
   <name>wolf_goat_cabbage</name>
@@ -2756,6 +3302,9 @@ danil.korotenko@gmail.com</description>
   <size>27643</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=113</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>wolf_goat_cabbage</sandbox>
  </game>
  <game>
   <name>skiir</name>
@@ -2771,6 +3320,9 @@ danil.korotenko@gmail.com</description>
   <size>2861715</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=21</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>skiir</sandbox>
  </game>
  <game>
   <name>tale_about_ivan</name>
@@ -2784,6 +3336,9 @@ danil.korotenko@gmail.com</description>
   <size>3997460</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=134</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>tale_about_ivan</sandbox>
  </game>
  <game>
   <name>ruins</name>
@@ -2802,6 +3357,9 @@ danil.korotenko@gmail.com</description>
   <size>44349</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=139</descurl>
+  <accessible>1</accessible>
+  <accessibleComment>Лучше её проходить в instead-cli.</accessibleComment>
+  <sandbox>ruins</sandbox>
  </game>
  <game>
   <name>wolf_goat_yakuza</name>
@@ -2816,6 +3374,9 @@ danil.korotenko@gmail.com</description>
   <size>3381</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=127</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>wolf_goat_yakuza</sandbox>
  </game>
  <game>
   <name>bumblebee_flight</name>
@@ -2833,6 +3394,9 @@ danil.korotenko@gmail.com</description>
   <size>7174</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=116</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>bumblebee_flight</sandbox>
  </game>
  <game>
   <name>time_to_survive</name>
@@ -2851,6 +3415,9 @@ danil.korotenko@gmail.com</description>
   <size>13456445</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=16</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>time_to_survive</sandbox>
  </game>
  <game>
   <name>tale_of_hope</name>
@@ -2865,6 +3432,9 @@ danil.korotenko@gmail.com</description>
   <size>14928012</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=27</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>tale_of_hope</sandbox>
  </game>
  <game>
   <name>knock_knock-demo</name>
@@ -2880,6 +3450,9 @@ danil.korotenko@gmail.com</description>
   <size>5242707</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=28</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>knock_knock-demo</sandbox>
  </game>
  <game>
   <name>ruiner</name>
@@ -2895,6 +3468,9 @@ danil.korotenko@gmail.com</description>
   <size>353890</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=33</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>ruiner</sandbox>
  </game>
  <game>
   <name>maxwell_holidays</name>
@@ -2908,6 +3484,9 @@ danil.korotenko@gmail.com</description>
   <size>15188816</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=30</descurl>
+  <accessible>4</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>maxwell_holidays</sandbox>
  </game>
  <game>
   <name>forest_heart</name>
@@ -2922,6 +3501,9 @@ danil.korotenko@gmail.com</description>
   <size>33294096</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=7</descurl>
+  <accessible>8</accessible>
+  <accessibleComment>Из-за того,что эта игра писалась очень давно и не совсем адаптирована под текстовый интерпретатор, она доступна частично,и,соответственно,непроходима.</accessibleComment>
+  <sandbox>forest_heart</sandbox>
  </game>
  <game>
   <name>exit_from_dream</name>
@@ -2936,6 +3518,9 @@ danil.korotenko@gmail.com</description>
   <size>981831</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=26</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>exit_from_dream</sandbox>
  </game>
  <game>
   <name>collector</name>
@@ -2949,6 +3534,9 @@ danil.korotenko@gmail.com</description>
   <size>10650614</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=29</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>collector</sandbox>
  </game>
  <game>
   <name>gremlins</name>
@@ -2971,6 +3559,9 @@ vtroll18@gmail.com</description>
   <size>14307228</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=100</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>gremlins</sandbox>
  </game>
  <game>
   <name>flash</name>
@@ -2984,6 +3575,9 @@ vtroll18@gmail.com</description>
   <size>267036</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=87</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>flash</sandbox>
  </game>
  <game>
   <name>tasty_dinner</name>
@@ -2998,6 +3592,9 @@ vtroll18@gmail.com</description>
   <size>1646276</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=34</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>tasty_dinner</sandbox>
  </game>
  <game>
   <name>dn_mary_in_the_note</name>
@@ -3012,6 +3609,9 @@ vtroll18@gmail.com</description>
   <size>144966</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=86</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>dn_mary_in_the_note</sandbox>
  </game>
  <game>
   <name>basement</name>
@@ -3030,6 +3630,9 @@ vtroll18@gmail.com</description>
   <size>3398095</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=12</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>basement</sandbox>
  </game>
  <game>
   <name>cellar_escape</name>
@@ -3044,6 +3647,9 @@ vtroll18@gmail.com</description>
   <size>1650013</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=80</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>cellar_escape</sandbox>
  </game>
  <game>
   <name>reactor_puzzle-demo</name>
@@ -3058,6 +3664,9 @@ vtroll18@gmail.com</description>
   <size>2930</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=81</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>reactor_puzzle-demo</sandbox>
  </game>
  <game>
   <name>fatal_lands</name>
@@ -3073,6 +3682,9 @@ vtroll18@gmail.com</description>
   <size>9039119</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=39</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>fatal_lands</sandbox>
  </game>
  <game>
   <name>ded_moroz_2012</name>
@@ -3086,6 +3698,9 @@ vtroll18@gmail.com</description>
   <size>437047</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=8</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>ded_moroz_2012</sandbox>
  </game>
  <game>
   <name>ded_moroz_2011</name>
@@ -3099,6 +3714,9 @@ vtroll18@gmail.com</description>
   <size>539007</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=14</descurl>
+  <accessible>1</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>ded_moroz_2011</sandbox>
  </game>
  <game>
   <name>nothing_unusual</name>
@@ -3112,6 +3730,9 @@ vtroll18@gmail.com</description>
   <size>1295040</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=13</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>nothing_unusual</sandbox>
  </game>
  <game>
   <name>maxwell</name>
@@ -3127,6 +3748,9 @@ vtroll18@gmail.com</description>
   <size>22146269</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=17</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>maxwell</sandbox>
  </game>
  <game>
   <name>taiga</name>
@@ -3140,6 +3764,9 @@ vtroll18@gmail.com</description>
   <size>1766073</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=20</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>taiga</sandbox>
  </game>
  <game>
   <name>toilet_revenge</name>
@@ -3153,5 +3780,8 @@ vtroll18@gmail.com</description>
   <size>2584853</size>
   <lang>ru</lang>
   <descurl>https://instead-games.ru/game.php?ID=24</descurl>
+  <accessible>16</accessible>
+  <accessibleComment></accessibleComment>
+  <sandbox>toilet_revenge</sandbox>
  </game>
 </game_list>
