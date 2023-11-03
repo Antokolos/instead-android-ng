@@ -47,7 +47,7 @@ static void write_buffer_to_log() {
     }
 }
 
-static void *thread_func(void*) {
+static void *thread_func(void* p) {
     while (getStopIssued() == 0) {
         write_buffer_to_log();
     }
@@ -97,10 +97,10 @@ int is_not_blank(const char* str) {
     return 1;
 }
 
-extern "C" int instead_main(int argc, char** argv);
+int instead_main(int argc, char** argv);
 
 /* Start up the SDL app */
-extern "C" int SDL_main(int argc, char** argv) {
+int SDL_main(int argc, char** argv) {
     __android_log_write(ANDROID_LOG_DEBUG, tag, "Entering INSTEAD launcher...");
     const char* nativelog = argc >= 2 ? argv[1] : NULL;
     const char* path = argc >= 3 ? argv[2] : NULL;
@@ -125,6 +125,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     /* Run the application code! */
     int status;
     char* _argv[20];
+    int i = 0;
     int n = 1;
     if (path != NULL) {
         printf("path = %s\n", path);
@@ -215,7 +216,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     if (logFile != NULL) {
         fclose(logFile);
     }
-    for (int i = 0; i < n; ++i) {
+    for (i = 0; i < n; ++i) {
         SDL_free(_argv[i]);
     }
     
@@ -225,7 +226,7 @@ extern "C" int SDL_main(int argc, char** argv) {
     return status;
 }
 
-extern "C" void Java_com_nlbhub_instead_STEADActivity_toggleMenu(JNIEnv* env, jclass cls) {
+void Java_com_nlbhub_instead_STEADActivity_toggleMenu(JNIEnv* env, jclass cls) {
     printf("Menu toggle command issued\n");
     SDL_Event event;
 
@@ -242,59 +243,69 @@ extern "C" void Java_com_nlbhub_instead_STEADActivity_toggleMenu(JNIEnv* env, jc
     SDL_PushEvent(&event); // Inject key press of the Escape Key
 }
 
-extern "C" JNIEnv* Android_JNI_GetEnv(void);
-
-extern "C" jclass Android_JNI_GetActivityClass();
-
-extern "C" void get_screen_size(int *w, int *h) {
+void get_screen_size(int *w, int *h) {
     const char *str;
-    JNIEnv* env = Android_JNI_GetEnv();
-    jclass clazz = Android_JNI_GetActivityClass();
+    JNIEnv *env = (JNIEnv*)SDL_AndroidGetJNIEnv();
+    jobject activity = (jobject)SDL_AndroidGetActivity();
+    jclass clazz = (*env)->GetObjectClass(env, activity);
 
-    jmethodID method_id = env->GetStaticMethodID(clazz, "getScreenSize", "()Ljava/lang/String;");
-    jstring s = (jstring) env->CallStaticObjectMethod(clazz, method_id);
+    jmethodID method_id = (*env)->GetStaticMethodID(env, clazz, "getScreenSize", "()Ljava/lang/String;");
+    jstring s= (*env)->CallStaticObjectMethod (env, clazz, method_id);
 
-    str = env->GetStringUTFChars(s, 0);
+    str = (*env)->GetStringUTFChars(env, s, 0);
     sscanf(str, "%dx%d", w, h);
-    env->ReleaseStringUTFChars(s, str);
+    (*env)->ReleaseStringUTFChars(env, s, str);
 
-    env->DeleteLocalRef(clazz);
+    (*env)->DeleteLocalRef(env, clazz);
+    (*env)->DeleteLocalRef(env, activity);
 }
 
-extern "C" void rotate_landscape() {
-    JNIEnv* env = Android_JNI_GetEnv();
-    jclass cls = Android_JNI_GetActivityClass();
-    jmethodID rotateLandscape = env->GetStaticMethodID(cls, "rotateLandscape", "()V");
+void rotate_landscape() {
+    JNIEnv *env = (JNIEnv*)SDL_AndroidGetJNIEnv();
+    jobject activity = (jobject)SDL_AndroidGetActivity();
+    jclass clazz = (*env)->GetObjectClass(env, activity);
+
+    jmethodID rotateLandscape = (*env)->GetStaticMethodID(env, clazz, "rotateLandscape", "()V");
     if (rotateLandscape) {
-        env->CallStaticVoidMethod(cls, rotateLandscape);
+        (*env)->CallStaticVoidMethod(env, clazz, rotateLandscape);
     } else {
         printf("rotateLandscape() method not found in the SDLActivity class!\n");
     }
-    env->DeleteLocalRef(cls);
+
+    (*env)->DeleteLocalRef(env, clazz);
+    (*env)->DeleteLocalRef(env, activity);
 }
 
-extern "C" void rotate_portrait() {
-    JNIEnv* env = Android_JNI_GetEnv();
-    jclass cls = Android_JNI_GetActivityClass();
-    jmethodID rotatePortrait = env->GetStaticMethodID(cls, "rotatePortrait", "()V");
+void rotate_portrait() {
+    JNIEnv *env = (JNIEnv*)SDL_AndroidGetJNIEnv();
+    jobject activity = (jobject)SDL_AndroidGetActivity();
+    jclass clazz = (*env)->GetObjectClass(env, activity);
+
+    jmethodID rotatePortrait = (*env)->GetStaticMethodID(env, clazz, "rotatePortrait", "()V");
     if (rotatePortrait) {
-        env->CallStaticVoidMethod(cls, rotatePortrait);
+        (*env)->CallStaticVoidMethod(env, clazz, rotatePortrait);
     } else {
         printf("rotatePortrait() method not found in the SDLActivity class!\n");
     }
-    env->DeleteLocalRef(cls);
+
+    (*env)->DeleteLocalRef(env, clazz);
+    (*env)->DeleteLocalRef(env, activity);
 }
 
-extern "C" void unlock_rotation() {
-    JNIEnv* env = Android_JNI_GetEnv();
-    jclass cls = Android_JNI_GetActivityClass();
-    jmethodID unlockRotation = env->GetStaticMethodID(cls, "unlockRotation", "()V");
+void unlock_rotation() {
+    JNIEnv *env = (JNIEnv*)SDL_AndroidGetJNIEnv();
+    jobject activity = (jobject)SDL_AndroidGetActivity();
+    jclass clazz = (*env)->GetObjectClass(env, activity);
+
+    jmethodID unlockRotation = (*env)->GetStaticMethodID(env, clazz, "unlockRotation", "()V");
     if (unlockRotation) {
-        env->CallStaticVoidMethod(cls, unlockRotation);
+        (*env)->CallStaticVoidMethod(env, clazz, unlockRotation);
     } else {
         printf("unlockRotation() method not found in the SDLActivity class!\n");
     }
-    env->DeleteLocalRef(cls);
+
+    (*env)->DeleteLocalRef(env, clazz);
+    (*env)->DeleteLocalRef(env, activity);
 }
 
 /* vi: set ts=4 sw=4 expandtab: */

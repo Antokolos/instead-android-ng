@@ -14,7 +14,7 @@ endif
 SUBDIR := instead/src
 INSTEAD := instead/src/instead
 
-LOCAL_SRC_FILES := instead_launcher.cpp $(SDL_PATH)/src/main/android/SDL_android_main.c \
+LOCAL_SRC_FILES := instead_launcher.c $(SDL_PATH)/src/main/android/SDL_android_main.c \
 	$(INSTEAD)/cache.c $(INSTEAD)/idf.c $(INSTEAD)/instead.c $(INSTEAD)/lfs.c $(INSTEAD)/list.c $(INSTEAD)/snprintf.c $(INSTEAD)/tinymt32.c $(INSTEAD)/util.c \
 	$(SUBDIR)/instead_bits.c $(SUBDIR)/instead_paths.c $(SUBDIR)/instead_sound.c $(SUBDIR)/instead_sprites.c $(SUBDIR)/instead_timer.c \
 	$(SUBDIR)/graphics.c $(SUBDIR)/input.c $(SUBDIR)/game.c $(SUBDIR)/main.c  $(SUBDIR)/sound.c $(SUBDIR)/config.c \

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:installLocation="auto" android:versionCode="170000"
+<manifest android:installLocation="auto" android:versionCode="170001"
     android:versionName="1.7.0" package="com.nlbhub.instead.launcher" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
     <uses-sdk android:minSdkVersion="13" android:targetSdkVersion="33"/>
