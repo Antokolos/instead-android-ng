@@ -10,7 +10,8 @@ android {
     defaultConfig {
         minSdk = 21
         ndk {
-            abiFilters += listOf("arm64-v8a")
+            // x86_64 — для эмулятора; на устройстве используется arm64-v8a.
+            abiFilters += listOf("arm64-v8a", "x86_64")
         }
         externalNativeBuild {
             ndkBuild {
