@@ -37,20 +37,8 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     // Load the .so
 
     @Override
-    public void loadLibraries() {
-        try {
-            // I'm using /data/data/myPackage/app_libs (using Ctx.getDir("libs",Context.MODE_PRIVATE); returns that path).
-            String libsDirPath = Ctx.getDir("libs", Context.MODE_PRIVATE).getCanonicalPath() + "/";
-            System.load(libsDirPath + "libgnustl_shared.so");
-            System.load(libsDirPath + "libSDL2.so");
-            System.load(libsDirPath + "libSDL2_image.so");
-            System.load(libsDirPath + "libsmpeg2.so");
-            System.load(libsDirPath + "libSDL2_mixer.so");
-            System.load(libsDirPath + "libSDL2_ttf.so");
-            System.load(libsDirPath + "libmain.so");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    protected String[] getLibraries() {
+        return new String[]{"SDL2", "SDL2_image", "SDL2_mixer", "SDL2_ttf", "main"};
     }
 
     public File getDataDir() {
@@ -103,24 +91,25 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         return Ctx;
     }
 
-    /*
-    This method should be added to org.libsdl.app.SDLActivity
     protected KeyEvent.DispatcherState getKeyDispatcherState() {
-        return mSurface.getKeyDispatcherState();
+        return mSurface != null ? mSurface.getKeyDispatcherState() : null;
     }
-    */
 
     public boolean processKey(KeyEvent event, int keyCode, KeyHandler keyHandler) {
         if (event.getKeyCode() == keyCode) {
+            KeyEvent.DispatcherState state = getKeyDispatcherState();
+            if (state == null) {
+                return false;
+            }
             if (event.getAction() == KeyEvent.ACTION_DOWN
                     && event.getRepeatCount() == 0) {
 
                 // Tell the framework to start tracking this event.
-                getKeyDispatcherState().startTracking(event, this);
+                state.startTracking(event, this);
                 return true;
 
             } else if (event.getAction() == KeyEvent.ACTION_UP) {
-                getKeyDispatcherState().handleUpEvent(event);
+                state.handleUpEvent(event);
                 if (event.isTracking() && !event.isCanceled()) {
                     keyHandler.handle();
                     return true;
