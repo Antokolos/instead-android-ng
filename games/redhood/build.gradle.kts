@@ -16,6 +16,16 @@ android {
         versionName = "1.0.6"
     }
 
+    signingConfigs {
+        create("release") {
+            val store = System.getenv("INSTEAD_KEYSTORE") ?: "keystore/test-release.jks"
+            storeFile = rootProject.file(store)
+            storePassword = System.getenv("INSTEAD_KEYSTORE_PASSWORD") ?: "instead"
+            keyAlias = System.getenv("INSTEAD_KEY_ALIAS") ?: "instead"
+            keyPassword = System.getenv("INSTEAD_KEY_PASSWORD") ?: "instead"
+        }
+    }
+
     sourceSets["main"].apply {
         java.srcDirs("src/main/java")
         res.srcDirs("src/main/res")
@@ -25,8 +35,18 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("release")
         }
+    }
+
+    packaging {
+        jniLibs.useLegacyPackaging = true
     }
 
     compileOptions {

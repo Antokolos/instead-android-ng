@@ -47,3 +47,4 @@ modules/instead_standalone/res/raw/themes.zip
 # Gradle
 build/
 .gradle/
+keystore/
