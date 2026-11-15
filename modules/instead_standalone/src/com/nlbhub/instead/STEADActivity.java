@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.storage.StorageManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
@@ -256,6 +257,34 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         super.onResume();
         if (settings.getScreenOff()) {
             wakeLock.acquire();
+        }
+    }
+
+    // Методы, которые вызывает instead_launcher.c (get_screen_size/rotate_*).
+    public static String getScreenSize() {
+        if (mSingleton == null) {
+            return "0x0";
+        }
+        DisplayMetrics metrics = new DisplayMetrics();
+        mSingleton.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
+        return metrics.widthPixels + "x" + metrics.heightPixels;
+    }
+
+    public static void rotateLandscape() {
+        if (mSingleton != null) {
+            mSingleton.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+    }
+
+    public static void rotatePortrait() {
+        if (mSingleton != null) {
+            mSingleton.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+    }
+
+    public static void unlockRotation() {
+        if (mSingleton != null) {
+            mSingleton.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
     }
 
