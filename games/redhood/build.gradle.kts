@@ -66,6 +66,7 @@ val gameContent = rootProject.layout.projectDirectory
 val generatedAssets = layout.buildDirectory.dir("generated/game-assets")
 
 val prepareGameContent = tasks.register("prepareGameContent") {
+    dependsOn(":engine:fetchInsteadSource")
     inputs.files(gameContent).optional()
     outputs.dir(generatedAssets)
     doLast {
