@@ -46,13 +46,13 @@ LOCAL_CFLAGS := \
 				-I$(LOCAL_PATH)/../SDL2_mixer \
 				-I$(LOCAL_PATH)/../SDL2_image \
 				-I$(LOCAL_PATH)/../SDL2_ttf \
-				-I$(LOCAL_PATH)/../LuaJIT/src \
-				-I$(LOCAL_PATH)/../freetype/include \
+				-I$(LOCAL_PATH)/../lua/src \
+				-I$(LOCAL_PATH)/../SDL2_ttf/external/freetype/include \
 				-I$(LOCAL_PATH)/../libiconv/libiconv/include \
 				-I$(LOCAL_PATH)/..
 
 #				-I$(LOCAL_PATH)/../lua/lua/src
-LOCAL_CFLAGS += -DVERSION=\"3.5.1\" -DANDROID -DNOMAIN -D_USE_SDL -D_LOCAL_APPDATA -D_HAVE_ICONV -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) -D_CUR_DIR=$(DATAPATH)
+LOCAL_CFLAGS += -DVERSION=\"3.5.2\" -DANDROID -DNOMAIN -D_USE_SDL -D_LOCAL_APPDATA -D_HAVE_ICONV -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) -D_CUR_DIR=$(DATAPATH)
 
 LOCAL_CFLAGS += -DGAMES_PATH=\"${GAMESPATH}/\" -DTHEME_PATH=\"${THEMEPATH}/\"
 
@@ -60,9 +60,7 @@ LOCAL_CFLAGS +=  -DLANG_PATH=\"${LANGPATH}/\" -DSTEAD_PATH=\"${STEADPATH}/\" -DT
 
 LOCAL_SHARED_LIBRARIES := SDL2 SDL2_ttf SDL2_mixer SDL2_image
 
-LOCAL_STATIC_LIBRARIES := luajit freetype libiconv
-
-LOCAL_LDFLAGS := -Lobj/local/armeabi
+LOCAL_STATIC_LIBRARIES := lua freetype libiconv
 
 LOCAL_LDLIBS := -lGLESv1_CM -lGLESv2 -landroid -llog -lm -ldl
 

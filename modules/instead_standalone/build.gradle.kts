@@ -5,9 +5,18 @@ plugins {
 android {
     namespace = "com.nlbhub.instead"
     compileSdk = 36
+    ndkVersion = "28.2.13676358"
 
     defaultConfig {
         minSdk = 21
+        ndk {
+            abiFilters += listOf("arm64-v8a")
+        }
+        externalNativeBuild {
+            ndkBuild {
+                arguments += listOf("APP_PLATFORM=android-21")
+            }
+        }
     }
 
     sourceSets["main"].apply {
@@ -21,10 +30,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    // Native-слой подключается на этапе 2 (нужен NDK 28.2 и SDL2 2.32).
-    // externalNativeBuild {
-    //     ndkBuild { path = file("jni/Android.mk") }
-    // }
+    externalNativeBuild {
+        ndkBuild {
+            path = file("jni/Android.mk")
+        }
+    }
 
     lint {
         abortOnError = false

@@ -1,131 +1,168 @@
-LOCAL_PATH := $(call my-dir)
+SDL_IMAGE_LOCAL_PATH := $(call my-dir)
+
+
+# Enable this if you want PNG and JPG support with minimal dependencies
+USE_STBIMAGE ?= true
+
+# The additional formats below require downloading third party dependencies,
+# using the external/download.sh script.
+
+# Enable this if you want to support loading AVIF images
+# The library path should be a relative path to this directory.
+SUPPORT_AVIF ?= false
+AVIF_LIBRARY_PATH := external/libavif
+DAV1D_LIBRARY_PATH := external/dav1d
+
+# Enable this if you want to support loading JPEG images using libjpeg
+# The library path should be a relative path to this directory.
+SUPPORT_JPG ?= false
+SUPPORT_SAVE_JPG ?= true
+JPG_LIBRARY_PATH := external/jpeg
+
+# Enable this if you want to support loading JPEG-XL images
+# The library path should be a relative path to this directory.
+SUPPORT_JXL ?= false
+JXL_LIBRARY_PATH := external/libjxl
+
+# Enable this if you want to support loading PNG images using libpng
+# The library path should be a relative path to this directory.
+SUPPORT_PNG ?= false
+SUPPORT_SAVE_PNG ?= true
+PNG_LIBRARY_PATH := external/libpng
+
+# Enable this if you want to support loading WebP images
+# The library path should be a relative path to this directory.
+SUPPORT_WEBP ?= false
+WEBP_LIBRARY_PATH := external/libwebp
+
+
+# Build the library
+ifeq ($(SUPPORT_AVIF),true)
+    include $(SDL_IMAGE_LOCAL_PATH)/$(AVIF_LIBRARY_PATH)/Android.mk
+    include $(SDL_IMAGE_LOCAL_PATH)/$(DAV1D_LIBRARY_PATH)/Android.mk
+endif
+
+# Build the library
+ifeq ($(SUPPORT_JPG),true)
+    include $(SDL_IMAGE_LOCAL_PATH)/$(JPG_LIBRARY_PATH)/Android.mk
+endif
+
+# Build the library
+ifeq ($(SUPPORT_JXL),true)
+    include $(SDL_IMAGE_LOCAL_PATH)/$(JXL_LIBRARY_PATH)/Android.mk
+endif
+
+# Build the library
+ifeq ($(SUPPORT_PNG),true)
+    include $(SDL_IMAGE_LOCAL_PATH)/$(PNG_LIBRARY_PATH)/Android.mk
+endif
+
+# Build the library
+ifeq ($(SUPPORT_WEBP),true)
+    include $(SDL_IMAGE_LOCAL_PATH)/$(WEBP_LIBRARY_PATH)/Android.mk
+endif
+
+
+# Restore local path
+LOCAL_PATH := $(SDL_IMAGE_LOCAL_PATH)
 
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := SDL2_image
 
-# Enable this if you want to support loading JPEG images
-# The library path should be a relative path to this directory.
-SUPPORT_JPG ?= true
-JPG_LIBRARY_PATH := external/jpeg-9
+LOCAL_SRC_FILES :=  \
+    src/IMG.c           \
+    src/IMG_avif.c      \
+    src/IMG_bmp.c       \
+    src/IMG_gif.c       \
+    src/IMG_jpg.c       \
+    src/IMG_jxl.c       \
+    src/IMG_lbm.c       \
+    src/IMG_pcx.c       \
+    src/IMG_png.c       \
+    src/IMG_pnm.c       \
+    src/IMG_qoi.c       \
+    src/IMG_stb.c       \
+    src/IMG_svg.c       \
+    src/IMG_tga.c       \
+    src/IMG_tif.c       \
+    src/IMG_webp.c      \
+    src/IMG_WIC.c       \
+    src/IMG_xcf.c       \
+    src/IMG_xpm.c.arm   \
+    src/IMG_xv.c
 
-# Enable this if you want to support loading PNG images
-# The library path should be a relative path to this directory.
-SUPPORT_PNG ?= true
-PNG_LIBRARY_PATH := external/libpng-1.6.2
-
-# Enable this if you want to support loading WebP images
-# The library path should be a relative path to this directory.
-#
-# IMPORTANT: In order to enable this must have a symlink in your jni directory to external/libwebp-0.3.0.
-SUPPORT_WEBP ?= false
-WEBP_LIBRARY_PATH := external/libwebp-0.3.0
-
-
-LOCAL_C_INCLUDES := $(LOCAL_PATH)
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/include
 LOCAL_CFLAGS := -DLOAD_BMP -DLOAD_GIF -DLOAD_LBM -DLOAD_PCX -DLOAD_PNM \
-                -DLOAD_TGA -DLOAD_XCF -DLOAD_XPM -DLOAD_XV
-LOCAL_CFLAGS += -O3 -fstrict-aliasing -fprefetch-loop-arrays
-
-LOCAL_SRC_FILES := $(notdir $(filter-out %/showimage.c, $(wildcard $(LOCAL_PATH)/*.c)))
-
+                -DLOAD_SVG -DLOAD_TGA -DLOAD_XCF -DLOAD_XPM -DLOAD_XV  \
+                -DLOAD_QOI
 LOCAL_LDLIBS :=
 LOCAL_STATIC_LIBRARIES :=
 LOCAL_SHARED_LIBRARIES := SDL2
 
+ifeq ($(USE_STBIMAGE),true)
+    LOCAL_CFLAGS += -DLOAD_JPG -DLOAD_PNG -DUSE_STBIMAGE
+endif
+
+ifeq ($(SUPPORT_AVIF),true)
+    LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(AVIF_LIBRARY_PATH)/include
+    LOCAL_CFLAGS += -DLOAD_AVIF
+    LOCAL_STATIC_LIBRARIES += avif
+    LOCAL_WHOLE_STATIC_LIBRARIES += dav1d dav1d-8bit dav1d-16bit
+endif
+
 ifeq ($(SUPPORT_JPG),true)
     LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(JPG_LIBRARY_PATH)
     LOCAL_CFLAGS += -DLOAD_JPG
-    # We can include the sources directly so the user doesn't have to...
-    #LOCAL_STATIC_LIBRARIES += jpeg
-    LOCAL_CFLAGS += -DAVOID_TABLES
-    LOCAL_SRC_FILES += \
-        $(JPG_LIBRARY_PATH)/jaricom.c \
-        $(JPG_LIBRARY_PATH)/jcapimin.c \
-        $(JPG_LIBRARY_PATH)/jcapistd.c \
-        $(JPG_LIBRARY_PATH)/jcarith.c \
-        $(JPG_LIBRARY_PATH)/jccoefct.c \
-        $(JPG_LIBRARY_PATH)/jccolor.c \
-        $(JPG_LIBRARY_PATH)/jcdctmgr.c \
-        $(JPG_LIBRARY_PATH)/jchuff.c \
-        $(JPG_LIBRARY_PATH)/jcinit.c \
-        $(JPG_LIBRARY_PATH)/jcmainct.c \
-        $(JPG_LIBRARY_PATH)/jcmarker.c \
-        $(JPG_LIBRARY_PATH)/jcmaster.c \
-        $(JPG_LIBRARY_PATH)/jcomapi.c \
-        $(JPG_LIBRARY_PATH)/jcparam.c \
-        $(JPG_LIBRARY_PATH)/jcprepct.c \
-        $(JPG_LIBRARY_PATH)/jcsample.c \
-        $(JPG_LIBRARY_PATH)/jctrans.c \
-        $(JPG_LIBRARY_PATH)/jdapimin.c \
-        $(JPG_LIBRARY_PATH)/jdapistd.c \
-        $(JPG_LIBRARY_PATH)/jdarith.c \
-        $(JPG_LIBRARY_PATH)/jdatadst.c \
-        $(JPG_LIBRARY_PATH)/jdatasrc.c \
-        $(JPG_LIBRARY_PATH)/jdcoefct.c \
-        $(JPG_LIBRARY_PATH)/jdcolor.c \
-        $(JPG_LIBRARY_PATH)/jddctmgr.c \
-        $(JPG_LIBRARY_PATH)/jdhuff.c \
-        $(JPG_LIBRARY_PATH)/jdinput.c \
-        $(JPG_LIBRARY_PATH)/jdmainct.c \
-        $(JPG_LIBRARY_PATH)/jdmarker.c \
-        $(JPG_LIBRARY_PATH)/jdmaster.c \
-        $(JPG_LIBRARY_PATH)/jdmerge.c \
-        $(JPG_LIBRARY_PATH)/jdpostct.c \
-        $(JPG_LIBRARY_PATH)/jdsample.c \
-        $(JPG_LIBRARY_PATH)/jdtrans.c \
-        $(JPG_LIBRARY_PATH)/jerror.c \
-        $(JPG_LIBRARY_PATH)/jfdctflt.c \
-        $(JPG_LIBRARY_PATH)/jfdctfst.c \
-        $(JPG_LIBRARY_PATH)/jfdctint.c \
-        $(JPG_LIBRARY_PATH)/jidctflt.c \
-        $(JPG_LIBRARY_PATH)/jidctint.c \
-        $(JPG_LIBRARY_PATH)/jquant1.c \
-        $(JPG_LIBRARY_PATH)/jquant2.c \
-        $(JPG_LIBRARY_PATH)/jutils.c \
-        $(JPG_LIBRARY_PATH)/jmemmgr.c \
-        $(JPG_LIBRARY_PATH)/jmem-android.c \
-        $(JPG_LIBRARY_PATH)/jidctfst.c
+    LOCAL_STATIC_LIBRARIES += jpeg
+ifeq ($(SUPPORT_SAVE_JPG),true)
+    LOCAL_CFLAGS += -DSDL_IMAGE_SAVE_JPG=1
+else
+    LOCAL_CFLAGS += -DSDL_IMAGE_SAVE_JPG=0
+endif
+endif
 
-    # assembler support is available for arm
-    # Antokolos: but it causes compilation errors and therefore was removed
-#    ifeq ($(TARGET_ARCH),arm)
-#        LOCAL_SRC_FILES += $(JPG_LIBRARY_PATH)/jidctfst.S
-#    else
-#        LOCAL_SRC_FILES += $(JPG_LIBRARY_PATH)/jidctfst.c
-#    endif
+ifeq ($(SUPPORT_JXL),true)
+    LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(JXL_LIBRARY_PATH)/lib/include \
+                        $(LOCAL_PATH)/$(JXL_LIBRARY_PATH)/android
+    LOCAL_CFLAGS += -DLOAD_JXL
+    LOCAL_STATIC_LIBRARIES += jxl
 endif
 
 ifeq ($(SUPPORT_PNG),true)
     LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(PNG_LIBRARY_PATH)
     LOCAL_CFLAGS += -DLOAD_PNG
-    # We can include the sources directly so the user doesn't have to...
-    #LOCAL_STATIC_LIBRARIES += png
-    LOCAL_SRC_FILES += \
-        $(PNG_LIBRARY_PATH)/png.c \
-        $(PNG_LIBRARY_PATH)/pngerror.c \
-        $(PNG_LIBRARY_PATH)/pngget.c \
-        $(PNG_LIBRARY_PATH)/pngmem.c \
-        $(PNG_LIBRARY_PATH)/pngpread.c \
-        $(PNG_LIBRARY_PATH)/pngread.c \
-        $(PNG_LIBRARY_PATH)/pngrio.c \
-        $(PNG_LIBRARY_PATH)/pngrtran.c \
-        $(PNG_LIBRARY_PATH)/pngrutil.c \
-        $(PNG_LIBRARY_PATH)/pngset.c \
-        $(PNG_LIBRARY_PATH)/pngtrans.c \
-        $(PNG_LIBRARY_PATH)/pngwio.c \
-        $(PNG_LIBRARY_PATH)/pngwrite.c \
-        $(PNG_LIBRARY_PATH)/pngwtran.c \
-        $(PNG_LIBRARY_PATH)/pngwutil.c
+    LOCAL_STATIC_LIBRARIES += png
     LOCAL_LDLIBS += -lz
+ifeq ($(SUPPORT_SAVE_PNG),true)
+    LOCAL_CFLAGS += -DSDL_IMAGE_SAVE_PNG=1
+else
+    LOCAL_CFLAGS += -DSDL_IMAGE_SAVE_PNG=0
+endif
 endif
 
 ifeq ($(SUPPORT_WEBP),true)
     LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(WEBP_LIBRARY_PATH)/src
     LOCAL_CFLAGS += -DLOAD_WEBP
+    LOCAL_STATIC_LIBRARIES += webpdemux
     LOCAL_STATIC_LIBRARIES += webp
 endif
 
-LOCAL_EXPORT_C_INCLUDES += $(LOCAL_C_INCLUDES)
+LOCAL_EXPORT_C_INCLUDES += $(LOCAL_PATH)/include
 
 include $(BUILD_SHARED_LIBRARY)
+
+###########################
+#
+# SDL2_image static library
+#
+###########################
+
+LOCAL_MODULE := SDL2_image_static
+
+LOCAL_MODULE_FILENAME := libSDL2_image
+
+LOCAL_LDLIBS :=
+LOCAL_EXPORT_LDLIBS :=
+
+include $(BUILD_STATIC_LIBRARY)
