@@ -1,0 +1,7 @@
+* text=auto
+
+# Скрипты Gradle должны сохранять LF, иначе ломаются на Linux/CI.
+gradlew text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
+*.jar binary
