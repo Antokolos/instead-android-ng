@@ -1,27 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
-    
     <!-- OpenGL ES 2.0 -->
     <uses-feature android:glEsVersion="0x00020000" />
 
-    <uses-sdk android:minSdkVersion="13" android:targetSdkVersion="33"/>
-    <!-- Required to access Google Play Licensing (used for APK expansion files AKA obb) -->
-    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
-
-    <!-- Required to poll the state of the network connection and respond to changes (required for obb) -->
+    <!-- Каталог игр -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <!-- Required to check whether Wi-Fi is enabled (required for obb) -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
-    <!-- Required to download files from Google Play and INSTEAD repositories -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- Required to keep CPU alive while downloading files (AND to keep screen awake in-game) -->
+    <!-- Экран не гаснет во время игры -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <!-- Required to read and write the files on shared storage -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>

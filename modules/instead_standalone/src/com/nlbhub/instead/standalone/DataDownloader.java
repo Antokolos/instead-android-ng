@@ -50,6 +50,7 @@ public class DataDownloader extends Thread {
 
 	public void extractArchive(InputStream stream, PathResolver pathResolver) throws IOException {
 		String path = null;
+		File rootDir = new File(pathResolver.resolvePath("")).getCanonicalFile();
 		ZipInputStream zip = null;
 		zip = new ZipInputStream(stream);
 
@@ -71,15 +72,25 @@ public class DataDownloader extends Thread {
 				break;
 			if (entry.isDirectory()) {
 				try {
-					(new File(pathResolver.resolvePath(entry.getName()))).mkdirs();
+					File dir = new File(pathResolver.resolvePath(entry.getName())).getCanonicalFile();
+					if (!dir.equals(rootDir)
+							&& !dir.getPath().startsWith(rootDir.getPath() + File.separator)) {
+						throw new IOException("Unsafe zip entry: " + entry.getName());
+					}
+					dir.mkdirs();
 				} catch (SecurityException e) {
 				}
-				;
 				continue;
 			}
 
 			OutputStream out = null;
 			path = pathResolver.resolvePath(entry.getName());
+			File target = new File(path).getCanonicalFile();
+			if (!target.equals(rootDir)
+					&& !target.getPath().startsWith(rootDir.getPath() + File.separator)) {
+				throw new IOException("Unsafe zip entry: " + entry.getName());
+			}
+			path = target.getPath();
 			new File(path).getParentFile().mkdirs();
 
 			try {

@@ -13,6 +13,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
+import android.window.OnBackInvokedDispatcher;
 import com.nlbhub.instead.input.Keys;
 import com.nlbhub.instead.standalone.*;
 import org.libsdl.app.SDLActivity;
@@ -207,9 +208,13 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         enableHWASafe();
         super.onCreate(savedInstanceState);
 
-        // We will always show navigation panels, because immersive mode is only for Android >= 4.4 and we want to maintain backward compatibility
-        int iFlags = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        getWindow().getDecorView().setSystemUiVisibility(iFlags);
+        enterImmersiveMode();
+        registerBackCallback();
+        getWindow().getDecorView().post(() -> Log.d("STEAD",
+                "decor " + getWindow().getDecorView().getWidth() + "x"
+                        + getWindow().getDecorView().getHeight() + ", surface "
+                        + (mSurface == null ? "null"
+                        : mSurface.getWidth() + "x" + mSurface.getHeight())));
 
         settings = SettingsFactory.create(this);
         keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard());
@@ -255,8 +260,51 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (mSurface != null) {
+            Log.d("STEAD", "surface " + mSurface.getWidth() + "x" + mSurface.getHeight()
+                    + ", decor " + getWindow().getDecorView().getWidth() + "x"
+                    + getWindow().getDecorView().getHeight());
+        }
         if (settings.getScreenOff()) {
             wakeLock.acquire();
+        }
+    }
+
+    private void enterImmersiveMode() {
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false);
+            WindowInsetsController controller = window.getInsetsController();
+            if (controller != null) {
+                controller.hide(WindowInsets.Type.systemBars());
+                controller.setSystemBarsBehavior(
+                        WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+            }
+        } else {
+            window.getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WindowManager.LayoutParams attrs = window.getAttributes();
+            attrs.layoutInDisplayCutoutMode =
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            window.setAttributes(attrs);
+        }
+    }
+
+    private void registerBackCallback() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+                    OnBackInvokedDispatcher.PRIORITY_DEFAULT,
+                    () -> {
+                        SDLActivity.onNativeKeyDown(KeyEvent.KEYCODE_BACK);
+                        SDLActivity.onNativeKeyUp(KeyEvent.KEYCODE_BACK);
+                    });
         }
     }
 
