@@ -1,4 +1,6 @@
+import java.awt.image.BufferedImage
 import java.io.File
+import javax.imageio.ImageIO
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
@@ -94,10 +96,37 @@ val prepareInsteadData = tasks.register("prepareInsteadData") {
             }
         }
 
+        // Тема mobile рассчитана на 9:16. Для современных 20:9 экранов растягиваем
+        // фон до полного экрана и подгоняем scr.h, чтобы не было чёрных полос.
+        fun patchMobileTheme(themesRoot: File) {
+            val dir = File(themesRoot, "mobile")
+            val ini = File(dir, "theme.ini")
+            if (!ini.isFile) return
+            var text = ini.readText()
+            if (!text.contains("scr.col.brd")) {
+                text += "\nscr.col.bg = #1c2322\nscr.col.brd = #1c2322\n"
+            }
+            text = text.replace(Regex("(?m)^scr\\.h\\s*=\\s*\\d+\\s*$"), "scr.h = 1280")
+            ini.writeText(text)
+
+            val bg = File(dir, "bg.png")
+            if (bg.isFile) {
+                val src = ImageIO.read(bg)
+                if (src != null && (src.width != 576 || src.height != 1280)) {
+                    val dst = BufferedImage(576, 1280, BufferedImage.TYPE_INT_ARGB)
+                    val g = dst.createGraphics()
+                    g.drawImage(src, 0, 0, 576, 1280, null)
+                    g.dispose()
+                    ImageIO.write(dst, "png", bg)
+                }
+            }
+        }
+
         if (instead.isDirectory) {
             val data = File(stage, "data")
             copyDir(File(instead, "stead"), File(data, "stead"))
             copyDir(File(instead, "themes"), File(data, "themes"))
+            patchMobileTheme(File(data, "themes"))
             copyDir(File(instead, "lang"), File(data, "lang"))
             if (lua.isDirectory) {
                 copyDir(File(lua, "stead2"), File(data, "stead/stead2"))
@@ -109,6 +138,7 @@ val prepareInsteadData = tasks.register("prepareInsteadData") {
 
             val themesStage = File(stage, "themes")
             copyDir(File(instead, "themes"), File(themesStage, "themes"))
+            patchMobileTheme(File(themesStage, "themes"))
             File(themesStage, "themes/.nomedia").createNewFile()
             zipDirectory(themesStage, rawDir.file("themes.zip").asFile)
 
