@@ -36,8 +36,6 @@
             android:configChanges="keyboardHidden|orientation"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
         />
-        <service android:name="com.nlbhub.instead.standalone.expansion.InsteadDownloaderService" />
-        <receiver android:name="com.nlbhub.instead.standalone.expansion.InsteadAlarmReceiver" />
         <activity android:name="com.nlbhub.instead.STEADActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
         <activity android:name=".universal.GameManager" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>
         <activity android:name=".universal.nlb.NLBGameManager" android:theme="@android:style/Theme.NoTitleBar" android:configChanges="keyboard|keyboardHidden|orientation"/>

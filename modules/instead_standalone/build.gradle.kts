@@ -130,7 +130,3 @@ tasks.named("preBuild") {
     dependsOn(prepareInsteadData)
 }
 
-dependencies {
-    api(project(":licensing"))
-    api(project(":expansion"))
-}

@@ -6,11 +6,9 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Messenger;
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,11 +19,9 @@ import android.view.Window;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import com.google.android.vending.expansion.downloader.*;
 import com.nlbhub.instead.PropertyManager;
 import com.nlbhub.instead.R;
 import com.nlbhub.instead.STEADActivity;
-import com.nlbhub.instead.standalone.expansion.APKHelper;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;
 
 import java.io.*;
@@ -34,7 +30,7 @@ import java.util.*;
 /**
  * Created by Antokolos on 14.10.15.
  */
-public abstract class MainMenuAbstract extends ListActivity implements SimpleAdapter.ViewBinder, IDownloaderClient {
+public abstract class MainMenuAbstract extends ListActivity implements SimpleAdapter.ViewBinder {
 
     protected boolean onpause = false;
     protected boolean dwn = false;
@@ -42,72 +38,9 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
     protected static final String BR = "<br>";
     protected static final String LIST_TEXT = "list_text";
 
-    private IStub mDownloaderClientStub;
-    private IDownloaderService mRemoteService;
-    private ProgressDialog mProgressDialog;
-
     protected class ListItem {
         public String text;
         public int icon;
-    }
-
-    private void initDownloaderClientStub(Context context) {
-        try {
-            mDownloaderClientStub = new APKHelper(context).createDownloaderStubIfNeeded((InsteadApplication) getApplication(), this);
-            if (mDownloaderClientStub != null) {
-                // Shows download progress
-                mProgressDialog = new ProgressDialog(this);
-                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                mProgressDialog.setMessage(getResources().getString(R.string.downloading_assets));
-                mProgressDialog.setCancelable(false);
-                mProgressDialog.show();
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(InsteadApplication.ApplicationName, "Error creating downloader stub", e);
-        }
-    }
-
-    @Override
-    public void onServiceConnected(Messenger m) {
-        mRemoteService = DownloaderServiceMarshaller.CreateProxy(m);
-        mRemoteService.onClientUpdated(mDownloaderClientStub.getMessenger());
-        mRemoteService.setDownloadFlags(IDownloaderService.FLAGS_DOWNLOAD_OVER_CELLULAR);
-    }
-
-    @Override
-    public void onDownloadProgress(DownloadProgressInfo progress) {
-        long percents = progress.mOverallProgress * 100 / progress.mOverallTotal;
-        Log.v(InsteadApplication.ApplicationName, "DownloadProgress:"+Long.toString(percents) + "%");
-        mProgressDialog.setProgress((int) percents);
-    }
-
-    @Override
-    public void onDownloadStateChanged(int newState) {
-        Log.v(InsteadApplication.ApplicationName, "DownloadStateChanged : " + getString(Helpers.getDownloaderStringResourceIDFromState(newState)));
-
-        switch (newState) {
-            case STATE_DOWNLOADING:
-                Log.v(InsteadApplication.ApplicationName, "Downloading...");
-                break;
-            case STATE_COMPLETED: // The download was finished
-                // validateXAPKZipFiles();
-                mProgressDialog.setMessage(getResources().getString(R.string.preparing_assets));
-                // dismiss progress dialog
-                mProgressDialog.dismiss();
-
-                break;
-            case STATE_FAILED_UNLICENSED:
-            case STATE_FAILED_FETCHING_URL:
-            case STATE_FAILED_SDCARD_FULL:
-            case STATE_FAILED_CANCELED:
-            case STATE_FAILED:
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.setTitle(getResources().getString(R.string.dataerror));
-                alert.setMessage(getResources().getString(R.string.download_failed));
-                alert.setNeutralButton(getResources().getString(R.string.close), null);
-                alert.show();
-                break;
-        }
     }
 
     @Override
@@ -129,7 +62,6 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
         if (!dwn) {
             checkRC();
         }
-        initDownloaderClientStub(this);
     }
 
     @Override
@@ -285,9 +217,6 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
 
     @Override
     protected void onResume() {
-        if (null != mDownloaderClientStub) {
-            mDownloaderClientStub.connect(this);
-        }
         super.onResume();
         if (!dwn) {
             if (dialog.isShowing()) {
@@ -304,9 +233,6 @@ public abstract class MainMenuAbstract extends ListActivity implements SimpleAda
 
     @Override
     protected void onStop() {
-        if (null != mDownloaderClientStub) {
-            mDownloaderClientStub.disconnect(this);
-        }
         super.onStop();
     }
 

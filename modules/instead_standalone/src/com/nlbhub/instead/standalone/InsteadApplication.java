@@ -5,73 +5,47 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
-import com.google.android.vending.expansion.downloader.Helpers;
 
-/**
- * This should be TEMPORARY workaround! I mean it! :)
- * This class provides method to statically obtain application context.
- * Instead of using this class, Globals class should be fully rewritten (and probably obliterated for greater good)
- */
-public class InsteadApplication extends ObbSupportedApplication {
+public class InsteadApplication extends Application {
     public static final String ApplicationName = "Instead-NG";
-    // You must use the public key belonging to your publisher account
-    public static final String BASE64_PUBLIC_KEY = "YourLVLKey";
-    // You should also modify this salt
-    public static final byte[] SALT = new byte[] { 1, 42, -12, -1, 54, 98,
-            -100, -12, 43, 2, -8, -4, 9, 5, -106, -107, -33, 45, -1, 84
-    };
 
-    // You must override the following methods in your application
+    private static Context context;
 
     @Override
-    public String getApplicationMainFolderName() {
-        return ApplicationName;
+    public void onCreate() {
+        super.onCreate();
+        context = getApplicationContext();
     }
 
-    @Override
-    public String getPublicKey() {
-        return BASE64_PUBLIC_KEY;
+    public static Context getAppContext() {
+        return context;
     }
 
-    @Override
-    public byte[] getSALT() {
-        return SALT;
+    private static PackageInfo getPackageInfo(Context c) {
+        PackageInfo pi = null;
+        try {
+            pi = c.getPackageManager().getPackageInfo(c.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(ApplicationName, "Name not found", e);
+        }
+        return pi;
     }
 
-    @Override
-    public String getMainObb() {
-        return "main" + getObbNameTail(getAppContext());
+    public static String AppVer(Context c) {
+        PackageInfo pi = getPackageInfo(c);
+        return (pi != null) ? pi.versionName : "Not Found";
     }
 
-    private String getObbNameTail(Context context) {
-        return "." + AppVerCode(context) + "." + context.getPackageName() + ".obb";
-    }
-
-    @Override
-    public String getPatchObb() {
-        return "patch" + getObbNameTail(getAppContext());
+    public static String AppVerCode(Context c) {
+        PackageInfo pi = getPackageInfo(c);
+        return (pi != null) ? String.valueOf(pi.versionCode) : "000000";
     }
 
     /**
-     * Returned APK files array is empty here, redefine it in your application if it uses APK files.
-     * @return
+     * Каталог приложения в общем хранилище (Instead-NG). Игры-приложения могут
+     * переопределить его, чтобы жить в своей папке.
      */
-    @Override
-    protected XAPKFile[] getAPKFiles() {
-        XAPKFile[] result = {
-            /*new XAPKFile(
-                    true, // true signifies a main file
-                    3, // the version of the APK that the file was uploaded
-                    // against
-                    687801613L // the length of the file in bytes
-            ),
-            new XAPKFile(
-                    false, // false signifies a patch file
-                    4, // the version of the APK that the patch file was uploaded
-                    // against
-                    512860L // the length of the patch file in bytes
-            )*/
-        };
-        return result;
+    public String getApplicationMainFolderName() {
+        return ApplicationName;
     }
 }

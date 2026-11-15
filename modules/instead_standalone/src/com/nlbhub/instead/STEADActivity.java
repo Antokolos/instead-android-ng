@@ -8,7 +8,6 @@ import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.storage.StorageManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.*;
@@ -28,7 +27,6 @@ import java.util.Locale;
  * Created by Antokolos on 29.01.16.
  */
 public class STEADActivity extends org.libsdl.app.SDLActivity {
-    private ExpansionMounter expansionMounterMain = null;
     private String game = null;
     private String idf = null;
     private Settings settings;
@@ -63,8 +61,8 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
      */
     @Override
     protected String[] getArguments() {
-        final String appdata = StorageResolver.getAppDataPath(expansionMounterMain);
-        final String gamespath = StorageResolver.getGamesPath(expansionMounterMain);
+        final String appdata = StorageResolver.getAppDataPath();
+        final String gamespath = StorageResolver.getGamesPath();
         final PropertiesBean properties = PropertyManager.getProperties(this);
         Settings settings = getSettings();
         boolean nocursor = settings.isNoCursor();
@@ -167,29 +165,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         return settings;
     }
 
-    // Setup
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private synchronized void initExpansionManager(Context context) {
-        if (expansionMounterMain == null) {
-            StorageManager storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
-            context.getObbDir().mkdir();
-            expansionMounterMain = (
-                    new ExpansionMounter(
-                            storageManager,
-                            StorageResolver.getObbFilePath(((ObbSupportedApplication) getApplication()).getMainObb(), context)
-                    )
-            );
-            expansionMounterMain.mountExpansion();
-        }
-    }
-
-    private synchronized void initExpansionManagerSafe(Context context) {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            initExpansionManager(context);
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void enableHWA() {
         getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
@@ -218,7 +193,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
 
         settings = SettingsFactory.create(this);
         keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard());
-        initExpansionManagerSafe(this);
 
         Intent intent = getIntent();
         if (intent.getAction()!=null) {
