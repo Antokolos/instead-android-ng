@@ -3,10 +3,17 @@
     <!-- OpenGL ES 2.0 -->
     <uses-feature android:glEsVersion="0x00020000" />
 
-    <!-- Каталог игр -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <!-- Экран не гаснет во время игры -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <application>
+        <!-- Общие экраны движка: их наследуют и лаунчер, и самостоятельные игры. -->
+        <activity
+            android:name="org.libsdl.app.SDLActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.nlbhub.instead.STEADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+    </application>
 </manifest>

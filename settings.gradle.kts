@@ -16,6 +16,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "instead-android-ng"
 
-include(":engine", ":launcher")
+include(":engine", ":launcher", ":games:redhood")
 
 project(":engine").projectDir = file("modules/instead_standalone")
+project(":games:redhood").projectDir = file("games/redhood")

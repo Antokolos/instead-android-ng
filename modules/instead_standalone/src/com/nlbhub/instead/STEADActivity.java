@@ -28,6 +28,7 @@ import java.util.Locale;
  */
 public class STEADActivity extends org.libsdl.app.SDLActivity {
     private String game = null;
+    private boolean standaloneRequested = false;
     private String idf = null;
     private Settings settings;
     private SDLActivity Ctx;
@@ -81,7 +82,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         args[8] = settings.isOwntheme() ? "Y" : null;  // The exact value is unimportant, if NOT null, then -owntheme will be added
         args[9] = settings.getTheme();
         args[10] = StorageResolver.getThemesDirectoryPath();
-        args[11] = properties.isStandalone() ? "Y" : null;
+        args[11] = (properties.isStandalone() || standaloneRequested) ? "Y" : null;
         args[12] = (nocursor) ? "Y" : null;
         args[13] = Locale.getDefault().getLanguage();
         return args;
@@ -211,6 +212,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
             if(b!=null){
                 game = b.getString("game");
                 idf = b.getString("idf");
+                standaloneRequested = b.getBoolean("standalone", false);
             }
         }
 
