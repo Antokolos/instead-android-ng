@@ -45,3 +45,28 @@ bash scripts/verify-16kb.sh launcher/build/outputs/bundle/release/launcher-relea
 ```
 
 На Windows без bash проверка: `llvm-readelf -l lib/arm64-v8a/libmain.so | findstr LOAD` — ожидается `0x4000`.
+
+## Артефакты CI
+
+На каждый push/PR workflow `android` собирает и выкладывает:
+
+| Артефакт | Содержимое |
+|---|---|
+| `aab` | `launcher-release.aab`, `redhood-release.aab` для Play |
+| `apk-debug` | `launcher-debug.apk`, `redhood-debug.apk` — универсальные debug-сборки со всеми ABI (arm64-v8a, armeabi-v7a, x86_64) |
+
+Debug-APK ставятся на устройство/эмулятор через `adb install` и не требуют подписи
+для Play. Отдельные APK по ABI не собираются: универсальный проще для тестирования,
+а размер не критичен для артефакта CI.
+
+## Описание PR
+
+- `.github/pull_request_template.md` — шаблон с разделами «Что меняется», «Как
+  проверено», чек-лист и release notes. Подставляется автоматически при создании PR.
+- workflow `pr-description` на событие `opened` заменяет маркер
+  `<!-- AUTO-DESCRIPTION -->` сводкой: список коммитов, число изменённых файлов и
+  затронутые области. Ручное описание не перезаписывается; для PR из форков шаг
+  пропускается, так как `GITHUB_TOKEN` там только на чтение.
+- Готовые подробные тексты для типовых PR — `docs/pr-templates/sync.md`
+  (зеркалирование) и `docs/pr-templates/app.md` (модернизация): можно скопировать
+  в описание и дополнить.

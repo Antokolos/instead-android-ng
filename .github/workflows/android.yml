@@ -48,7 +48,7 @@ jobs:
           INSTEAD_KEYSTORE_PASSWORD: ci-password
           INSTEAD_KEY_ALIAS: ci
           INSTEAD_KEY_PASSWORD: ci-password
-        run: ./gradlew :launcher:bundleRelease :games:redhood:bundleRelease --no-daemon
+        run: ./gradlew :launcher:bundleRelease :games:redhood:bundleRelease :launcher:assembleDebug :games:redhood:assembleDebug --no-daemon
 
       - name: Verify 16 KB alignment
         run: |
@@ -62,4 +62,13 @@ jobs:
           path: |
             launcher/build/outputs/bundle/release/*.aab
             games/redhood/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk-debug
+          path: |
+            launcher/build/outputs/apk/debug/*.apk
+            games/redhood/build/outputs/apk/debug/*.apk
           if-no-files-found: error
