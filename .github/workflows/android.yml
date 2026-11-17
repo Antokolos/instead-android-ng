@@ -18,6 +18,10 @@ jobs:
           java-version: "17"
 
       - uses: android-actions/setup-android@v3
+        with:
+          # Пакет tools удалён из Android SDK; по умолчанию action пытается его
+          # поставить и падает с "Failed to find package 'tools'".
+          packages: "platform-tools"
 
       - name: Install SDK and NDK
         run: |
