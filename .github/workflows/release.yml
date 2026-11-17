@@ -221,12 +221,13 @@ jobs:
             echo "AAB загружается в Google Play Console, debug APK — для проверки на устройстве."
           } > notes.md
           gh release create "$TAG" assets/* \
+            --repo "$GITHUB_REPOSITORY" \
             --draft \
             --target "$SHA" \
             --title "$TITLE" \
             --notes-file notes.md \
             --generate-notes
-          echo "Черновик: $(gh release view "$TAG" --json url -q .url)" >> "$GITHUB_STEP_SUMMARY"
+          echo "Черновик: $(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json url -q .url)" >> "$GITHUB_STEP_SUMMARY"
 
   publish:
     name: Publish release
@@ -245,4 +246,4 @@ jobs:
         run: |
           set -euo pipefail
           gh release edit "$TAG" --draft=false --repo "$GITHUB_REPOSITORY"
-          echo "Опубликовано: $(gh release view "$TAG" --json url -q .url)" >> "$GITHUB_STEP_SUMMARY"
+          echo "Опубликовано: $(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json url -q .url)" >> "$GITHUB_STEP_SUMMARY"
