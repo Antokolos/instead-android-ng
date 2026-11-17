@@ -7,6 +7,9 @@ on:
 
 jobs:
   build:
+    # Коммиты release-workflow ("chore: release ...") собираются в release.yml,
+    # отдельный прогон android для них не нужен.
+    if: "github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore: release')"
     runs-on: ubuntu-latest
 
     steps:

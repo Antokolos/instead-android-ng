@@ -1,7 +1,12 @@
 import java.io.File
+import java.util.Properties
 
 plugins {
     id("com.android.application")
+}
+
+val appVersion = Properties().apply {
+    rootProject.file("version.properties").inputStream().use { load(it) }
 }
 
 android {
@@ -12,8 +17,8 @@ android {
         applicationId = "com.nlbhub.instead.redhood"
         minSdk = 21
         targetSdk = 36
-        versionCode = 105006
-        versionName = "1.0.6"
+        versionCode = appVersion.getProperty("redhood.versionCode").toInt()
+        versionName = appVersion.getProperty("redhood.versionName")
     }
 
     signingConfigs {
