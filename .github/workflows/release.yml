@@ -1,0 +1,248 @@
+name: release
+
+# Ручной выпуск: Actions -> release -> Run workflow.
+# 1. Повышает версию в version.properties и коммитит в master.
+# 2. Собирает AAB и debug APK с новой версией, переименовывает артефакты.
+# 3. Создаёт ЧЕРНОВИК релиза с ассетами.
+# 4. После аппрува environment "release" публикует черновик.
+# Настройка environment и секретов — docs/release.md.
+
+on:
+  workflow_dispatch:
+    inputs:
+      component:
+        description: "Что выпускаем"
+        type: choice
+        options: [ launcher, redhood, both ]
+        default: launcher
+      bump:
+        description: "Повышение версии"
+        type: choice
+        options: [ patch, minor, major ]
+        default: patch
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    name: Bump version
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.bump.outputs.sha }}
+      tag: ${{ steps.bump.outputs.tag }}
+      title: ${{ steps.bump.outputs.title }}
+      launcher_version: ${{ steps.bump.outputs.launcher_version }}
+      redhood_version: ${{ steps.bump.outputs.redhood_version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: master
+
+      - name: Bump version.properties
+        id: bump
+        shell: bash
+        run: |
+          set -euo pipefail
+          component="${{ inputs.component }}"
+          bump="${{ inputs.bump }}"
+
+          if [ "$component" = "launcher" ] || [ "$component" = "both" ]; then
+            bash scripts/bump-version.sh launcher "$bump"
+          fi
+          if [ "$component" = "redhood" ] || [ "$component" = "both" ]; then
+            bash scripts/bump-version.sh redhood "$bump"
+          fi
+
+          launcher_version="$(sed -n 's/^launcher.versionName=//p' version.properties)"
+          redhood_version="$(sed -n 's/^redhood.versionName=//p' version.properties)"
+
+          case "$component" in
+            launcher) tag="v$launcher_version"; title="Instead-NG $launcher_version" ;;
+            redhood) tag="redhood-v$redhood_version"; title="Red Hood $redhood_version" ;;
+            both) tag="v$launcher_version"; title="Instead-NG $launcher_version" ;;
+          esac
+
+          if git rev-parse -q --verify "refs/tags/$tag" > /dev/null; then
+            echo "::error::Tag $tag already exists"
+            exit 1
+          fi
+          if git ls-remote --tags origin "refs/tags/$tag" | grep -q .; then
+            echo "::error::Tag $tag already exists on origin"
+            exit 1
+          fi
+
+          git config user.name "instead-release-bot"
+          git config user.email "instead-release-bot@users.noreply.github.com"
+          git commit -am "chore: release $title"
+          git push origin HEAD:master
+
+          {
+            echo "sha=$(git rev-parse HEAD)"
+            echo "tag=$tag"
+            echo "title=$title"
+            echo "launcher_version=$launcher_version"
+            echo "redhood_version=$redhood_version"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Summary
+        run: |
+          echo "Версия лаунчера: ${{ steps.bump.outputs.launcher_version }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Версия Red Hood: ${{ steps.bump.outputs.redhood_version }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Тег: ${{ steps.bump.outputs.tag }}" >> "$GITHUB_STEP_SUMMARY"
+
+  build:
+    name: Build release artifacts
+    needs: bump
+    runs-on: ubuntu-latest
+    env:
+      COMPONENT: ${{ inputs.component }}
+      LAUNCHER_VERSION: ${{ needs.bump.outputs.launcher_version }}
+      REDHOOD_VERSION: ${{ needs.bump.outputs.redhood_version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.bump.outputs.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: "platform-tools"
+
+      - name: Install SDK and NDK
+        run: |
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager "platforms;android-36" "build-tools;36.0.0" "ndk;28.2.13676358"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Prepare keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.INSTEAD_KEYSTORE_BASE64 }}
+        run: |
+          set -euo pipefail
+          mkdir -p keystore
+          if [ -n "${KEYSTORE_BASE64:-}" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > keystore/release.jks
+            echo "INSTEAD_KEYSTORE=keystore/release.jks" >> "$GITHUB_ENV"
+            echo "Используется upload key из секрета INSTEAD_KEYSTORE_BASE64"
+          else
+            keytool -genkeypair -v \
+              -keystore keystore/ci.jks -alias ci \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass ci-password -keypass ci-password \
+              -dname "CN=CI, OU=CI, O=Instead, L=CI, C=RU"
+            echo "INSTEAD_KEYSTORE=keystore/ci.jks" >> "$GITHUB_ENV"
+            echo "::warning::INSTEAD_KEYSTORE_BASE64 не задан: артефакты подписаны временным ключом и не подходят для Play"
+          fi
+
+      - name: Build
+        env:
+          INSTEAD_KEYSTORE_PASSWORD: ${{ secrets.INSTEAD_KEYSTORE_PASSWORD || 'ci-password' }}
+          INSTEAD_KEY_ALIAS: ${{ secrets.INSTEAD_KEY_ALIAS || 'ci' }}
+          INSTEAD_KEY_PASSWORD: ${{ secrets.INSTEAD_KEY_PASSWORD || 'ci-password' }}
+        run: |
+          set -euo pipefail
+          case "$COMPONENT" in
+            launcher) targets=":launcher:bundleRelease :launcher:assembleDebug" ;;
+            redhood) targets=":games:redhood:bundleRelease :games:redhood:assembleDebug" ;;
+            both) targets=":launcher:bundleRelease :games:redhood:bundleRelease :launcher:assembleDebug :games:redhood:assembleDebug" ;;
+          esac
+          ./gradlew $targets --no-daemon
+
+      - name: Collect artifacts
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          if [ "$COMPONENT" = "launcher" ] || [ "$COMPONENT" = "both" ]; then
+            cp launcher/build/outputs/bundle/release/launcher-release.aab "dist/instead-ng-${LAUNCHER_VERSION}-launcher.aab"
+            cp launcher/build/outputs/apk/debug/launcher-debug.apk "dist/instead-ng-${LAUNCHER_VERSION}-launcher-debug.apk"
+          fi
+          if [ "$COMPONENT" = "redhood" ] || [ "$COMPONENT" = "both" ]; then
+            cp games/redhood/build/outputs/bundle/release/redhood-release.aab "dist/instead-ng-${REDHOOD_VERSION}-redhood.aab"
+            cp games/redhood/build/outputs/apk/debug/redhood-debug.apk "dist/instead-ng-${REDHOOD_VERSION}-redhood-debug.apk"
+          fi
+          ls -lh dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-assets
+          path: dist/*
+          if-no-files-found: error
+
+  draft:
+    name: Draft release
+    needs: [ bump, build ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      TAG: ${{ needs.bump.outputs.tag }}
+      TITLE: ${{ needs.bump.outputs.title }}
+      SHA: ${{ needs.bump.outputs.sha }}
+      COMPONENT: ${{ inputs.component }}
+      LAUNCHER_VERSION: ${{ needs.bump.outputs.launcher_version }}
+      REDHOOD_VERSION: ${{ needs.bump.outputs.redhood_version }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-assets
+          path: assets
+
+      - name: Create draft release
+        run: |
+          set -euo pipefail
+          {
+            echo "## $TITLE"
+            echo ""
+            echo "| Приложение | AAB | Debug APK |"
+            echo "|---|---|---|"
+            if [ "$COMPONENT" = "launcher" ] || [ "$COMPONENT" = "both" ]; then
+              echo "| Instead-NG | \`instead-ng-${LAUNCHER_VERSION}-launcher.aab\` | \`instead-ng-${LAUNCHER_VERSION}-launcher-debug.apk\` |"
+            fi
+            if [ "$COMPONENT" = "redhood" ] || [ "$COMPONENT" = "both" ]; then
+              echo "| Red Hood | \`instead-ng-${REDHOOD_VERSION}-redhood.aab\` | \`instead-ng-${REDHOOD_VERSION}-redhood-debug.apk\` |"
+            fi
+            echo ""
+            echo "AAB загружается в Google Play Console, debug APK — для проверки на устройстве."
+          } > notes.md
+          gh release create "$TAG" assets/* \
+            --draft \
+            --target "$SHA" \
+            --title "$TITLE" \
+            --notes-file notes.md \
+            --generate-notes
+          echo "Черновик: $(gh release view "$TAG" --json url -q .url)" >> "$GITHUB_STEP_SUMMARY"
+
+  publish:
+    name: Publish release
+    needs: [ bump, draft ]
+    runs-on: ubuntu-latest
+    # В Settings -> Environments создайте environment "release" и добавьте
+    # Required reviewers: job ждёт аппрува, пока черновик можно отредактировать.
+    environment: release
+    permissions:
+      contents: write
+    env:
+      TAG: ${{ needs.bump.outputs.tag }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Publish draft
+        run: |
+          set -euo pipefail
+          gh release edit "$TAG" --draft=false --repo "$GITHUB_REPOSITORY"
+          echo "Опубликовано: $(gh release view "$TAG" --json url -q .url)" >> "$GITHUB_STEP_SUMMARY"

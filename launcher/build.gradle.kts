@@ -1,5 +1,11 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
+}
+
+val appVersion = Properties().apply {
+    rootProject.file("version.properties").inputStream().use { load(it) }
 }
 
 android {
@@ -10,8 +16,8 @@ android {
         applicationId = "com.nlbhub.instead.launcher"
         minSdk = 21
         targetSdk = 36
-        versionCode = 180000
-        versionName = "1.8.0"
+        versionCode = appVersion.getProperty("launcher.versionCode").toInt()
+        versionName = appVersion.getProperty("launcher.versionName")
     }
 
     signingConfigs {

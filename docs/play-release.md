@@ -18,8 +18,12 @@ Debug-варианты: `:launcher:assembleDebug`, `:games:redhood:assembleDebug
 
 ## Версии
 
-- Лаунчер: `versionCode 180000`, `versionName 1.8.0`.
-- Каждая игра: свой `applicationId` и `versionCode` (Red Hood: 105006 / 1.0.6).
+Версии хранятся в `version.properties` и читаются сборочными скриптами; вручную
+править `build.gradle.kts` не нужно. Выпуск — workflow `release` (см.
+`docs/release.md`): он повышает версию, собирает AAB и создаёт черновик релиза.
+
+- Лаунчер: `launcher.versionCode`, `launcher.versionName`.
+- Red Hood: `redhood.versionCode`, `redhood.versionName`.
 
 ## Разрешения и объяснение для Play
 
