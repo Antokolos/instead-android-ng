@@ -1,0 +1,55 @@
+name: mirror
+
+on:
+  push:
+    branches: [ "**" ]
+    tags: [ "*" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mirror-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    env:
+      # Если задан APP_ID, используется GitHub App: токен на парный репозиторий
+      # выдаётся на время запуска. Иначе берётся PAT из MIRROR_TOKEN.
+      APP_ID: ${{ secrets.APP_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Mint GitHub App token for the peer repository
+        id: app-token
+        if: env.APP_ID != ''
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ env.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository == 'Antokolos/instead-android-ng' && 'instead-hub' || 'Antokolos' }}
+          repositories: instead-android-ng
+
+      - name: Mirror branches and tags (GitHub App)
+        if: env.APP_ID != ''
+        env:
+          MIRROR_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PEER: ${{ github.repository == 'Antokolos/instead-android-ng' && 'instead-hub/instead-android-ng' || 'Antokolos/instead-android-ng' }}
+        run: bash scripts/mirror-refs.sh
+
+      - name: Mirror branches and tags (personal access token)
+        if: env.APP_ID == ''
+        env:
+          MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PEER: ${{ github.repository == 'Antokolos/instead-android-ng' && 'instead-hub/instead-android-ng' || 'Antokolos/instead-android-ng' }}
+        run: bash scripts/mirror-refs.sh
