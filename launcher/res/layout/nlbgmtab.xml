@@ -32,7 +32,7 @@
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_centerVertical="true"
-			        android:layout_toLeftOf="@+id/linearLayout1"
+			        android:layout_toLeftOf="@id/linearLayout1"
 			        android:layout_toRightOf="@+id/logo"
 			        android:gravity="center"
 			        android:shadowColor="#000000"
@@ -45,6 +45,7 @@
 			    </TextView>
 
 			    <LinearLayout
+			        android:id="@+id/linearLayout1"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:layout_alignParentRight="true"
