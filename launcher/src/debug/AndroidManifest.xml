@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Только для debug: позволяет запускать игру из adb для тестов.
+         В release STEADActivity остаётся неэкспортированной. -->
+    <application>
+        <activity
+            android:name="com.nlbhub.instead.STEADActivity"
+            android:exported="true"
+            tools:replace="android:exported" />
+    </application>
+</manifest>

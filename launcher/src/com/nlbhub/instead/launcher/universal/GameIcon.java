@@ -3,6 +3,7 @@ package com.nlbhub.instead.launcher.universal;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetProvider;
 import android.content.Intent;
+import android.os.Build;
 import android.content.Context;
 import android.widget.RemoteViews;
 import android.appwidget.AppWidgetManager;
@@ -110,7 +111,11 @@ static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
         Intent active = new Intent(context, STEADActivity.class);
         active.setAction(game);
 
-        PendingIntent actionPendingIntent = PendingIntent.getActivity(context, 0, active, 0);
+        int pendingFlags = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            pendingFlags |= PendingIntent.FLAG_IMMUTABLE;
+        }
+        PendingIntent actionPendingIntent = PendingIntent.getActivity(context, 0, active, pendingFlags);
 
     	views.setOnClickPendingIntent(R.id.widget, actionPendingIntent);
 

@@ -66,15 +66,15 @@ public class StorageResolver {
     }
 
     public static String getDefaultProgramDir() {
-        return getStorage() + ((ObbSupportedApplication) InsteadApplication.getAppContext()).getApplicationMainFolderName();
+        return getStorage() + ((InsteadApplication) InsteadApplication.getAppContext()).getApplicationMainFolderName();
     }
 
     public static String getProgramDirOnSDCard() {
-        return getExternalStorage() + ((ObbSupportedApplication) InsteadApplication.getAppContext()).getApplicationMainFolderName();
+        return getExternalStorage() + ((InsteadApplication) InsteadApplication.getAppContext()).getApplicationMainFolderName();
     }
 
     public static String getProgramDirInSystemMemory() {
-        return getSystemStorage() + ((ObbSupportedApplication) InsteadApplication.getAppContext()).getApplicationMainFolderName();
+        return getSystemStorage() + ((InsteadApplication) InsteadApplication.getAppContext()).getApplicationMainFolderName();
     }
 
     public static String getThemesDirectoryPath() {
@@ -84,11 +84,6 @@ public class StorageResolver {
     public static File getThemesDirectory() throws IOException {
         return new File(getThemesDirectoryPath());
     }
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static String getObbFilePath(final String filename, Context context) {
-        return context.getObbDir() + "/" + filename;
-    };
 
     public static String getOutFilePath(final String filename) {
         return getDefaultProgramDir() + "/" + filename;
@@ -108,30 +103,17 @@ public class StorageResolver {
         return false;
     }
 
-    public static String getGamesPath(ExpansionMounter expansionMounter) {
-        final String expansionFilePath = (expansionMounter != null) ? expansionMounter.getExpansionFilePath() : null;
-        final String appdata = getAppDataPath(expansionMounter);
-        return (expansionFilePath != null) ? expansionFilePath + "/games" : appdata + "/games";
+    public static String getGamesPath() {
+        return getAppDataPath() + "/games";
     }
 
-    public static String getAppDataPath(ExpansionMounter expansionMounter) {
-        final String expansionFilePath = (expansionMounter != null) ? expansionMounter.getExpansionFilePath() : null;
-        final File bundledGameDirParent = (expansionFilePath != null) ? new File(expansionFilePath, "games") : null;
-        String resultPath = StorageResolver.getDefaultProgramDir() + "/" + getAppDataFolderName(bundledGameDirParent);
+    public static String getAppDataPath() {
+        String resultPath = StorageResolver.getDefaultProgramDir() + "/appdata";
         File resultDir = new File(resultPath);
         if (!resultDir.exists()) {
-            // TODO: directories creation should be moved somewhere, this metod should only get things
-            resultDir.mkdir();
+            resultDir.mkdirs();
         }
         return resultPath;
-    }
-
-    private static String getAppDataFolderName(File bundledGameDirParent) {
-        if (bundledGameDirParent == null || !bundledGameDirParent.isDirectory()) {
-            return "appdata";
-        } else {
-            return bundledGameDirParent.list()[0];
-        }
     }
 
     public static void delete(String path) {

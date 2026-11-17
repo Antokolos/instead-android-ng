@@ -8,10 +8,11 @@ import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.storage.StorageManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.*;
 import android.widget.Toast;
+import android.window.OnBackInvokedDispatcher;
 import com.nlbhub.instead.input.Keys;
 import com.nlbhub.instead.standalone.*;
 import org.libsdl.app.SDLActivity;
@@ -26,8 +27,8 @@ import java.util.Locale;
  * Created by Antokolos on 29.01.16.
  */
 public class STEADActivity extends org.libsdl.app.SDLActivity {
-    private ExpansionMounter expansionMounterMain = null;
     private String game = null;
+    private boolean standaloneRequested = false;
     private String idf = null;
     private Settings settings;
     private SDLActivity Ctx;
@@ -37,20 +38,8 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     // Load the .so
 
     @Override
-    public void loadLibraries() {
-        try {
-            // I'm using /data/data/myPackage/app_libs (using Ctx.getDir("libs",Context.MODE_PRIVATE); returns that path).
-            String libsDirPath = Ctx.getDir("libs", Context.MODE_PRIVATE).getCanonicalPath() + "/";
-            System.load(libsDirPath + "libgnustl_shared.so");
-            System.load(libsDirPath + "libSDL2.so");
-            System.load(libsDirPath + "libSDL2_image.so");
-            System.load(libsDirPath + "libsmpeg2.so");
-            System.load(libsDirPath + "libSDL2_mixer.so");
-            System.load(libsDirPath + "libSDL2_ttf.so");
-            System.load(libsDirPath + "libmain.so");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    protected String[] getLibraries() {
+        return new String[]{"SDL2", "SDL2_image", "SDL2_mixer", "SDL2_ttf", "main"};
     }
 
     public File getDataDir() {
@@ -73,8 +62,8 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
      */
     @Override
     protected String[] getArguments() {
-        final String appdata = StorageResolver.getAppDataPath(expansionMounterMain);
-        final String gamespath = StorageResolver.getGamesPath(expansionMounterMain);
+        final String appdata = StorageResolver.getAppDataPath();
+        final String gamespath = StorageResolver.getGamesPath();
         final PropertiesBean properties = PropertyManager.getProperties(this);
         Settings settings = getSettings();
         boolean nocursor = settings.isNoCursor();
@@ -93,7 +82,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         args[8] = settings.isOwntheme() ? "Y" : null;  // The exact value is unimportant, if NOT null, then -owntheme will be added
         args[9] = settings.getTheme();
         args[10] = StorageResolver.getThemesDirectoryPath();
-        args[11] = properties.isStandalone() ? "Y" : null;
+        args[11] = (properties.isStandalone() || standaloneRequested) ? "Y" : null;
         args[12] = (nocursor) ? "Y" : null;
         args[13] = Locale.getDefault().getLanguage();
         return args;
@@ -103,24 +92,25 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         return Ctx;
     }
 
-    /*
-    This method should be added to org.libsdl.app.SDLActivity
     protected KeyEvent.DispatcherState getKeyDispatcherState() {
-        return mSurface.getKeyDispatcherState();
+        return mSurface != null ? mSurface.getKeyDispatcherState() : null;
     }
-    */
 
     public boolean processKey(KeyEvent event, int keyCode, KeyHandler keyHandler) {
         if (event.getKeyCode() == keyCode) {
+            KeyEvent.DispatcherState state = getKeyDispatcherState();
+            if (state == null) {
+                return false;
+            }
             if (event.getAction() == KeyEvent.ACTION_DOWN
                     && event.getRepeatCount() == 0) {
 
                 // Tell the framework to start tracking this event.
-                getKeyDispatcherState().startTracking(event, this);
+                state.startTracking(event, this);
                 return true;
 
             } else if (event.getAction() == KeyEvent.ACTION_UP) {
-                getKeyDispatcherState().handleUpEvent(event);
+                state.handleUpEvent(event);
                 if (event.isTracking() && !event.isCanceled()) {
                     keyHandler.handle();
                     return true;
@@ -176,29 +166,6 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         return settings;
     }
 
-    // Setup
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private synchronized void initExpansionManager(Context context) {
-        if (expansionMounterMain == null) {
-            StorageManager storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
-            context.getObbDir().mkdir();
-            expansionMounterMain = (
-                    new ExpansionMounter(
-                            storageManager,
-                            StorageResolver.getObbFilePath(((ObbSupportedApplication) getApplication()).getMainObb(), context)
-                    )
-            );
-            expansionMounterMain.mountExpansion();
-        }
-    }
-
-    private synchronized void initExpansionManagerSafe(Context context) {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            initExpansionManager(context);
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void enableHWA() {
         getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
@@ -217,13 +184,16 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
         enableHWASafe();
         super.onCreate(savedInstanceState);
 
-        // We will always show navigation panels, because immersive mode is only for Android >= 4.4 and we want to maintain backward compatibility
-        int iFlags = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        getWindow().getDecorView().setSystemUiVisibility(iFlags);
+        enterImmersiveMode();
+        registerBackCallback();
+        getWindow().getDecorView().post(() -> Log.d("STEAD",
+                "decor " + getWindow().getDecorView().getWidth() + "x"
+                        + getWindow().getDecorView().getHeight() + ", surface "
+                        + (mSurface == null ? "null"
+                        : mSurface.getWidth() + "x" + mSurface.getHeight())));
 
         settings = SettingsFactory.create(this);
         keyboardAdapter = KeyboardFactory.create(this, settings.getKeyboard());
-        initExpansionManagerSafe(this);
 
         Intent intent = getIntent();
         if (intent.getAction()!=null) {
@@ -242,6 +212,7 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
             if(b!=null){
                 game = b.getString("game");
                 idf = b.getString("idf");
+                standaloneRequested = b.getBoolean("standalone", false);
             }
         }
 
@@ -265,8 +236,79 @@ public class STEADActivity extends org.libsdl.app.SDLActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (mSurface != null) {
+            Log.d("STEAD", "surface " + mSurface.getWidth() + "x" + mSurface.getHeight()
+                    + ", decor " + getWindow().getDecorView().getWidth() + "x"
+                    + getWindow().getDecorView().getHeight());
+        }
         if (settings.getScreenOff()) {
             wakeLock.acquire();
+        }
+    }
+
+    private void enterImmersiveMode() {
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false);
+            WindowInsetsController controller = window.getInsetsController();
+            if (controller != null) {
+                controller.hide(WindowInsets.Type.systemBars());
+                controller.setSystemBarsBehavior(
+                        WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+            }
+        } else {
+            window.getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WindowManager.LayoutParams attrs = window.getAttributes();
+            attrs.layoutInDisplayCutoutMode =
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            window.setAttributes(attrs);
+        }
+    }
+
+    private void registerBackCallback() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+                    OnBackInvokedDispatcher.PRIORITY_DEFAULT,
+                    () -> {
+                        SDLActivity.onNativeKeyDown(KeyEvent.KEYCODE_BACK);
+                        SDLActivity.onNativeKeyUp(KeyEvent.KEYCODE_BACK);
+                    });
+        }
+    }
+
+    // Методы, которые вызывает instead_launcher.c (get_screen_size/rotate_*).
+    public static String getScreenSize() {
+        if (mSingleton == null) {
+            return "0x0";
+        }
+        DisplayMetrics metrics = new DisplayMetrics();
+        mSingleton.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
+        return metrics.widthPixels + "x" + metrics.heightPixels;
+    }
+
+    public static void rotateLandscape() {
+        if (mSingleton != null) {
+            mSingleton.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+    }
+
+    public static void rotatePortrait() {
+        if (mSingleton != null) {
+            mSingleton.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+    }
+
+    public static void unlockRotation() {
+        if (mSingleton != null) {
+            mSingleton.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
     }
 

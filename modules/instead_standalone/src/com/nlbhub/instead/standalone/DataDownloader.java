@@ -50,6 +50,7 @@ public class DataDownloader extends Thread {
 
 	public void extractArchive(InputStream stream, PathResolver pathResolver) throws IOException {
 		String path = null;
+		File rootDir = new File(pathResolver.resolvePath("")).getCanonicalFile();
 		ZipInputStream zip = null;
 		zip = new ZipInputStream(stream);
 
@@ -71,15 +72,26 @@ public class DataDownloader extends Thread {
 				break;
 			if (entry.isDirectory()) {
 				try {
-					(new File(pathResolver.resolvePath(entry.getName()))).mkdirs();
+					File dir = new File(pathResolver.resolvePath(entry.getName())).getCanonicalFile();
+					if (!dir.equals(rootDir)
+							&& !dir.getPath().startsWith(rootDir.getPath() + File.separator)) {
+						throw new IOException("Unsafe zip entry: " + entry.getName());
+					}
+					dir.mkdirs();
 				} catch (SecurityException e) {
 				}
-				;
 				continue;
 			}
 
 			OutputStream out = null;
 			path = pathResolver.resolvePath(entry.getName());
+			File target = new File(path).getCanonicalFile();
+			if (!target.equals(rootDir)
+					&& !target.getPath().startsWith(rootDir.getPath() + File.separator)) {
+				throw new IOException("Unsafe zip entry: " + entry.getName());
+			}
+			path = target.getPath();
+			new File(path).getParentFile().mkdirs();
 
 			try {
 				out = new FileOutputStream(path);
@@ -120,52 +132,6 @@ public class DataDownloader extends Thread {
 		}
 	}
 
-	public static boolean isArm64v8() {
-		try {
-			return Build.VERSION.SDK_INT >= 4 && Build.class.getField("CPU_ABI").get(null).toString().startsWith("arm64-v8a");
-		} catch (Throwable ignore) {}
-
-		return false;
-	}
-
-	public static boolean isArmv7() {
-		try {
-			return Build.VERSION.SDK_INT >= 4 && Build.class.getField("CPU_ABI").get(null).toString().startsWith("armeabi-v7");
-		} catch (Throwable ignore) {}
-
-		return false;
-	}
-
-	public static boolean isX86_64() {
-		try {
-			return Build.VERSION.SDK_INT >= 4 && Build.class.getField("CPU_ABI").get(null).toString().startsWith("x86_64");
-		} catch (Throwable ignore) {}
-
-		return false;
-	}
-
-	public static boolean isX86() {
-		try {
-			return Build.VERSION.SDK_INT >= 4 && Build.class.getField("CPU_ABI").get(null).toString().startsWith("x86");
-		} catch (Throwable ignore) {}
-
-		return false;
-	}
-
-	private InputStream getAppropriateLibsStream() {
-        if (isArm64v8()) {
-            return Parent.getResources().openRawResource(R.raw.libs_arm64_v8a);
-        } else if (isArmv7()) {
-			return Parent.getResources().openRawResource(R.raw.libs_armeabi_v7a);
-		} else if (isX86_64()) {
-			return Parent.getResources().openRawResource(R.raw.libs_x86_64);
-		} else if (isX86()) {
-			return Parent.getResources().openRawResource(R.raw.libs_x86);
-		} else {
-			return Parent.getResources().openRawResource(R.raw.libs_armeabi);
-		}
-	}
-
 	@Override
 	public void run() {
 		String path = null;
@@ -185,7 +151,6 @@ public class DataDownloader extends Thread {
 			extractArchive(Parent.getResources().openRawResource(R.raw.games), appdata);
 			extractArchive(Parent.getResources().openRawResource(R.raw.themes), appdata);
 			extractArchive(Parent.getResources().openRawResource(R.raw.data), dataResolver);
-			extractArchive(getAppropriateLibsStream(), new SystemPathResolver("libs", Parent.getApplicationContext()));
 		} catch (IOException e) {
 			Log.e("Instead-NG ERROR", "IOException");
 		}
