@@ -18,4 +18,7 @@ endif
 SUPPORT_WAVPACK := false
 SUPPORT_GME := false
 
-APP_MODULES := main SDL2 SDL2_mixer SDL2_image SDL2_ttf freetype libiconv lua
+# Tracker music (s3m/xm/it/mod) via libxmp; the ilines game uses .s3m.
+SUPPORT_MOD_XMP := true
+
+APP_MODULES := main SDL2 SDL2_mixer SDL2_image SDL2_ttf freetype libiconv lua xmp
