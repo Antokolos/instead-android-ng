@@ -261,6 +261,10 @@ void get_screen_size(int *w, int *h) {
 }
 
 void rotate_landscape() {
+    /* SDL при создании окна сам выставляет ориентацию по SDL_HINT_ORIENTATIONS.
+       Без hint он выбирает FULL_USER и игра остаётся в портрете с полями. */
+    SDL_SetHint(SDL_HINT_ORIENTATIONS, "LandscapeLeft LandscapeRight");
+
     JNIEnv *env = (JNIEnv*)SDL_AndroidGetJNIEnv();
     jobject activity = (jobject)SDL_AndroidGetActivity();
     jclass clazz = (*env)->GetObjectClass(env, activity);
@@ -277,6 +281,8 @@ void rotate_landscape() {
 }
 
 void rotate_portrait() {
+    SDL_SetHint(SDL_HINT_ORIENTATIONS, "Portrait");
+
     JNIEnv *env = (JNIEnv*)SDL_AndroidGetJNIEnv();
     jobject activity = (jobject)SDL_AndroidGetActivity();
     jclass clazz = (*env)->GetObjectClass(env, activity);
@@ -293,6 +299,8 @@ void rotate_portrait() {
 }
 
 void unlock_rotation() {
+    SDL_SetHint(SDL_HINT_ORIENTATIONS, "LandscapeLeft LandscapeRight Portrait PortraitUpsideDown");
+
     JNIEnv *env = (JNIEnv*)SDL_AndroidGetJNIEnv();
     jobject activity = (jobject)SDL_AndroidGetActivity();
     jclass clazz = (*env)->GetObjectClass(env, activity);
