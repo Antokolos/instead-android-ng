@@ -2,6 +2,9 @@ APP_ABI := arm64-v8a armeabi-v7a x86_64
 APP_PLATFORM := android-21
 APP_STL := c++_shared
 
+# Windows: длинные команды линковки SDL2 упираются в лимит 32767 символов.
+APP_SHORT_COMMANDS := true
+
 # Legacy vendor C++ code (with register/narrowing) needs C++14.
 APP_CPPFLAGS := -std=c++14 -Wno-c++11-narrowing
 
