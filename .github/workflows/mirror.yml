@@ -5,6 +5,10 @@ on:
     branches: [ "**" ]
     tags: [ "*" ]
   workflow_dispatch:
+  # Страховка от расхождений: push, сделанный GITHUB_TOKEN'ом (release-workflow,
+  # другие боты), не запускает новые workflow, поэтому раз в 30 минут сверяем refs.
+  schedule:
+    - cron: "*/30 * * * *"
 
 permissions:
   contents: read

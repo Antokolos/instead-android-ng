@@ -70,3 +70,9 @@ bash scripts/bump-version.sh launcher patch
 
 Скрипт печатает `previous`, `version`, `code` и пишет их в `$GITHUB_OUTPUT`, если
 переменная задана.
+
+## Зеркалирование
+
+После bump-коммита и после публикации (создания тега) release-workflow сам запускает
+workflow mirror, потому что события от GITHUB_TOKEN не порождают новых прогонов.
+Дополнительно mirror работает по расписанию раз в 30 минут.
