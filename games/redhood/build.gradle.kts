@@ -64,10 +64,8 @@ android {
     }
 }
 
-// Контент игры лежит в INSTEAD-дереве (games/tutorial как заглушка для Red Hood).
-// Реальный контент игры подкладывается сюда же и не коммитится в репозиторий.
-val gameContent = rootProject.layout.projectDirectory
-    .dir("modules/instead_standalone/jni/src/instead/games/tutorial")
+// Контент Return of Red Hood лежит в репозитории и бандлится в assets.
+val gameContent = rootProject.layout.projectDirectory.dir("games/redhood/game")
 val generatedAssets = layout.buildDirectory.dir("generated/game-assets")
 
 val prepareGameContent = tasks.register("prepareGameContent") {
