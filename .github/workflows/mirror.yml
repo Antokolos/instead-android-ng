@@ -5,6 +5,9 @@ on:
     branches: [ "**" ]
     tags: [ "*" ]
   workflow_dispatch:
+  # Публикация GitHub-релиза создаёт тег через API — push-события нет.
+  release:
+    types: [ published ]
   # Страховка от расхождений: push, сделанный GITHUB_TOKEN'ом (release-workflow,
   # другие боты), не запускает новые workflow, поэтому раз в 30 минут сверяем refs.
   schedule:
