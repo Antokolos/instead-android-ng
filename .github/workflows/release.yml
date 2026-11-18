@@ -27,6 +27,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   bump:
@@ -89,6 +90,14 @@ jobs:
             echo "launcher_version=$launcher_version"
             echo "redhood_version=$redhood_version"
           } >> "$GITHUB_OUTPUT"
+
+      - name: Trigger mirror
+        # Push, сделанный GITHUB_TOKEN'ом, не порождает новых запусков workflow,
+        # поэтому mirror нужно запустить явно; schedule в mirror.yml — страховка.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run mirror.yml --repo "$GITHUB_REPOSITORY" --ref master
 
       - name: Summary
         run: |
@@ -247,3 +256,10 @@ jobs:
           set -euo pipefail
           gh release edit "$TAG" --draft=false --repo "$GITHUB_REPOSITORY"
           echo "Опубликовано: $(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json url -q .url)" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Trigger mirror
+        # Публикация создаёт тег через API — push-события нет, синхронизируем явно.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run mirror.yml --repo "$GITHUB_REPOSITORY" --ref master
