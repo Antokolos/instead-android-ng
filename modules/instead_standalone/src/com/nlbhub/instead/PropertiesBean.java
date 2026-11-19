@@ -11,7 +11,7 @@ public class PropertiesBean {
     public static final boolean STANDALONE = false;
     public static final String GAME_LIST_DOWNLOAD_URL = "http://instead.syscall.ru/pool/game_list.xml";
     public static final String GAME_LIST_ALT_DOWNLOAD_URL = "http://instead-games.ru/xml.php";
-    public static final String GAME_LIST_NLBPROJECT_DOWNLOAD_URL = "https://nlbproject.com/hub/services/nlbproject_games";
+    public static final String GAME_LIST_NLBPROJECT_DOWNLOAD_URL = "https://nlbhub.com/hub/services/nlbproject_games";
     public static final String GAME_LIST_COMMUNITY_DOWNLOAD_URL = "https://nlbproject.com/hub/services/community_games";
 
     private boolean standalone = STANDALONE;

@@ -2,7 +2,10 @@ package com.nlbhub.instead;
 
 import android.app.Activity;
 import android.util.Log;
+import com.nlbhub.instead.standalone.DownloadMirrors;
 import com.nlbhub.instead.standalone.InsteadApplication;
+import com.nlbhub.instead.standalone.Settings;
+import com.nlbhub.instead.standalone.SettingsFactory;
 import com.nlbhub.instead.standalone.StorageResolver;
 import org.apache.commons.io.FileUtils;
 
@@ -30,7 +33,13 @@ public class PropertyManager {
     public static PropertiesBean getProperties(Activity parent) {
         File configDir = new File(StorageResolver.getDefaultProgramDir());
         try {
-            return readProperties(parent, configDir);
+            PropertiesBean result = readProperties(parent, configDir);
+            // Каталоги NLB/Community всегда берутся с выбранного зеркала,
+            // значения из config.properties оставлены только как fallback.
+            Settings settings = SettingsFactory.create(parent);
+            result.setGameListNLBProjectDownloadUrl(DownloadMirrors.nlbCatalogUrl(settings));
+            result.setGameListCommunityDownloadUrl(DownloadMirrors.communityCatalogUrl(settings));
+            return result;
         } catch (IOException e) {
             Log.e(InsteadApplication.ApplicationName, e.getMessage());
             return new PropertiesBean();

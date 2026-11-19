@@ -16,6 +16,8 @@ public class Settings {
     public static final boolean OWNTHEME_DEFAULT = true;
     public static final boolean ENFORCE_SYSTEM_STORAGE_DEFAULT = false;
     public static final String THEME_DEFAULT = "mobile";
+    public static final String NLB_MIRROR_DEFAULT = DownloadMirrors.NLB_DEFAULT;
+    public static final String COMMUNITY_MIRROR_DEFAULT = DownloadMirrors.COMMUNITY_DEFAULT;
     private boolean music;
     private boolean nativelog;
     private boolean enforceresolution;
@@ -26,6 +28,8 @@ public class Settings {
     private boolean owntheme;
     private boolean enforceSystemStorage;
     private String theme;
+    private String nlbMirror;
+    private String communityMirror;
 
     public Settings() {
         music = MUSIC_DEFAULT;
@@ -37,6 +41,8 @@ public class Settings {
         nocursor = NO_CURSOR_DEFAULT;
         owntheme = OWNTHEME_DEFAULT;
         theme = THEME_DEFAULT;
+        nlbMirror = NLB_MIRROR_DEFAULT;
+        communityMirror = COMMUNITY_MIRROR_DEFAULT;
         enforceSystemStorage = ENFORCE_SYSTEM_STORAGE_DEFAULT;
     }
 
@@ -53,6 +59,8 @@ public class Settings {
         nocursor = NO_CURSOR_DEFAULT;
         owntheme = OWNTHEME_DEFAULT;
         theme = THEME_DEFAULT;
+        nlbMirror = NLB_MIRROR_DEFAULT;
+        communityMirror = COMMUNITY_MIRROR_DEFAULT;
         enforceSystemStorage = ENFORCE_SYSTEM_STORAGE_DEFAULT;
     }
 
@@ -126,6 +134,22 @@ public class Settings {
 
     public void setTheme(String theme) {
         this.theme = theme;
+    }
+
+    public String getNlbMirror() {
+        return nlbMirror;
+    }
+
+    public void setNlbMirror(String nlbMirror) {
+        this.nlbMirror = DownloadMirrors.normalize(nlbMirror, NLB_MIRROR_DEFAULT);
+    }
+
+    public String getCommunityMirror() {
+        return communityMirror;
+    }
+
+    public void setCommunityMirror(String communityMirror) {
+        this.communityMirror = DownloadMirrors.normalize(communityMirror, COMMUNITY_MIRROR_DEFAULT);
     }
 
     public boolean isEnforceSystemStorage() {
