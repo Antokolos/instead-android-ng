@@ -34,11 +34,13 @@ public class PropertyManager {
         File configDir = new File(StorageResolver.getDefaultProgramDir());
         try {
             PropertiesBean result = readProperties(parent, configDir);
-            // Каталоги NLB/Community всегда берутся с выбранного зеркала,
+            // Каталоги NLB/Community и INSTEAD всегда берутся с выбранного зеркала,
             // значения из config.properties оставлены только как fallback.
             Settings settings = SettingsFactory.create(parent);
-            result.setGameListNLBProjectDownloadUrl(DownloadMirrors.nlbCatalogUrl(settings));
-            result.setGameListCommunityDownloadUrl(DownloadMirrors.communityCatalogUrl(settings));
+            result.setGameListDownloadUrl(DownloadMirrors.insteadGamesCatalogUrl(settings, false));
+            result.setGameListAltDownloadUrl(DownloadMirrors.insteadGamesCatalogUrl(settings, true));
+            result.setGameListNLBProjectDownloadUrl(DownloadMirrors.nlbCatalogUrl(settings, false));
+            result.setGameListCommunityDownloadUrl(DownloadMirrors.nlbCatalogUrl(settings, true));
             return result;
         } catch (IOException e) {
             Log.e(InsteadApplication.ApplicationName, e.getMessage());

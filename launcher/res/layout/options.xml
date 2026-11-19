@@ -117,11 +117,11 @@
 					    <TextView
 					        android:layout_width="wrap_content"
 					        android:layout_height="wrap_content"
-					        android:text="@string/nlb_mirror"
+					        android:text="@string/instead_games_mirror"
 					        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
 					    <Spinner
-					        android:id="@+id/nlb_mirror_spinner"
+					        android:id="@+id/instead_games_mirror_spinner"
 					        android:layout_width="fill_parent"
 					        android:layout_height="wrap_content" android:layout_weight="1"/>
 					</LinearLayout>
@@ -136,11 +136,11 @@
 					    <TextView
 					        android:layout_width="wrap_content"
 					        android:layout_height="wrap_content"
-					        android:text="@string/community_mirror"
+					        android:text="@string/nlb_mirror"
 					        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
 					    <Spinner
-					        android:id="@+id/community_mirror_spinner"
+					        android:id="@+id/nlb_mirror_spinner"
 					        android:layout_width="fill_parent"
 					        android:layout_height="wrap_content" android:layout_weight="1"/>
 					</LinearLayout>

@@ -1,34 +1,51 @@
 # Зеркала каталогов игр
 
-## NLB project games
+## Игры сообщества INSTEAD
+
+Раздел «репозиторий игр» (Каталог и Песочница). Пока одно зеркало:
+
+| Раздел | URL |
+|---|---|
+| Каталог | `https://www.instead-games.ru/xml.php` |
+| Песочница | `https://www.instead-games.ru/xml2.php` |
+
+## Non-Linear Text Quests
+
+Разделы NLB project и Community. Два зеркала:
 
 | Зеркало | Роль |
 |---|---|
 | `https://nlbhub.com` | по умолчанию |
 | `https://nlbproject.com` | альтернативное |
 
-Каталог: `<зеркало>/hub/services/nlbproject_games`.
-
-## Community games
-
-Пока одно зеркало: `https://nlbproject.com`.
-Каталог: `https://nlbproject.com/hub/services/community_games`.
+| Раздел | URL |
+|---|---|
+| NLB project | `<зеркало>/hub/services/nlbproject_games` |
+| Community | `<зеркало>/hub/services/community_games` |
 
 ## Настройка
 
-Settings → **NLB project games mirror** / **Community games mirror**.
-Выбор сохраняется в SharedPreferences (`nlbMirror`, `communityMirror`) и
+Settings содержит два выпадающих списка:
+
+- **INSTEAD community games mirror** — `www.instead-games.ru` (пока один вариант);
+- **Non-Linear Text Quests mirror** — `nlbhub.com` (по умолчанию) или `nlbproject.com`.
+
+Выбор сохраняется в SharedPreferences (`insteadGamesMirror`, `nlbMirror`) и
 применяется к:
 
-- URL загрузки каталога;
+- URL загрузки каталогов;
 - ссылкам на игровые архивы (`url` в XML);
 - ссылкам на страницы описания (`descurl` в XML).
 
-Ссылки на другие домены (например, `instead-games.ru`) не переписываются.
+`DownloadMirrors` переписывает только «свои» домены:
+
+- для INSTEAD — `instead-games.ru` / `www.instead-games.ru`;
+- для NLTQ — `nlbhub.com` / `nlbproject.com` (включая `www.`).
+
+Остальные домены не меняются.
 
 ## Конфигурация
 
-`modules/instead_standalone/res/raw/config.properties` содержит URL как fallback,
-но `PropertyManager` всегда подставляет выбранное зеркало поверх значений файла.
-Старые `config.properties` в appdata на устройстве переопределяются так же —
-миграция не требуется.
+`modules/instead_standalone/res/raw/config.properties` содержит URL как fallback.
+`PropertyManager` всегда подставляет выбранные зеркала поверх значений файла,
+поэтому старые `config.properties` в appdata менять не нужно.

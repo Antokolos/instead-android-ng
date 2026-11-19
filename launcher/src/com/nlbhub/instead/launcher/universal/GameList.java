@@ -91,17 +91,19 @@ public class GameList {
 	private Document document;
 	private GameManager Parent;
 	private final String mirrorBase;
+	private final boolean nlbMirror;
 
 	
 	GameList(GameManager _parent, String f) {
 		Parent = _parent;
 		Settings settings = SettingsFactory.create(Parent);
-		if (Globals.NLBProjectGamesFileName.equals(f)) {
+		if (Globals.NLBProjectGamesFileName.equals(f)
+				|| Globals.CommunityGamesFileName.equals(f)) {
 			mirrorBase = DownloadMirrors.nlbBase(settings);
-		} else if (Globals.CommunityGamesFileName.equals(f)) {
-			mirrorBase = DownloadMirrors.communityBase(settings);
+			nlbMirror = true;
 		} else {
-			mirrorBase = null;
+			mirrorBase = DownloadMirrors.insteadGamesBase(settings);
+			nlbMirror = false;
 		}
 		na=Parent.getString(R.string.na);
 		flag = new ArrayList<Integer>();
@@ -375,9 +377,9 @@ public class GameList {
 			case TITLE:
 				return title.get(n);
 			case URL:
-				return DownloadMirrors.rewrite(url.get(n), mirrorBase);
+				return rewriteMirror(url.get(n));
 			case DESCURL:
-				return DownloadMirrors.rewrite(descurl.get(n), mirrorBase);
+				return rewriteMirror(descurl.get(n));
 			case LANG:
 				return lang.get(n);
 			case VERSION:
@@ -389,6 +391,15 @@ public class GameList {
 			}
 		}
 		return null;
+	}
+
+	private String rewriteMirror(String value) {
+		if (value == null || mirrorBase == null) {
+			return value;
+		}
+		return nlbMirror
+				? DownloadMirrors.rewriteNlb(value, mirrorBase)
+				: DownloadMirrors.rewriteInsteadGames(value, mirrorBase);
 	}
 
 	public int getFlag(int i) {

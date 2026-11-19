@@ -4,17 +4,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Зеркала каталогов NLB project / Community и переписывание ссылок из XML
- * на выбранное зеркало.
+ * Зеркала каталогов:
+ * - Игры сообщества INSTEAD (Каталог и Песочница) — instead-games.ru;
+ * - Non-Linear Text Quests (NLB project и Community) — nlbhub.com / nlbproject.com.
  */
 public final class DownloadMirrors {
+    public static final String INSTEAD_GAMES_DEFAULT = "https://www.instead-games.ru";
     public static final String NLB_DEFAULT = "https://nlbhub.com";
     public static final String NLBPROJECT = "https://nlbproject.com";
-    public static final String COMMUNITY_DEFAULT = NLBPROJECT;
 
+    public static final String[] INSTEAD_GAMES_MIRRORS = { INSTEAD_GAMES_DEFAULT };
     public static final String[] NLB_MIRRORS = { NLB_DEFAULT, NLBPROJECT };
-    public static final String[] COMMUNITY_MIRRORS = { COMMUNITY_DEFAULT };
 
+    private static final Pattern INSTEAD_GAMES_HOST = Pattern.compile(
+            "^https?://(?:www\\.)?instead-games\\.ru(/.*)?$",
+            Pattern.CASE_INSENSITIVE);
     private static final Pattern NLB_HOST = Pattern.compile(
             "^https?://(?:www\\.)?(?:nlbhub\\.com|nlbproject\\.com)(/.*)?$",
             Pattern.CASE_INSENSITIVE);
@@ -22,40 +26,56 @@ public final class DownloadMirrors {
     private DownloadMirrors() {
     }
 
+    public static String insteadGamesBase(Settings settings) {
+        return normalize(settings != null ? settings.getInsteadGamesMirror() : null,
+                INSTEAD_GAMES_DEFAULT);
+    }
+
     public static String nlbBase(Settings settings) {
         return normalize(settings != null ? settings.getNlbMirror() : null, NLB_DEFAULT);
     }
 
-    public static String communityBase(Settings settings) {
-        return normalize(settings != null ? settings.getCommunityMirror() : null, COMMUNITY_DEFAULT);
-    }
-
-    public static String nlbCatalogUrl(Settings settings) {
-        return nlbBase(settings) + "/hub/services/nlbproject_games";
-    }
-
-    public static String communityCatalogUrl(Settings settings) {
-        return communityBase(settings) + "/hub/services/community_games";
+    /**
+     * @param sandbox true — Песочница (xml2.php), false — Каталог (xml.php)
+     */
+    public static String insteadGamesCatalogUrl(Settings settings, boolean sandbox) {
+        return insteadGamesBase(settings) + (sandbox ? "/xml2.php" : "/xml.php");
     }
 
     /**
-     * Переписывает ссылки nlbhub.com/nlbproject.com на выбранное зеркало.
-     * Ссылки на другие домены (например, instead-games.ru) не меняются.
+     * @param community true — Community games, false — NLB project games
      */
-    public static String rewrite(String url, String base) {
+    public static String nlbCatalogUrl(Settings settings, boolean community) {
+        return nlbBase(settings)
+                + (community ? "/hub/services/community_games" : "/hub/services/nlbproject_games");
+    }
+
+    public static String rewriteInsteadGames(String url, String base) {
+        return rewrite(url, base, INSTEAD_GAMES_HOST, INSTEAD_GAMES_DEFAULT);
+    }
+
+    public static String rewriteNlb(String url, String base) {
+        return rewrite(url, base, NLB_HOST, NLB_DEFAULT);
+    }
+
+    private static String rewrite(String url, String base, Pattern sourceHost, String fallback) {
         if (url == null || base == null) {
             return url;
         }
-        Matcher matcher = NLB_HOST.matcher(url.trim());
+        Matcher matcher = sourceHost.matcher(url.trim());
         if (!matcher.matches()) {
             return url;
         }
         String path = matcher.group(1);
-        return normalize(base, NLB_DEFAULT) + (path == null ? "" : path);
+        if (path != null) {
+            // В каталогах INSTEAD встречаются двойные слэши: //download/...
+            path = "/" + path.replaceFirst("^/+", "");
+        }
+        return normalize(base, fallback) + (path == null ? "" : path);
     }
 
     public static String hostLabel(String base) {
-        return normalize(base, NLB_DEFAULT).replaceFirst("^https?://", "");
+        return normalize(base, INSTEAD_GAMES_DEFAULT).replaceFirst("^https?://", "");
     }
 
     public static String normalize(String value, String fallback) {

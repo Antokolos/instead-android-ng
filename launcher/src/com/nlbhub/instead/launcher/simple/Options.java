@@ -39,7 +39,7 @@ public class Options extends Activity {
     private CheckBox enforceSystemStorage;
     private Spinner spinner;
     private Spinner nlbMirrorSpinner;
-    private Spinner communityMirrorSpinner;
+    private Spinner insteadGamesMirrorSpinner;
     private LastGame lastGame;
     private int theme;
     private String arr[];
@@ -107,10 +107,10 @@ public class Options extends Activity {
 
         });
 
+        insteadGamesMirrorSpinner = (Spinner) findViewById(R.id.instead_games_mirror_spinner);
         nlbMirrorSpinner = (Spinner) findViewById(R.id.nlb_mirror_spinner);
-        communityMirrorSpinner = (Spinner) findViewById(R.id.community_mirror_spinner);
+        setupMirrorSpinner(insteadGamesMirrorSpinner, DownloadMirrors.INSTEAD_GAMES_MIRRORS);
         setupMirrorSpinner(nlbMirrorSpinner, DownloadMirrors.NLB_MIRRORS);
-        setupMirrorSpinner(communityMirrorSpinner, DownloadMirrors.COMMUNITY_MIRRORS);
 
     }
 
@@ -313,10 +313,10 @@ public class Options extends Activity {
         music.setChecked(lastGame.isMusic());
         ourtheme.setChecked(lastGame.isOwntheme());
         enforceSystemStorage.setChecked(lastGame.isEnforceSystemStorage());
+        insteadGamesMirrorSpinner.setSelection(
+                findMirror(DownloadMirrors.INSTEAD_GAMES_MIRRORS, lastGame.getInsteadGamesMirror()));
         nlbMirrorSpinner.setSelection(
                 findMirror(DownloadMirrors.NLB_MIRRORS, lastGame.getNlbMirror()));
-        communityMirrorSpinner.setSelection(
-                findMirror(DownloadMirrors.COMMUNITY_MIRRORS, lastGame.getCommunityMirror()));
         findTheme(lastGame.getTheme());
     }
 
@@ -341,15 +341,15 @@ public class Options extends Activity {
         lastGame.setMusic(music.isChecked());
         lastGame.setOwntheme(ourtheme.isChecked());
         lastGame.setEnforceSystemStorage(enforceSystemStorage.isChecked());
+        int insteadGamesMirrorIndex = insteadGamesMirrorSpinner.getSelectedItemPosition();
+        if (insteadGamesMirrorIndex >= 0
+                && insteadGamesMirrorIndex < DownloadMirrors.INSTEAD_GAMES_MIRRORS.length) {
+            lastGame.setInsteadGamesMirror(
+                    DownloadMirrors.INSTEAD_GAMES_MIRRORS[insteadGamesMirrorIndex]);
+        }
         int nlbMirrorIndex = nlbMirrorSpinner.getSelectedItemPosition();
         if (nlbMirrorIndex >= 0 && nlbMirrorIndex < DownloadMirrors.NLB_MIRRORS.length) {
             lastGame.setNlbMirror(DownloadMirrors.NLB_MIRRORS[nlbMirrorIndex]);
-        }
-        int communityMirrorIndex = communityMirrorSpinner.getSelectedItemPosition();
-        if (communityMirrorIndex >= 0
-                && communityMirrorIndex < DownloadMirrors.COMMUNITY_MIRRORS.length) {
-            lastGame.setCommunityMirror(
-                    DownloadMirrors.COMMUNITY_MIRRORS[communityMirrorIndex]);
         }
         Globals.FlagSync = true;
         if (arr.length > 0) {

@@ -47,8 +47,8 @@ public class LastGame extends Settings {
 		super.setOwntheme(pr.get("owntheme", Settings.OWNTHEME_DEFAULT));
 		super.setTheme(pr.get("theme", Settings.THEME_DEFAULT));
 		super.setEnforceSystemStorage(pr.get("enforceSystemStorage", Settings.ENFORCE_SYSTEM_STORAGE_DEFAULT));
+		super.setInsteadGamesMirror(pr.get("insteadGamesMirror", Settings.INSTEAD_GAMES_MIRROR_DEFAULT));
 		super.setNlbMirror(pr.get("nlbMirror", Settings.NLB_MIRROR_DEFAULT));
-		super.setCommunityMirror(pr.get("communityMirror", Settings.COMMUNITY_MIRROR_DEFAULT));
  		flagsync = pr.get("flagsync", true);
 	}
 	
@@ -182,14 +182,14 @@ public class LastGame extends Settings {
 	}
 
 	@Override
-	public void setNlbMirror(String mirror) {
-		super.setNlbMirror(mirror);
+	public void setInsteadGamesMirror(String mirror) {
+		super.setInsteadGamesMirror(mirror);
 		Commit();
 	}
 
 	@Override
-	public void setCommunityMirror(String mirror) {
-		super.setCommunityMirror(mirror);
+	public void setNlbMirror(String mirror) {
+		super.setNlbMirror(mirror);
 		Commit();
 	}
 
@@ -210,8 +210,8 @@ public class LastGame extends Settings {
 		pr.set("owntheme", isOwntheme());
 		pr.set("theme", getTheme());
 		pr.set("enforceSystemStorage", isEnforceSystemStorage());
+		pr.set("insteadGamesMirror", getInsteadGamesMirror());
 		pr.set("nlbMirror", getNlbMirror());
-		pr.set("communityMirror", getCommunityMirror());
 		pr.commit();
 	}
 }
