@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.nlbhub.instead.launcher.R;
+import com.nlbhub.instead.standalone.DownloadMirrors;
 import com.nlbhub.instead.standalone.ExceptionHandler;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.standalone.StorageResolver;
@@ -37,6 +38,8 @@ public class Options extends Activity {
     private TextView textViewPaths;
     private CheckBox enforceSystemStorage;
     private Spinner spinner;
+    private Spinner nlbMirrorSpinner;
+    private Spinner insteadGamesMirrorSpinner;
     private LastGame lastGame;
     private int theme;
     private String arr[];
@@ -104,6 +107,32 @@ public class Options extends Activity {
 
         });
 
+        insteadGamesMirrorSpinner = (Spinner) findViewById(R.id.instead_games_mirror_spinner);
+        nlbMirrorSpinner = (Spinner) findViewById(R.id.nlb_mirror_spinner);
+        setupMirrorSpinner(insteadGamesMirrorSpinner, DownloadMirrors.INSTEAD_GAMES_MIRRORS);
+        setupMirrorSpinner(nlbMirrorSpinner, DownloadMirrors.NLB_MIRRORS);
+
+    }
+
+    private void setupMirrorSpinner(Spinner target, String[] mirrors) {
+        String[] labels = new String[mirrors.length];
+        for (int i = 0; i < mirrors.length; i++) {
+            labels[i] = DownloadMirrors.hostLabel(mirrors[i]);
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, labels);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        target.setAdapter(adapter);
+    }
+
+    private int findMirror(String[] mirrors, String value) {
+        String normalized = DownloadMirrors.normalize(value, mirrors[0]);
+        for (int i = 0; i < mirrors.length; i++) {
+            if (mirrors[i].equalsIgnoreCase(normalized)) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     private void setPathsText() {
@@ -284,6 +313,10 @@ public class Options extends Activity {
         music.setChecked(lastGame.isMusic());
         ourtheme.setChecked(lastGame.isOwntheme());
         enforceSystemStorage.setChecked(lastGame.isEnforceSystemStorage());
+        insteadGamesMirrorSpinner.setSelection(
+                findMirror(DownloadMirrors.INSTEAD_GAMES_MIRRORS, lastGame.getInsteadGamesMirror()));
+        nlbMirrorSpinner.setSelection(
+                findMirror(DownloadMirrors.NLB_MIRRORS, lastGame.getNlbMirror()));
         findTheme(lastGame.getTheme());
     }
 
@@ -308,6 +341,17 @@ public class Options extends Activity {
         lastGame.setMusic(music.isChecked());
         lastGame.setOwntheme(ourtheme.isChecked());
         lastGame.setEnforceSystemStorage(enforceSystemStorage.isChecked());
+        int insteadGamesMirrorIndex = insteadGamesMirrorSpinner.getSelectedItemPosition();
+        if (insteadGamesMirrorIndex >= 0
+                && insteadGamesMirrorIndex < DownloadMirrors.INSTEAD_GAMES_MIRRORS.length) {
+            lastGame.setInsteadGamesMirror(
+                    DownloadMirrors.INSTEAD_GAMES_MIRRORS[insteadGamesMirrorIndex]);
+        }
+        int nlbMirrorIndex = nlbMirrorSpinner.getSelectedItemPosition();
+        if (nlbMirrorIndex >= 0 && nlbMirrorIndex < DownloadMirrors.NLB_MIRRORS.length) {
+            lastGame.setNlbMirror(DownloadMirrors.NLB_MIRRORS[nlbMirrorIndex]);
+        }
+        Globals.FlagSync = true;
         if (arr.length > 0) {
             lastGame.setTheme(arr[theme]);
         }

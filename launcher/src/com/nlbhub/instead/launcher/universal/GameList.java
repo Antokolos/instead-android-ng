@@ -17,8 +17,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.nlbhub.instead.standalone.DownloadMirrors;
 import com.nlbhub.instead.standalone.InsteadApplication;
 import com.nlbhub.instead.launcher.R;
+import com.nlbhub.instead.standalone.Settings;
+import com.nlbhub.instead.standalone.SettingsFactory;
 import com.nlbhub.instead.standalone.StorageResolver;
 import com.nlbhub.instead.launcher.simple.Globals;
 import com.nlbhub.instead.launcher.simple.MyPrefs;
@@ -87,10 +90,21 @@ public class GameList {
 	
 	private Document document;
 	private GameManager Parent;
+	private final String mirrorBase;
+	private final boolean nlbMirror;
 
 	
 	GameList(GameManager _parent, String f) {
 		Parent = _parent;
+		Settings settings = SettingsFactory.create(Parent);
+		if (Globals.NLBProjectGamesFileName.equals(f)
+				|| Globals.CommunityGamesFileName.equals(f)) {
+			mirrorBase = DownloadMirrors.nlbBase(settings);
+			nlbMirror = true;
+		} else {
+			mirrorBase = DownloadMirrors.insteadGamesBase(settings);
+			nlbMirror = false;
+		}
 		na=Parent.getString(R.string.na);
 		flag = new ArrayList<Integer>();
 		bytesize = new ArrayList<Integer>();
@@ -363,9 +377,9 @@ public class GameList {
 			case TITLE:
 				return title.get(n);
 			case URL:
-				return url.get(n);
+				return rewriteMirror(url.get(n));
 			case DESCURL:
-				return descurl.get(n);
+				return rewriteMirror(descurl.get(n));
 			case LANG:
 				return lang.get(n);
 			case VERSION:
@@ -377,6 +391,15 @@ public class GameList {
 			}
 		}
 		return null;
+	}
+
+	private String rewriteMirror(String value) {
+		if (value == null || mirrorBase == null) {
+			return value;
+		}
+		return nlbMirror
+				? DownloadMirrors.rewriteNlb(value, mirrorBase)
+				: DownloadMirrors.rewriteInsteadGames(value, mirrorBase);
 	}
 
 	public int getFlag(int i) {

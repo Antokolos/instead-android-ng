@@ -94,6 +94,8 @@
     <string name="scroff">Keep the screen turned on</string>
     <string name="nocursor">Hide cursor</string>
     <string name="theme">Theme: </string>
+    <string name="instead_games_mirror">INSTEAD community games mirror: </string>
+    <string name="nlb_mirror">Non-Linear Text Quests mirror: </string>
     <string name="portrait">Portrait screen orientation</string>
     <string name="dirlist">All games</string>
     <string name="gamein">Games in</string>
