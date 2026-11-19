@@ -10,6 +10,7 @@
     <string name="connect">Connecting</string>
     <string name="ready">Ready</string>
     <string name="update">Update game list</string>
+    <string name="search_hint">Search by name</string>
     <string name="menudel">Remove game</string>
     <string name="menudown">Download game</string>
     <string name="menustart">Start game</string>

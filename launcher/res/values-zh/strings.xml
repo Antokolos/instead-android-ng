@@ -29,6 +29,7 @@
     <string name="filtr">过滤器</string>
     <string name="dwnsize">下载的大小</string>
     <string name="update">更新游戏列表</string>
+    <string name="search_hint">按名称搜索</string>
     <string name="dwncancel">下载取消！</string>
     <string name="ag_title">标题</string>
     <string name="connect">连接</string>
