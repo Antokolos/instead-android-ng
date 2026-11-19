@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import android.app.AlertDialog;
@@ -16,7 +17,9 @@ import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -54,6 +58,7 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
     private Favorites favGame; 
 	private int listpos;
 	private int toppos;
+	private String searchQuery = "";
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,23 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 		
 		lastGame = new LastGame(this);
 		favGame = new Favorites(this);
+
+		final EditText searchInput = (EditText) findViewById(R.id.search_input);
+		searchInput.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				searchQuery = s.toString().trim().toLowerCase(Locale.getDefault());
+				listUpdate();
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+			}
+		});
 		
 		
 		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -215,9 +237,13 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 		
 		for(int i=0; i < dtitles.size(); i++){
 
+		String title = dtitles.get(i);
+		if (!matchesSearch(title)) {
+			continue;
+		}
 
-		listData.add(addListItem(GameManager.getHtmlTagForName(dtitles.get(i)),
-				Globals.getIcon(getIndexMenu(dtitles.get(i)))));
+		listData.add(addListItem(GameManager.getHtmlTagForName(title),
+				Globals.getIcon(getIndexMenu(title))));
 				//GameManager.getHtmlTagForComment(getIndexMenu(dtitles.get(i)))
 				
 		
@@ -228,7 +254,23 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 				new int[] { R.id.list_text });
 		simpleAdapter.setViewBinder(this);
 		setListAdapter(simpleAdapter);
-		listPosRestore();
+		if (searchQuery.isEmpty()) {
+			listPosRestore();
+		} else {
+			listView.setSelection(0);
+		}
+	}
+
+	private boolean matchesSearch(String title) {
+		if (searchQuery.isEmpty()) {
+			return true;
+		}
+		return containsIgnoreCase(title, searchQuery)
+				|| containsIgnoreCase(getIndexMenu(title), searchQuery);
+	}
+
+	private boolean containsIgnoreCase(String value, String query) {
+		return value != null && value.toLowerCase(Locale.getDefault()).contains(query);
 	}
 	
 	
