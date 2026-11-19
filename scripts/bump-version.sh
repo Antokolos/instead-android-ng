@@ -36,8 +36,8 @@ if [ "$COMPONENT" = "launcher" ]; then
   # 1.8.0 -> 1080000, 1.8.1 -> 1080100, 1.9.0 -> 1090000, 2.0.0 -> 2000000
   NEW_CODE=$((major * 1000000 + minor * 10000 + patch * 100))
 else
-  # У игры своя нумерация (105006), поэтому просто монотонный инкремент.
-  NEW_CODE=$((CURRENT_CODE + 1))
+  # 1.5.8 -> 105008, 1.5.9 -> 105009, 1.6.0 -> 106000
+  NEW_CODE=$((major * 100000 + minor * 1000 + patch))
 fi
 
 if [ "$NEW_CODE" -le "$CURRENT_CODE" ]; then
