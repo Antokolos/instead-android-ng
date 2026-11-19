@@ -9,6 +9,7 @@
     <string name="connect">Соединяемся</string>
     <string name="ready">Готово</string>
     <string name="update">Обновить список игр</string>
+    <string name="search_hint">Поиск по названию</string>
     <string name="menudel">Удалить игру</string>
     <string name="menudown">Загрузить игру</string>
     <string name="menustart">Начать игру</string>

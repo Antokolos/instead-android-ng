@@ -29,6 +29,7 @@
     <string name="filtr">Filtro</string>
     <string name="dwnsize">Dimensioni del download</string>
     <string name="update">Aggiornamento del gioco lista</string>
+    <string name="search_hint">Cerca per nome</string>
     <string name="dwncancel">Annullato il download!</string>
     <string name="ag_title">Titolo</string>
     <string name="connect">Connessione</string>

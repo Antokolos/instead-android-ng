@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,12 +19,15 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.*;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -48,6 +52,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 	private int item_index = -1;
 	private String g;
 	private int filter = FilterConstants.ALL;
+	private String searchQuery = "";
 	private GameList gl;
 	private List<Integer> index;
 	private ProgressDialog dialog;
@@ -172,7 +177,27 @@ public class GameManager extends ListActivity implements ViewBinder {
 				btn_filtr.performClick();
 			}
 		});
-		
+
+		final EditText searchInput = (EditText) findViewById(R.id.search_input);
+		searchInput.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				searchQuery = s.toString().trim().toLowerCase(Locale.getDefault());
+				if (gl != null) {
+					list_fresh = true;
+					listUpdate();
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+			}
+		});
+
 		setFiltrImg();
 		
 		alter_btn = (Button) findViewById(R.id.alter_btn);
@@ -558,6 +583,20 @@ public class GameManager extends ListActivity implements ViewBinder {
 		return iD;
 	}
 
+	private boolean matchesSearch(int i) {
+		if (searchQuery.isEmpty()) {
+			return true;
+		}
+		String title = gl.getInf(GameList.TITLE, i);
+		String name = gl.getInf(GameList.NAME, i);
+		return containsIgnoreCase(title, searchQuery)
+				|| containsIgnoreCase(name, searchQuery);
+	}
+
+	private boolean containsIgnoreCase(String value, String query) {
+		return value != null && value.toLowerCase(Locale.getDefault()).contains(query);
+	}
+
 	private String getGameListName(int n) {
         final int basicListNo = getBasicListNo();
         final int alterListNo = getAlterListNo();
@@ -577,6 +616,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 	public void listUpdate() {
 
 		listPosSave();
+		index.clear();
 
 		gl = new GameList(this, getGameListName(listNo));
 		lastGame.setFlagSync(Globals.FlagSync);
@@ -585,6 +625,10 @@ public class GameManager extends ListActivity implements ViewBinder {
 		int j = 0;
 
 		for (int i = 0; i < gl.getLength(); i++) {
+
+			if (!matchesSearch(i)) {
+				continue;
+			}
 
 			if (lang_filter.equals(gl.getInf(GameList.LANG, i))
 					|| lang_filter.equals("")) {

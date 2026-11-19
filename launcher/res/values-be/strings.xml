@@ -29,6 +29,7 @@
     <string name="filtr">Фільтр</string>
     <string name="dwnsize">Памер рагрузки</string>
     <string name="update">Абнавіць спіс гульняў</string>
+    <string name="search_hint">Пошук па назве</string>
     <string name="dwncancel">Загрузка адменена</string>
     <string name="ag_title">Назва</string>
     <string name="connect">Злучаемся</string>
