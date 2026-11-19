@@ -3,10 +3,10 @@
 Версия хранится в одном месте — `version.properties`:
 
 ```properties
-launcher.versionCode=180000
-launcher.versionName=1.8.0
-redhood.versionCode=105006
-redhood.versionName=1.0.6
+launcher.versionCode=1090400
+launcher.versionName=1.9.4
+redhood.versionCode=105008
+redhood.versionName=1.5.8
 ```
 
 `launcher/build.gradle.kts` и `games/redhood/build.gradle.kts` читают её при сборке,
@@ -25,8 +25,8 @@ Workflow делает:
 2. коммитит `chore: release ...` и пушит в `master` (коммит зеркалируется в второй
    репозиторий);
 3. собирает AAB и debug APK с новой версией и переименовывает их:
-   `instead-ng-1.8.1-launcher.aab`, `instead-ng-1.8.1-launcher-debug.apk`,
-   `instead-ng-1.0.7-redhood.aab` и т.д.;
+   `instead-ng-1.9.4-launcher.aab`, `instead-ng-1.9.4-launcher-debug.apk`,
+   `instead-ng-1.5.8-redhood.aab` и т.д.;
 4. создаёт **черновик** релиза с этими ассетами, заголовком и черновыми заметками;
 5. ждёт аппрува environment `release` — после него публикует черновик.
 
@@ -38,7 +38,8 @@ GitHub → Releases: поправить заголовок и текст, про
 
 - **launcher**: `versionCode = major*1000000 + minor*10000 + patch*100`
   (1.8.0 → 1080000, 1.8.1 → 1080100, 1.9.0 → 1090000). Монотонно и с запасом.
-- **redhood**: `versionCode` увеличивается на 1 (у игры своя нумерация).
+- **redhood**: `versionCode = major*100000 + minor*1000 + patch`
+  (1.5.8 → 105008, 1.5.9 → 105009, 1.6.0 → 106000).
 - Теги: `v<launcher version>` для лаунчера, `redhood-v<game version>` для игры,
   для `both` — `v<launcher version>`.
 - Повторный запуск с уже существующим тегом падает до сборки.
