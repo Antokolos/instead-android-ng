@@ -901,6 +901,22 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
         return result;
     }
 
+    /**
+     * Delivers committed IME text to the native SDL text input path.
+     * Used by the INSTEAD virtual keyboard, which owns its own IME editor.
+     */
+    public static void commitTextToGame(String text) {
+        SDLInputConnection.nativeCommitText(text, 0);
+    }
+
+    /**
+     * Lets the INSTEAD virtual keyboard confirm input through SDL's soft
+     * return-key path instead of a raw hardware key event.
+     */
+    public static boolean softReturnKey() {
+        return onNativeSoftReturnKey();
+    }
+
     // C functions we call
     public static native String nativeGetVersion();
     public static native int nativeSetupJNI();

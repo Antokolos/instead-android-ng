@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import com.nlbhub.instead.R;
+import org.libsdl.app.SDLActivity;
 
 /**
  * Created by Antokolos on 10.10.15.
@@ -144,30 +145,60 @@ public class InputLayout extends RelativeLayout {
             outAttrs.imeOptions = EditorInfo.IME_FLAG_NO_EXTRACT_UI
                     | EditorInfo.IME_FLAG_NO_FULLSCREEN;
             return new BaseInputConnection(this, true) {
+                private final StringBuilder composing = new StringBuilder();
+
+                private void commitComposing() {
+                    if (composing.length() > 0) {
+                        SDLActivity.commitTextToGame(composing.toString());
+                        composing.setLength(0);
+                    }
+                }
+
                 @Override
                 public boolean commitText(CharSequence text, int newCursorPosition) {
                     if (text != null && text.length() > 0) {
-                        Keys.inputText(text.toString(), IN_MAX);
+                        // Do not convert text to keycodes: that loses Cyrillic
+                        // and other non-Latin characters. Deliver it to SDL as
+                        // committed IME text instead.
+                        SDLActivity.commitTextToGame(text.toString());
                     }
+                    composing.setLength(0);
                     return true;
                 }
 
                 @Override
                 public boolean setComposingText(CharSequence text, int newCursorPosition) {
-                    // The game is not an editor: wait for commitText().
+                    // Gboard keeps the word as composing text until a
+                    // separator/Enter. Remember it and send it on commit.
+                    composing.setLength(0);
+                    if (text != null) {
+                        composing.append(text);
+                    }
                     return true;
                 }
 
                 @Override
                 public boolean finishComposingText() {
+                    commitComposing();
                     return true;
                 }
 
                 @Override
                 public boolean deleteSurroundingText(int beforeLength, int afterLength) {
                     for (int i = 0; i < beforeLength; i++) {
-                        Keys.down(KeyEvent.KEYCODE_DEL, false);
+                        if (composing.length() > 0) {
+                            composing.deleteCharAt(composing.length() - 1);
+                        } else {
+                            Keys.down(KeyEvent.KEYCODE_DEL, false);
+                        }
                     }
+                    return true;
+                }
+
+                @Override
+                public boolean performEditorAction(int editorAction) {
+                    commitComposing();
+                    SDLActivity.softReturnKey();
                     return true;
                 }
 
@@ -175,9 +206,15 @@ public class InputLayout extends RelativeLayout {
                 public boolean sendKeyEvent(KeyEvent event) {
                     if (event.getAction() == KeyEvent.ACTION_DOWN) {
                         int keyCode = event.getKeyCode();
-                        if (keyCode == KeyEvent.KEYCODE_ENTER
-                                || keyCode == KeyEvent.KEYCODE_DEL) {
-                            Keys.down(keyCode, false);
+                        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                            commitComposing();
+                            SDLActivity.softReturnKey();
+                        } else if (keyCode == KeyEvent.KEYCODE_DEL) {
+                            if (composing.length() > 0) {
+                                composing.deleteCharAt(composing.length() - 1);
+                            } else {
+                                Keys.down(KeyEvent.KEYCODE_DEL, false);
+                            }
                         }
                     }
                     return true;
