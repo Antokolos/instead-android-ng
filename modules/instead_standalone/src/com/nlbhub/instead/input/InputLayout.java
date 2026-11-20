@@ -97,22 +97,32 @@ public class InputLayout extends RelativeLayout {
         int action = event.getAction();
         int keyCode = event.getKeyCode();
         switch (action) {
-            case KeyEvent.ACTION_DOWN:
             case KeyEvent.ACTION_MULTIPLE:
+                String characters = event.getCharacters();
+                if (characters != null && characters.length() > 0) {
+                    SDLActivity.commitTextToGame(characters);
+                }
+                return true;
+            case KeyEvent.ACTION_DOWN:
+                if (isTextInputEvent(event)) {
+                    String text = unicodeText(event);
+                    if (!text.isEmpty()) {
+                        SDLActivity.commitTextToGame(text);
+                        return true;
+                    }
+                }
                 if (keyCode != KeyEvent.KEYCODE_UNKNOWN) {
                     if ((keyCode == KeyEvent.KEYCODE_SHIFT_LEFT) || (keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT)) {
                         shift = true;
                     } else {
                         // Keys.keyPress(keyCode, false); -- do nothing, will be handled on keyup
                     }
-                } else {
-                    String characters = event.getCharacters();
-                    if (characters != null && characters.length() > 0) {
-                        Keys.inputText(characters, IN_MAX);
-                    }
                 }
                 return true;
             case KeyEvent.ACTION_UP:
+                if (isTextInputEvent(event)) {
+                    return true;
+                }
                 if (keyCode != KeyEvent.KEYCODE_UNKNOWN) {
                     if ((keyCode == KeyEvent.KEYCODE_SHIFT_LEFT) || (keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT)) {
                         shift = false;
@@ -125,6 +135,23 @@ public class InputLayout extends RelativeLayout {
                 break;
         }
         return false;
+    }
+
+    private static boolean isTextInputEvent(KeyEvent event) {
+        // Ctrl-only shortcuts stay on the keycode path. AltGr (Ctrl+Alt)
+        // still produces printable text and is allowed through.
+        if (event.isCtrlPressed() && !event.isAltPressed()) {
+            return false;
+        }
+        return event.isPrintingKey() || event.getKeyCode() == KeyEvent.KEYCODE_SPACE;
+    }
+
+    private static String unicodeText(KeyEvent event) {
+        int codePoint = event.getUnicodeChar(event.getMetaState());
+        if (codePoint == 0) {
+            return "";
+        }
+        return new String(Character.toChars(codePoint));
     }
 
     /**
