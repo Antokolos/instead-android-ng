@@ -10,10 +10,15 @@ import android.view.*;
 import android.widget.*;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.DownloadMirrors;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.standalone.ExceptionHandler;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.standalone.InsteadApplication;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.standalone.StorageResolver;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.standalone.fs.SystemPathResolver;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -52,6 +57,7 @@ public class Options extends Activity {
         lastGame = new LastGame(this);
 
         setContentView(R.layout.options);
+        InsetsHelper.apply(this);
 
         textViewPaths = (TextView) findViewById(R.id.textViewPaths);
         setPathsText();

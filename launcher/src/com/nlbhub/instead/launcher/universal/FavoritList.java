@@ -29,9 +29,12 @@ import android.widget.Toast;
 import android.widget.SimpleAdapter.ViewBinder;
 import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.standalone.ExceptionHandler;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.standalone.InsteadApplication;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.StorageResolver;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.launcher.simple.Globals;
 
 public class FavoritList extends ListActivity  implements ViewBinder  {
@@ -49,6 +52,7 @@ public class FavoritList extends ListActivity  implements ViewBinder  {
 		Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.fvhead);
+        InsetsHelper.apply(this);
         listView = getListView();
 		registerForContextMenu(listView);
 		

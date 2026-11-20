@@ -37,10 +37,14 @@ import android.widget.Toast;
 import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.launcher.simple.FilterConstants;
 import com.nlbhub.instead.standalone.ExceptionHandler;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.standalone.InsteadApplication;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.MainMenuAbstract;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.standalone.StorageResolver;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.launcher.simple.Globals;
 import com.nlbhub.instead.launcher.simple.LastGame;
 
@@ -125,6 +129,7 @@ public class GameManager extends ListActivity implements ViewBinder {
 		dialog.setIndeterminate(true);
 		dialog.setCancelable(false);
         setContentView(getLayoutResID());
+		InsetsHelper.apply(this);
     	lastGame = new LastGame(this);
     	favGame = new Favorites(this);
         filter = lastGame.getFiltr();
