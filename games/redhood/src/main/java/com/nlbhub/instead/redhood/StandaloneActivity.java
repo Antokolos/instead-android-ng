@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.standalone.BundledGameInstaller;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.standalone.EngineDataInstaller;
+import com.nlbhub.instead.standalone.InsetsHelper;
 
 /**
  * Меню самостоятельной игры: без каталога и сети.
@@ -23,6 +25,7 @@ public class StandaloneActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.standalone_menu);
+        InsetsHelper.apply(this);
 
         Button play = findViewById(R.id.play);
         Button reinstall = findViewById(R.id.reinstall);

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.ExceptionHandler;
+import com.nlbhub.instead.standalone.InsetsHelper;
 
 public class AboutGame extends Activity {
 	private TextView tstatus;
@@ -31,6 +32,7 @@ public class AboutGame extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.about);
+        InsetsHelper.apply(this);
 
 		Bundle b = getIntent().getExtras();
 		if (b == null) {

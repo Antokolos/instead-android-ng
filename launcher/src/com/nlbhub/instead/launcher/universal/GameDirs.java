@@ -35,9 +35,12 @@ import android.widget.Toast;
 import android.widget.SimpleAdapter.ViewBinder;
 import com.nlbhub.instead.STEADActivity;
 import com.nlbhub.instead.standalone.ExceptionHandler;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.standalone.InsteadApplication;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.launcher.R;
 import com.nlbhub.instead.standalone.StorageResolver;
+import com.nlbhub.instead.standalone.InsetsHelper;
 import com.nlbhub.instead.launcher.simple.Globals;
 import com.nlbhub.instead.launcher.simple.LastGame;
 
@@ -70,6 +73,7 @@ public class GameDirs extends ListActivity  implements ViewBinder  {
 		dialog.setIndeterminate(true);
 		dialog.setCancelable(false);
         setContentView(R.layout.fghead);
+        InsetsHelper.apply(this);
         listView = getListView();
 		registerForContextMenu(listView);
 		
