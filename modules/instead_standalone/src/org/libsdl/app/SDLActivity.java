@@ -901,6 +901,22 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
         return result;
     }
 
+    /**
+     * Delivers committed IME text to the native SDL text input path.
+     * Used by the INSTEAD virtual keyboard, which owns its own IME editor.
+     */
+    public static void commitTextToGame(String text) {
+        SDLInputConnection.nativeCommitText(text, 0);
+    }
+
+    /**
+     * Lets the INSTEAD virtual keyboard confirm input through SDL's soft
+     * return-key path instead of a raw hardware key event.
+     */
+    public static boolean softReturnKey() {
+        return onNativeSoftReturnKey();
+    }
+
     // C functions we call
     public static native String nativeGetVersion();
     public static native int nativeSetupJNI();
@@ -1303,8 +1319,9 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
 
     public static boolean isTextInputEvent(KeyEvent event) {
 
-        // Key pressed with Ctrl should be sent as SDL_KEYDOWN/SDL_KEYUP and not SDL_TEXTINPUT
-        if (event.isCtrlPressed()) {
+        // Ctrl-only shortcuts should be sent as SDL_KEYDOWN/SDL_KEYUP and not SDL_TEXTINPUT.
+        // AltGr (Ctrl+Alt) still produces printable text and is allowed through.
+        if (event.isCtrlPressed() && !event.isAltPressed()) {
             return false;
         }
 
@@ -1362,17 +1379,33 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
             }
         }
 
+        if (event.getAction() == KeyEvent.ACTION_MULTIPLE) {
+            String characters = event.getCharacters();
+            if (characters != null && characters.length() > 0) {
+                SDLInputConnection.nativeCommitText(characters, 0);
+                return true;
+            }
+        }
+
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             if (isTextInputEvent(event)) {
-                if (ic != null) {
-                    ic.commitText(String.valueOf((char) event.getUnicodeChar()), 1);
-                } else {
-                    SDLInputConnection.nativeCommitText(String.valueOf((char) event.getUnicodeChar()), 1);
+                int codePoint = event.getUnicodeChar(event.getMetaState());
+                if (codePoint != 0) {
+                    String text = new String(Character.toChars(codePoint));
+                    if (ic != null) {
+                        ic.commitText(text, 1);
+                    } else {
+                        SDLInputConnection.nativeCommitText(text, 1);
+                    }
+                    return true;
                 }
             }
             onNativeKeyDown(keyCode);
             return true;
         } else if (event.getAction() == KeyEvent.ACTION_UP) {
+            if (isTextInputEvent(event)) {
+                return true;
+            }
             onNativeKeyUp(keyCode);
             return true;
         }
