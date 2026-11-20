@@ -43,6 +43,7 @@ public class Options extends Activity {
     private LastGame lastGame;
     private int theme;
     private String arr[];
+    private boolean saveOnPause = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,9 +158,11 @@ public class Options extends Activity {
         switch (item.getItemId()) {
             case R.id.saveopt:
                 saveOptions();
+                saveOnPause = false;
                 finish();
                 break;
             case R.id.cancelopt:
+                saveOnPause = false;
                 finish();
                 break;
         }
@@ -171,6 +174,16 @@ public class Options extends Activity {
         super.onResume();
         readOptions();
         // Log.d(Globals.TAG, "Option: Resume");
+    }
+
+    @Override
+    protected void onPause() {
+        if (saveOnPause) {
+            // Android 13+ gesture back may not deliver KEYCODE_BACK to
+            // onKeyDown, so persist settings when the screen goes away too.
+            saveOptions();
+        }
+        super.onPause();
     }
 
     private void resetCfgDialog() {
@@ -261,6 +274,7 @@ public class Options extends Activity {
     }
 
     private void deleteCfg() {
+        saveOnPause = false;
         SystemPathResolver dataResolver = new SystemPathResolver("data", this);
         (new File(this.getFilesDir() + "/" + Globals.GameListFileName)).delete();
         (new File(this.getFilesDir() + "/" + Globals.GameListAltFileName)).delete();
@@ -361,6 +375,7 @@ public class Options extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             saveOptions();
+            saveOnPause = false;
         }
         return super.onKeyDown(keyCode, event);
     }
