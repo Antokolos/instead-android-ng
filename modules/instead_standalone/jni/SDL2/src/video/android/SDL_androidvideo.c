@@ -150,6 +150,8 @@ static SDL_VideoDevice *Android_CreateDevice(void)
 
     /* Text input */
     device->SetTextInputRect = Android_SetTextInputRect;
+    device->StartTextInput = Android_StartTextInput;
+    device->StopTextInput = Android_StopTextInput;
 
     /* Screen keyboard */
     device->HasScreenKeyboardSupport = Android_HasScreenKeyboardSupport;

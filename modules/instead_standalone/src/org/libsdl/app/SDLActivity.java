@@ -902,14 +902,6 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     }
 
     /**
-     * Delivers committed IME text to the native SDL text input path.
-     * Used by the INSTEAD virtual keyboard, which owns its own IME editor.
-     */
-    public static void commitTextToGame(String text) {
-        SDLInputConnection.nativeCommitText(text, 0);
-    }
-
-    /**
      * Shrinks the SDL content area above the IME so the game paints its own
      * input line (and the hints below it) above the keyboard.
      */
@@ -922,14 +914,6 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
                     bottom);
             mLayout.requestLayout();
         }
-    }
-
-    /**
-     * Lets the INSTEAD virtual keyboard confirm input through SDL's soft
-     * return-key path instead of a raw hardware key event.
-     */
-    public static boolean softReturnKey() {
-        return onNativeSoftReturnKey();
     }
 
     // C functions we call
@@ -2028,12 +2012,24 @@ class SDLInputConnection extends BaseInputConnection {
          */
 
         if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-            if (SDLActivity.onNativeSoftReturnKey()) {
-                return true;
-            }
+            sendEnterKey();
+            return true;
         }
 
         return super.sendKeyEvent(event);
+    }
+
+    private void sendEnterKey() {
+        SDLActivity.onNativeKeyDown(KeyEvent.KEYCODE_ENTER);
+        SDLActivity.onNativeKeyUp(KeyEvent.KEYCODE_ENTER);
+        mCommittedText = "";
+        mEditText.setText("");
+    }
+
+    @Override
+    public boolean performEditorAction(int editorAction) {
+        sendEnterKey();
+        return true;
     }
 
     @Override
@@ -2105,9 +2101,8 @@ class SDLInputConnection extends BaseInputConnection {
             for (offset = 0; offset < pendingText.length(); ) {
                 int codePoint = pendingText.codePointAt(offset);
                 if (codePoint == '\n') {
-                    if (SDLActivity.onNativeSoftReturnKey()) {
-                        return;
-                    }
+                    sendEnterKey();
+                    return;
                 }
                 /* Higher code points don't generate simulated scancodes */
                 if (codePoint < 128) {
