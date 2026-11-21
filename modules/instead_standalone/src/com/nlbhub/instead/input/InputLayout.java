@@ -25,6 +25,7 @@ import org.libsdl.app.SDLActivity;
 public class InputLayout extends RelativeLayout {
 
     private ImageButton kbdButton;
+    private RelativeLayout.LayoutParams kbdButtonParams;
 
     public InputLayout(Context context) {
         super(context);
@@ -50,6 +51,7 @@ public class InputLayout extends RelativeLayout {
         params.addRule(RelativeLayout.CENTER_HORIZONTAL);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         params.bottomMargin = dp(24);
+        kbdButtonParams = params;
         addView(kbdButton, params);
 
         setOnApplyWindowInsetsListener((v, insets) -> {
@@ -61,6 +63,10 @@ public class InputLayout extends RelativeLayout {
             }
             // Keep the game's own console line and hints above the stock IME.
             SDLActivity.setImeBottomInset(imeBottom);
+            // Keep the keyboard button reachable above the open IME instead
+            // of hiding it behind the keyboard.
+            kbdButtonParams.bottomMargin = imeBottom + dp(24);
+            kbdButton.setLayoutParams(kbdButtonParams);
             return insets;
         });
         requestApplyInsets();
