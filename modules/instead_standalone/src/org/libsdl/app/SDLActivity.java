@@ -910,6 +910,21 @@ public class SDLActivity extends Activity implements View.OnSystemUiVisibilityCh
     }
 
     /**
+     * Shrinks the SDL content area above the IME so the game paints its own
+     * input line (and the hints below it) above the keyboard.
+     */
+    public static void setImeBottomInset(int bottom) {
+        if (mLayout != null) {
+            mLayout.setPadding(
+                    mLayout.getPaddingLeft(),
+                    mLayout.getPaddingTop(),
+                    mLayout.getPaddingRight(),
+                    bottom);
+            mLayout.requestLayout();
+        }
+    }
+
+    /**
      * Lets the INSTEAD virtual keyboard confirm input through SDL's soft
      * return-key path instead of a raw hardware key event.
      */
